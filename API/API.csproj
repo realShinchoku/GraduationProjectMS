@@ -42,19 +42,19 @@
     </ItemGroup>
 
     <ItemGroup>
-      <_ContentIncludedByDefault Remove="wwwroot\assets\categoryImages\culture.jpg" />
-      <_ContentIncludedByDefault Remove="wwwroot\assets\categoryImages\drinks.jpg" />
-      <_ContentIncludedByDefault Remove="wwwroot\assets\categoryImages\film.jpg" />
-      <_ContentIncludedByDefault Remove="wwwroot\assets\categoryImages\food.jpg" />
-      <_ContentIncludedByDefault Remove="wwwroot\assets\categoryImages\music.jpg" />
-      <_ContentIncludedByDefault Remove="wwwroot\assets\categoryImages\travel.jpg" />
-      <_ContentIncludedByDefault Remove="wwwroot\assets\logo.png" />
-      <_ContentIncludedByDefault Remove="wwwroot\assets\placeholder.png" />
-      <_ContentIncludedByDefault Remove="wwwroot\assets\user.png" />
+        <_ContentIncludedByDefault Remove="wwwroot\assets\categoryImages\culture.jpg" />
+        <_ContentIncludedByDefault Remove="wwwroot\assets\categoryImages\drinks.jpg" />
+        <_ContentIncludedByDefault Remove="wwwroot\assets\categoryImages\film.jpg" />
+        <_ContentIncludedByDefault Remove="wwwroot\assets\categoryImages\food.jpg" />
+        <_ContentIncludedByDefault Remove="wwwroot\assets\categoryImages\music.jpg" />
+        <_ContentIncludedByDefault Remove="wwwroot\assets\categoryImages\travel.jpg" />
+        <_ContentIncludedByDefault Remove="wwwroot\assets\logo.png" />
+        <_ContentIncludedByDefault Remove="wwwroot\assets\placeholder.png" />
+        <_ContentIncludedByDefault Remove="wwwroot\assets\user.png" />
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="wwwroot" />
+        <Folder Include="wwwroot" />
     </ItemGroup>
 
 </Project>

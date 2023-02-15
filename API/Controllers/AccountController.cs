@@ -17,7 +17,6 @@ public class AccountController : BaseApiController
 {
     private readonly IConfiguration _config;
     private readonly IEmailSender _emailSender;
-    private readonly HttpClient _httpClient;
     private readonly SignInManager<AppUser> _signInManager;
     private readonly TokenService _tokenService;
     private readonly UserManager<AppUser> _userManager;
@@ -30,10 +29,6 @@ public class AccountController : BaseApiController
         _signInManager = signInManager;
         _emailSender = emailSender;
         _userManager = userManager;
-        _httpClient = new HttpClient
-        {
-            BaseAddress = new Uri("https://graph.facebook.com")
-        };
     }
 
     [AllowAnonymous]

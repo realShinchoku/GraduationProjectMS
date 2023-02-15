@@ -22,22 +22,22 @@ builder.Services.AddIdentityService(builder.Configuration);
 
 var app = builder.Build();
 app.UseMiddleware<ExceptionMiddleware>();
-
-app.UseXContentTypeOptions();
-app.UseReferrerPolicy(opt => opt.NoReferrer());
-app.UseXXssProtection(opt => opt.EnabledWithBlockMode());
-app.UseXfo(opt => opt.Deny());
-app.UseCsp(opt => opt
-    .BlockAllMixedContent()
-    .StyleSources(s =>
-        s.Self().CustomSources("https://fonts.googleapis.com"))
-    .FontSources(s => s.Self().CustomSources("https://fonts.gstatic.com", "data:"))
-    .FormActions(s => s.Self())
-    .FrameAncestors(s => s.Self())
-    .ImageSources(s =>
-        s.Self().CustomSources("blod:", "data:", "https://res.cloudinary.com", "https://platform-lookaside.fbsbx.com"))
-    .ScriptSources(s => s.Self())
-);
+//
+// app.UseXContentTypeOptions();
+// app.UseReferrerPolicy(opt => opt.NoReferrer());
+// app.UseXXssProtection(opt => opt.EnabledWithBlockMode());
+// app.UseXfo(opt => opt.Deny());
+// app.UseCsp(opt => opt
+//     .BlockAllMixedContent()
+//     .StyleSources(s =>
+//         s.Self().CustomSources("https://fonts.googleapis.com"))
+//     .FontSources(s => s.Self().CustomSources("https://fonts.gstatic.com", "data:"))
+//     .FormActions(s => s.Self())
+//     .FrameAncestors(s => s.Self())
+//     .ImageSources(s =>
+//         s.Self().CustomSources("blod:", "data:", "https://res.cloudinary.com", "https://platform-lookaside.fbsbx.com"))
+//     .ScriptSources(s => s.Self())
+// );
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -68,7 +68,7 @@ app.MapControllers();
 
 app.MapHub<ChatHub>("/chat");
 
-app.MapFallbackToController("Index", "Fallback");
+// app.MapFallbackToController("Index", "Fallback");
 
 using var scope = app.Services.CreateScope();
 
