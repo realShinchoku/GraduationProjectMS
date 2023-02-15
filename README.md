@@ -18,7 +18,7 @@ After run config port of `DefaultConnection` in `./API/appsettings.json` to port
 
 In terminal project run:
 
-#### `dotnet run -project API --no-hot-reload`
+#### `dotnet run --project API --no-hot-reload`
 
 ## Client
 

@@ -18,7 +18,7 @@ public static class IdentityServiceExtensions
             .AddIdentityCore<AppUser>(opt =>
             {
                 opt.Password.RequireNonAlphanumeric = false;
-                opt.SignIn.RequireConfirmedEmail = true;
+                opt.SignIn.RequireConfirmedEmail = false;
             })
             .AddEntityFrameworkStores<DataContext>()
             .AddSignInManager<SignInManager<AppUser>>()
@@ -54,10 +54,10 @@ public static class IdentityServiceExtensions
                 };
             });
 
-        services.AddAuthorization(opt =>
-        {
-            opt.AddPolicy("IsActivityHost", policy => { policy.Requirements.Add(new IsHostRequirement()); });
-        });
+        // services.AddAuthorization(opt =>
+        // {
+        //     opt.AddPolicy("IsActivityHost", policy => { policy.Requirements.Add(new IsHostRequirement()); });
+        // });
 
         services.AddTransient<IAuthorizationHandler, IsHostRequirementHandler>();
 

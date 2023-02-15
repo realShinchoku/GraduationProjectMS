@@ -14,24 +14,27 @@ public class Seed
             {
                 new()
                 {
+                    DisplayName = "Tien",
+                    UserName = "tien",
+                    Email = "tienmp3@gmail.com"
+                },
+                new()
+                {
                     DisplayName = "Bob",
                     UserName = "bob",
-                    Email = "bob@test.com",
-                    EmailConfirmed = true
+                    Email = "bob@test.com"
                 },
                 new()
                 {
                     DisplayName = "Jane",
                     UserName = "jane",
-                    Email = "jane@test.com",
-                    EmailConfirmed = true
+                    Email = "jane@test.com"
                 },
                 new()
                 {
                     DisplayName = "Tom",
                     UserName = "tom",
-                    Email = "tom@test.com",
-                    EmailConfirmed = true
+                    Email = "tom@test.com"
                 }
             };
 

@@ -15,17 +15,14 @@ namespace API.Controllers;
 [ApiController]
 public class AccountController : BaseApiController
 {
-    private readonly IConfiguration _config;
     private readonly IEmailSender _emailSender;
     private readonly SignInManager<AppUser> _signInManager;
     private readonly TokenService _tokenService;
     private readonly UserManager<AppUser> _userManager;
 
-    public AccountController(UserManager<AppUser> userManager, TokenService tokenService, IConfiguration config,
-        SignInManager<AppUser> signInManager, IEmailSender emailSender)
+    public AccountController(UserManager<AppUser> userManager, TokenService tokenService, SignInManager<AppUser> signInManager, IEmailSender emailSender)
     {
         _tokenService = tokenService;
-        _config = config;
         _signInManager = signInManager;
         _emailSender = emailSender;
         _userManager = userManager;
@@ -39,8 +36,6 @@ public class AccountController : BaseApiController
             x => x.Email == loginDto.Email);
 
         if (user == null) return Unauthorized("Invalid email");
-
-        if (!user.EmailConfirmed) return Unauthorized("Email not confirmed");
 
         var result = await _signInManager.CheckPasswordSignInAsync(user, loginDto.Password, false);
 
@@ -73,56 +68,58 @@ public class AccountController : BaseApiController
         if (!result.Succeeded)
             return BadRequest("Problem registering user");
 
-        var origin = Request.Headers["origin"];
-        var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-
-        token = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(token));
-
-        var verifyUrl = $"{origin}/account/verifyEmail?token={token}&email={user.Email}";
-        var message =
-            $"<p>Please click the below link to verify your email address:</p><p><a href='{verifyUrl}'>Click to verify email</a></p>";
-
-        await _emailSender.SendEmailAsync(user.Email, "Please verify your email address", message);
-
-        return Ok("Registration successfully - Please verify your email address");
+        return Ok("Registration successfully");
     }
 
-    [AllowAnonymous]
-    [HttpPost("verifyEmail")]
-    public async Task<IActionResult> VerifyEmail(string token, string email)
+    [Authorize]
+    [HttpPost("changePassword")]
+    public async Task<IActionResult> ChangePassword(ChangePasswordDto passwordDto)
     {
-        var user = await _userManager.FindByEmailAsync(email);
-        if (user == null) return Unauthorized();
-        var decodedTokenByBytes = WebEncoders.Base64UrlDecode(token);
-        var decodedToken = Encoding.UTF8.GetString(decodedTokenByBytes);
-        var result = await _userManager.ConfirmEmailAsync(user, decodedToken);
+        var user = await _userManager.Users.FirstOrDefaultAsync(
+            x => x.Email == User.FindFirstValue(ClaimTypes.Email));
 
-        if (!result.Succeeded) return BadRequest("Could not verify email address");
+        var result = await _userManager.ChangePasswordAsync(user, passwordDto.OldPassword, passwordDto.NewPassword);
 
-        return Ok("Email confirmed - you can login now");
+        if (!result.Succeeded)
+            return Conflict("Incorrect password");
+        return Ok("Password changed");
     }
 
     [AllowAnonymous]
-    [HttpGet("resendEmailConfirmationLink")]
-    public async Task<IActionResult> ResendEmailConfirmationLink(string email)
+    [HttpGet("sendResetPasswordLink")]
+    public async Task<IActionResult> SendResetPassword(string email)
     {
         var user = await _userManager.FindByEmailAsync(email);
 
         if (user == null)
-            return Unauthorized();
-
+            return Unauthorized("Email not found");
+        
         var origin = Request.Headers["origin"];
-        var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-
+        var token = await _userManager.GeneratePasswordResetTokenAsync(user);
         token = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(token));
 
-        var verifyUrl = $"{origin}/account/verifyEmail?token={token}&email={user.Email}";
+        var verifyUrl = $"{origin}/account/accountRecovery?token={token}&email={user.Email}";
         var message =
-            $"<p>Please click the below link to verify your email address:</p><p><a href='{verifyUrl}'>Click to verify email</a></p>";
+            $"<p>Please click the below link to change your password:</p><p><a href='{verifyUrl}'>Click to change password</a></p>";
 
-        await _emailSender.SendEmailAsync(user.Email, "Please verify your email address", message);
+        await _emailSender.SendEmailAsync(user.Email, "Account Recovery", message);
 
-        return Ok("Email verification link resent");
+        return Ok("Email recovery link sent");
+    }
+
+    [AllowAnonymous]
+    [HttpPost("resetPassword")]
+    public async Task<IActionResult> ResetPassword(ResetPasswordDto resetPasswordDto)
+    {
+        var user = await _userManager.FindByEmailAsync(resetPasswordDto.Email);
+        if (user == null) return Unauthorized();
+        var decodedTokenByBytes = WebEncoders.Base64UrlDecode(resetPasswordDto.Token);
+        var decodedToken = Encoding.UTF8.GetString(decodedTokenByBytes);
+        var result = await _userManager.ResetPasswordAsync(user, decodedToken, resetPasswordDto.Password);
+
+        if (!result.Succeeded) return BadRequest(result.Errors);
+
+        return Ok("Password changed - you can login now");
     }
 
     [Authorize]
@@ -150,7 +147,7 @@ public class AccountController : BaseApiController
 
         var oldToken = user.RefreshTokens.SingleOrDefault(x => x.Token == refreshToken);
 
-        if (oldToken != null && !oldToken.IsActive) return Unauthorized();
+        if (oldToken is { IsActive: false }) return Unauthorized();
 
         return CreateUserObject(user);
     }
