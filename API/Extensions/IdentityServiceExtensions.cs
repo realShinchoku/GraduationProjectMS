@@ -23,6 +23,8 @@ public static class IdentityServiceExtensions
             .AddEntityFrameworkStores<DataContext>()
             .AddSignInManager<SignInManager<AppUser>>()
             .AddDefaultTokenProviders();
+        services.Configure<DataProtectionTokenProviderOptions>(opt =>
+            opt.TokenLifespan = TimeSpan.FromMinutes(15));
 
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["TokenKey"]));
 
