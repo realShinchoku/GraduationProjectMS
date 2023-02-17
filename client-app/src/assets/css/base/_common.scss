@@ -1,0 +1,99 @@
+/*
+    common
+*/
+html,
+body {
+    -webkit-tap-highlight-color: transparent;
+    // max-width: 1920px;
+    width: 100%;
+    margin: 0 auto;
+    font-size: 100%;
+    font-family: $base-font-family !important;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    word-wrap: break-word;
+    text-align: center;
+    &.hidden {
+        height: 100%;
+        overflow: hidden;
+    }
+    @include sp {
+        max-width: 100%;
+    }
+    th {
+        text-align: center;
+        font-weight: 700;
+        border: 1px solid #efefef;
+        padding: 10px 6px;
+        background-color: #f5f7fa;
+        word-break: break-word;
+    }
+    tr {
+        border: 1px solid #efefef;
+    }
+    td {
+        border: 1px solid #efefef;
+        text-align: left;
+        padding: 10px 15px;
+        word-break: break-word;
+        min-width: 60px;
+    }
+}
+* {
+    box-sizing: border-box;
+}
+img {
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    -webkit-touch-callout: none;
+}
+ul,
+ol {
+    list-style: none;
+}
+a {
+    outline: none;
+    text-decoration: none;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="date"],
+input[type="email"],
+input[type="url"],
+select,
+textarea {
+    width: 100%;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    font-family: inherit;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    outline: none;
+}
+
+button {
+    border: none;
+}
+
+.util_sp {
+    display: none !important;
+    @include sp {
+        display: block !important;
+    }
+}
+.util_pc {
+    //display: block !important;
+    @include sp {
+        display: none !important;
+    }
+}
+@media print {
+    img {
+        display: none;
+    }
+}
