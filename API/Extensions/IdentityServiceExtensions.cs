@@ -20,8 +20,10 @@ public static class IdentityServiceExtensions
                 opt.Password.RequireNonAlphanumeric = false;
                 opt.SignIn.RequireConfirmedEmail = false;
             })
+            .AddRoles<AppRole>()
             .AddEntityFrameworkStores<DataContext>()
             .AddSignInManager<SignInManager<AppUser>>()
+            .AddRoleManager<RoleManager<AppRole>>()
             .AddDefaultTokenProviders();
         services.Configure<DataProtectionTokenProviderOptions>(opt =>
             opt.TokenLifespan = TimeSpan.FromMinutes(15));
@@ -58,7 +60,8 @@ public static class IdentityServiceExtensions
 
         // services.AddAuthorization(opt =>
         // {
-        //     opt.AddPolicy("IsActivityHost", policy => { policy.Requirements.Add(new IsHostRequirement()); });
+        //     // opt.AddPolicy("IsActivityHost", policy => { policy.Requirements.Add(new IsHostRequirement()); });
+        //     // opt.AddPolicy("FacultyOffice", policy => policy.RequireRole(Role.FacultyOffice.ToString()));
         // });
 
         services.AddTransient<IAuthorizationHandler, IsHostRequirementHandler>();

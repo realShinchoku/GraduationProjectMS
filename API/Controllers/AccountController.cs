@@ -16,15 +16,17 @@ namespace API.Controllers;
 public class AccountController : BaseApiController
 {
     private readonly IEmailSender _emailSender;
+    private readonly RoleManager<AppRole> _roleManager;
     private readonly SignInManager<AppUser> _signInManager;
     private readonly TokenService _tokenService;
     private readonly UserManager<AppUser> _userManager;
 
-    public AccountController(UserManager<AppUser> userManager, TokenService tokenService, SignInManager<AppUser> signInManager, IEmailSender emailSender)
+    public AccountController(UserManager<AppUser> userManager, TokenService tokenService, SignInManager<AppUser> signInManager, IEmailSender emailSender, RoleManager<AppRole> roleManager)
     {
         _tokenService = tokenService;
         _signInManager = signInManager;
         _emailSender = emailSender;
+        _roleManager = roleManager;
         _userManager = userManager;
     }
 
@@ -45,11 +47,16 @@ public class AccountController : BaseApiController
         await SetRefreshToken(user);
         return CreateUserObject(user);
     }
-
-    [AllowAnonymous]
+    [Authorize]
     [HttpPost("register")]
     public async Task<ActionResult<UserDto>> Register(RegisterDto registerDto)
     {
+        var currentUser = await _userManager.Users.FirstOrDefaultAsync(
+            x => x.Email == User.FindFirstValue(ClaimTypes.Email));
+
+        if (currentUser.Role != Role.FacultyOffice)
+            return Forbid();
+        
         if (await _userManager.Users.AnyAsync(x => x.UserName == registerDto.UserName))
             return Conflict("Username is already taken");
 
@@ -81,7 +88,7 @@ public class AccountController : BaseApiController
         var result = await _userManager.ChangePasswordAsync(user, passwordDto.OldPassword, passwordDto.NewPassword);
 
         if (!result.Succeeded)
-            return Conflict("Incorrect password");
+            return Conflict(result.Errors);
         return Ok("Password changed");
     }
 
@@ -128,7 +135,6 @@ public class AccountController : BaseApiController
     {
         var user = await _userManager.Users.FirstOrDefaultAsync(
             x => x.Email == User.FindFirstValue(ClaimTypes.Email));
-
         await SetRefreshToken(user);
         return CreateUserObject(user);
     }
@@ -144,7 +150,6 @@ public class AccountController : BaseApiController
 
         if (user == null)
             return Unauthorized();
-
         var oldToken = user.RefreshTokens.SingleOrDefault(x => x.Token == refreshToken);
 
         if (oldToken is { IsActive: false }) return Unauthorized();
@@ -158,7 +163,8 @@ public class AccountController : BaseApiController
         {
             DisplayName = user.DisplayName,
             Token = _tokenService.CreateToken(user),
-            UserName = user.UserName
+            UserName = user.UserName,
+            Role = user.Role
         };
 
 
