@@ -24,7 +24,7 @@ export default class UserStore {
             this.startRefreshTokenTimer(user);
             runInAction(() => this.user = user);
             // store.modalStore.closeModal();
-            await router.navigate('/activities');
+            // await router.navigate('/activities');
         } catch (err) {
             throw err;
         }
