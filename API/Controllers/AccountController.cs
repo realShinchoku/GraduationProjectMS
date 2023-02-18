@@ -120,7 +120,7 @@ public class AccountController : BaseApiController
         var token = await _userManager.GeneratePasswordResetTokenAsync(user);
         token = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(token));
 
-        var verifyUrl = $"{origin}/account/accountRecovery?token={token}&email={user.Email}";
+        var verifyUrl = $"{origin}/account/recover/password?token={token}&email={user.Email}";
         var message =
             $"<p>Vui lòng ấn vào link phía dưới:</p><p><a href='{verifyUrl}'>Đổi mật khẩu</a></p>";
 
