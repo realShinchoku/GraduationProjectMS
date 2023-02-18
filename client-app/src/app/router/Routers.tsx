@@ -15,10 +15,10 @@ export const routes: RouteObject[] = [
             {
                 element: <RequireAuth/>, children: []
             },
-            {path: 'not-found', element: <NotFound />},
-            {path: 'server-error', element: <ServerError />},
-            {path: 'login', element: <Login />},
-            {path: '*', element: <Navigate replace to={'/not-found'} />},
+            {path: 'not-found', element: <NotFound/>},
+            {path: 'server-error', element: <ServerError/>},
+            {path: 'login', element: <Login/>},
+            {path: '*', element: <Navigate replace to={'/not-found'}/>},
         ],
     }
 ]

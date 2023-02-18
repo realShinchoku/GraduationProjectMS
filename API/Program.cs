@@ -1,3 +1,4 @@
+using System.Text.Json.Serialization;
 using API.Extensions;
 using API.Middleware;
 using API.SignalR;
@@ -78,8 +79,9 @@ try
 {
     var context = services.GetRequiredService<DataContext>();
     var userManage = services.GetRequiredService<UserManager<AppUser>>();
+    var roleManager = services.GetRequiredService<RoleManager<AppRole>>();
     context.Database.Migrate();
-    await Seed.SeedData(context, userManage);
+    await Seed.SeedData(context, userManage, roleManager);
 }
 catch (Exception ex)
 {

@@ -22,7 +22,10 @@ export default class UserStore {
             const user = await agent.Account.login(formValues);
             store.commonStore.setToken(user.token);
             this.startRefreshTokenTimer(user);
-            runInAction(() => this.user = user);
+            runInAction(() => {this.user = user;
+                console.log(user);
+                
+            });
             // store.modalStore.closeModal();
             await router.navigate('/activities');
         } catch (err) {
