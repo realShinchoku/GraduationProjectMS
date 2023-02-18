@@ -56,7 +56,7 @@ public class AccountController : BaseApiController
         return CreateUserObject(user);
     }
 
-    [Authorize]
+    [Authorize(Policy = "IsFacultyOffice")]
     [HttpPost("register")]
     public async Task<ActionResult<UserDto>> Register(RegisterDto registerDto)
     {

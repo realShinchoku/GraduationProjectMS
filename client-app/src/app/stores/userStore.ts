@@ -24,13 +24,16 @@ export default class UserStore {
             this.startRefreshTokenTimer(user);
             runInAction(() => {
                 this.user = user;
-                console.log(user);
-
             });
             // store.modalStore.closeModal();
             // await router.navigate('/activities');
-        } catch (err) {
-            throw err;
+        } catch (err: any) {
+            const error = {email: null, password: null}
+            if(err.response.data.email)
+                error.email = err.response.data.email[0];
+            if(err.response.data.password)
+                error.password =  err.response.data.password[0];
+            throw error;
         }
     }
 

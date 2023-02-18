@@ -29,14 +29,14 @@ function Login() {
                 <Box className="inner">
                     <Typography variant="h3">XIN CHÀO</Typography>
                     <Formik
-                        initialValues={{email: '', password: '', error: null}}
-                        onSubmit={(values, {setErrors}) => login(values).catch(err =>
-                            // setErrors({error: err.response.data}))}
-                            console.log(err.response.data.password[0]))}
-
+                        initialValues={{email: '', password: '', error: {email: '', password:''}}}
+                        onSubmit={(values, {setErrors}) => login(values).catch((err: any) =>
+                        {
+                            setErrors({error: err});
+                        })}
                         validationSchema={validationSchema}
                     >
-                        {({handleSubmit, isSubmitting, errors, handleChange, touched}) => (
+                        {({handleSubmit, isSubmitting, errors, handleChange, isValid, dirty}) => (
                             <Form onSubmit={handleSubmit}>
                                 <TextField
                                     className="input"
@@ -45,8 +45,8 @@ function Login() {
                                     name="email"
                                     label="Tài khoản"
                                     onChange={handleChange}
-                                    error={touched.email && Boolean(errors.email)}
-                                    helperText={touched.email && errors.email}
+                                    error={(dirty && Boolean(errors.email) || Boolean(errors.error?.email))}
+                                    helperText={(dirty && errors.email) || errors.error?.email}
                                 />
                                 <TextField
                                     className="input"
@@ -56,11 +56,18 @@ function Login() {
                                     label="Mật khẩu"
                                     type="password"
                                     onChange={handleChange}
-                                    error={touched.password && Boolean(errors.password)}
-                                    helperText={touched.password && errors.password}
+                                    error={(dirty && Boolean(errors.password) || Boolean(errors.error?.password))}
+                                    helperText={(dirty && errors.password) || errors.error?.password}
                                 />
-                                <LoadingButton color="primary" variant="contained" fullWidth loading={isSubmitting}
-                                               type="submit">Đăng nhập</LoadingButton>
+                                <LoadingButton 
+                                    color="primary" variant="contained" 
+                                    fullWidth 
+                                    loading={isSubmitting} 
+                                    disabled={!isValid || !dirty || isSubmitting}
+                                    type="submit"
+                                >
+                                    Đăng nhập
+                                </LoadingButton>
                             </Form>
                         )}
                     </Formik>
