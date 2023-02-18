@@ -5,7 +5,9 @@ import ServerError from "../../features/Error/ServerError";
 import RequireAuth from "./RequireAuth";
 import Login from "../../features/Account/Login/Login";
 import Test from "../../features/Test/Test";
+import ResetPassword from "../../features/Account/ResetPassword/ResetPassword";
 import ResetPasswordEmailForm from "../../features/Account/ResetPassword/ResetPasswordEmailForm";
+
 
 export const route = {
     login:'/account/login',
@@ -23,6 +25,7 @@ export const routes: RouteObject[] = [
             },
             {path: 'not-found', element: <NotFound/>},
             {path: 'server-error', element: <ServerError/>},
+
             {path: 'account/login', element: <Login/>},
             {path: 'account/recover', element: <ResetPasswordEmailForm/>},
             {path: 'test', element: <Test/>},
