@@ -1,72 +1,70 @@
 import {observer} from "mobx-react-lite";
-import { Box, Link } from "@mui/material";
-import { useFormik } from 'formik';
+import { Box, Link, Typography } from "@mui/material";
+import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
-import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import "./login.scss";
 import { useStore } from "../../../app/stores/store";
-import { UserFormValues } from "../../../app/models/user";
+import { LoadingButton } from "@mui/lab";
 
 const validationSchema = Yup.object().shape({
   email: Yup.string()
-    .email("Enter a valid email")
-    .required("Email is required"),
+    .email("Vui lòng nhập email!")
+    .required("Vui lòng nhập email!"),
   password: Yup.string()
-    .min(8, "Password should be of minimum 8 characters length")
-    .required("Password is required"),
+    .matches(
+      /^(?=.*[0-9]+.*)(?=.*[a-z]+.*)(?=.*[A-Z]+.*)[!-z]{6,20}.*$/,
+      "Mật khẩu gồm ít nhất 8 kí tự trong đó bao gồm 1 kí tự hoa, 1 kí tự thường và 1 số!"
+    ).required("Vui lòng nhập mật khẩu!"),
 });
 
 function Login() {
-    const {userStore:{login}} = useStore();
-  const formik = useFormik({
-    initialValues: {
-      email: "",
-      password: "",
-    },
-    validationSchema: validationSchema,
-    onSubmit: async (values:UserFormValues) => {
-        await login(values)
-    },
-  });
+  const {userStore:{login}} = useStore();
   return (
     <Box className="container">
       <Box className="thumb">
         <Box className="logo"></Box>
       </Box>
       <Box className="SignUp_Form">
-        {/* <SingUp /> */}
         <Box className="inner">
-          <form onSubmit={formik.handleSubmit}>
-            <TextField
-              className="input"
-              fullWidth
-              id="email"
-              name="email"
-              label="Email"
-              onChange={formik.handleChange}
-              error={formik.touched.email && Boolean(formik.errors.email)}
-              helperText={formik.touched.email && formik.errors.email}
-            />
-            <TextField
-              className="input"
-              fullWidth
-              id="password"
-              name="password"
-              label="Password"
-              type="password"
-              onChange={formik.handleChange}
-              error={formik.touched.password && Boolean(formik.errors.password)}
-              helperText={formik.touched.password && formik.errors.password}
-            />
-            <Button color="primary" variant="contained" fullWidth type="submit">
-              Submit
-            </Button>
-          </form>
+          <Typography variant="h3">XIN CHÀO</Typography>
+          <Formik
+            initialValues={{email: '', password: '', error: null}}
+            onSubmit={(values, {setErrors}) => login(values).catch(err =>
+                // setErrors({error: err.response.data}))}
+                console.log(err.response.data.password[0]))}
+                
+            validationSchema={validationSchema}
+          >
+            {({handleSubmit, isSubmitting, errors, handleChange, touched}) => (
+              <Form onSubmit={handleSubmit}>
+                <TextField
+                  className="input"
+                  fullWidth
+                  id="email"
+                  name="email"
+                  label="Tài khoản"
+                  onChange={handleChange}
+                  error={touched.email && Boolean(errors.email)}
+                  helperText={touched.email && errors.email}
+                />
+                <TextField
+                  className="input"
+                  fullWidth
+                  id="password"
+                  name="password"
+                  label="Mật khẩu"
+                  type="password"
+                  onChange={handleChange}
+                  error={touched.password && Boolean(errors.password)}
+                  helperText={touched.password && errors.password}
+                />
+                <LoadingButton color="primary" variant="contained" fullWidth loading={isSubmitting} type="submit">Đăng nhập</LoadingButton>
+              </Form>
+            )}
+          </Formik>
         </Box>
-        <Link href="" underline="none">
-          Forgot password
-        </Link>
+        <Link href="" underline="none">Quên mật khẩu</Link>
       </Box>
     </Box>
   );

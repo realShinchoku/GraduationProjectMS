@@ -37,12 +37,19 @@ public class AccountController : BaseApiController
         var user = await _userManager.Users.FirstOrDefaultAsync(
             x => x.Email == loginDto.Email);
 
-        if (user == null) return Unauthorized("Invalid email");
-
+        if (user == null) 
+        {
+            ModelState.AddModelError("email", "Email không tồn tại");
+            return BadRequest(ModelState);
+        }
+            
         var result = await _signInManager.CheckPasswordSignInAsync(user, loginDto.Password, false);
 
         if (!result.Succeeded)
-            return Unauthorized("Invalid password");
+        {
+            ModelState.AddModelError("password", "Sai mật khẩu");
+            return BadRequest(ModelState);
+        }
 
         await SetRefreshToken(user);
         return CreateUserObject(user);
