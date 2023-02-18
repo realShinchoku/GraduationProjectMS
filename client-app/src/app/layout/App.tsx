@@ -19,7 +19,7 @@ function App() {
             <ScrollRestoration/>
             <NavBar/>
             <Outlet/>
-            APP HERE
+            {/* APP HERE */}
         </>
     );
 }
