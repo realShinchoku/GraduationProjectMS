@@ -19,7 +19,7 @@ const validationSchema = Yup.object().shape({
 });
 
 function Login() {
-    const {userStore: {login}} = useStore();    
+    const {userStore: {login}} = useStore();
     return (
         <Box className={styles.container}>
             <Box className={styles.thumb}>
@@ -29,9 +29,8 @@ function Login() {
                 <Box className="inner">
                     <Typography variant="h3">XIN CHÀO</Typography>
                     <Formik
-                        initialValues={{email: '', password: '', error: {email: '', password:''}}}
-                        onSubmit={(values, {setErrors}) => login(values).catch((err: any) =>
-                        {
+                        initialValues={{email: '', password: '', error: {email: '', password: ''}}}
+                        onSubmit={(values, {setErrors}) => login(values).catch((err: any) => {
                             setErrors({error: err});
                         })}
                         validationSchema={validationSchema}
@@ -59,10 +58,10 @@ function Login() {
                                     error={(dirty && Boolean(errors.password) || Boolean(errors.error?.password))}
                                     helperText={(dirty && errors.password) || errors.error?.password}
                                 />
-                                <LoadingButton 
-                                    color="primary" variant="contained" 
-                                    fullWidth 
-                                    loading={isSubmitting} 
+                                <LoadingButton
+                                    color="primary" variant="contained"
+                                    fullWidth
+                                    loading={isSubmitting}
                                     disabled={!isValid || !dirty || isSubmitting}
                                     type="submit"
                                 >

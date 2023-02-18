@@ -88,7 +88,7 @@ public class AccountController : BaseApiController
     }
 
     [Authorize]
-    [HttpPost("changePassword")]
+    [HttpPut("changePassword")]
     public async Task<IActionResult> ChangePassword(ChangePasswordDto passwordDto)
     {
         var user = await _userManager.Users.FirstOrDefaultAsync(
@@ -97,12 +97,12 @@ public class AccountController : BaseApiController
         var result = await _userManager.ChangePasswordAsync(user, passwordDto.OldPassword, passwordDto.NewPassword);
 
         if (!result.Succeeded)
-            return Conflict(result.Errors);
+            return Conflict("Sai mật khẩu");
         return Ok("Password changed");
     }
 
     [AllowAnonymous]
-    [HttpGet("sendResetPasswordLink")]
+    [HttpPost("sendResetPasswordLink")]
     public async Task<IActionResult> SendResetPassword(string email)
     {
         var user = await _userManager.FindByEmailAsync(email);
@@ -116,7 +116,7 @@ public class AccountController : BaseApiController
 
         var verifyUrl = $"{origin}/account/accountRecovery?token={token}&email={user.Email}";
         var message =
-            $"<p>Please click the below link to change your password:</p><p><a href='{verifyUrl}'>Click to change password</a></p>";
+            $"<p>Vui lòng ấn vào link phía dưới:</p><p><a href='{verifyUrl}'>Đổi mật khẩu</a></p>";
 
         await _emailSender.SendEmailAsync(user.Email, "Account Recovery", message);
 
@@ -124,7 +124,7 @@ public class AccountController : BaseApiController
     }
 
     [AllowAnonymous]
-    [HttpPost("resetPassword")]
+    [HttpPut("resetPassword")]
     public async Task<IActionResult> ResetPassword(ResetPasswordDto resetPasswordDto)
     {
         var user = await _userManager.FindByEmailAsync(resetPasswordDto.Email);

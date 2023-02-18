@@ -1,7 +1,7 @@
 import axios, {AxiosError, AxiosResponse} from "axios";
 import {router} from "../router/Routers";
 import {store, useStore} from "../stores/store";
-import {User, UserFormValues} from "../models/user";
+import {PasswordFormValues, User, UserFormValues} from "../models/user";
 import {PaginationResult} from "../models/pagination";
 
 const sleep = (delay: number) => {
@@ -29,14 +29,14 @@ axios.interceptors.response.use(async response => {
         return response as AxiosResponse<PaginationResult<any>>
     }
     return response;
-}, (error: AxiosError) => {
+}, async (error: AxiosError) => {
     const {data, status, config, headers} = error.response as AxiosResponse;
     switch (status) {
         case 400:
             if (typeof (data) === "string")
                 console.log('Bad request');
             else if (config.method === 'get' && data.errors.hasOwnProperty('id')) {
-                router.navigate('/not-found');
+                await router.navigate('/not-found');
             } else if (data.errors) {
                 const modelStateErrors = [];
                 for (const key in data.errors) {
@@ -50,20 +50,20 @@ axios.interceptors.response.use(async response => {
         case 401:
             if (status === 401 && headers['www-authenticate']?.startsWith('Bearer error="invalid_token')) {
                 console.log('Session expired - please login again');
-                useStore().userStore.logout();
+                await useStore().userStore.logout();
             }
             break;
         case 403:
             console.log('Forbidden');
             break;
         case 404:
-            router.navigate('/not-found');
+            await router.navigate('/not-found');
             break;
         case 409:
             throw data;
         case 500:
             store.commonStore.setServerError(data);
-            router.navigate('/server-error');
+            await router.navigate('/server-error');
             break;
     }
     return Promise.reject(error);
@@ -81,8 +81,13 @@ const Account = {
     login: (user: UserFormValues) => requests.post<User>('/account/login', user),
     register: (user: UserFormValues) => requests.post<User>('/account/register', user),
     refreshToken: () => requests.post<User>('/account/refreshToken', {}),
-    verifyEmail: (token: string, email: string) => requests.post<void>(`/account/verifyEmail?token=${token}&email=${email}`, {}),
-    resendEmailConfirm: (email: string) => requests.get(`/account/resendEmailConfirmationLink?email=${email}`)
+    sendResetPasswordLink: (email: string) => requests.post<void>(`/account/sendResetPasswordLink?email=${email}`, {}),
+    resetPassword: (email: string, password: string, token: string) => requests.put<void>(`/account/resetPassword`, {
+        email,
+        password,
+        token
+    }),
+    changePassword: (values: PasswordFormValues) => requests.put<void>('/account/changePassword', values),
 }
 
 const agent = {
