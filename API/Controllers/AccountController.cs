@@ -83,14 +83,14 @@ public class AccountController : BaseApiController
         var result = await _userManager.CreateAsync(user, createUserDto.Password);
 
         if (!result.Succeeded)
-            return BadRequest("Problem registering user");
-        
-        result = await _userManager.AddToRoleAsync(user, createUserDto.Role.ToString());
-        
-        if (!result.Succeeded)
-            return BadRequest("Problem registering user");
+            return BadRequest("Problem creating user");
 
-        return Ok("Registration successfully");
+        result = await _userManager.AddToRoleAsync(user, createUserDto.Role.ToString());
+
+        if (!result.Succeeded)
+            return BadRequest("Problem creating user");
+
+        return Ok("Creation successfully");
     }
 
     [Authorize]
@@ -104,7 +104,7 @@ public class AccountController : BaseApiController
 
         if (!result.Succeeded)
             return Conflict("Sai mật khẩu");
-        return Ok("Password changed");
+        return Ok("Dổi mật khẩu thành công");
     }
 
     [AllowAnonymous]
@@ -120,13 +120,13 @@ public class AccountController : BaseApiController
         var token = await _userManager.GeneratePasswordResetTokenAsync(user);
         token = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(token));
 
-        var verifyUrl = $"{origin}/account/recover/password?token={token}&email={user.Email}";
+        var verifyUrl = $"{origin}/account/password_reset/with?token={token}&email={user.Email}";
         var message =
-            $"<p>Vui lòng ấn vào link phía dưới:</p><p><a href='{verifyUrl}'>Đổi mật khẩu</a></p>";
+            $"<p>Vui lòng ấn vào link phía dưới:</p><p><a href='{verifyUrl}'>Phục hồi</a></p>";
 
-        await _emailSender.SendEmailAsync(user.Email, "Account Recovery", message);
+        await _emailSender.SendEmailAsync(user.Email, "Phục hồi tài khoản", message);
 
-        return Ok("Email recovery link sent");
+        return Ok("Email phục hồi tài khoản");
     }
 
     [AllowAnonymous]
@@ -139,9 +139,9 @@ public class AccountController : BaseApiController
         var decodedToken = Encoding.UTF8.GetString(decodedTokenByBytes);
         var result = await _userManager.ResetPasswordAsync(user, decodedToken, resetPasswordDto.Password);
 
-        if (!result.Succeeded) return BadRequest(result.Errors);
+        if (!result.Succeeded) return BadRequest("Có lỗi xảy ra vui lòng thử lại");
 
-        return Ok("Password changed - you can login now");
+        return Ok("Thay đổi mật khẩu thành công, hãy đăng nhập");
     }
 
     [Authorize]

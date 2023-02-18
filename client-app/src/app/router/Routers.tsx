@@ -3,31 +3,36 @@ import App from "../layout/App";
 import NotFound from "../../features/Error/NotFound";
 import ServerError from "../../features/Error/ServerError";
 import RequireAuth from "./RequireAuth";
-import Login from "../../features/Account/Login/Login";
 import Test from "../../features/Test/Test";
-import ResetPassword from "../../features/Account/ResetPassword/ResetPassword";
-import ResetPasswordEmailForm from "../../features/Account/ResetPassword/ResetPasswordEmailForm";
+import Login from "../../features/Account/Login";
+import PasswordReset from "../../features/Account/PasswordReset";
+import PasswordResetToken from "../../features/Account/PasswordResetToken";
+import RequireNonAuth from "./RequireNonAuth";
 
 
 export const route = {
-    login:'/account/login',
-    resetPassword: '/account/recover',
-    confirmResetPassword: '/account/recover/password'
+    login: '/login',
+    resetPassword: '/account/password_reset',
+    confirmResetPassword: '/account/password_reset/with'
 };
 
 export const routes: RouteObject[] = [
     {
-        path: '/',
+        path: '',
         element: <App/>,
         children: [
             {
-                element: <RequireAuth/>, children: []
+                path: '/', element: <RequireAuth/>, children: []
+            },
+            {
+                path: '/', element: <RequireNonAuth/>, children: [
+                    {path: 'login', element: <Login/>},
+                    {path: 'account/password_reset', element: <PasswordReset/>},
+                    {path: 'account/password_reset/with', element: <PasswordResetToken/>},
+                ]
             },
             {path: 'not-found', element: <NotFound/>},
             {path: 'server-error', element: <ServerError/>},
-
-            {path: 'account/login', element: <Login/>},
-            {path: 'account/recover', element: <ResetPasswordEmailForm/>},
             {path: 'test', element: <Test/>},
             {path: '*', element: <Navigate replace to={'/not-found'}/>},
         ],
