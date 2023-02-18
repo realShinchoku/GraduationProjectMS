@@ -15,9 +15,9 @@ const validationSchema = Yup.object().shape({
         .required("Vui lòng nhập email!"),
 });
 
-function Login() {
+function ResetPasswordEmailForm() {
   
-    const {userStore: {login}} = useStore();
+    const {userStore: {sendResetPasswordLink}} = useStore();
     return (
         <Grid className="container">
             <Grid className="thumb">
@@ -27,12 +27,11 @@ function Login() {
               <Grid sx={{ mx: 'auto' }} className="inner">
                 <Typography variant="h3">RESET PASSWORD</Typography>
                 <Formik
-                    initialValues={{email: '', password: '', error: {email: '', password:''}}}
-                    // onSubmit={(values, {setErrors}) => login(values).catch((err: any) =>
-                    // {
-                    //     setErrors({error: err});
-                    // })}
-                    onSubmit={()=>console.log("")}
+                    initialValues={{email: '', error: null}}
+                    onSubmit={(values, {setErrors}) => sendResetPasswordLink(values.email).catch((err: any) =>
+                    {
+                        setErrors({error: err.response.data});
+                    })}
                     validationSchema={validationSchema}
                 >
                     {({handleSubmit, isSubmitting, errors, handleChange, isValid, dirty}) => (
@@ -44,8 +43,8 @@ function Login() {
                                 name="email"
                                 label="Tài khoản"
                                 onChange={handleChange}
-                                error={(dirty && Boolean(errors.email) || Boolean(errors.error?.email))}
-                                helperText={(dirty && errors.email) || errors.error?.email}
+                                error={(dirty && Boolean(errors.email) || Boolean(errors.error))}
+                                helperText={(dirty && errors.email) || errors.error}
                             />
                             <LoadingButton 
                                 color="primary" variant="contained" 
@@ -65,4 +64,4 @@ function Login() {
     );
 }
 
-export default observer(Login);
+export default observer(ResetPasswordEmailForm);

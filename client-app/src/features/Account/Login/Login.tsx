@@ -8,6 +8,7 @@ import TextField from '@mui/material/TextField';
 
 import {useStore} from "../../../app/stores/store";
 import "./login.scss";
+import {route} from "../../../app/router/Routers";
 
 const validationSchema = Yup.object().shape({
     email: Yup.string()
@@ -75,7 +76,7 @@ function Login() {
                     )}
                 </Formik>
               </Grid>
-              <Link href="" underline="none">Quên mật khẩu</Link>
+              <Link href={route.resetPassword} underline="none">Quên mật khẩu</Link>
             </Grid>
         </Grid>
     );
