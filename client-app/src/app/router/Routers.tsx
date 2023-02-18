@@ -6,8 +6,14 @@ import RequireAuth from "./RequireAuth";
 import Login from "../../features/Account/Login/Login";
 import Test from "../../features/Test/Test";
 import ResetPassword from "../../features/Account/ResetPassword/ResetPassword";
+import ResetPasswordEmailForm from "../../features/Account/ResetPassword/ResetPasswordEmailForm";
 
-export const route = {};
+
+export const route = {
+    login:'/account/login',
+    resetPassword: '/account/recover',
+    confirmResetPassword: '/account/recover/password'
+};
 
 export const routes: RouteObject[] = [
     {
@@ -19,8 +25,9 @@ export const routes: RouteObject[] = [
             },
             {path: 'not-found', element: <NotFound/>},
             {path: 'server-error', element: <ServerError/>},
-            {path: 'login', element: <Login/>},
-            {path: 'resetpassword', element: <ResetPassword/>},
+
+            {path: 'account/login', element: <Login/>},
+            {path: 'account/recover', element: <ResetPasswordEmailForm/>},
             {path: 'test', element: <Test/>},
             {path: '*', element: <Navigate replace to={'/not-found'}/>},
         ],

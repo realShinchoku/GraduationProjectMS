@@ -7,23 +7,17 @@ import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import TextField from '@mui/material/TextField';
 
 import {useStore} from "../../../app/stores/store";
-import "./login.scss";
-import {route} from "../../../app/router/Routers";
+
 
 const validationSchema = Yup.object().shape({
     email: Yup.string()
         .email("Vui lòng nhập email!")
         .required("Vui lòng nhập email!"),
-    password: Yup.string()
-        .matches(
-            /^(?=.*[0-9]+.*)(?=.*[a-z]+.*)(?=.*[A-Z]+.*)[!-z]{6,20}.*$/,
-            "Mật khẩu gồm ít nhất 8 kí tự trong đó bao gồm 1 kí tự hoa, 1 kí tự thường và 1 số!"
-        ).required("Vui lòng nhập mật khẩu!"),
 });
 
-function Login() {
+function ResetPasswordEmailForm() {
   
-    const {userStore: {login}} = useStore();
+    const {userStore: {sendResetPasswordLink}} = useStore();
     return (
         <Grid className="container">
             <Grid className="thumb">
@@ -31,12 +25,12 @@ function Login() {
             </Grid>
             <Grid className="SignUp_Form">
               <Grid sx={{ mx: 'auto' }} className="inner">
-                <Typography variant="h3">XIN CHÀO</Typography>
+                <Typography variant="h3">RESET PASSWORD</Typography>
                 <Formik
-                    initialValues={{email: '', password: '', error: {email: '', password:''}}}
-                    onSubmit={(values, {setErrors}) => login(values).catch((err: any) =>
+                    initialValues={{email: '', error: null}}
+                    onSubmit={(values, {setErrors}) => sendResetPasswordLink(values.email).catch((err: any) =>
                     {
-                        setErrors({error: err});
+                        setErrors({error: err.response.data});
                     })}
                     validationSchema={validationSchema}
                 >
@@ -49,19 +43,8 @@ function Login() {
                                 name="email"
                                 label="Tài khoản"
                                 onChange={handleChange}
-                                error={(dirty && Boolean(errors.email) || Boolean(errors.error?.email))}
-                                helperText={(dirty && errors.email) || errors.error?.email}
-                            />
-                            <TextField
-                                className="input"
-                                fullWidth
-                                id="password"
-                                name="password"
-                                label="Mật khẩu"
-                                type="password"
-                                onChange={handleChange}
-                                error={(dirty && Boolean(errors.password) || Boolean(errors.error?.password))}
-                                helperText={(dirty && errors.password) || errors.error?.password}
+                                error={(dirty && Boolean(errors.email) || Boolean(errors.error))}
+                                helperText={(dirty && errors.email) || errors.error}
                             />
                             <LoadingButton 
                                 color="primary" variant="contained" 
@@ -70,16 +53,15 @@ function Login() {
                                 disabled={!isValid || !dirty || isSubmitting}
                                 type="submit"
                             >
-                                Đăng nhập
+                                Xác nhận
                             </LoadingButton>
                         </Form>
                     )}
                 </Formik>
               </Grid>
-              <Link href={route.resetPassword} underline="none">Quên mật khẩu</Link>
             </Grid>
         </Grid>
     );
 }
 
-export default observer(Login);
+export default observer(ResetPasswordEmailForm);

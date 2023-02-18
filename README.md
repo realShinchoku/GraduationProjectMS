@@ -26,7 +26,7 @@ In terminal project run:
 
 #### `cd ./client-app`
 
-### Download package for first clone
+### Download package after pull from git
 
 #### `npm i`
 
