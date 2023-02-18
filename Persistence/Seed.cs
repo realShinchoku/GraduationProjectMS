@@ -18,7 +18,7 @@ public class Seed
                     Name = Role.FacultyOffice.ToString()
                 },
                 new()
-                {   
+                {
                     RoleId = Role.DepartmentSubjects,
                     Name = Role.DepartmentSubjects.ToString()
                 },
@@ -31,13 +31,11 @@ public class Seed
                 {
                     RoleId = Role.Student,
                     Name = Role.Student.ToString()
-                },
+                }
             };
-            foreach (var role in roles)
-            {
-                await roleManager.CreateAsync(role);
-            }
+            foreach (var role in roles) await roleManager.CreateAsync(role);
         }
+
         if (!userManager.Users.Any())
         {
             var users = new List<AppUser>
@@ -53,13 +51,13 @@ public class Seed
                 {
                     DisplayName = "Jane",
                     UserName = "jane",
-                    Email = "jane@test.com",
+                    Email = "jane@test.com"
                 },
                 new()
                 {
                     DisplayName = "Tom",
                     UserName = "tom",
-                    Email = "tom@test.com",
+                    Email = "tom@test.com"
                 }
             };
 

@@ -21,7 +21,8 @@ public class AccountController : BaseApiController
     private readonly TokenService _tokenService;
     private readonly UserManager<AppUser> _userManager;
 
-    public AccountController(UserManager<AppUser> userManager, TokenService tokenService, SignInManager<AppUser> signInManager, IEmailSender emailSender, RoleManager<AppRole> roleManager)
+    public AccountController(UserManager<AppUser> userManager, TokenService tokenService,
+        SignInManager<AppUser> signInManager, IEmailSender emailSender, RoleManager<AppRole> roleManager)
     {
         _tokenService = tokenService;
         _signInManager = signInManager;
@@ -37,12 +38,12 @@ public class AccountController : BaseApiController
         var user = await _userManager.Users.FirstOrDefaultAsync(
             x => x.Email == loginDto.Email);
 
-        if (user == null) 
+        if (user == null)
         {
             ModelState.AddModelError("email", "Email không tồn tại");
             return BadRequest(ModelState);
         }
-            
+
         var result = await _signInManager.CheckPasswordSignInAsync(user, loginDto.Password, false);
 
         if (!result.Succeeded)
@@ -54,6 +55,7 @@ public class AccountController : BaseApiController
         await SetRefreshToken(user);
         return CreateUserObject(user);
     }
+
     [Authorize]
     [HttpPost("register")]
     public async Task<ActionResult<UserDto>> Register(RegisterDto registerDto)
@@ -63,7 +65,7 @@ public class AccountController : BaseApiController
 
         if (currentUser.Role != Role.FacultyOffice)
             return Forbid();
-        
+
         if (await _userManager.Users.AnyAsync(x => x.UserName == registerDto.UserName))
             return Conflict("Username is already taken");
 
@@ -107,7 +109,7 @@ public class AccountController : BaseApiController
 
         if (user == null)
             return Unauthorized("Email not found");
-        
+
         var origin = Request.Headers["origin"];
         var token = await _userManager.GeneratePasswordResetTokenAsync(user);
         token = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(token));
