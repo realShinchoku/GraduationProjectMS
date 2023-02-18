@@ -18,10 +18,3 @@ export enum Role {
     Lecturer = <number>2,
     Student = <number>3
 }
-
-export enum RoleName {
-    "Văn phòng khoa" = <number>0,
-    "Bộ môn" = <number>1,
-    "Giảng viên" = <number>2,
-    "Sinh viên" = <number>3
-}

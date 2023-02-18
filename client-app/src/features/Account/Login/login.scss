@@ -83,15 +83,24 @@
             padding: get_sp(32);
         }
         .inner {
-            padding-top: 150px;
+            padding-top: 90px;
             @include pc {
-                padding-top: get_pc(150);
+                padding-top: get_pc(90);
             }
             @include tablet {
-                padding-top: get_tablet(150);
+                padding-top: get_tablet(90);
             }
             @include sp {
-                padding-top: get_sp(150);
+                padding-top: get_sp(90);
+            }
+            h3 {
+                color: $color-base-1;
+                font-family: "Haas Grot Text R Web", "Helvetica Neue", Helvetica, Arial, sans-serif;
+                font-size: 32px;
+                font-weight: 500;
+                line-height: 29px;
+                text-align: center;
+                margin-bottom: 90px;
             }
             form {
                 .input, button {
