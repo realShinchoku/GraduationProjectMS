@@ -1,11 +1,13 @@
 import {observer} from "mobx-react-lite";
-import {Box, Link, Typography} from "@mui/material";
 import {Form, Formik} from 'formik';
 import * as Yup from 'yup';
-import TextField from '@mui/material/TextField';
-import styles from "./login.scss";
-import {useStore} from "../../../app/stores/store";
+import {Box, Link, Typography} from "@mui/material";
 import {LoadingButton} from "@mui/lab";
+import Grid from "@mui/material/Unstable_Grid2/Grid2";
+import TextField from '@mui/material/TextField';
+
+import {useStore} from "../../../app/stores/store";
+import "./login.scss";
 
 const validationSchema = Yup.object().shape({
     email: Yup.string()
@@ -19,61 +21,63 @@ const validationSchema = Yup.object().shape({
 });
 
 function Login() {
+  
     const {userStore: {login}} = useStore();
     return (
-        <Box className={styles.container}>
-            <Box className={styles.thumb}>
+        <Grid className="container">
+            <Grid className="thumb">
                 <Box className="logo"></Box>
-            </Box>
-            <Box className="SignUp_Form">
-                <Box className="inner">
-                    <Typography variant="h3">XIN CHÀO</Typography>
-                    <Formik
-                        initialValues={{email: '', password: '', error: {email: '', password: ''}}}
-                        onSubmit={(values, {setErrors}) => login(values).catch((err: any) => {
-                            setErrors({error: err});
-                        })}
-                        validationSchema={validationSchema}
-                    >
-                        {({handleSubmit, isSubmitting, errors, handleChange, isValid, dirty}) => (
-                            <Form onSubmit={handleSubmit}>
-                                <TextField
-                                    className="input"
-                                    fullWidth
-                                    id="email"
-                                    name="email"
-                                    label="Tài khoản"
-                                    onChange={handleChange}
-                                    error={(dirty && Boolean(errors.email) || Boolean(errors.error?.email))}
-                                    helperText={(dirty && errors.email) || errors.error?.email}
-                                />
-                                <TextField
-                                    className="input"
-                                    fullWidth
-                                    id="password"
-                                    name="password"
-                                    label="Mật khẩu"
-                                    type="password"
-                                    onChange={handleChange}
-                                    error={(dirty && Boolean(errors.password) || Boolean(errors.error?.password))}
-                                    helperText={(dirty && errors.password) || errors.error?.password}
-                                />
-                                <LoadingButton
-                                    color="primary" variant="contained"
-                                    fullWidth
-                                    loading={isSubmitting}
-                                    disabled={!isValid || !dirty || isSubmitting}
-                                    type="submit"
-                                >
-                                    Đăng nhập
-                                </LoadingButton>
-                            </Form>
-                        )}
-                    </Formik>
-                </Box>
-                <Link href="" underline="none">Quên mật khẩu</Link>
-            </Box>
-        </Box>
+            </Grid>
+            <Grid className="SignUp_Form">
+              <Grid sx={{ mx: 'auto' }} className="inner">
+                <Typography variant="h3">XIN CHÀO</Typography>
+                <Formik
+                    initialValues={{email: '', password: '', error: {email: '', password:''}}}
+                    onSubmit={(values, {setErrors}) => login(values).catch((err: any) =>
+                    {
+                        setErrors({error: err});
+                    })}
+                    validationSchema={validationSchema}
+                >
+                    {({handleSubmit, isSubmitting, errors, handleChange, isValid, dirty}) => (
+                        <Form onSubmit={handleSubmit}>
+                            <TextField
+                                className="input"
+                                fullWidth
+                                id="email"
+                                name="email"
+                                label="Tài khoản"
+                                onChange={handleChange}
+                                error={(dirty && Boolean(errors.email) || Boolean(errors.error?.email))}
+                                helperText={(dirty && errors.email) || errors.error?.email}
+                            />
+                            <TextField
+                                className="input"
+                                fullWidth
+                                id="password"
+                                name="password"
+                                label="Mật khẩu"
+                                type="password"
+                                onChange={handleChange}
+                                error={(dirty && Boolean(errors.password) || Boolean(errors.error?.password))}
+                                helperText={(dirty && errors.password) || errors.error?.password}
+                            />
+                            <LoadingButton 
+                                color="primary" variant="contained" 
+                                fullWidth 
+                                loading={isSubmitting} 
+                                disabled={!isValid || !dirty || isSubmitting}
+                                type="submit"
+                            >
+                                Đăng nhập
+                            </LoadingButton>
+                        </Form>
+                    )}
+                </Formik>
+              </Grid>
+              <Link href="" underline="none">Quên mật khẩu</Link>
+            </Grid>
+        </Grid>
     );
 }
 
