@@ -10,6 +10,13 @@ export interface UserFormValues {
     password: string;
     displayName?: string;
     userName?: string;
+    oldPassword?: string;
+    newPassword?: string;
+}
+
+export interface PasswordFormValues {
+    oldPassword: string;
+    newPassword: string;
 }
 
 export enum Role {

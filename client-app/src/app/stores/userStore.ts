@@ -1,4 +1,4 @@
-import {User, UserFormValues} from "../models/user";
+import {PasswordFormValues, User, UserFormValues} from "../models/user";
 import {makeAutoObservable, runInAction} from "mobx";
 import agent from "../api/agent";
 import {store} from "./store";
@@ -6,7 +6,8 @@ import {router} from "../router/Routers";
 
 export default class UserStore {
     user: User | null = null;
-    fbLoading = false;
+    isSend = false;
+    isReset = false;
     refreshTokenTimeout: any;
 
     constructor() {
@@ -29,10 +30,10 @@ export default class UserStore {
             // await router.navigate('/activities');
         } catch (err: any) {
             const error = {email: null, password: null}
-            if(err.response.data.email)
+            if (err.response.data.email)
                 error.email = err.response.data.email[0];
-            if(err.response.data.password)
-                error.password =  err.response.data.password[0];
+            if (err.response.data.password)
+                error.password = err.response.data.password[0];
             throw error;
         }
     }
@@ -58,9 +59,37 @@ export default class UserStore {
         try {
             await agent.Account.register(formValues);
             // store.modalStore.closeModal();
-            await router.navigate(`/account/registerSuccess?email=${formValues.email}`);
         } catch (err) {
             throw err;
+        }
+    }
+
+    sendResetPasswordLink = async (email: string) => {
+        try {
+            await agent.Account.sendResetPasswordLink(email);
+            runInAction(() => this.isSend = true);
+        } catch (e) {
+            throw e;
+        }
+
+    }
+
+    resetPassword = async (email: string, password: string, token: string) => {
+        try {
+            await agent.Account.resetPassword(email, password, token);
+            runInAction(() => this.isReset = true);
+        } catch (e) {
+            throw e;
+        }
+    }
+
+    changePassword = async (values: PasswordFormValues) => {
+        try {
+            await agent.Account.changePassword(values);
+            await this.logout();
+            await router.navigate('/login')
+        } catch (e: any) {
+            throw e.response.data;
         }
     }
 

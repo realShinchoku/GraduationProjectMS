@@ -1,8 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Domain;
 
 namespace API.DTOs;
 
-public class RegisterDto
+public class CreateUserDto
 {
     [Required] [EmailAddress] public string Email { get; set; }
 
@@ -14,4 +15,5 @@ public class RegisterDto
     [Required] public string DisplayName { get; set; }
 
     [Required] public string UserName { get; set; }
+    [Required] public Role Role { get; set; }
 }

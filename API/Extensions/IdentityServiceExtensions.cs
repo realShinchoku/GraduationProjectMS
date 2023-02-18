@@ -61,10 +61,10 @@ public static class IdentityServiceExtensions
         services.AddAuthorization(opt =>
         {
             opt.AddPolicy("IsFacultyOffice", policy => policy.Requirements.Add(new IsRole(Role.FacultyOffice)));
-            opt.AddPolicy("IsDepartmentSubjects", policy => policy.Requirements.Add(new IsRole(Role.DepartmentSubjects)));
+            opt.AddPolicy("IsDepartmentSubjects",
+                policy => policy.Requirements.Add(new IsRole(Role.DepartmentSubjects)));
             opt.AddPolicy("IsLecturer", policy => policy.Requirements.Add(new IsRole(Role.Lecturer)));
             opt.AddPolicy("IsStudent", policy => policy.Requirements.Add(new IsRole(Role.Student)));
-
         });
 
         services.AddTransient<IAuthorizationHandler, IsRoleHandler>();

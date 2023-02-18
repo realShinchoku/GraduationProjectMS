@@ -21,7 +21,7 @@ const validationSchema = Yup.object().shape({
 });
 
 function Login() {
-    const {userStore: {login}} = useStore();    
+    const {userStore: {login}} = useStore();
     return (
         <Grid className="container">
             <Grid className="thumb">

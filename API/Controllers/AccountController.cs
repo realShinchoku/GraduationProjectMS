@@ -57,8 +57,8 @@ public class AccountController : BaseApiController
     }
 
     [Authorize(Policy = "IsFacultyOffice")]
-    [HttpPost("register")]
-    public async Task<ActionResult<UserDto>> Register(RegisterDto registerDto)
+    [HttpPost("create")]
+    public async Task<ActionResult<UserDto>> Create(CreateUserDto createUserDto)
     {
         var currentUser = await _userManager.Users.FirstOrDefaultAsync(
             x => x.Email == User.FindFirstValue(ClaimTypes.Email));
@@ -66,21 +66,27 @@ public class AccountController : BaseApiController
         if (currentUser.Role != Role.FacultyOffice)
             return Forbid();
 
-        if (await _userManager.Users.AnyAsync(x => x.UserName == registerDto.UserName))
+        if (await _userManager.Users.AnyAsync(x => x.UserName == createUserDto.UserName))
             return Conflict("Username is already taken");
 
-        if (await _userManager.Users.AnyAsync(x => x.Email == registerDto.Email))
+        if (await _userManager.Users.AnyAsync(x => x.Email == createUserDto.Email))
             return Conflict("Email is already taken");
 
         var user = new AppUser
         {
-            DisplayName = registerDto.DisplayName,
-            Email = registerDto.Email,
-            UserName = registerDto.UserName
+            DisplayName = createUserDto.DisplayName,
+            Email = createUserDto.Email,
+            UserName = createUserDto.UserName,
+            Role = createUserDto.Role
         };
 
-        var result = await _userManager.CreateAsync(user, registerDto.Password);
+        var result = await _userManager.CreateAsync(user, createUserDto.Password);
 
+        if (!result.Succeeded)
+            return BadRequest("Problem registering user");
+        
+        result = await _userManager.AddToRoleAsync(user, createUserDto.Role.ToString());
+        
         if (!result.Succeeded)
             return BadRequest("Problem registering user");
 
@@ -88,7 +94,7 @@ public class AccountController : BaseApiController
     }
 
     [Authorize]
-    [HttpPost("changePassword")]
+    [HttpPut("changePassword")]
     public async Task<IActionResult> ChangePassword(ChangePasswordDto passwordDto)
     {
         var user = await _userManager.Users.FirstOrDefaultAsync(
@@ -97,12 +103,12 @@ public class AccountController : BaseApiController
         var result = await _userManager.ChangePasswordAsync(user, passwordDto.OldPassword, passwordDto.NewPassword);
 
         if (!result.Succeeded)
-            return Conflict(result.Errors);
+            return Conflict("Sai mật khẩu");
         return Ok("Password changed");
     }
 
     [AllowAnonymous]
-    [HttpGet("sendResetPasswordLink")]
+    [HttpPost("sendResetPasswordLink")]
     public async Task<IActionResult> SendResetPassword(string email)
     {
         var user = await _userManager.FindByEmailAsync(email);
@@ -116,7 +122,7 @@ public class AccountController : BaseApiController
 
         var verifyUrl = $"{origin}/account/accountRecovery?token={token}&email={user.Email}";
         var message =
-            $"<p>Please click the below link to change your password:</p><p><a href='{verifyUrl}'>Click to change password</a></p>";
+            $"<p>Vui lòng ấn vào link phía dưới:</p><p><a href='{verifyUrl}'>Đổi mật khẩu</a></p>";
 
         await _emailSender.SendEmailAsync(user.Email, "Account Recovery", message);
 
@@ -124,7 +130,7 @@ public class AccountController : BaseApiController
     }
 
     [AllowAnonymous]
-    [HttpPost("resetPassword")]
+    [HttpPut("resetPassword")]
     public async Task<IActionResult> ResetPassword(ResetPasswordDto resetPasswordDto)
     {
         var user = await _userManager.FindByEmailAsync(resetPasswordDto.Email);
