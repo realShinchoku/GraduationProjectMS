@@ -26,8 +26,7 @@ export default class UserStore {
             runInAction(() => {
                 this.user = user;
             });
-            // store.modalStore.closeModal();
-            // await router.navigate('/activities');
+            await router.navigate('/');
         } catch (err: any) {
             const error = {email: null, password: null}
             if (err.response.data.email)
@@ -41,7 +40,7 @@ export default class UserStore {
     logout = async () => {
         store.commonStore.setToken(null);
         this.user = null;
-        await router.navigate('/');
+        await router.navigate('/login');
     }
 
     getUser = async () => {
@@ -58,7 +57,6 @@ export default class UserStore {
     register = async (formValues: UserFormValues) => {
         try {
             await agent.Account.register(formValues);
-            // store.modalStore.closeModal();
         } catch (err) {
             throw err;
         }
@@ -78,6 +76,7 @@ export default class UserStore {
         try {
             await agent.Account.resetPassword(email, password, token);
             runInAction(() => this.isReset = true);
+            // await router.navigate('/login');
         } catch (e) {
             throw e;
         }

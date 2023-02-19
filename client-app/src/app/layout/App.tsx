@@ -7,17 +7,12 @@ import {useStore} from "../stores/store";
 
 function App() {
 
-    const {userStore: {isLoggedIn}} = useStore();
-
     return (
         <>
             <ScrollRestoration/>
-            {!isLoggedIn ? <Login/> : (
-                <>
-                    <NavBar/>
-                    <Outlet/>
-                </>
-            )}
+            <>
+                <Outlet/>
+            </>
         </>
     );
 }
