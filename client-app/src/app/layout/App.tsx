@@ -4,15 +4,15 @@ import NavBar from "./NavBar";
 import './styles.css';
 import Login from "../../features/Account/Login";
 import {useStore} from "../stores/store";
+import ModalContainer from "../common/modal/ModalContainer";
 
 function App() {
 
     return (
         <>
             <ScrollRestoration/>
-            <>
-                <Outlet/>
-            </>
+            <ModalContainer/>
+            <Outlet/>
         </>
     );
 }
