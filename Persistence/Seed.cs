@@ -42,22 +42,30 @@ public class Seed
             {
                 new()
                 {
-                    DisplayName = "Bob",
-                    UserName = "bob",
-                    Email = "bob@test.com",
+                    DisplayName = "Văn phòng khoa",
+                    UserName = "vpk",
+                    Email = "vpk@test.com",
                     Role = Role.FacultyOffice
                 },
                 new()
                 {
-                    DisplayName = "Jane",
-                    UserName = "jane",
-                    Email = "jane@test.com"
+                    DisplayName = "Bộ môn",
+                    UserName = "bm",
+                    Email = "bm@test.com",
+                    Role = Role.DepartmentSubjects
                 },
                 new()
                 {
-                    DisplayName = "Tom",
-                    UserName = "tom",
-                    Email = "tom@test.com"
+                    DisplayName = "Giảng viên",
+                    UserName = "gv",
+                    Email = "gv@test.com",
+                    Role = Role.Lecturer
+                },
+                new()
+                {
+                    DisplayName = "Sinh viên",
+                    UserName = "sv",
+                    Email = "sv@test.com"
                 }
             };
 
