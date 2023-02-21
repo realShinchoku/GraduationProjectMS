@@ -1,0 +1,38 @@
+@import "../../../assets/css/config/variables";
+@import "../../../assets/css/mixin/function";
+
+.menu_item {
+  display: flex;
+  padding: 10px;
+  color: $clr-base-font;
+  border-radius: 6px;
+  align-items: center;
+  margin-bottom: 10px;
+
+  .icon {
+    margin-right: 16px;
+    width: 20px;
+    height: 20px;
+    color: #787486;
+  }
+
+  .title {
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 500;
+    color: #787486;
+    line-height: 19px;
+  }
+
+  &.active {
+    background: #5030E514;
+
+    .title, .icon {
+      color: #000000;
+    }
+  }
+
+  &:hover {
+    background: rgba(22, 24, 35, .03);
+  }
+}

@@ -1,19 +1,19 @@
 import {useStore} from "../stores/store";
-import {Navigate, Outlet, useLocation} from "react-router-dom";
-import {route} from "./Routers";
-import NavBar from "../layout/NavBar";
-import ModalContainer from "../common/modal/ModalContainer";
+import {Outlet, useLocation} from "react-router-dom";
+import Header from "../layout/Header/Header";
+import Sidebar from "../layout/Sidebar/Sidebar";
 
 export default function RequireAuth() {
     const {userStore: {isLoggedIn}} = useStore();
     const location = useLocation();
 
-    if (!isLoggedIn)
-        return <Navigate to={route.login} state={{from: location}}/>
+    // if (!isLoggedIn)
+    //     return <Navigate to={route.login} state={{from: location}}/>
 
     return (
         <>
-            <NavBar/>
+            <Header/>
+            <Sidebar/>
             <Outlet/>
         </>
     )

@@ -7,8 +7,8 @@ import Test from "../../features/Test/Test";
 import PasswordReset from "../../features/Account/PasswordReset";
 import PasswordResetToken from "../../features/Account/PasswordResetToken";
 import RequireNonAuth from "./RequireNonAuth";
-import HomePage from "../../features/pages/HomePage";
 import Login from "../../features/Account/Login";
+import HomePage from "../../features/Hompage/HomePage";
 
 
 export const route = {
@@ -24,7 +24,7 @@ export const routes: RouteObject[] = [
         children: [
             {
                 path: '/', element: <RequireAuth/>, children: [
-                    {path: 'homepage', element: <HomePage/>},
+                    {path: '', element: <HomePage/>},
                 ]
             },
             {
