@@ -8,6 +8,7 @@ import TextField from '@mui/material/TextField';
 import {useStore} from "../../app/stores/store";
 import './form.scss';
 import {route} from "../../app/router/Routers";
+import {useState} from "react";
 
 const validationSchema = Yup.object().shape({
     email: Yup.string()
@@ -18,6 +19,9 @@ const validationSchema = Yup.object().shape({
 function PasswordReset() {
 
     const {userStore: {sendResetPasswordLink}} = useStore();
+
+    const [isSent, setIsSent] = useState(false);
+
     return (
         <Grid className="account">
             <Grid className="container">
@@ -60,6 +64,7 @@ function PasswordReset() {
                         </Formik>
                     </Grid>
                     <Link href={route.login} underline="none">Đăng nhập</Link>
+
                 </Grid>
             </Grid>
         </Grid>

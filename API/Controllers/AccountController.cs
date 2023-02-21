@@ -72,6 +72,9 @@ public class AccountController : BaseApiController
         if (await _userManager.Users.AnyAsync(x => x.Email == createUserDto.Email))
             return Conflict("Email is already taken");
 
+        if (!Enum.IsDefined(typeof(Role),createUserDto.Role))
+            return Conflict("Role is not exsit");
+
         var user = new AppUser
         {
             DisplayName = createUserDto.DisplayName,
@@ -79,6 +82,7 @@ public class AccountController : BaseApiController
             UserName = createUserDto.UserName,
             Role = createUserDto.Role
         };
+        
 
         var result = await _userManager.CreateAsync(user, createUserDto.Password);
 
@@ -88,7 +92,7 @@ public class AccountController : BaseApiController
         result = await _userManager.AddToRoleAsync(user, createUserDto.Role.ToString());
 
         if (!result.Succeeded)
-            return BadRequest("Problem creating user");
+            return BadRequest("Problem adding role");
 
         return Ok("Creation successfully");
     }
