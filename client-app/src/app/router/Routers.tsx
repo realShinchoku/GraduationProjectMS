@@ -7,25 +7,30 @@ import Test from "../../features/Test/Test";
 import PasswordReset from "../../features/Account/PasswordReset";
 import PasswordResetToken from "../../features/Account/PasswordResetToken";
 import RequireNonAuth from "./RequireNonAuth";
+import HomePage from "../../features/pages/HomePage";
 import Login from "../../features/Account/Login";
 
 
 export const route = {
     login: '/login',
     resetPassword: '/account/password_reset',
-    confirmResetPassword: '/account/password_reset/with'
+    confirmResetPassword: '/account/password_reset/with',
+    homepage: '/homepage',
 };
 
 export const routes: RouteObject[] = [
     {
+      path: '/',
         element: <App/>,
         children: [
             {
-                path: '/', element: <RequireAuth/>, children: []
+                element: <RequireAuth/>, children: [
+                    {path: 'homepage', element: <HomePage/>},
+                ]
             },
             {
-                path: '/', element: <RequireNonAuth/>, children: [
-                    {path: 'login', element: <Login />},
+                element: <RequireNonAuth/>, children: [
+                    {path: 'login', element: <Login/>},
                     {path: 'account/password_reset', element: <PasswordReset/>},
                     {path: 'account/password_reset/with', element: <PasswordResetToken/>},
                 ]

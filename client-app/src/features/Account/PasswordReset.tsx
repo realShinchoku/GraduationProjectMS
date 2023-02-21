@@ -23,53 +23,48 @@ function PasswordReset() {
     const [isSent, setIsSent] = useState(false);
 
     return (
-        <Grid className="container">
-            <Grid className="thumb">
-                <Box className="logo"></Box>
-            </Grid>
-            <Grid className="SignUp_Form">
-                <Grid sx={{mx: 'auto'}} className="inner">
-                    <Typography variant="h3">RESET PASSWORD</Typography>
-                    {isSent ?
-                        <>
-                            mail da dc gui vui long check email cua ban
-                        </>
-                        : <>
-                            <Formik
-                                initialValues={{email: '', error: null}}
-                                onSubmit={(values, {setErrors}) => sendResetPasswordLink(values.email).then(() => setIsSent(true)).catch((err: any) => {
-                                    setErrors({error: err.response.data});
-                                })}
-                                validationSchema={validationSchema}
-                            >
-                                {({handleSubmit, isSubmitting, errors, handleChange, isValid, dirty}) => (
-                                    <Form onSubmit={handleSubmit}>
-                                        <TextField
-                                            className="input"
-                                            fullWidth
-                                            id="email"
-                                            name="email"
-                                            label="Email"
-                                            onChange={handleChange}
-                                            error={(dirty && Boolean(errors.email) || Boolean(errors.error))}
-                                            helperText={(dirty && errors.email) || errors.error}
-                                        />
-                                        <LoadingButton
-                                            color="primary" variant="contained"
-                                            fullWidth
-                                            loading={isSubmitting}
-                                            disabled={!isValid || !dirty || isSubmitting}
-                                            type="submit"
-                                        >
-                                            Xác nhận
-                                        </LoadingButton>
-                                    </Form>
-                                )}
-                            </Formik>
-                            <Link href={route.login} underline="none">Đăng nhập</Link>
+        <Grid className="account">
+            <Grid className="container">
+                <Grid className="thumb">
+                    <Box className="logo"></Box>
+                </Grid>
+                <Grid className="SignUp_Form">
+                    <Grid sx={{mx: 'auto'}} className="inner">
+                        <Typography variant="h3">RESET PASSWORD</Typography>
+                        <Formik
+                            initialValues={{email: '', error: null}}
+                            onSubmit={(values, {setErrors}) => sendResetPasswordLink(values.email).catch((err: any) => {
+                                setErrors({error: err.response.data});
+                            })}
+                            validationSchema={validationSchema}
+                        >
+                            {({handleSubmit, isSubmitting, errors, handleChange, isValid, dirty}) => (
+                                <Form onSubmit={handleSubmit}>
+                                    <TextField
+                                        className="input"
+                                        fullWidth
+                                        id="email"
+                                        name="email"
+                                        label="Email"
+                                        onChange={handleChange}
+                                        error={(dirty && Boolean(errors.email) || Boolean(errors.error))}
+                                        helperText={(dirty && errors.email) || errors.error}
+                                    />
+                                    <LoadingButton
+                                        color="primary" variant="contained"
+                                        fullWidth
+                                        loading={isSubmitting}
+                                        disabled={!isValid || !dirty || isSubmitting}
+                                        type="submit"
+                                    >
+                                        Xác nhận
+                                    </LoadingButton>
+                                </Form>
+                            )}
+                        </Formik>
+                    </Grid>
+                    <Link href={route.login} underline="none">Đăng nhập</Link>
 
-                        </>
-                    }
                 </Grid>
             </Grid>
         </Grid>

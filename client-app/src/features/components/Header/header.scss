@@ -1,0 +1,46 @@
+@import "../../../assets/css/config/variables";
+@import "../../../assets/css/mixin/function";
+
+#app_bar {
+    box-shadow: unset;
+    border-bottom: 1px solid #DBDBDB;
+    .container {
+        background: #FFFFFF;
+        max-width: 100%;
+        .user {
+            display: flex;
+            color: #787486;
+            align-items: center;
+            margin-right: 18px;
+            font-family: 'Inter', sans-serif;
+            @include sp {
+                display: none;
+            }
+            .icon {
+                margin-right: 15px;
+                svg {
+                    width: 20px;
+                    height: 20px;
+                    position: relative;
+                }
+                svg + svg {
+                    margin-left: 20px;
+                }
+            }
+        }
+    }
+    .tlt {
+        h5 {
+            color: #0D062D;
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 19px;
+            margin-bottom: 3px;
+        }
+        span {
+            font-size: 14px;
+            line-height: 17px;
+            font-weight: 400;
+        }
+    }
+}
