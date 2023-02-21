@@ -27,60 +27,62 @@ function PasswordResetToken() {
     const email = useQuery().get('email') as string;
     const {userStore: {resetPassword}} = useStore();
     return (
-        <Grid className="container">
-            <Grid className="thumb">
-                <Box className="logo"></Box>
-            </Grid>
-            <Grid className="SignUp_Form">
-                <Grid sx={{mx: 'auto'}} className="inner">
-                    <Typography variant="h3">Đặt Lại mật khẩu</Typography>
-                    <Formik
-                        initialValues={{
-                            password: '',
-                            confirmPassword: '',
-                            error: null
-                        }}
-                        onSubmit={(values, {setErrors}) => resetPassword(email, values.password, token).catch((err: any) => {
-                            setErrors({error: err.response.data});
-                        })}
-                        validationSchema={validationSchema}
-                    >
-                        {({handleSubmit, isSubmitting, errors, handleChange, isValid, dirty}) => (
-                            <Form onSubmit={handleSubmit}>
-                                <TextField
-                                    className="input"
-                                    fullWidth
-                                    id="password"
-                                    name="password"
-                                    label="Mật khẩu mới"
-                                    type="password"
-                                    onChange={handleChange}
-                                    error={(dirty && Boolean(errors.password) || Boolean(errors.error))}
-                                    helperText={(dirty && errors.password) || errors.error}
-                                />
-                                <TextField
-                                    className="input"
-                                    fullWidth
-                                    id="confirmPassword"
-                                    name="confirmPassword"
-                                    label="Nhập lại mật khẩu mới"
-                                    type="password"
-                                    onChange={handleChange}
-                                    error={(dirty && Boolean(errors.confirmPassword))}
-                                    helperText={(dirty && errors.confirmPassword)}
-                                />
-                                <LoadingButton
-                                    color="primary" variant="contained"
-                                    fullWidth
-                                    loading={isSubmitting}
-                                    disabled={!isValid || !dirty || isSubmitting}
-                                    type="submit"
-                                >
-                                    Đồng ý
-                                </LoadingButton>
-                            </Form>
-                        )}
-                    </Formik>
+        <Grid className="account">
+            <Grid className="container">
+                <Grid className="thumb">
+                    <Box className="logo"></Box>
+                </Grid>
+                <Grid className="SignUp_Form">
+                    <Grid sx={{mx: 'auto'}} className="inner">
+                        <Typography variant="h3">Đặt Lại mật khẩu</Typography>
+                        <Formik
+                            initialValues={{
+                                password: '',
+                                confirmPassword: '',
+                                error: null
+                            }}
+                            onSubmit={(values, {setErrors}) => resetPassword(email, values.password, token).catch((err: any) => {
+                                setErrors({error: err.response.data});
+                            })}
+                            validationSchema={validationSchema}
+                        >
+                            {({handleSubmit, isSubmitting, errors, handleChange, isValid, dirty}) => (
+                                <Form onSubmit={handleSubmit}>
+                                    <TextField
+                                        className="input"
+                                        fullWidth
+                                        id="password"
+                                        name="password"
+                                        label="Mật khẩu mới"
+                                        type="password"
+                                        onChange={handleChange}
+                                        error={(dirty && Boolean(errors.password) || Boolean(errors.error))}
+                                        helperText={(dirty && errors.password) || errors.error}
+                                    />
+                                    <TextField
+                                        className="input"
+                                        fullWidth
+                                        id="confirmPassword"
+                                        name="confirmPassword"
+                                        label="Nhập lại mật khẩu mới"
+                                        type="password"
+                                        onChange={handleChange}
+                                        error={(dirty && Boolean(errors.confirmPassword))}
+                                        helperText={(dirty && errors.confirmPassword)}
+                                    />
+                                    <LoadingButton
+                                        color="primary" variant="contained"
+                                        fullWidth
+                                        loading={isSubmitting}
+                                        disabled={!isValid || !dirty || isSubmitting}
+                                        type="submit"
+                                    >
+                                        Đồng ý
+                                    </LoadingButton>
+                                </Form>
+                            )}
+                        </Formik>
+                    </Grid>
                 </Grid>
             </Grid>
         </Grid>

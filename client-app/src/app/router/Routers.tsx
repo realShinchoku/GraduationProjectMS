@@ -8,12 +8,14 @@ import Login from "../../features/Account/Login";
 import PasswordReset from "../../features/Account/PasswordReset";
 import PasswordResetToken from "../../features/Account/PasswordResetToken";
 import RequireNonAuth from "./RequireNonAuth";
+import HomePage from "../../features/pages/HomePage";
 
 
 export const route = {
     login: '/login',
     resetPassword: '/account/password_reset',
-    confirmResetPassword: '/account/password_reset/with'
+    confirmResetPassword: '/account/password_reset/with',
+    homepage: '/homepage',
 };
 
 export const routes: RouteObject[] = [
@@ -22,10 +24,13 @@ export const routes: RouteObject[] = [
         element: <App/>,
         children: [
             {
-                path: '/', element: <RequireAuth/>, children: []
+                path: '/', element: <RequireAuth/>, children: [
+                    // {path: 'homepage', element: <HomePage/>},
+                ]
             },
             {
                 path: '/', element: <RequireNonAuth/>, children: [
+                    {path: 'homepage', element: <HomePage/>},
                     {path: 'login', element: <Login/>},
                     {path: 'account/password_reset', element: <PasswordReset/>},
                     {path: 'account/password_reset/with', element: <PasswordResetToken/>},
