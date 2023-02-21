@@ -24,11 +24,11 @@
   &_logo {
     display: flex;
     justify-content: space-between;
-    padding: 11px 24px;
+    padding: 12px 24px;
     align-items: center;
     border-bottom: 1px solid #DBDBDB;
     @include sp {
-      padding: 7px 24px;
+      padding: 8px 24px;
     }
   }
 
