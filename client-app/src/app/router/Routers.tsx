@@ -20,16 +20,15 @@ export const route = {
 
 export const routes: RouteObject[] = [
     {
-      path: '/',
         element: <App/>,
         children: [
             {
-                element: <RequireAuth/>, children: [
+                path: '/', element: <RequireAuth/>, children: [
                     {path: 'homepage', element: <HomePage/>},
                 ]
             },
             {
-                element: <RequireNonAuth/>, children: [
+                path: '/', element: <RequireNonAuth/>, children: [
                     {path: 'login', element: <Login/>},
                     {path: 'account/password_reset', element: <PasswordReset/>},
                     {path: 'account/password_reset/with', element: <PasswordResetToken/>},
