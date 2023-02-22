@@ -193,5 +193,47 @@
     .forgotpd{
       color: #838B98;
     }
+    .mt-10{
+      margin-top: 25px;
+    }
+    .inner_resetpass{
+      text-align: center;
+      padding-top: 0.75vw;
+    }
+    .inner_resetPassSuccess{
+      text-align: center;
+      padding-top: 6vw;
+    }
+    .success{
+      color: #15bf97;
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      background: #d6e9f2;
+      padding: 5px;
+      }
+    .success_icon{
+      background: #15bf97;
+      display: block;
+      position: relative;
+      width: 70px;
+      height: 70px;
+      padding-top: 12.5px;
+      border-radius: 50%;
+      margin-left: 40%;
+      }
+    .form_Bottom{
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .back_Icon{
+      color: #838B98;
+      width: 25px;
+      height: 25px;
+      margin-bottom: 30px;
+      margin-right: 5px;
+    }  
   }
 }
