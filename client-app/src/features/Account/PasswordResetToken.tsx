@@ -7,6 +7,8 @@ import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import TextField from '@mui/material/TextField';
 import {useStore} from "../../app/stores/store";
 import useQuery from "../../app/util/hooks";
+import VpnKeyIcon from '@mui/icons-material/VpnKey';
+import { useState } from "react";
 import './form.scss';
 
 const validationSchema = Yup.object().shape({
@@ -23,6 +25,7 @@ const validationSchema = Yup.object().shape({
 });
 
 function PasswordResetToken() {
+    const [isReset, setIsReset] = useState(false);
     const token = useQuery().get('token') as string;
     const email = useQuery().get('email') as string;
     const {userStore: {resetPassword}} = useStore();
@@ -33,15 +36,17 @@ function PasswordResetToken() {
                     <Box className="logo"></Box>
                 </Grid>
                 <Grid className="SignUp_Form">
-                    <Grid sx={{mx: 'auto'}} className="inner">
-                        <Typography variant="h3">Đặt Lại mật khẩu</Typography>
+                    <Grid sx={{mx: 'auto'}} className="inner inner_resetpass">
+                    <Grid className = "keypass_vpn"><><VpnKeyIcon className={isReset ? '' : 'keypass'}></VpnKeyIcon></></Grid>
+                    <Typography className = "h3_fget" variant="h3">{isReset? '' :'Đặt lại mật khẩu?'}</Typography>
+                    <Typography className = "h2_fget" variant="h6">Mật khẩu mới của bạn phải khác với mật khẩu đã sử dụng trước đó</Typography>
                         <Formik
                             initialValues={{
                                 password: '',
                                 confirmPassword: '',
                                 error: null
                             }}
-                            onSubmit={(values, {setErrors}) => resetPassword(email, values.password, token).catch((err: any) => {
+                            onSubmit={(values, {setErrors}) => resetPassword(email, values.password, token).then(() => setIsReset(true)).catch((err: any) => {
                                 setErrors({error: err.response.data});
                             })}
                             validationSchema={validationSchema}
