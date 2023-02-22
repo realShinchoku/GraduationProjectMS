@@ -1,197 +1,199 @@
 @import "../../assets/css/config/variables";
 @import "../../assets/css/mixin/function";
 
-.container {
-  position: absolute;
-  top: 50%;
-  right: 0;
-  left: 0;
-  margin: 0 auto;
-  transform: translateY(-50%);
-  display: flex;
-  width: 800px;
-  height: 540px;
-  border-radius: 0.1875rem;
-  box-shadow: rgba(0, 0, 0, 0.4) 0px 0px 10px;
-  @include tablet {
-    width: get_tablet(800);
-  }
-  @include sp {
-    width: 100%;
-    height: 100%;
-  }
-
-  .thumb {
-    position: relative;
-    padding: 2rem;
+.account {
+  .container {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    left: 0;
+    margin: 0 auto;
+    transform: translateY(-50%);
     display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    background: linear-gradient(to right, $background-linear-1, $background-linear-2);
-    background-repeat: no-repeat;
-    background-position: 50% center;
-    background-size: 100%;
-    width: 50%;
-    height: 100%;
-    color: $color-base;
-    @include pc {
-      padding: get_pc(32);
-    }
+    width: 800px;
+    height: 540px;
+    border-radius: 0.1875rem;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 0px 10px;
     @include tablet {
-      padding: get_tablet(32);
+      width: get_tablet(800);
     }
     @include sp {
-      padding: get_sp(20);
-      display: none
-    }
-
-    .logo {
-      @include bgsetup("../../../assets/images/Logo.png", no-repeat, 50% center, 75%);
-      position: absolute;
-      top: 0;
-      left: 0;
       width: 100%;
       height: 100%;
     }
-  }
-
-  .SignUp_Form {
-    width: 50%;
-    height: 100%;
-    color: $color-base;
-    padding: 2rem;
-    background: $background-login;
-    text-align: right;
-    @include pc {
-      padding: get_pc(32);
-    }
-    @include tablet {
-      padding: get_tablet(32);
-    }
-    @include sp {
-      width: 100%;
-      padding: get_sp(32);
-    }
-
-    .inner {
-      padding-top: 150px;
+  
+    .thumb {
+      position: relative;
+      padding: 2rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      background: linear-gradient(to right, $background-linear-1, $background-linear-2);
+      background-repeat: no-repeat;
+      background-position: 50% center;
+      background-size: 100%;
+      width: 50%;
+      height: 100%;
+      color: $color-base;
       @include pc {
-        padding-top: get_pc(150);
+        padding: get_pc(32);
       }
       @include tablet {
-        padding-top: get_tablet(80);
+        padding: get_tablet(32);
       }
       @include sp {
-        padding-top: get_sp(150);
+        padding: get_sp(20);
+        display: none
       }
-
-      h3 {
-        color: $color-base-1;
-        font-size: 40px;
-        font-weight: 700;
-        line-height: 50px;
-        margin-bottom: 30px;
-        text-align: center;
+  
+      .logo {
+        @include bgsetup("../../../assets/images/Logo.png", no-repeat, 50% center, 75%);
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+    }
+  
+    .SignUp_Form {
+      width: 50%;
+      height: 100%;
+      color: $color-base;
+      padding: 2rem;
+      background: $background-login;
+      text-align: right;
+      @include pc {
+        padding: get_pc(32);
+      }
+      @include tablet {
+        padding: get_tablet(32);
+      }
+      @include sp {
+        width: 100%;
+        padding: get_sp(32);
+      }
+  
+      .inner {
+        padding-top: 150px;
         @include pc {
-          font-size: get_pc(40);
-          line-height: get_pc(50);
-          margin-bottom: get_pc(30);
+          padding-top: get_pc(150);
         }
         @include tablet {
-          font-size: get_tablet(40);
-          line-height: get_tablet(50);
-          margin-bottom: get_tablet(30);
+          padding-top: get_tablet(80);
         }
         @include sp {
-          font-size: get_sp(40);
-          line-height: get_sp(50);
-          margin-bottom: get_sp(30);
+          padding-top: get_sp(150);
         }
-      }
-
-      form {
-        .input, button {
-          margin-bottom: 20px;
+  
+        h3 {
+          color: $color-base-1;
+          font-size: 40px;
+          font-weight: 700;
+          line-height: 50px;
+          margin-bottom: 30px;
+          text-align: center;
           @include pc {
-            margin-bottom: get_pc(20);
+            font-size: get_pc(40);
+            line-height: get_pc(50);
+            margin-bottom: get_pc(30);
           }
           @include tablet {
-            margin-bottom: get_tablet(20);
+            font-size: get_tablet(40);
+            line-height: get_tablet(50);
+            margin-bottom: get_tablet(30);
           }
           @include sp {
-            margin-bottom: get_sp(20);
+            font-size: get_sp(40);
+            line-height: get_sp(50);
+            margin-bottom: get_sp(30);
           }
         }
-
-        button {
-          padding: 10px 16px;
-          @include pc {
-            padding: get_pc(10) get_pc(16);
+  
+        form {
+          .input, button {
+            margin-bottom: 20px;
+            @include pc {
+              margin-bottom: get_pc(20);
+            }
+            @include tablet {
+              margin-bottom: get_tablet(20);
+            }
+            @include sp {
+              margin-bottom: get_sp(20);
+            }
           }
-          @include tablet {
-            padding: get_tablet(10) get_pc(16);
-          }
-          @include sp {
-            padding: get_sp(10) get_pc(16);
+  
+          button {
+            padding: 10px 16px;
+            @include pc {
+              padding: get_pc(10) get_pc(16);
+            }
+            @include tablet {
+              padding: get_tablet(10) get_pc(16);
+            }
+            @include sp {
+              padding: get_sp(10) get_pc(16);
+            }
           }
         }
       }
-    }
-    .keypass{
-    color: #9fc7ec;
-    width: 35px;
-    height: 35px;
-    border-radius: 50%;
-    background: #d6e9f2;
-    padding: 5px;
-    }
-    .keypass_vpn{
-    background: #eef1f6;
-    display: block;
-    position: relative;
-    width: 70px;
-    height: 70px;
-    padding-top: 12.5px;
-    border-radius: 50%;
-    margin-left: 40%;
-    }
-    .inner_pass{
-      text-align: center;
-      padding-top: 4.5vw;
-    }
-    .h3_fget{
-      margin-top: 25px;
-      font-family: system-ui;
-      color: #3b3939 !important;
-      font-size: x-large;
-      margin-bottom: 10px !important;
-    }
-    .h2_fget{
-      color: #a3a2a2;
-      font-weight: 500;
-      font-size: inherit;
-      margin-bottom: 30px;
-      font-family: system-ui;    }
-    .school_icon{
+      .keypass{
+      color: #9fc7ec;
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      background: #d6e9f2;
+      padding: 5px;
+      }
+      .keypass_vpn{
       background: #eef1f6;
+      display: block;
+      position: relative;
       width: 70px;
       height: 70px;
       padding-top: 12.5px;
       border-radius: 50%;
       margin-left: 40%;
-      margin-bottom: 10px;
-    }
-    .schoolicon{
-      color: #1976d2;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    }
-    .h3_login{
-      font-family: system-ui;
-    }
-    .forgotpd{
-      color: #838B98;
+      }
+      .inner_pass{
+        text-align: center;
+        padding-top: 3.5vw;
+      }
+      .h3_fget{
+        margin-top: 25px;
+        font-family: system-ui;
+        color: #3b3939 !important;
+        font-size: x-large;
+        margin-bottom: 10px !important;
+      }
+      .h2_fget{
+        color: #a3a2a2;
+        font-weight: 500;
+        font-size: inherit;
+        margin-bottom: 30px;
+        font-family: system-ui;    }
+      .school_icon{
+        background: #eef1f6;
+        width: 70px;
+        height: 70px;
+        padding-top: 12.5px;
+        border-radius: 50%;
+        margin-left: 40%;
+        margin-bottom: 10px;
+      }
+      .schoolicon{
+        color: #1976d2;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      }
+      .h3_login{
+        font-family: system-ui;
+      }
+      .forgotpd{
+        color: #838B98;
+      }
     }
   }
 }

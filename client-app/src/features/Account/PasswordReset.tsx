@@ -24,56 +24,58 @@ function PasswordReset() {
     const [isSent, setIsSent] = useState(false);
 
     return (
-        <Grid className="container">
-            <Grid className="thumb">
-                <Box className="logo">
-                </Box>
-            </Grid>
-            <Grid className="SignUp_Form">
-                <Grid sx={{mx: 'auto'}} className="inner inner_pass">
-                    <Grid className = "keypass_vpn"><><VpnKeyIcon className="keypass"></VpnKeyIcon></></Grid>
-                    <Typography className = "h3_fget" variant="h3">Quên mật khẩu?</Typography>
-                    <Typography className = "h2_fget" variant="h6">Chúng tôi sẽ gửi cho bạn đường dẫn đặt lại mật khẩu.</Typography>
-                    {isSent ?
-                        <>
-                            Mail đã được gửi về vui lòng check mai của bạn
-                        </>
-                        : <>
-                            <Formik
-                                initialValues={{email: '', error: null}}
-                                onSubmit={(values, {setErrors}) => sendResetPasswordLink(values.email).then(() => setIsSent(true)).catch((err: any) => {
-                                    setErrors({error: err.response.data});
-                                })}
-                                validationSchema={validationSchema}
-                            >
-                                {({handleSubmit, isSubmitting, errors, handleChange, isValid, dirty}) => (
-                                    <Form onSubmit={handleSubmit}>
-                                        <TextField
-                                            className="input"
-                                            fullWidth
-                                            id="email"
-                                            name="email"
-                                            label="Email"
-                                            onChange={handleChange}
-                                            error={(dirty && Boolean(errors.email) || Boolean(errors.error))}
-                                            helperText={(dirty && errors.email) || errors.error}
-                                        />
-                                        <LoadingButton
-                                            color="primary" variant="contained"
-                                            fullWidth
-                                            loading={isSubmitting}
-                                            disabled={!isValid || !dirty || isSubmitting}
-                                            type="submit"
-                                        >
-                                            Đặt lại mật khẩu
-                                        </LoadingButton>
-                                    </Form>
-                                )}
-                            </Formik>
-                            <Link className = "forgotpd h2_fget" href={route.login} underline="none">Đăng nhập</Link>
+        <Grid className="account">
+            <Grid className="container">
+                <Grid className="thumb">
+                    <Box className="logo">
+                    </Box>
+                </Grid>
+                <Grid className="SignUp_Form">
+                    <Grid sx={{mx: 'auto'}} className="inner inner_pass">
+                        <Grid className = "keypass_vpn"><><VpnKeyIcon className="keypass"></VpnKeyIcon></></Grid>
+                        <Typography className = "h3_fget" variant="h3">Quên mật khẩu?</Typography>
+                        <Typography className = "h2_fget" variant="h6">Chúng tôi sẽ gửi cho bạn đường dẫn đặt lại mật khẩu.</Typography>
+                        {isSent ?
+                            <>
+                                Mail đã được gửi về vui lòng check mai của bạn
+                            </>
+                            : <>
+                                <Formik
+                                    initialValues={{email: '', error: null}}
+                                    onSubmit={(values, {setErrors}) => sendResetPasswordLink(values.email).then(() => setIsSent(true)).catch((err: any) => {
+                                        setErrors({error: err.response.data});
+                                    })}
+                                    validationSchema={validationSchema}
+                                >
+                                    {({handleSubmit, isSubmitting, errors, handleChange, isValid, dirty}) => (
+                                        <Form onSubmit={handleSubmit}>
+                                            <TextField
+                                                className="input"
+                                                fullWidth
+                                                id="email"
+                                                name="email"
+                                                label="Email"
+                                                onChange={handleChange}
+                                                error={(dirty && Boolean(errors.email) || Boolean(errors.error))}
+                                                helperText={(dirty && errors.email) || errors.error}
+                                            />
+                                            <LoadingButton
+                                                color="primary" variant="contained"
+                                                fullWidth
+                                                loading={isSubmitting}
+                                                disabled={!isValid || !dirty || isSubmitting}
+                                                type="submit"
+                                            >
+                                                Đặt lại mật khẩu
+                                            </LoadingButton>
+                                        </Form>
+                                    )}
+                                </Formik>
+                                <Link className = "forgotpd h2_fget" href={route.login} underline="none">Đăng nhập</Link>
 
-                        </>
-                    }
+                            </>
+                        }
+                    </Grid>
                 </Grid>
             </Grid>
         </Grid>
