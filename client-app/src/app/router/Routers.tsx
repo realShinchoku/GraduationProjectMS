@@ -10,6 +10,7 @@ import PasswordResetSuccess from "../../features/Account/PasswordResetSuccess";
 import RequireNonAuth from "./RequireNonAuth";
 import Login from "../../features/Account/Login";
 import HomePage from "../../features/Hompage/HomePage";
+import Checkyouremail from "../../features/Account/ChangePassword/checkyouremail";
 
 
 export const route = {
@@ -35,6 +36,7 @@ export const routes: RouteObject[] = [
                     {path: 'account/password_reset', element: <PasswordReset/>},
                     {path: 'account/password_reset/with', element: <PasswordResetToken/>},
                     {path: 'account/password_reset_success/with', element: <PasswordResetSuccess/>},
+                    {path: 'account/checkyouremail', element: <Checkyouremail/>},
                 ]
             },
             {path: 'not-found', element: <NotFound/>},

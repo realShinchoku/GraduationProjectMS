@@ -25,58 +25,60 @@ function Login() {
 
     const {userStore: {login}} = useStore();
     return (
-        <Grid className="container">
-            <Grid className="thumb">
-                <Box className="logo"></Box>
-            </Grid>
-            <Grid className="SignUp_Form">
-                <Grid sx={{mx: 'auto'}} className="inner inner_pass">
-                    <Grid className = "school_icon"><><SchoolIcon className="schoolicon"></SchoolIcon></></Grid>
-                    <Typography  className = "h3_login" variant="h3">Đăng nhập</Typography>
-                    <Formik
-                        initialValues={{email: '', password: '', error: {email: '', password: ''}}}
-                        onSubmit={(values, {setErrors}) => login(values).catch((err: any) => {
-                            setErrors({error: err});
-                        })}
-                        validationSchema={validationSchema}
-                    >
-                        {({handleSubmit, isSubmitting, errors, handleChange, isValid, dirty}) => (
-                            <Form onSubmit={handleSubmit}>
-                                <TextField
-                                    className="input"
-                                    fullWidth
-                                    id="email"
-                                    name="email"
-                                    label="Tài khoản"
-                                    onChange={handleChange}
-                                    error={(dirty && Boolean(errors.email) || Boolean(errors.error?.email))}
-                                    helperText={(dirty && errors.email) || errors.error?.email}
-                                />
-                                <TextField
-                                    className="input"
-                                    fullWidth
-                                    id="password"
-                                    name="password"
-                                    label="Mật khẩu"
-                                    type="password"
-                                    onChange={handleChange}
-                                    error={(dirty && Boolean(errors.password) || Boolean(errors.error?.password))}
-                                    helperText={(dirty && errors.password) || errors.error?.password}
-                                />
-                                <LoadingButton
-                                    color="primary" variant="contained"
-                                    fullWidth
-                                    loading={isSubmitting}
-                                    disabled={!isValid || !dirty || isSubmitting}
-                                    type="submit"
-                                >
-                                    Đăng nhập
-                                </LoadingButton>
-                            </Form>
-                        )}
-                    </Formik>
+        <Grid className="account">
+            <Grid className="container">
+                <Grid className="thumb">
+                    <Box className="logo"></Box>
                 </Grid>
-                <Link className = "forgotpd h2_fget" href={route.resetPassword} underline="none">Quên mật khẩu</Link>
+                <Grid className="SignUp_Form">
+                    <Grid sx={{mx: 'auto'}} className="inner inner_pass">
+                        <Grid className = "school_icon"><><SchoolIcon className="schoolicon"></SchoolIcon></></Grid>
+                        <Typography  className = "h3_login" variant="h3">Đăng nhập</Typography>
+                        <Formik
+                            initialValues={{email: '', password: '', error: {email: '', password: ''}}}
+                            onSubmit={(values, {setErrors}) => login(values).catch((err: any) => {
+                                setErrors({error: err});
+                            })}
+                            validationSchema={validationSchema}
+                        >
+                            {({handleSubmit, isSubmitting, errors, handleChange, isValid, dirty}) => (
+                                <Form onSubmit={handleSubmit}>
+                                    <TextField
+                                        className="input"
+                                        fullWidth
+                                        id="email"
+                                        name="email"
+                                        label="Tài khoản"
+                                        onChange={handleChange}
+                                        error={(dirty && Boolean(errors.email) || Boolean(errors.error?.email))}
+                                        helperText={(dirty && errors.email) || errors.error?.email}
+                                    />
+                                    <TextField
+                                        className="input"
+                                        fullWidth
+                                        id="password"
+                                        name="password"
+                                        label="Mật khẩu"
+                                        type="password"
+                                        onChange={handleChange}
+                                        error={(dirty && Boolean(errors.password) || Boolean(errors.error?.password))}
+                                        helperText={(dirty && errors.password) || errors.error?.password}
+                                    />
+                                    <LoadingButton
+                                        color="primary" variant="contained"
+                                        fullWidth
+                                        loading={isSubmitting}
+                                        disabled={!isValid || !dirty || isSubmitting}
+                                        type="submit"
+                                    >
+                                        Đăng nhập
+                                    </LoadingButton>
+                                </Form>
+                            )}
+                        </Formik>
+                    </Grid>
+                    <Link className = "forgotpd h2_fget" href={route.resetPassword} underline="none">Quên mật khẩu</Link>
+                </Grid>
             </Grid>
         </Grid>
     );

@@ -18,8 +18,8 @@ import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 import Badge, {badgeClasses} from "@mui/material/Badge";
 
 import MenuItem from "../Menu/MenuItem";
-import "./Header.scss"
 import {route} from "../../router/Routers";
+import "./Header.scss";
 
 function Header() {
 
