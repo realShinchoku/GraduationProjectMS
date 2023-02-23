@@ -8,7 +8,7 @@ import TextField from '@mui/material/TextField';
 import SchoolIcon from '@mui/icons-material/School';
 import {route} from "../../app/router/Routers";
 import {useStore} from "../../app/stores/store";
-import './form.scss';
+import './Account.scss';
 
 const validationSchema = Yup.object().shape({
     email: Yup.string()
@@ -32,8 +32,9 @@ function Login() {
                 </Grid>
                 <Grid className="SignUp_Form">
                     <Grid sx={{mx: 'auto'}} className="inner inner_pass">
-                        <Grid className = "school_icon"><><SchoolIcon className="schoolicon"></SchoolIcon></></Grid>
-                        <Typography  className = "h3_login" variant="h3">Đăng nhập</Typography>
+                        <Grid className="school_icon"><><SchoolIcon className="schoolicon"></SchoolIcon></>
+                        </Grid>
+                        <Typography className="h3_login" variant="h3">Đăng nhập</Typography>
                         <Formik
                             initialValues={{email: '', password: '', error: {email: '', password: ''}}}
                             onSubmit={(values, {setErrors}) => login(values).catch((err: any) => {
@@ -77,7 +78,7 @@ function Login() {
                             )}
                         </Formik>
                     </Grid>
-                    <Link className = "forgotpd h2_fget" href={route.resetPassword} underline="none">Quên mật khẩu</Link>
+                    <Link className="forgotpd h2_fget" href={route.resetPassword} underline="none">Quên mật khẩu</Link>
                 </Grid>
             </Grid>
         </Grid>
