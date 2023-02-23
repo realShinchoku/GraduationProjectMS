@@ -10,13 +10,15 @@ import RequireNonAuth from "./RequireNonAuth";
 import Login from "../../features/Account/Login";
 import HomePage from "../../features/Hompage/HomePage";
 import Checkyouremail from "../../features/Account/ChangePassword/checkyouremail";
+import HomePageTest from "../../features/HompageTest/HomePageTest";
 
 
 export const route = {
     login: '/login',
     resetPassword: '/account/password_reset',
     confirmResetPassword: '/account/password_reset/with',
-    homepage: '/homepage',
+    homepage: '/',
+    homepagetest: '/homepagetest',
 };
 
 export const routes: RouteObject[] = [
@@ -26,6 +28,7 @@ export const routes: RouteObject[] = [
             {
                 path: '/', element: <RequireAuth/>, children: [
                     {path: '', element: <HomePage/>},
+                    {path: 'homepagetest', element: <HomePageTest />},
                 ]
             },
             {

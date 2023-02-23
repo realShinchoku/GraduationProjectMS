@@ -7,12 +7,11 @@
   top: 0;
   bottom: 0;
   display: block;
-  overflow-y: auto;
   width: 100%;
   max-width: 250px;
   padding-right: 0;
   padding-left: 0;
-  min-width: 250px;
+  min-width: 252px;
   border-color: rgba(0, 0, 0, .05);
   z-index: 1050;
   transition: all .15s ease;
@@ -20,15 +19,16 @@
   border-style: solid;
   box-shadow: 0 0 2rem 0 rgb(136 152 170 / 15%);
   border-right: 1px solid #DBDBDB;
+  font-family: 'Inter', sans-serif;
 
   &_logo {
     display: flex;
     justify-content: space-between;
-    padding: 12px 24px;
+    padding: 24px;
     align-items: center;
     border-bottom: 1px solid #DBDBDB;
     @include sp {
-      padding: 8px 24px;
+      padding: 20px 24px;
     }
   }
 
@@ -36,7 +36,48 @@
     display: flex;
     flex-direction: column;
     align-items: stretch;
+    padding: 14px 14px 15px 14px;
+  }
+  .tlt {
+    font-size: 12px;
+    font-family: "Inter", sans-serif;
+    font-weight: 700;
+    line-height: 15px;
+    color: #787486;
+    padding-top: 30.5px;
+    padding-left: 8px;
+    margin-bottom: 21px;
+    margin-left: 14px;
+    padding-right: 8px;
+    margin-right: 14px;
+    border-top: 1px solid #DBDBDB;
+  }
+  .tab {
     padding: 0 14px;
+    .tab_ {
+      justify-content: left;
+      min-height: unset;
+      padding: 11px 0 10.5px 12px;
+      text-decoration: none;
+      font-size: 16px;
+      font-weight: 600;
+      color: #787486;
+      line-height: 19px;
+      font-family: 'Inter', sans-serif;
+      text-align: left;
+      svg {
+        width: 8px;
+        height: 8px;
+        margin-right: 16px;
+      }
+      &.Mui-selected {
+        background: rgba(80, 48, 229, 0.0784313725);
+        border-radius: 6px;
+      }
+      + .tab_ {
+        margin-top: 10px;
+      }
+    }
   }
 }
 
@@ -96,9 +137,9 @@
 
     .side_bar_logo {
       justify-content: center;
-      padding: 12px 12px;
+      padding: 24px 12px;
       @include sp {
-        padding: 10px 12px;
+        padding: 20px 12px;
       }
 
       .Logo {
@@ -178,11 +219,16 @@
     .menu_item {
       &.active {
         background: none;
-
         .icon {
           color: #5030E514;
         }
       }
+    }
+    .tlt {
+      display: none;
+    }
+    .tab {
+      display: none;
     }
   }
 }
