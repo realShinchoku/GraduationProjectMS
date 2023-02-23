@@ -159,15 +159,10 @@
         margin-left: 40%;
       }
 
-      .inner_pass {
-        text-align: center;
-        padding-top: 3.5vw;
-      }
-
       .h3_fget {
         margin-top: 25px;
         font-family: system-ui;
-        color: #3b3939 !important;
+        color: #0e1827 !important;
         font-size: x-large;
         margin-bottom: 10px !important;
       }
@@ -223,16 +218,6 @@
       margin-top: 25px;
     }
 
-    .inner_resetpass {
-      text-align: center;
-      padding-top: 0.75vw;
-    }
-
-    .inner_resetPassSuccess {
-      text-align: center;
-      padding-top: 6vw;
-    }
-
     .success {
       color: #15bf97;
       width: 45px;
@@ -267,5 +252,118 @@
       margin-bottom: 30px;
       margin-right: 5px;
     }
+    .resetPass_Form{
+      width: 50%;
+      height: 100%;
+      color: $color-base;
+      padding: 2rem;
+      background: $background-login;
+      text-align: right;
+      @include pc {
+        padding: get_pc(32);
+      }
+      @include tablet {
+        padding: get_tablet(32);
+      }
+      @include sp {
+        width: 100%;
+        padding: get_sp(32);
+      }
+      h3 {
+        color: $color-base-1;
+        font-size: 40px;
+        font-weight: 600;
+        line-height: 50px;
+        margin-bottom: 30px;
+        text-align: center;
+        @include pc {
+          font-size: get_pc(40);
+          line-height: get_pc(50);
+          margin-bottom: get_pc(30);
+        }
+        @include tablet {
+          font-size: get_tablet(40);
+          line-height: get_tablet(50);
+          margin-bottom: get_tablet(30);
+        }
+        @include sp {
+          font-size: get_sp(40);
+          line-height: get_sp(50);
+          margin-bottom: get_sp(30);
+        }
+      }
+
+      form {
+        .input, button {
+          margin-bottom: 20px;
+          @include pc {
+            margin-bottom: get_pc(20);
+          }
+          @include tablet {
+            margin-bottom: get_tablet(20);
+          }
+          @include sp {
+            margin-bottom: get_sp(20);
+          }
+        }
+
+        button {
+          padding: 10px 16px;
+          @include pc {
+            padding: get_pc(10) get_pc(16);
+          }
+          @include tablet {
+            padding: get_tablet(10) get_pc(16);
+          }
+          @include sp {
+            padding: get_sp(10) get_pc(16);
+          }
+        }
+      }
+    }
+
+      .inner_ResetPass {
+        text-align: center;
+        padding-top: 0.75vw;
+      }
+
+      .keyPass {
+        color: #8ac2f5;
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+        background: #d6e9f2;
+        padding: 15px;
+      }
+
+      .h3_Reset {
+        margin-top: 15px;
+        font-family: 'Inter', sans-serif;
+        color: #161c26 !important;
+        font-size: x-large;
+        margin-bottom: 10px !important;
+      }
+
+      .h6_Reset {
+        color: #a3a2a2;
+        font-weight: 450;
+        font-size: inherit;
+        margin-bottom: 30px;
+        font-family: system-ui;
+      }
+
+      .inner_Pass {
+        text-align: center;
+        padding-top: 3.5vw;
+      }
+
+      .forGotPd {
+        color: #a3a2a2;
+        font-weight: 450;
+        font-size: inherit;
+        margin-bottom: 30px;
+        font-family: system-ui;
+      }  
   }
 }
+

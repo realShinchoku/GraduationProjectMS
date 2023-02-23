@@ -39,29 +39,25 @@ function PasswordResetToken() {
                     <Box className="logo"></Box>
                 </Grid>
                 {isReset ?
-                    <Grid className="SignUp_Form">
-                        <Grid sx={{mx: 'auto'}} className="inner inner_resetPassSuccess">
+                    <Grid className="resetPass_Form">
+                        <Grid sx={{mx: 'auto'}} className="inner_ResetPassSuccess">
                             <Grid className="successIcon">
                                 <CheckCircleOutlineIcon className="success"/>
                             </Grid>
-                            <Typography className="h3_fget" variant="h3">Password được đặt lại</Typography>
-                            <Typography className="h2_fget" variant="h6">Mật khẩu của bạn đã được thiết lập thành
-                                công</Typography>
+                            <Typography className="h3_Reset" variant="h3">Password được đặt lại</Typography>
+                            <Typography className="h6_Reset" variant="h6">Mật khẩu của bạn đã được thiết lập thành công</Typography>
                         </Grid>
                         <Grid className="form_Bottom">
                             <ArrowBackIcon className="back_Icon"></ArrowBackIcon>
-                            <Link className="forgotpd h2_fget" href={route.login} underline="none">Trở lại trang đăng
-                                nhập</Link>
+                            <Link className="h6_Reset" href={route.login} underline="none">Trở lại trang đăng nhập</Link>
                         </Grid>
                     </Grid>
                     :
-                    <Grid className="SignUp_Form">
-                        <Grid sx={{mx: 'auto'}} className="inner inner_resetpass">
-                            <Grid className="keypass_vpn">
-                                <VpnKeyIcon className='keypass'/>
-                            </Grid>
-                            <Typography className="h3_fget" variant="h3">Đặt lại mật khẩu?</Typography>
-                            <Typography className="h2_fget" variant="h6">
+                    <Grid className="resetPass_Form">
+                        <Grid sx={{mx: 'auto'}} className="inner_ResetPass">
+                            <Grid ><VpnKeyIcon className='keyPass'/></Grid>
+                            <Typography className="h3_Reset" variant="h3">Đặt lại mật khẩu?</Typography>
+                            <Typography className="h6_Reset" variant="h6">
                                 Mật khẩu mới của bạn phải khác với mật khẩu đã sử dụng trước đó
                             </Typography>
                             <Formik
