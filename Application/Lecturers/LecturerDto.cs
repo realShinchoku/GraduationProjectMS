@@ -12,6 +12,7 @@ public class LecturerDto
     public string PhoneNumber { get; set; }
     public string Faculty { get; set; }
     public string DepartmentSubjects { get; set; }
+    public int StudentCount { get; set; }
     public int Status { get; set; }
     public string Bio { get; set; }
 }

@@ -2,5 +2,5 @@
 
 public class Faculty : AppUser
 {
-    public ICollection<FacultyDepartmentSubject> DepartmentSubjects { get; set; }
+    public ICollection<DepartmentSubject> DepartmentSubjects { get; set; }
 }

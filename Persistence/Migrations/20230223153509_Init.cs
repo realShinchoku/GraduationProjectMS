@@ -123,9 +123,12 @@ namespace Persistence.Migrations
                     Sex = table.Column<bool>(type: "boolean", nullable: false),
                     Birthday = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     Discriminator = table.Column<string>(type: "text", nullable: false),
+                    FacultyId = table.Column<string>(type: "text", nullable: true),
+                    DepartmentSubjectId = table.Column<string>(type: "text", nullable: true),
                     InstructorStatus = table.Column<int>(type: "integer", nullable: true),
                     MaxStudentsNumber = table.Column<int>(type: "integer", nullable: true),
                     StudentId = table.Column<string>(type: "text", nullable: true),
+                    LecturerId = table.Column<string>(type: "text", nullable: true),
                     GraduationProjectPeriodId = table.Column<Guid>(type: "uuid", nullable: true),
                     GraduationProjectId = table.Column<Guid>(type: "uuid", nullable: true),
                     SyllabusId = table.Column<string>(type: "text", nullable: true),
@@ -149,6 +152,21 @@ namespace Persistence.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_AspNetUsers_AspNetUsers_DepartmentSubjectId",
+                        column: x => x.DepartmentSubjectId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_AspNetUsers_AspNetUsers_FacultyId",
+                        column: x => x.FacultyId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_AspNetUsers_AspNetUsers_LecturerId",
+                        column: x => x.LecturerId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_AspNetUsers_GraduationProjectPeriods_GraduationProjectPerio~",
                         column: x => x.GraduationProjectPeriodId,
@@ -257,78 +275,6 @@ namespace Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "DepartmentSubjectLecturers",
-                columns: table => new
-                {
-                    LecturerId = table.Column<string>(type: "text", nullable: false),
-                    DepartmentSubjectId = table.Column<string>(type: "text", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_DepartmentSubjectLecturers", x => new { x.DepartmentSubjectId, x.LecturerId });
-                    table.ForeignKey(
-                        name: "FK_DepartmentSubjectLecturers_AspNetUsers_DepartmentSubjectId",
-                        column: x => x.DepartmentSubjectId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_DepartmentSubjectLecturers_AspNetUsers_LecturerId",
-                        column: x => x.LecturerId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "FacultyDepartmentSubjects",
-                columns: table => new
-                {
-                    FacultyId = table.Column<string>(type: "text", nullable: false),
-                    DepartmentSubjectId = table.Column<string>(type: "text", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_FacultyDepartmentSubjects", x => new { x.DepartmentSubjectId, x.FacultyId });
-                    table.ForeignKey(
-                        name: "FK_FacultyDepartmentSubjects_AspNetUsers_DepartmentSubjectId",
-                        column: x => x.DepartmentSubjectId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_FacultyDepartmentSubjects_AspNetUsers_FacultyId",
-                        column: x => x.FacultyId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "LecturerStudents",
-                columns: table => new
-                {
-                    LecturerId = table.Column<string>(type: "text", nullable: false),
-                    StudentId = table.Column<string>(type: "text", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_LecturerStudents", x => new { x.StudentId, x.LecturerId });
-                    table.ForeignKey(
-                        name: "FK_LecturerStudents_AspNetUsers_LecturerId",
-                        column: x => x.LecturerId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_LecturerStudents_AspNetUsers_StudentId",
-                        column: x => x.StudentId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "RefreshToken",
                 columns: table => new
                 {
@@ -381,6 +327,16 @@ namespace Persistence.Migrations
                 column: "NormalizedEmail");
 
             migrationBuilder.CreateIndex(
+                name: "IX_AspNetUsers_DepartmentSubjectId",
+                table: "AspNetUsers",
+                column: "DepartmentSubjectId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AspNetUsers_FacultyId",
+                table: "AspNetUsers",
+                column: "FacultyId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_AspNetUsers_GraduationProjectId",
                 table: "AspNetUsers",
                 column: "GraduationProjectId");
@@ -396,6 +352,11 @@ namespace Persistence.Migrations
                 column: "GraduationProjectReportId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_AspNetUsers_LecturerId",
+                table: "AspNetUsers",
+                column: "LecturerId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_AspNetUsers_SyllabusId",
                 table: "AspNetUsers",
                 column: "SyllabusId");
@@ -404,34 +365,6 @@ namespace Persistence.Migrations
                 name: "UserNameIndex",
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_DepartmentSubjectLecturers_LecturerId",
-                table: "DepartmentSubjectLecturers",
-                column: "LecturerId",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_FacultyDepartmentSubjects_DepartmentSubjectId",
-                table: "FacultyDepartmentSubjects",
-                column: "DepartmentSubjectId",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_FacultyDepartmentSubjects_FacultyId",
-                table: "FacultyDepartmentSubjects",
-                column: "FacultyId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_LecturerStudents_LecturerId",
-                table: "LecturerStudents",
-                column: "LecturerId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_LecturerStudents_StudentId",
-                table: "LecturerStudents",
-                column: "StudentId",
                 unique: true);
 
             migrationBuilder.CreateIndex(
@@ -457,15 +390,6 @@ namespace Persistence.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
-
-            migrationBuilder.DropTable(
-                name: "DepartmentSubjectLecturers");
-
-            migrationBuilder.DropTable(
-                name: "FacultyDepartmentSubjects");
-
-            migrationBuilder.DropTable(
-                name: "LecturerStudents");
 
             migrationBuilder.DropTable(
                 name: "RefreshToken");
