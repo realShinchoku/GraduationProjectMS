@@ -126,7 +126,6 @@ namespace Persistence.Migrations
                     InstructorStatus = table.Column<int>(type: "integer", nullable: true),
                     MaxStudentsNumber = table.Column<int>(type: "integer", nullable: true),
                     StudentId = table.Column<string>(type: "text", nullable: true),
-                    LecturerId = table.Column<string>(type: "text", nullable: true),
                     GraduationProjectPeriodId = table.Column<Guid>(type: "uuid", nullable: true),
                     GraduationProjectId = table.Column<Guid>(type: "uuid", nullable: true),
                     SyllabusId = table.Column<string>(type: "text", nullable: true),
@@ -150,11 +149,6 @@ namespace Persistence.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_AspNetUsers_AspNetUsers_LecturerId",
-                        column: x => x.LecturerId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_AspNetUsers_GraduationProjectPeriods_GraduationProjectPerio~",
                         column: x => x.GraduationProjectPeriodId,
@@ -311,6 +305,30 @@ namespace Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "LecturerStudents",
+                columns: table => new
+                {
+                    LecturerId = table.Column<string>(type: "text", nullable: false),
+                    StudentId = table.Column<string>(type: "text", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_LecturerStudents", x => new { x.StudentId, x.LecturerId });
+                    table.ForeignKey(
+                        name: "FK_LecturerStudents_AspNetUsers_LecturerId",
+                        column: x => x.LecturerId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_LecturerStudents_AspNetUsers_StudentId",
+                        column: x => x.StudentId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "RefreshToken",
                 columns: table => new
                 {
@@ -378,11 +396,6 @@ namespace Persistence.Migrations
                 column: "GraduationProjectReportId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_AspNetUsers_LecturerId",
-                table: "AspNetUsers",
-                column: "LecturerId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_AspNetUsers_SyllabusId",
                 table: "AspNetUsers",
                 column: "SyllabusId");
@@ -409,6 +422,17 @@ namespace Persistence.Migrations
                 name: "IX_FacultyDepartmentSubjects_FacultyId",
                 table: "FacultyDepartmentSubjects",
                 column: "FacultyId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_LecturerStudents_LecturerId",
+                table: "LecturerStudents",
+                column: "LecturerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_LecturerStudents_StudentId",
+                table: "LecturerStudents",
+                column: "StudentId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_RefreshToken_AppUserId",
@@ -439,6 +463,9 @@ namespace Persistence.Migrations
 
             migrationBuilder.DropTable(
                 name: "FacultyDepartmentSubjects");
+
+            migrationBuilder.DropTable(
+                name: "LecturerStudents");
 
             migrationBuilder.DropTable(
                 name: "RefreshToken");

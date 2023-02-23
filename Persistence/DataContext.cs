@@ -20,9 +20,8 @@ public class DataContext : IdentityDbContext<AppUser, AppRole, string>
     public DbSet<Syllabus> Syllabi { get; set; }
     public DbSet<FacultyDepartmentSubject> FacultyDepartmentSubjects { get; set; }
     public DbSet<DepartmentSubjectLecturer> DepartmentSubjectLecturers { get; set; }
+    public DbSet<LecturerStudent> LecturerStudents { get; set; }
     
-
-
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
@@ -35,5 +34,10 @@ public class DataContext : IdentityDbContext<AppUser, AppRole, string>
         builder.Entity<DepartmentSubjectLecturer>().HasOne(ds => ds.DepartmentSubject).WithMany(l => l.Lecturers)
             .HasForeignKey(ds => ds.DepartmentSubjectId);
         builder.Entity<DepartmentSubjectLecturer>().HasOne(l => l.Lecturer).WithOne(ds => ds.DepartmentSubject);
+        
+        builder.Entity<LecturerStudent>(x => x.HasKey(k => new { k.StudentId, k.LecturerId }));
+        builder.Entity<LecturerStudent>().HasOne(l => l.Lecturer).WithMany(l => l.Students)
+            .HasForeignKey(ds => ds.LecturerId);
+        builder.Entity<LecturerStudent>().HasOne(s => s.Student).WithOne(l => l.Lecturer);
     }
 }

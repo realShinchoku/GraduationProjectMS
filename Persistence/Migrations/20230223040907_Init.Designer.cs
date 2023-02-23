@@ -12,7 +12,7 @@ using Persistence;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230222184444_Init")]
+    [Migration("20230223040907_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -252,6 +252,24 @@ namespace Persistence.Migrations
                     b.ToTable("GraduationProjectReports");
                 });
 
+            modelBuilder.Entity("Domain.LecturerStudent", b =>
+                {
+                    b.Property<string>("StudentId")
+                        .HasColumnType("text");
+
+                    b.Property<string>("LecturerId")
+                        .HasColumnType("text");
+
+                    b.HasKey("StudentId", "LecturerId");
+
+                    b.HasIndex("LecturerId");
+
+                    b.HasIndex("StudentId")
+                        .IsUnique();
+
+                    b.ToTable("LecturerStudents");
+                });
+
             modelBuilder.Entity("Domain.RefreshToken", b =>
                 {
                     b.Property<int>("Id")
@@ -450,9 +468,6 @@ namespace Persistence.Migrations
                     b.Property<string>("GraduationProjectReportId")
                         .HasColumnType("text");
 
-                    b.Property<string>("LecturerId")
-                        .HasColumnType("text");
-
                     b.Property<decimal>("Point")
                         .HasColumnType("numeric");
 
@@ -467,8 +482,6 @@ namespace Persistence.Migrations
                     b.HasIndex("GraduationProjectPeriodId");
 
                     b.HasIndex("GraduationProjectReportId");
-
-                    b.HasIndex("LecturerId");
 
                     b.HasIndex("SyllabusId");
 
@@ -511,6 +524,25 @@ namespace Persistence.Migrations
                     b.Navigation("DepartmentSubject");
 
                     b.Navigation("Faculty");
+                });
+
+            modelBuilder.Entity("Domain.LecturerStudent", b =>
+                {
+                    b.HasOne("Domain.Lecturer", "Lecturer")
+                        .WithMany("Students")
+                        .HasForeignKey("LecturerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Student", "Student")
+                        .WithOne("Lecturer")
+                        .HasForeignKey("Domain.LecturerStudent", "StudentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Lecturer");
+
+                    b.Navigation("Student");
                 });
 
             modelBuilder.Entity("Domain.RefreshToken", b =>
@@ -587,10 +619,6 @@ namespace Persistence.Migrations
                         .WithMany()
                         .HasForeignKey("GraduationProjectReportId");
 
-                    b.HasOne("Domain.Lecturer", "Lecturer")
-                        .WithMany("Students")
-                        .HasForeignKey("LecturerId");
-
                     b.HasOne("Domain.Syllabus", "Syllabus")
                         .WithMany()
                         .HasForeignKey("SyllabusId");
@@ -600,8 +628,6 @@ namespace Persistence.Migrations
                     b.Navigation("GraduationProjectPeriod");
 
                     b.Navigation("GraduationProjectReport");
-
-                    b.Navigation("Lecturer");
 
                     b.Navigation("Syllabus");
                 });
@@ -633,6 +659,11 @@ namespace Persistence.Migrations
                     b.Navigation("DepartmentSubject");
 
                     b.Navigation("Students");
+                });
+
+            modelBuilder.Entity("Domain.Student", b =>
+                {
+                    b.Navigation("Lecturer");
                 });
 #pragma warning restore 612, 618
         }
