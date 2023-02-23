@@ -51,7 +51,7 @@ function Login() {
                                         name="email"
                                         label="Tài khoản"
                                         onChange={handleChange}
-                                        error={(dirty && Boolean(errors.email) || Boolean(errors.error?.email))}
+                                        error={(dirty && Boolean(errors.email)) || Boolean(errors.error?.email)}
                                         helperText={(dirty && errors.email) || errors.error?.email}
                                     />
                                     <TextField
@@ -62,7 +62,7 @@ function Login() {
                                         label="Mật khẩu"
                                         type="password"
                                         onChange={handleChange}
-                                        error={(dirty && Boolean(errors.password) || Boolean(errors.error?.password))}
+                                        error={(dirty && Boolean(errors.password)) || Boolean(errors.error?.password)}
                                         helperText={(dirty && errors.password) || errors.error?.password}
                                     />
                                     <LoadingButton

@@ -85,7 +85,7 @@ function PasswordResetToken() {
                                             label="Mật khẩu mới"
                                             type="password"
                                             onChange={handleChange}
-                                            error={(dirty && Boolean(errors.password) || Boolean(errors.error))}
+                                            error={(dirty && Boolean(errors.password)) || Boolean(errors.error)}
                                             helperText={(dirty && errors.password) || errors.error}
                                         />
                                         <TextField
@@ -96,7 +96,7 @@ function PasswordResetToken() {
                                             label="Nhập lại mật khẩu mới"
                                             type="password"
                                             onChange={handleChange}
-                                            error={(dirty && Boolean(errors.confirmPassword))}
+                                            error={dirty && Boolean(errors.confirmPassword)}
                                             helperText={(dirty && errors.confirmPassword)}
                                         />
                                         <LoadingButton

@@ -75,7 +75,7 @@ function PasswordReset() {
                                             name="email"
                                             label="Email"
                                             onChange={handleChange}
-                                            error={(dirty && Boolean(errors.email) || Boolean(errors.error))}
+                                            error={(dirty && Boolean(errors.email)) || Boolean(errors.error)}
                                             helperText={(dirty && errors.email) || errors.error}
                                         />
                                         <LoadingButton
