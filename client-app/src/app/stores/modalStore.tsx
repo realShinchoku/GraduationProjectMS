@@ -2,13 +2,13 @@ import {makeAutoObservable} from "mobx";
 
 interface Modal {
     open: boolean;
-    body: JSX.Element | null;
+    body: JSX.Element;
 }
 
 export default class ModalStore {
     modal: Modal = {
         open: false,
-        body: null
+        body: <></>
     }
 
     constructor() {
@@ -22,6 +22,6 @@ export default class ModalStore {
 
     closeModal = () => {
         this.modal.open = false;
-        this.modal.body = null;
+        this.modal.body = <></>;
     }
 }
