@@ -1,7 +1,6 @@
 ﻿namespace Domain;
 
-public class Faculty
+public class Faculty : AppUser
 {
-    public Guid Id { get; set; }
-    public string Name { get; set; }
+    public ICollection<FacultyDepartmentSubject> DepartmentSubjects { get; set; }
 }

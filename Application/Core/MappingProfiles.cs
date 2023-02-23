@@ -8,6 +8,8 @@ public class MappingProfiles : Profile
 {
     public MappingProfiles()
     {
-        CreateMap<AppUser, LecturerDto>();
+        // CreateMap<Lecturer, LecturerDto>()
+        //     .ForMember(d => d.DepartmentSubjects, o => o.MapFrom(x => x.DepartmentSubject.DisplayName))
+        //     .ForMember(d => d.Faculty, o => o.MapFrom(x => x.Faculty.DisplayName));
     }
 }

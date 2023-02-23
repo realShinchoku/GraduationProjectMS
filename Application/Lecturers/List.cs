@@ -28,7 +28,7 @@ public class List
         
         public async Task<Result<PageList<LecturerDto>>> Handle(Query request, CancellationToken cancellationToken)
         {
-            var query = _context.Users.Where(x => x.Role == Role.Lecturer)
+            var query = _context.Lecturers.Where(x => x.Role == Role.Lecturer)
                 .ProjectTo<LecturerDto>(_mapper.ConfigurationProvider).AsQueryable();
             
             return Result<PageList<LecturerDto>>.Success(

@@ -12,8 +12,5 @@ public class AppUser : IdentityUser
     public Role Role { get; set; } = Role.Student;
     public bool Sex { get; set; }
     public DateTime? Birthday { get; set; }
-    public Faculty Faculty { get; set; }
-    public DepartmentSubjects DepartmentSubjects { get; set; }
-    public int Status { get; set; }
-    public string Bio { get; set; }
+   
 }

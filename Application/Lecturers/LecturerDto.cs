@@ -10,4 +10,8 @@ public class LecturerDto
     public DateTime Birthday { get; set; }
     public string Email { get; set; }
     public string PhoneNumber { get; set; }
+    public string Faculty { get; set; }
+    public string DepartmentSubjects { get; set; }
+    public int Status { get; set; }
+    public string Bio { get; set; }
 }

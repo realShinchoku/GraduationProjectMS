@@ -59,7 +59,7 @@ namespace Persistence.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("integer");
 
-                    b.Property<DateTime>("Birthday")
+                    b.Property<DateTime?>("Birthday")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("ConcurrencyStamp")
@@ -68,6 +68,10 @@ namespace Persistence.Migrations
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<string>("DisplayName")
                         .HasColumnType("text");
@@ -128,6 +132,121 @@ namespace Persistence.Migrations
                         .HasDatabaseName("UserNameIndex");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("AppUser");
+
+                    b.UseTphMappingStrategy();
+                });
+
+            modelBuilder.Entity("Domain.DepartmentSubjectLecturer", b =>
+                {
+                    b.Property<string>("DepartmentSubjectId")
+                        .HasColumnType("text");
+
+                    b.Property<string>("LecturerId")
+                        .HasColumnType("text");
+
+                    b.HasKey("DepartmentSubjectId", "LecturerId");
+
+                    b.HasIndex("LecturerId")
+                        .IsUnique();
+
+                    b.ToTable("DepartmentSubjectLecturers");
+                });
+
+            modelBuilder.Entity("Domain.FacultyDepartmentSubject", b =>
+                {
+                    b.Property<string>("DepartmentSubjectId")
+                        .HasColumnType("text");
+
+                    b.Property<string>("FacultyId")
+                        .HasColumnType("text");
+
+                    b.HasKey("DepartmentSubjectId", "FacultyId");
+
+                    b.HasIndex("DepartmentSubjectId")
+                        .IsUnique();
+
+                    b.HasIndex("FacultyId");
+
+                    b.ToTable("FacultyDepartmentSubjects");
+                });
+
+            modelBuilder.Entity("Domain.GraduationProject", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Type")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("GraduationProjects");
+                });
+
+            modelBuilder.Entity("Domain.GraduationProjectPeriod", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("ContactInstructorTime")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<DateTime>("GraduationProjectTime")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("ProtectionTime")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<DateTime>("RegisterTopicTime")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<DateTime>("SyllabusReviewTime")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<DateTime>("SyllabusSubmissionTime")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("GraduationProjectPeriods");
+                });
+
+            modelBuilder.Entity("Domain.GraduationProjectReport", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("CreateTime")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
+
+                    b.Property<int>("ReportStatus")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Url")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("GraduationProjectReports");
                 });
 
             modelBuilder.Entity("Domain.RefreshToken", b =>
@@ -155,6 +274,31 @@ namespace Persistence.Migrations
                     b.HasIndex("AppUserId");
 
                     b.ToTable("RefreshToken");
+                });
+
+            modelBuilder.Entity("Domain.Syllabus", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("CreateTime")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Note")
+                        .HasColumnType("text");
+
+                    b.Property<int>("SyllabusStatus")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Url")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Syllabi");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -263,6 +407,109 @@ namespace Persistence.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("Domain.DepartmentSubject", b =>
+                {
+                    b.HasBaseType("Domain.AppUser");
+
+                    b.HasDiscriminator().HasValue("DepartmentSubject");
+                });
+
+            modelBuilder.Entity("Domain.Faculty", b =>
+                {
+                    b.HasBaseType("Domain.AppUser");
+
+                    b.HasDiscriminator().HasValue("Faculty");
+                });
+
+            modelBuilder.Entity("Domain.Lecturer", b =>
+                {
+                    b.HasBaseType("Domain.AppUser");
+
+                    b.Property<int>("InstructorStatus")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("MaxStudentsNumber")
+                        .HasColumnType("integer");
+
+                    b.HasDiscriminator().HasValue("Lecturer");
+                });
+
+            modelBuilder.Entity("Domain.Student", b =>
+                {
+                    b.HasBaseType("Domain.AppUser");
+
+                    b.Property<Guid?>("GraduationProjectId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid?>("GraduationProjectPeriodId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("GraduationProjectReportId")
+                        .HasColumnType("text");
+
+                    b.Property<string>("LecturerId")
+                        .HasColumnType("text");
+
+                    b.Property<decimal>("Point")
+                        .HasColumnType("numeric");
+
+                    b.Property<string>("StudentId")
+                        .HasColumnType("text");
+
+                    b.Property<string>("SyllabusId")
+                        .HasColumnType("text");
+
+                    b.HasIndex("GraduationProjectId");
+
+                    b.HasIndex("GraduationProjectPeriodId");
+
+                    b.HasIndex("GraduationProjectReportId");
+
+                    b.HasIndex("LecturerId");
+
+                    b.HasIndex("SyllabusId");
+
+                    b.HasDiscriminator().HasValue("Student");
+                });
+
+            modelBuilder.Entity("Domain.DepartmentSubjectLecturer", b =>
+                {
+                    b.HasOne("Domain.DepartmentSubject", "DepartmentSubject")
+                        .WithMany("Lecturers")
+                        .HasForeignKey("DepartmentSubjectId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Lecturer", "Lecturer")
+                        .WithOne("DepartmentSubject")
+                        .HasForeignKey("Domain.DepartmentSubjectLecturer", "LecturerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("DepartmentSubject");
+
+                    b.Navigation("Lecturer");
+                });
+
+            modelBuilder.Entity("Domain.FacultyDepartmentSubject", b =>
+                {
+                    b.HasOne("Domain.DepartmentSubject", "DepartmentSubject")
+                        .WithOne("Faculty")
+                        .HasForeignKey("Domain.FacultyDepartmentSubject", "DepartmentSubjectId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Faculty", "Faculty")
+                        .WithMany("DepartmentSubjects")
+                        .HasForeignKey("FacultyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("DepartmentSubject");
+
+                    b.Navigation("Faculty");
+                });
+
             modelBuilder.Entity("Domain.RefreshToken", b =>
                 {
                     b.HasOne("Domain.AppUser", "AppUser")
@@ -323,9 +570,66 @@ namespace Persistence.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Domain.Student", b =>
+                {
+                    b.HasOne("Domain.GraduationProject", "GraduationProject")
+                        .WithMany()
+                        .HasForeignKey("GraduationProjectId");
+
+                    b.HasOne("Domain.GraduationProjectPeriod", "GraduationProjectPeriod")
+                        .WithMany("Students")
+                        .HasForeignKey("GraduationProjectPeriodId");
+
+                    b.HasOne("Domain.GraduationProjectReport", "GraduationProjectReport")
+                        .WithMany()
+                        .HasForeignKey("GraduationProjectReportId");
+
+                    b.HasOne("Domain.Lecturer", "Lecturer")
+                        .WithMany("Students")
+                        .HasForeignKey("LecturerId");
+
+                    b.HasOne("Domain.Syllabus", "Syllabus")
+                        .WithMany()
+                        .HasForeignKey("SyllabusId");
+
+                    b.Navigation("GraduationProject");
+
+                    b.Navigation("GraduationProjectPeriod");
+
+                    b.Navigation("GraduationProjectReport");
+
+                    b.Navigation("Lecturer");
+
+                    b.Navigation("Syllabus");
+                });
+
             modelBuilder.Entity("Domain.AppUser", b =>
                 {
                     b.Navigation("RefreshTokens");
+                });
+
+            modelBuilder.Entity("Domain.GraduationProjectPeriod", b =>
+                {
+                    b.Navigation("Students");
+                });
+
+            modelBuilder.Entity("Domain.DepartmentSubject", b =>
+                {
+                    b.Navigation("Faculty");
+
+                    b.Navigation("Lecturers");
+                });
+
+            modelBuilder.Entity("Domain.Faculty", b =>
+                {
+                    b.Navigation("DepartmentSubjects");
+                });
+
+            modelBuilder.Entity("Domain.Lecturer", b =>
+                {
+                    b.Navigation("DepartmentSubject");
+
+                    b.Navigation("Students");
                 });
 #pragma warning restore 612, 618
         }
