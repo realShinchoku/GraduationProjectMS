@@ -52,12 +52,12 @@ function PasswordReset() {
 
                     </Grid>
                     :
-                    <Grid className="SignUp_Form">
-                        <Grid sx={{mx: 'auto'}} className="inner inner_pass">
-                            <Grid className="keypass_vpn"><><VpnKeyIcon className="keypass"></VpnKeyIcon></>
+                    <Grid className="resetPass_Form">
+                        <Grid sx={{mx: 'auto'}} className="inner_Pass">
+                            <Grid ><><VpnKeyIcon className="keyPass"></VpnKeyIcon></>
                             </Grid>
-                            <Typography className="h3_fget" variant="h3">Quên mật khẩu?</Typography>
-                            <Typography className="h2_fget" variant="h6">Chúng tôi sẽ gửi cho bạn đường dẫn đặt lại mật
+                            <Typography className="h3_Reset" variant="h3">Quên mật khẩu?</Typography>
+                            <Typography className="h6_Reset " variant="h6">Chúng tôi sẽ gửi cho bạn đường dẫn đặt lại mật
                                 khẩu.</Typography>
                             <Formik
                                 initialValues={{email: '', error: null}}
@@ -90,7 +90,7 @@ function PasswordReset() {
                                     </Form>
                                 )}
                             </Formik>
-                            <Link className="forgotpd h2_fget" href={route.login} underline="none">Đăng nhập</Link>
+                            <Link className="forGotPd" href={route.login} underline="none">Đăng nhập</Link>
                         </Grid>
                     </Grid>
                 }
