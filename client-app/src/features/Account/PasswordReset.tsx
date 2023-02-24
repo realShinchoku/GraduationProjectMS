@@ -32,33 +32,28 @@ function PasswordReset() {
                 </Grid>
                 {email !== '' ?
                     <Grid className="SignUp_Form">
-                        <Grid sx={{mx: 'auto'}} className="inner inner_pass">
-                            <Grid className="keypass_vpn">
-                                <MarkEmailReadIcon className="keypass"/>
+                        <Grid sx={{mx: 'auto'}} className="inner">
+                            <Grid className="iconKey">
+                                <MarkEmailReadIcon className="nameKey"/>
                             </Grid>
-                            <Typography className="h3_fget" variant="h3">Kiểm tra Email của bạn</Typography>
-                            <Typography className="h2_fget" variant="h6">Chúng tôi gửi liên kết đặt lại mật khẩu
-                                tới {email}.</Typography>
+                            <Typography variant="h3">Kiểm tra Email của bạn</Typography>
+                            <Typography variant="h6">Chúng tôi gửi liên kết đặt lại mật khẩu tới {email}.</Typography>
                             <Typography className="h2_fget h2_resent" variant="h6">Không nhận được email ? <Link
-                                onClick={() => sendResetPasswordLink(email)} className='resent'>Gửi
-                                lại</Link></Typography>
+                                onClick={() => sendResetPasswordLink(email)} className='resent'>Gửi lại</Link></Typography>
 
                         </Grid>
                         <Grid className="form_Bottom">
                             <ArrowBackIcon className="back_Icon"></ArrowBackIcon>
-                            <Link className="forgotpd h2_fget" href={route.login} underline="none">Trở lại trang đăng
-                                nhập</Link>
+                            <Link className="backLogin h2_fget" href={route.login} underline="none">Trở lại trang đăng nhập</Link>
                         </Grid>
-
                     </Grid>
                     :
-                    <Grid className="resetPass_Form">
-                        <Grid sx={{mx: 'auto'}} className="inner_Pass">
-                            <Grid ><><VpnKeyIcon className="keyPass"></VpnKeyIcon></>
+                    <Grid className="SignUp_Form">
+                        <Grid sx={{mx: 'auto'}} className="inner">
+                            <Grid className="iconKey"><><VpnKeyIcon className="nameKey"></VpnKeyIcon></>
                             </Grid>
-                            <Typography className="h3_Reset" variant="h3">Quên mật khẩu?</Typography>
-                            <Typography className="h6_Reset " variant="h6">Chúng tôi sẽ gửi cho bạn đường dẫn đặt lại mật
-                                khẩu.</Typography>
+                            <Typography variant="h3">Quên mật khẩu?</Typography>
+                            <Typography variant="h6">Chúng tôi sẽ gửi cho bạn đường dẫn đặt lại mật khẩu.</Typography>
                             <Formik
                                 initialValues={{email: '', error: null}}
                                 onSubmit={(values, {setErrors}) => sendResetPasswordLink(values.email).then(() => setEmail(values.email)).catch((err: any) => {
@@ -90,7 +85,7 @@ function PasswordReset() {
                                     </Form>
                                 )}
                             </Formik>
-                            <Link className="forGotPd" href={route.login} underline="none">Đăng nhập</Link>
+                            <Link className="backLogin" href={route.login} underline="none">Đăng nhập</Link>
                         </Grid>
                     </Grid>
                 }

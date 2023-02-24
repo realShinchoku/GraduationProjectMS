@@ -34,7 +34,7 @@ function Login() {
                     <Grid sx={{mx: 'auto'}} className="inner inner_pass">
                         <Grid className="school_icon"><><SchoolIcon className="schoolicon"></SchoolIcon></>
                         </Grid>
-                        <Typography className="h3_login" variant="h3">Đăng nhập</Typography>
+                        <Typography variant="h3">Đăng nhập</Typography>
                         <Formik
                             initialValues={{email: '', password: '', error: {email: '', password: ''}}}
                             onSubmit={(values, {setErrors}) => login(values).catch((err: any) => {
@@ -78,7 +78,7 @@ function Login() {
                             )}
                         </Formik>
                     </Grid>
-                    <Link className="forgotpd h2_fget" href={route.resetPassword} underline="none">Quên mật khẩu</Link>
+                    <Link className="backLogin" href={route.resetPassword} underline="none">Quên mật khẩu?</Link>
                 </Grid>
             </Grid>
         </Grid>

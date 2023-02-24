@@ -33,31 +33,31 @@ function PasswordResetToken() {
     const email = useQuery().get('email') as string;
     const {userStore: {resetPassword}} = useStore();
     return (
-        <Grid className="account">
+        <Grid className="account resetPass">
             <Grid className="container">
                 <Grid className="thumb">
                     <Box className="logo"></Box>
                 </Grid>
                 {isReset ?
-                    <Grid className="resetPass_Form">
-                        <Grid sx={{mx: 'auto'}} className="inner_ResetPassSuccess">
+                    <Grid className="SignUp_Form">
+                        <Grid sx={{mx: 'auto'}} className="inner">
                             <Grid className="successIcon">
                                 <CheckCircleOutlineIcon className="success"/>
                             </Grid>
-                            <Typography className="h3_Reset" variant="h3">Password được đặt lại</Typography>
-                            <Typography className="h6_Reset" variant="h6">Mật khẩu của bạn đã được thiết lập thành công</Typography>
+                            <Typography variant="h3">Password được đặt lại</Typography>
+                            <Typography variant="h6">Mật khẩu của bạn đã được thiết lập thành công</Typography>
                         </Grid>
                         <Grid className="form_Bottom">
                             <ArrowBackIcon className="back_Icon"></ArrowBackIcon>
-                            <Link className="h6_Reset" href={route.login} underline="none">Trở lại trang đăng nhập</Link>
+                            <Link className="back_Reset" href={route.login} underline="none">Trở lại trang đăng nhập</Link>
                         </Grid>
                     </Grid>
                     :
-                    <Grid className="resetPass_Form">
-                        <Grid sx={{mx: 'auto'}} className="inner_ResetPass">
-                            <Grid ><VpnKeyIcon className='keyPass'/></Grid>
-                            <Typography className="h3_Reset" variant="h3">Đặt lại mật khẩu?</Typography>
-                            <Typography className="h6_Reset" variant="h6">
+                    <Grid className="SignUp_Form">
+                        <Grid sx={{mx: 'auto'}} className="inner ">
+                            <Grid className="iconKey"><VpnKeyIcon className='nameKey'/></Grid>
+                            <Typography variant="h3">Đặt lại mật khẩu?</Typography>
+                            <Typography variant="h6">
                                 Mật khẩu mới của bạn phải khác với mật khẩu đã sử dụng trước đó
                             </Typography>
                             <Formik
