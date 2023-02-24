@@ -40,7 +40,7 @@
             <Link>Dockerfile</Link>
         </Content>
         <Content Include="..\fly.toml">
-          <Link>fly.toml</Link>
+            <Link>fly.toml</Link>
         </Content>
         <Content Include="..\README.md">
             <Link>README.md</Link>

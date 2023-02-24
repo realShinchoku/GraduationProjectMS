@@ -69,10 +69,6 @@ namespace Persistence.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.Property<string>("DisplayName")
                         .HasColumnType("text");
 
@@ -133,9 +129,7 @@ namespace Persistence.Migrations
 
                     b.ToTable("AspNetUsers", (string)null);
 
-                    b.HasDiscriminator<string>("Discriminator").HasValue("AppUser");
-
-                    b.UseTphMappingStrategy();
+                    b.UseTptMappingStrategy();
                 });
 
             modelBuilder.Entity("Domain.GraduationProject", b =>
@@ -382,14 +376,22 @@ namespace Persistence.Migrations
 
                     b.HasIndex("FacultyId");
 
-                    b.HasDiscriminator().HasValue("DepartmentSubject");
+                    b.ToTable("DepartmentSubjects", null, t =>
+                        {
+                            t.Property("Id")
+                                .HasColumnName("UserId");
+                        });
                 });
 
             modelBuilder.Entity("Domain.Faculty", b =>
                 {
                     b.HasBaseType("Domain.AppUser");
 
-                    b.HasDiscriminator().HasValue("Faculty");
+                    b.ToTable("Faculties", null, t =>
+                        {
+                            t.Property("Id")
+                                .HasColumnName("UserId");
+                        });
                 });
 
             modelBuilder.Entity("Domain.Lecturer", b =>
@@ -397,6 +399,12 @@ namespace Persistence.Migrations
                     b.HasBaseType("Domain.AppUser");
 
                     b.Property<string>("DepartmentSubjectId")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Education")
+                        .HasColumnType("text");
+
+                    b.Property<string>("FacultyId")
                         .HasColumnType("text");
 
                     b.Property<int>("InstructorStatus")
@@ -407,12 +415,24 @@ namespace Persistence.Migrations
 
                     b.HasIndex("DepartmentSubjectId");
 
-                    b.HasDiscriminator().HasValue("Lecturer");
+                    b.HasIndex("FacultyId");
+
+                    b.ToTable("Lecturers", null, t =>
+                        {
+                            t.Property("Id")
+                                .HasColumnName("UserId");
+                        });
                 });
 
             modelBuilder.Entity("Domain.Student", b =>
                 {
                     b.HasBaseType("Domain.AppUser");
+
+                    b.Property<string>("DepartmentSubjectId")
+                        .HasColumnType("text");
+
+                    b.Property<string>("FacultyId")
+                        .HasColumnType("text");
 
                     b.Property<Guid?>("GraduationProjectId")
                         .HasColumnType("uuid");
@@ -435,6 +455,10 @@ namespace Persistence.Migrations
                     b.Property<string>("SyllabusId")
                         .HasColumnType("text");
 
+                    b.HasIndex("DepartmentSubjectId");
+
+                    b.HasIndex("FacultyId");
+
                     b.HasIndex("GraduationProjectId");
 
                     b.HasIndex("GraduationProjectPeriodId");
@@ -445,7 +469,11 @@ namespace Persistence.Migrations
 
                     b.HasIndex("SyllabusId");
 
-                    b.HasDiscriminator().HasValue("Student");
+                    b.ToTable("Students", null, t =>
+                        {
+                            t.Property("Id")
+                                .HasColumnName("UserId");
+                        });
                 });
 
             modelBuilder.Entity("Domain.RefreshToken", b =>
@@ -514,7 +542,22 @@ namespace Persistence.Migrations
                         .WithMany("DepartmentSubjects")
                         .HasForeignKey("FacultyId");
 
+                    b.HasOne("Domain.AppUser", null)
+                        .WithOne()
+                        .HasForeignKey("Domain.DepartmentSubject", "Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Faculty");
+                });
+
+            modelBuilder.Entity("Domain.Faculty", b =>
+                {
+                    b.HasOne("Domain.AppUser", null)
+                        .WithOne()
+                        .HasForeignKey("Domain.Faculty", "Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Domain.Lecturer", b =>
@@ -523,11 +566,31 @@ namespace Persistence.Migrations
                         .WithMany("Lecturers")
                         .HasForeignKey("DepartmentSubjectId");
 
+                    b.HasOne("Domain.Faculty", "Faculty")
+                        .WithMany("Lecturers")
+                        .HasForeignKey("FacultyId");
+
+                    b.HasOne("Domain.AppUser", null)
+                        .WithOne()
+                        .HasForeignKey("Domain.Lecturer", "Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("DepartmentSubject");
+
+                    b.Navigation("Faculty");
                 });
 
             modelBuilder.Entity("Domain.Student", b =>
                 {
+                    b.HasOne("Domain.DepartmentSubject", "DepartmentSubject")
+                        .WithMany("Students")
+                        .HasForeignKey("DepartmentSubjectId");
+
+                    b.HasOne("Domain.Faculty", "Faculty")
+                        .WithMany("Students")
+                        .HasForeignKey("FacultyId");
+
                     b.HasOne("Domain.GraduationProject", "GraduationProject")
                         .WithMany()
                         .HasForeignKey("GraduationProjectId");
@@ -540,6 +603,12 @@ namespace Persistence.Migrations
                         .WithMany()
                         .HasForeignKey("GraduationProjectReportId");
 
+                    b.HasOne("Domain.AppUser", null)
+                        .WithOne()
+                        .HasForeignKey("Domain.Student", "Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Domain.Lecturer", "Lecturer")
                         .WithMany("Students")
                         .HasForeignKey("LecturerId");
@@ -547,6 +616,10 @@ namespace Persistence.Migrations
                     b.HasOne("Domain.Syllabus", "Syllabus")
                         .WithMany()
                         .HasForeignKey("SyllabusId");
+
+                    b.Navigation("DepartmentSubject");
+
+                    b.Navigation("Faculty");
 
                     b.Navigation("GraduationProject");
 
@@ -572,11 +645,17 @@ namespace Persistence.Migrations
             modelBuilder.Entity("Domain.DepartmentSubject", b =>
                 {
                     b.Navigation("Lecturers");
+
+                    b.Navigation("Students");
                 });
 
             modelBuilder.Entity("Domain.Faculty", b =>
                 {
                     b.Navigation("DepartmentSubjects");
+
+                    b.Navigation("Lecturers");
+
+                    b.Navigation("Students");
                 });
 
             modelBuilder.Entity("Domain.Lecturer", b =>

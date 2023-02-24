@@ -72,7 +72,7 @@ public class AccountController : BaseApiController
         if (await _userManager.Users.AnyAsync(x => x.Email == createUserDto.Email))
             return Conflict("Email is already taken");
 
-        if (!Enum.IsDefined(typeof(Role),createUserDto.Role))
+        if (!Enum.IsDefined(typeof(Role), createUserDto.Role))
             return Conflict("Role is not exsit");
 
         var user = new AppUser
@@ -82,7 +82,7 @@ public class AccountController : BaseApiController
             UserName = createUserDto.UserName,
             Role = createUserDto.Role
         };
-        
+
 
         var result = await _userManager.CreateAsync(user, createUserDto.Password);
 
@@ -185,7 +185,7 @@ public class AccountController : BaseApiController
             UserName = user.UserName,
             Role = user.Role,
             Birthday = user.Birthday,
-            Sex = user.Sex,
+            Sex = user.Sex
         };
 
 

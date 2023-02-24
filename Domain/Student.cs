@@ -2,26 +2,13 @@
 
 public class Student : AppUser
 {
-    public string StudentId { get; set; }
     public Lecturer Lecturer { get; set; }
-    public GraduationProjectPeriod GraduationProjectPeriod { get; set; }
+    public DepartmentSubject DepartmentSubject { get; set; }
+    public Faculty Faculty { get; set; }
     public GraduationProject GraduationProject { get; set; }
-    public Syllabus Syllabus { get; set; }
+    public GraduationProjectPeriod GraduationProjectPeriod { get; set; }
     public GraduationProjectReport GraduationProjectReport { get; set; }
+    public Syllabus Syllabus { get; set; }
     public decimal Point { get; set; }
-    
-    public string GetLecturerName()
-    {
-        return Lecturer.DisplayName;
-    }
-    
-    public string GetDepartmentSubjectName()
-    {
-        return Lecturer.GetDepartmentSubjectName();
-    }
-    
-    public string GetFacultyName()
-    {
-        return Lecturer.GetFacultyName();
-    }
+    public string StudentId { get; set; }
 }
