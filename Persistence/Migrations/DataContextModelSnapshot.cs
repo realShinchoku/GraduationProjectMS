@@ -59,6 +59,9 @@ namespace Persistence.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("integer");
 
+                    b.Property<string>("Avatar")
+                        .HasColumnType("text");
+
                     b.Property<DateTime?>("Birthday")
                         .HasColumnType("timestamp with time zone");
 
@@ -207,6 +210,32 @@ namespace Persistence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("GraduationProjectReports");
+                });
+
+            modelBuilder.Entity("Domain.Instructor", b =>
+                {
+                    b.Property<string>("StudentId")
+                        .HasColumnType("text");
+
+                    b.Property<string>("FacultyId")
+                        .HasColumnType("text");
+
+                    b.Property<string>("LecturerId")
+                        .HasColumnType("text");
+
+                    b.Property<bool>("IsConfirm")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("IsRead")
+                        .HasColumnType("boolean");
+
+                    b.HasKey("StudentId", "FacultyId", "LecturerId");
+
+                    b.HasIndex("FacultyId");
+
+                    b.HasIndex("LecturerId");
+
+                    b.ToTable("Instructors");
                 });
 
             modelBuilder.Entity("Domain.RefreshToken", b =>
@@ -376,22 +405,14 @@ namespace Persistence.Migrations
 
                     b.HasIndex("FacultyId");
 
-                    b.ToTable("DepartmentSubjects", null, t =>
-                        {
-                            t.Property("Id")
-                                .HasColumnName("UserId");
-                        });
+                    b.ToTable("DepartmentSubjects", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Faculty", b =>
                 {
                     b.HasBaseType("Domain.AppUser");
 
-                    b.ToTable("Faculties", null, t =>
-                        {
-                            t.Property("Id")
-                                .HasColumnName("UserId");
-                        });
+                    b.ToTable("Faculties", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Lecturer", b =>
@@ -417,11 +438,7 @@ namespace Persistence.Migrations
 
                     b.HasIndex("FacultyId");
 
-                    b.ToTable("Lecturers", null, t =>
-                        {
-                            t.Property("Id")
-                                .HasColumnName("UserId");
-                        });
+                    b.ToTable("Lecturers", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Student", b =>
@@ -469,11 +486,34 @@ namespace Persistence.Migrations
 
                     b.HasIndex("SyllabusId");
 
-                    b.ToTable("Students", null, t =>
-                        {
-                            t.Property("Id")
-                                .HasColumnName("UserId");
-                        });
+                    b.ToTable("Students", (string)null);
+                });
+
+            modelBuilder.Entity("Domain.Instructor", b =>
+                {
+                    b.HasOne("Domain.Faculty", "Faculty")
+                        .WithMany()
+                        .HasForeignKey("FacultyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Lecturer", "Lecturer")
+                        .WithMany()
+                        .HasForeignKey("LecturerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Student", "Student")
+                        .WithMany()
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Faculty");
+
+                    b.Navigation("Lecturer");
+
+                    b.Navigation("Student");
                 });
 
             modelBuilder.Entity("Domain.RefreshToken", b =>

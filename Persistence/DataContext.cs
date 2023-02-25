@@ -18,17 +18,18 @@ public class DataContext : IdentityDbContext<AppUser, AppRole, string>
     public DbSet<GraduationProjectPeriod> GraduationProjectPeriods { get; set; }
     public DbSet<GraduationProjectReport> GraduationProjectReports { get; set; }
     public DbSet<Syllabus> Syllabi { get; set; }
+    public DbSet<Instructor> Instructors { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
-        builder.Entity<Student>().ToTable("Students",
-            tableBuilder => tableBuilder.Property(s => s.Id).HasColumnName("UserId"));
-        builder.Entity<Lecturer>().ToTable("Lecturers",
-            tableBuilder => tableBuilder.Property(l => l.Id).HasColumnName("UserId"));
-        builder.Entity<DepartmentSubject>().ToTable("DepartmentSubjects",
-            tableBuilder => tableBuilder.Property(ds => ds.Id).HasColumnName("UserId"));
-        builder.Entity<Faculty>().ToTable("Faculties",
-            tableBuilder => tableBuilder.Property(f => f.Id).HasColumnName("UserId"));
+
+        builder.Entity<Student>().ToTable("Students");
+        builder.Entity<Lecturer>().ToTable("Lecturers");
+        builder.Entity<DepartmentSubject>().ToTable("DepartmentSubjects");
+        builder.Entity<Faculty>().ToTable("Faculties");
+        
+        builder.Entity<Instructor>(i => i.HasKey(x => new { x.StudentId, x.FacultyId, x.LecturerId }));
+
     }
 }

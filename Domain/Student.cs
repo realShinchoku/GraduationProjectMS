@@ -2,6 +2,11 @@
 
 public class Student : AppUser
 {
+    public Student()
+    {
+        Role = Role.Student;
+    }
+
     public Lecturer Lecturer { get; set; }
     public DepartmentSubject DepartmentSubject { get; set; }
     public Faculty Faculty { get; set; }

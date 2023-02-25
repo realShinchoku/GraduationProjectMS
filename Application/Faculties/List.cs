@@ -5,7 +5,7 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
 
-namespace Application.Faculty;
+namespace Application.Faculties;
 
 public class List
 {

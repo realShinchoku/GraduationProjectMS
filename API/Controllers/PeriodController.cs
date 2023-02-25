@@ -1,12 +1,10 @@
-﻿using Application.Faculty;
-using Application.GraduationProjectPeriods;
+﻿using Application.GraduationProjectPeriods;
 using Domain;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;
 
-[ApiController]
 [Authorize]
 public class PeriodController : BaseApiController
 {

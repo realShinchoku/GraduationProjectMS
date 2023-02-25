@@ -1,4 +1,4 @@
-﻿namespace Application.Faculty;
+﻿namespace Application.Faculties;
 
 public class FacultyDto
 {

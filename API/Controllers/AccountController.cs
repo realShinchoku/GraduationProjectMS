@@ -12,7 +12,6 @@ using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers;
 
-[ApiController]
 public class AccountController : BaseApiController
 {
     private readonly IEmailSender _emailSender;

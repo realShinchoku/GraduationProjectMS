@@ -12,7 +12,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="GraduationProjectPeriods\DTOs" />
+        <Folder Include="GraduationProjectPeriods\DTOs" />
     </ItemGroup>
 
     <PropertyGroup>

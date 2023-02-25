@@ -287,28 +287,18 @@ public class Seed
                 {
                     DisplayName = "Sinh viên 8",
                     UserName = "sv8",
-                    Email = "sv8@test.com",
-                    Lecturer = lecturers[2],
-                    DepartmentSubject = lecturers[2].DepartmentSubject,
-                    Faculty = lecturers[2].Faculty
+                    Email = "sv8@test.com"
                 },
                 new()
                 {
                     DisplayName = "Sinh viên 9",
-                    UserName = "sv9",
-                    Email = "sv9@test.com",
-                    Lecturer = lecturers[2],
-                    DepartmentSubject = lecturers[2].DepartmentSubject,
-                    Faculty = lecturers[2].Faculty
+                    UserName = "sv9"
                 },
                 new()
                 {
                     DisplayName = "Sinh viên 10",
                     UserName = "sv10",
-                    Email = "sv10@test.com",
-                    Lecturer = lecturers[2],
-                    DepartmentSubject = lecturers[2].DepartmentSubject,
-                    Faculty = lecturers[2].Faculty
+                    Email = "sv10@test.com"
                 }
             };
 

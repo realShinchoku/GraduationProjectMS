@@ -12,7 +12,7 @@ public class Create
     {
         public GraduationProjectPeriod GraduationProjectPeriod { get; set; }
     }
-    
+
     public class CommandValidator : AbstractValidator<Command>
     {
         public CommandValidator()
@@ -34,7 +34,7 @@ public class Create
             RuleFor(x => x.SyllabusSubmissionTime).NotEmpty();
         }
     }
-    
+
     public class Handler : IRequestHandler<Command, Result<Unit>>
     {
         private readonly DataContext _context;
@@ -43,11 +43,12 @@ public class Create
         {
             _context = context;
         }
+
         public async Task<Result<Unit>> Handle(Command request, CancellationToken cancellationToken)
         {
             _context.GraduationProjectPeriods.Add(request.GraduationProjectPeriod);
             var result = await _context.SaveChangesAsync(cancellationToken) > 0;
-            
+
             if (!result)
                 return Result<Unit>.Failure("Failed to create Graduation Project period");
 

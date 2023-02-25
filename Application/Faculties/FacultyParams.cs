@@ -1,6 +1,6 @@
 ﻿using Application.Core;
 
-namespace Application.Faculty;
+namespace Application.Faculties;
 
 public class FacultyParams : PagingParams
 {

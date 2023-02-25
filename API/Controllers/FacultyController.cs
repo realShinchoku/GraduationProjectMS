@@ -1,10 +1,9 @@
-﻿using Application.Faculty;
+﻿using Application.Faculties;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;
 
-[ApiController]
 [Authorize]
 public class FacultyController : BaseApiController
 {
