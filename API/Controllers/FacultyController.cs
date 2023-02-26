@@ -7,9 +7,14 @@ namespace API.Controllers;
 [Authorize]
 public class FacultyController : BaseApiController
 {
-    [HttpGet] //api/lecturer
-    public async Task<IActionResult> GetFaculty([FromQuery] FacultyParams param)
+    [HttpPost("lecturer/assign")] //api/lecturer
+    public async Task<IActionResult> AssignLecturer(string studentId, string lecturerId)
     {
-        return HandlePageResult(await Mediator.Send(new List.Query { Params = param }));
+        return HandleResult(await Mediator.Send(new AssignLecturer.Command{StudentId = studentId, LecturerId = lecturerId}));
+    }
+    [HttpPost("lecturer/confirm")] //api/lecturer
+    public async Task<IActionResult> ConfirmLecturer(string studentId, string lecturerId)
+    {
+        return HandleResult(await Mediator.Send(new ConfirmLecturer.Command{StudentId = studentId, LecturerId = lecturerId}));
     }
 }
