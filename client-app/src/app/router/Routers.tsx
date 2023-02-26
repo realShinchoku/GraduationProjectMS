@@ -20,7 +20,7 @@ export const route = {
 
 export const routes: RouteObject[] = [
     {
-      path: '/',
+        path: '/',
         element: <App/>,
         children: [
             {

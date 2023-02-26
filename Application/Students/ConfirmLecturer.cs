@@ -25,13 +25,14 @@ public class ConfirmLecturer
 
         public async Task<Result<Unit>> Handle(Command request, CancellationToken cancellationToken)
         {
-
             var student =
-                await _context.Students.FirstOrDefaultAsync(x => x.Id == _userAccessor.GetUserName(), cancellationToken);
+                await _context.Students.FirstOrDefaultAsync(x => x.Id == _userAccessor.GetUserName(),
+                    cancellationToken);
             if (student == null)
                 return null;
 
-            var instructor = await _context.Instructors.FirstOrDefaultAsync(x => x.StudentId == student.Id, cancellationToken);
+            var instructor =
+                await _context.Instructors.FirstOrDefaultAsync(x => x.StudentId == student.Id, cancellationToken);
 
             if (instructor == null)
                 return null;

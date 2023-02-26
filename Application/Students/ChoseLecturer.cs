@@ -34,12 +34,13 @@ public class ChoseLecturer
 
             var instructor =
                 await _context.Instructors.FirstOrDefaultAsync(x => x.StudentId == student.Id, cancellationToken);
-            
-            if(instructor != null || student.Lecturer != null)
+
+            if (instructor != null || student.Lecturer != null)
                 return Result<Unit>.Failure("Bạn đã có giảng viên hướng dẫn");
 
             var lecturer =
-                await _context.Lecturers.Include(s => s.Students).FirstOrDefaultAsync(x => x.Id == request.Id, cancellationToken);
+                await _context.Lecturers.Include(s => s.Students)
+                    .FirstOrDefaultAsync(x => x.Id == request.Id, cancellationToken);
 
             if (lecturer == null) return null;
 

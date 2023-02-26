@@ -28,8 +28,7 @@ public class DataContext : IdentityDbContext<AppUser, AppRole, string>
         builder.Entity<Lecturer>().ToTable("Lecturers");
         builder.Entity<DepartmentSubject>().ToTable("DepartmentSubjects");
         builder.Entity<Faculty>().ToTable("Faculties");
-        
-        builder.Entity<Instructor>(i => i.HasKey(x => new { x.StudentId, x.FacultyId, x.LecturerId }));
 
+        builder.Entity<Instructor>(i => i.HasKey(x => new { x.StudentId, x.FacultyId, x.LecturerId }));
     }
 }
