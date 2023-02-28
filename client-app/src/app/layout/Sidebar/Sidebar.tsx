@@ -1,4 +1,4 @@
-import {useState} from "react";
+import { observer } from "mobx-react-lite";
 import { useLocation } from "react-router-dom";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import PersonIcon from '@mui/icons-material/Person';
@@ -12,6 +12,7 @@ import {route} from "../../router/Routers";
 import MenuItem from "../Menu/MenuItem";
 import {LogoSP} from "../../../assets";
 import VerticalTabs from "./Tab";
+import { useStore } from "../../stores/store";
 import "./Sidebar.scss";
 
 interface SidebarProps {
@@ -20,16 +21,19 @@ interface SidebarProps {
 }
   
 function Sidebar(props: SidebarProps) {
-    const [isActive, setActive] = useState(false);
 
     const location = useLocation();
-    
+
     const handleClick = () => {
-        setActive(!isActive);
+        isActive? closeSideBar(): openSideBar();
     };
-    let active = (isActive ? 'active' : '');
+    
+    const {
+        commonStore: {isActive, openSideBar, closeSideBar }
+    } = useStore();
+
     return (
-        <Grid sx={{background: '#FFFFFF'}} className={`side_bar ${active}`}>
+        <Grid sx={{background: '#FFFFFF'}} className={`side_bar ${isActive}`}>
             <Box className="side_bar_logo">
                 <Avatar alt="Logo" className="Logo" src={LogoSP}/>
                 <Box id="nav_toggle" onClick={handleClick}>
@@ -48,7 +52,7 @@ function Sidebar(props: SidebarProps) {
                 <MenuItem title="Quản lý" to={route.homepagetest} icon={<LogoutIcon/>} />  
             </Box>
             <Typography className="tlt">GIẢNG VIÊN</Typography>
-            {(location.pathname === '/homepagetest')?(
+            {(location.pathname === '/lecturers')?(
             <Box>
                 <VerticalTabs setValue={props.setValue} value={props.value}/>
             </Box>
@@ -57,4 +61,4 @@ function Sidebar(props: SidebarProps) {
     )
 }
 
-export default Sidebar;
+export default observer(Sidebar);

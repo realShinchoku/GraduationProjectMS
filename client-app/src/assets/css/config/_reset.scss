@@ -1,3 +1,5 @@
+@import "./variables";
+@import "../mixin/function";
 html, body, div, span, applet, object, iframe,h1, h2, h3, h4, h5, h6, p, blockquote, pre,a, abbr, acronym, address, big, cite, code,del, dfn, em, img, ins, kbd, q, s, samp,small, strike, strong, sub, sup, tt, var,b, u, i, center,dl, dt, dd, li,fieldset, form, label, legend,table, caption, tbody, tfoot, thead, tr, th, td,article, aside, canvas, details, embed,figure, figcaption, footer, header, hgroup,menu, nav, output, ruby, section, summary,time, mark, audio, video{margin:0;padding:0;border:0;vertical-align:baseline;}
 article, aside, details, figcaption, figure,footer, header, hgroup, menu, nav, section{display:block;}
 body{line-height:1;}
@@ -9,6 +11,7 @@ ul,ol{margin:0;padding:0;}
 html *::-webkit-scrollbar {
     border-radius: 0;
     width: 8px;
+    display: none; 
 }
 html *::-webkit-scrollbar-thumb {
     border-radius: 4px;
@@ -17,4 +20,20 @@ html *::-webkit-scrollbar-thumb {
 html *::-webkit-scrollbar-track {
     border-radius: 0;
     background-color: rgba(0, 0, 0, 0);
+}
+
+.container {
+    padding-top: 88px;
+    padding-left: 250px;
+    transition: all 0.15s ease;
+
+    @include sp {
+        padding-top: 70px;
+        padding-left: 65px;
+    }
+
+    &.active {
+        padding-left: 80px;
+        transition: all 0.15s ease;
+    }
 }
