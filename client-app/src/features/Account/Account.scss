@@ -21,7 +21,7 @@
       width: 100%;
       height: 100%;
     }
-  
+
     .thumb {
       position: relative;
       padding: 2rem;
@@ -45,7 +45,7 @@
         padding: get_sp(20);
         display: none
       }
-  
+
       .logo {
         @include bgsetup("../../../assets/images/Logo.png", no-repeat, 50% center, 75%);
         position: absolute;
@@ -55,14 +55,14 @@
         height: 100%;
       }
     }
-  
+
     .SignUp_Form {
       width: 50%;
       height: 100%;
       color: $color-base;
       padding: 2rem;
       background: $background-login;
-      text-align: right;
+      text-align: center;
       @include pc {
         padding: get_pc(32);
       }
@@ -73,11 +73,11 @@
         width: 100%;
         padding: get_sp(32);
       }
-  
+
       .inner {
         padding-top: 150px;
         @include pc {
-          padding-top: get_pc(150);
+          padding-top: get_pc(30);
         }
         @include tablet {
           padding-top: get_tablet(80);
@@ -85,19 +85,20 @@
         @include sp {
           padding-top: get_sp(150);
         }
-  
+
         h3 {
           color: $color-base-1;
           font-size: 40px;
-          font-weight: 700;
+          font-weight: 600;
           line-height: 50px;
           margin-bottom: 30px;
           text-align: center;
           @include pc {
             font-size: get_pc(40);
             line-height: get_pc(50);
-            margin-bottom: get_pc(30);
+            margin-bottom: get_pc(20);
           }
+          
           @include tablet {
             font-size: get_tablet(40);
             line-height: get_tablet(50);
@@ -109,7 +110,30 @@
             margin-bottom: get_sp(30);
           }
         }
-  
+
+        h6 {
+          color: #a3a2a2;
+          font-weight: 450;
+          margin-bottom: 30px;
+          font-family: system-ui;
+          @include pc {
+            font-size: get_pc(16);
+            line-height: get_pc(20);
+            margin-bottom: get_pc(30);
+          }
+          
+          @include tablet {
+            font-size: get_tablet(20);
+            line-height: get_tablet(20);
+            margin-bottom: get_tablet(20);
+          }
+          @include sp {
+            font-size: get_sp(40);
+            line-height: get_sp(50);
+            margin-bottom: get_sp(30);
+          }
+        }
+
         form {
           .input, button {
             margin-bottom: 20px;
@@ -123,7 +147,7 @@
               margin-bottom: get_sp(20);
             }
           }
-  
+
           button {
             padding: 10px 16px;
             @include pc {
@@ -135,65 +159,116 @@
             @include sp {
               padding: get_sp(10) get_pc(16);
             }
-          }
+          }         
         }
       }
-      .keypass{
-      color: #9fc7ec;
-      width: 35px;
-      height: 35px;
-      border-radius: 50%;
-      background: #d6e9f2;
-      padding: 5px;
+
+      .nameKey {
+        color: #9fc7ec;
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+        background: #d6e9f2;
+        padding: 5px;
       }
-      .keypass_vpn{
-      background: #eef1f6;
-      display: block;
-      position: relative;
-      width: 70px;
-      height: 70px;
-      padding-top: 12.5px;
-      border-radius: 50%;
-      margin-left: 40%;
+
+      .iconKey {
+        background: #eef1f6;
+        display: block;
+        position: relative;
+        width: 70px;
+        height: 70px;
+        padding-top: 12.5px;
+        border-radius: 50%;
+        margin:0 auto 10px;
       }
-      .inner_pass{
-        text-align: center;
-        padding-top: 3.5vw;
-      }
-      .h3_fget{
-        margin-top: 25px;
-        font-family: system-ui;
-        color: #3b3939 !important;
-        font-size: x-large;
-        margin-bottom: 10px !important;
-      }
-      .h2_fget{
+
+      .h2_fget {
         color: #a3a2a2;
-        font-weight: 500;
+        font-weight: 450;
         font-size: inherit;
         margin-bottom: 30px;
-        font-family: system-ui;    }
-      .school_icon{
+        font-family: system-ui;
+      }
+
+      .h2_resent {
+        font-size: 15px;
+        color: #b7b7b7;
+      }
+
+      .resent {
+        text-decoration: none;
+      }
+
+      .resent:hover {
+        cursor: pointer;
+      }
+
+      .school_icon {
         background: #eef1f6;
         width: 70px;
         height: 70px;
         padding-top: 12.5px;
         border-radius: 50%;
-        margin-left: 40%;
+        margin: 0 auto 10px;
         margin-bottom: 10px;
       }
-      .schoolicon{
+
+      .schoolicon {
         color: #1976d2;
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
       }
-      .h3_login{
+
+      .backLogin {
+        color: #838B98;
+        font-weight: 450;
         font-family: system-ui;
       }
-      .forgotpd{
-        color: #838B98;
-      }
+    }
+
+    .success {
+      color: #15bf97;
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      background: #d4f5d1;
+      padding: 5px;
+    }
+
+    .successIcon {
+      background: #15bf97;
+      display: block;
+      position: relative;
+      width: 70px;
+      height: 70px;
+      padding-top: 8px;
+      border-radius: 50%;
+      margin:0 auto 15px;
+    }
+
+    .form_Bottom {
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .back_Icon {
+      color: #838B98;
+      width: 25px;
+      height: 25px;
+      margin-bottom: 30px;
+      margin-right: 5px;
+    }
+
+    .back_Reset {
+      color: #a3a2a2;
+      font-weight: 450;
+      font-size: inherit;
+      margin-bottom: 30px;
+      font-family: system-ui;
     }
   }
-}
+} 
