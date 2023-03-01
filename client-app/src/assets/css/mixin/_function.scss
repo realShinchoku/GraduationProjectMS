@@ -51,17 +51,17 @@
 }
 
 @function get_pc($fsize, $viewport:1920) {
-  $rate: 100 / $viewport;
+  $rate: calc(100 / $viewport);
   @return $rate * $fsize * 1vw;
 }
 
 @function get_tablet($fsize, $viewport:1000) {
-  $rate: 100 / $viewport;
+  $rate: calc(100 / $viewport);
   @return $rate * $fsize * 1vw;
 }
 
 @function get_sp($fsize, $viewport:390) {
-  $rate: 100 / $viewport;
+  $rate: calc(100 / $viewport);
   @return $rate * $fsize * 1vw;
 }
 
@@ -88,5 +88,4 @@
   position: relative;
   margin-left: -50vw;
   left: 50%;
-  //padding: calc((100vw - #{$calcwidth}) / 2);
 }

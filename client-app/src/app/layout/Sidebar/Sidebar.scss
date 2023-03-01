@@ -3,46 +3,89 @@
 
 
 .side_bar {
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    display: block;
-    overflow-y: auto;
-    width: 100%;
-    max-width: 250px;
-    padding-right: 0;
-    padding-left: 0;
-    min-width: 250px;
-    border-color: rgba(0, 0, 0, .05);
-    z-index: 1050;
-    transition: all .15s ease;
-    padding-top: 0;
-    border-style: solid;
-    box-shadow: 0 0 2rem 0 rgb(136 152 170 / 15%);
-    border-right: 1px solid #DBDBDB;
-    &_logo {
-        display: flex;
-        justify-content: space-between;
-        padding: 11px 24px;
-        align-items: center;
-        border-bottom: 1px solid #DBDBDB;
-        @include sp {
-          padding: 7px 24px;
-        }
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  display: block;
+  width: 100%;
+  max-width: 250px;
+  padding-right: 0;
+  padding-left: 0;
+  min-width: 252px;
+  border-color: rgba(0, 0, 0, .05);
+  z-index: 1050;
+  overflow-y: auto;
+  transition: all .15s ease;
+  padding-top: 0;
+  border-style: solid;
+  box-shadow: 0 0 2rem 0 rgb(136 152 170 / 15%);
+  border-right: 1px solid #DBDBDB;
+  font-family: 'Inter', sans-serif;
+
+  &_logo {
+    display: flex;
+    justify-content: space-between;
+    padding: 24px;
+    align-items: center;
+    border-bottom: 1px solid #DBDBDB;
+    @include sp {
+      padding: 20px 24px;
     }
-    &_inner{
-        display: flex;
-        flex-direction: column;
-        align-items: stretch;
-        padding: 0 14px;
+  }
+
+  &_inner {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 14px 14px 15px 14px;
+  }
+  .tlt {
+    font-size: 12px;
+    font-family: "Inter", sans-serif;
+    font-weight: 700;
+    line-height: 15px;
+    color: #787486;
+    padding-top: 30.5px;
+    padding-left: 8px;
+    margin-bottom: 21px;
+    margin-left: 14px;
+    padding-right: 8px;
+    margin-right: 14px;
+    border-top: 1px solid #DBDBDB;
+  }
+  .tab {
+    padding: 0 14px;
+    .tab_ {
+      justify-content: left;
+      min-height: unset;
+      padding: 11px 0 10.5px 12px;
+      text-decoration: none;
+      font-size: 16px;
+      font-weight: 600;
+      color: #787486;
+      line-height: 19px;
+      font-family: 'Inter', sans-serif;
+      text-align: left;
+      svg {
+        width: 8px;
+        height: 8px;
+        margin-right: 16px;
+      }
+      &.Mui-selected {
+        background: rgba(80, 48, 229, 0.0784313725);
+        border-radius: 6px;
+      }
+      + .tab_ {
+        margin-top: 10px;
+      }
     }
+  }
 }
 
 #nav_toggle {
   width: 40px;
   height: 40px;
   background: $color-base;
-  box-shadow: 0px 0px 10px #00000029;
   border-radius: 50%;
   cursor: pointer;
   z-index: 1001;
@@ -53,6 +96,7 @@
     top: 7.729vw;
     right: 7.488vw;
   }
+
   > div {
     position: relative;
     top: 11px;
@@ -60,6 +104,7 @@
     width: 20px;
     left: 0;
     margin: auto;
+
     span {
       display: block;
       position: absolute;
@@ -70,12 +115,15 @@
       zoom: 1;
       -webkit-transition: .35s ease-in-out;
       transition: .35s ease-in-out;
+
       &:nth-child(1) {
         top: 0;
       }
+
       &:nth-child(2) {
         top: 8px;
       }
+
       &:nth-child(3) {
         top: 16px;
       }
@@ -86,16 +134,19 @@
 .side_bar {
   &.active {
     max-width: 80px;
+
     .side_bar_logo {
       justify-content: center;
-      padding: 12px 12px;
+      padding: 24px 12px;
       @include sp {
-        padding: 10px 12px;
+        padding: 20px 12px;
       }
+
       .Logo {
         display: none;
       }
     }
+
     #nav_toggle {
       background: $color-base;
       width: 40px;
@@ -110,26 +161,31 @@
         top: 7.729vw;
         right: 7.488vw;
       }
+
       > div {
         width: 22px;
         @include sp {
           width: 4.695vw;
         }
+
         span {
           height: 3px;
           @include sp {
             height: 0.4830vw;
           }
+
           &:nth-child(1) {
             top: 9px;
             -webkit-transform: rotate(-135deg);
             transform: rotate(-135deg);
             zoom: 1;
           }
+
           &:nth-child(2) {
             width: 0;
             left: 50%;
           }
+
           &:nth-child(3) {
             top: 9px;
             -webkit-transform: rotate(135deg);
@@ -139,13 +195,17 @@
         }
       }
     }
+
     .side_bar_inner {
       align-items: center;
+
       .menu_item {
         padding: 10px 0;
+
         .icon {
           margin-right: 0;
         }
+
         .title {
           display: none;
         }
@@ -163,6 +223,12 @@
           color: #5030E514;
         }
       }
+    }
+    .tlt {
+      display: none;
+    }
+    .tab {
+      display: none;
     }
   }
 }

@@ -5,6 +5,7 @@ export default class CommonStore {
     error: ServerError | null = null;
     token: string | null = localStorage.getItem('jwt');
     appLoaded: boolean = false;
+    isActive: string = '';
 
     constructor() {
         makeAutoObservable(this);
@@ -27,4 +28,8 @@ export default class CommonStore {
     }
 
     setAppLoaded = () => this.appLoaded = true;
+
+    openSideBar = () => this.isActive = 'active';
+    closeSideBar = () => this.isActive = '';
+
 }
