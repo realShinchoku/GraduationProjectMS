@@ -2,6 +2,7 @@ using System.Security.Claims;
 using System.Text;
 using API.DTOs;
 using API.Services;
+using Application.Accounts;
 using Application.Interfaces;
 using Domain;
 using Microsoft.AspNetCore.Authorization;
@@ -12,7 +13,6 @@ using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers;
 
-[ApiController]
 public class AccountController : BaseApiController
 {
     private readonly IEmailSender _emailSender;
@@ -58,43 +58,9 @@ public class AccountController : BaseApiController
 
     [Authorize(Policy = "IsFacultyOffice")]
     [HttpPost("create")]
-    public async Task<ActionResult<UserDto>> Create(CreateUserDto createUserDto)
+    public async Task<ActionResult<UserDto>> Create([FromForm] Create.Command command)
     {
-        var currentUser = await _userManager.Users.FirstOrDefaultAsync(
-            x => x.Email == User.FindFirstValue(ClaimTypes.Email));
-
-        if (currentUser.Role != Role.FacultyOffice)
-            return Forbid();
-
-        if (await _userManager.Users.AnyAsync(x => x.UserName == createUserDto.UserName))
-            return Conflict("Username is already taken");
-
-        if (await _userManager.Users.AnyAsync(x => x.Email == createUserDto.Email))
-            return Conflict("Email is already taken");
-
-        if (!Enum.IsDefined(typeof(Role), createUserDto.Role))
-            return Conflict("Role is not exsit");
-
-        var user = new AppUser
-        {
-            DisplayName = createUserDto.DisplayName,
-            Email = createUserDto.Email,
-            UserName = createUserDto.UserName,
-            Role = createUserDto.Role
-        };
-
-
-        var result = await _userManager.CreateAsync(user, createUserDto.Password);
-
-        if (!result.Succeeded)
-            return BadRequest("Problem creating user");
-
-        result = await _userManager.AddToRoleAsync(user, createUserDto.Role.ToString());
-
-        if (!result.Succeeded)
-            return BadRequest("Problem adding role");
-
-        return Ok("Creation successfully");
+        return HandleResult(await Mediator.Send(command));
     }
 
     [Authorize]
@@ -183,7 +149,9 @@ public class AccountController : BaseApiController
             DisplayName = user.DisplayName,
             Token = _tokenService.CreateToken(user),
             UserName = user.UserName,
-            Role = user.Role
+            Role = user.Role,
+            Birthday = user.Birthday,
+            Sex = user.Sex
         };
 
 

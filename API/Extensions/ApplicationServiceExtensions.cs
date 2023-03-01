@@ -1,9 +1,13 @@
 ﻿using Application.Core;
+using Application.Accounts;
 using Application.Interfaces;
+using Application.Lecturers;
+using FluentValidation;
 using FluentValidation.AspNetCore;
 using Infrastructure.Email;
 using Infrastructure.Photos;
 using Infrastructure.Security;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
 
@@ -68,8 +72,9 @@ public static class ApplicationServiceExtensions
                         .WithOrigins("http://localhost:3000", "https://localhost:3000");
                 });
         });
-        // services.AddMediatR(typeof(List.Handler));
+        services.AddMediatR(typeof(List.Handler));
         services.AddAutoMapper(typeof(MappingProfiles).Assembly);
+        services.AddValidatorsFromAssemblyContaining<Create>();
         services.AddFluentValidationAutoValidation();
         services.AddHttpContextAccessor();
         services.AddScoped<IUserAccessor, UserAccessor>();

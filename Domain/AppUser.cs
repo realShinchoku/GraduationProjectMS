@@ -4,8 +4,11 @@ namespace Domain;
 
 public class AppUser : IdentityUser
 {
-    public string DisplayName { get; set; }
-    public ICollection<RefreshToken> RefreshTokens { get; set; } = new List<RefreshToken>();
     public DateTime CreatedDate { get; set; } = DateTime.UtcNow;
-    public Role Role { get; set; } = Role.Student;
+    public DateTime? Birthday { get; set; }
+    public ICollection<RefreshToken> RefreshTokens { get; set; } = new List<RefreshToken>();
+    public Role Role { get; set; }
+    public bool Sex { get; set; }
+    public string DisplayName { get; set; }
+    public string Avatar { get; set; }
 }
