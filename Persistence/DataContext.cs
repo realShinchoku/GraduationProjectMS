@@ -24,8 +24,13 @@ public class DataContext : IdentityDbContext<AppUser, AppRole, string>
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
-        builder.Ignore<IdentityUserClaim<string>>();
+        
+        builder.Entity<AppUser>().ToTable("Users");
+        builder.Entity<AppRole>().ToTable("Roles");
+        builder.Entity<IdentityUserRole<string>>().ToTable("UserRoles");
+
         builder.Ignore<IdentityUserLogin<string>>();
+        builder.Ignore<IdentityUserClaim<string>>();
         builder.Ignore<IdentityUserToken<string>>();
         builder.Ignore<IdentityRoleClaim<string>>();
 
