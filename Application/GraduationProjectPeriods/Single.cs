@@ -12,6 +12,7 @@ public class Single
     {
         public Guid Id { get; set; }
     }
+
     public class Handler : IRequestHandler<Query, Result<GraduationProjectPeriod>>
     {
         private readonly DataContext _context;
@@ -20,12 +21,14 @@ public class Single
         {
             _context = context;
         }
+
         public async Task<Result<GraduationProjectPeriod>> Handle(Query request, CancellationToken cancellationToken)
         {
-            var period = await _context.GraduationProjectPeriods.FirstOrDefaultAsync(x => x.Id == request.Id, cancellationToken);
+            var period =
+                await _context.GraduationProjectPeriods.FirstOrDefaultAsync(x => x.Id == request.Id, cancellationToken);
             if (period == null)
                 return null;
-            
+
             return Result<GraduationProjectPeriod>.Success(period);
         }
     }

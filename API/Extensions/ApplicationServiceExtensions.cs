@@ -1,5 +1,5 @@
-﻿using Application.Core;
-using Application.Accounts;
+﻿using Application.Accounts;
+using Application.Core;
 using Application.Interfaces;
 using Application.Lecturers;
 using FluentValidation;

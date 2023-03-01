@@ -3,213 +3,260 @@
 
 
 .homepage_test {
-    .inner {
-        padding: 0 25.5px;
-        .nav {
-            h3 {
-                font-size: 46px;
-                line-height: 56px;
-                font-family: 'Inter', sans-serif;
-                color: #0D062D;
-                font-weight: 600;
-                padding-top: 41px;
-                padding-left: 22.5px;
-                margin-bottom: 39px;
-            }
-            .btn {
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-                margin-bottom: 3px;
-                @include tablet {
-                    display: unset;
-                    margin-bottom: 20px;
-                }
-                @include sp {
-                    display: unset;
-                    margin-bottom: get_sp(20);
-                }
-                &_item {
-                    display: flex;
-                    margin-bottom: 0;
-                    @include tablet {
-                        margin-bottom: 10px;
-                    }
-                    @include sp {
-                        margin-bottom: 10px;
-                    }
-                    .btn_complete {
-                        border: 1px solid #787486;
-                        border-radius: 6px;
-                    }
-                }
-                .search {
-                    display: flex;
-                    @include tablet {
-                        margin-bottom: 10px;
-                    }
-                    .search_ {
-                        width: 417px;
-                        @include pc {
-                            width: get_pc(417);
-                        }
-                        @include tablet {
-                            width: get_tablet(417);
-                        }
-                        @include sp {
-                            width: get_sp(417);
-                        }
-                    }
-                    button {
-                        background-color: #FFFFFF;
-                        border-color: #787486;
-                        color: #787486;
-                        margin-left: 10px;
-                        padding: 3.5px 15px;
-                    }
-                }
-            }
-            .table {
-                box-shadow: unset;
-                table {
-                    th {
-                        padding: 13px 16px;
-                    }
-                }
-                @include tablet {
-                    table, thead, tbody, th, td, tr { 
-                        display: block; 
-                    }
-                    thead tr { 
-                        display: none;
-                    }
-                    td { 
-                        border: none;
-                        border-bottom: 1px solid #eee; 
-                        position: relative;
-                        padding-left: 50%; 
-                    }
-                    
-                    td:before {
-                        position: absolute;
-                        top: 16px;
-                        left: 16px;
-                        width: 50%; 
-                        padding-right: 10px; 
-                        white-space: nowrap;
-                    }
+  .inner {
+    padding: 0 25.5px;
 
-                    td:nth-of-type(1):before { content: "Giảng Viên"; }
-                    td:nth-of-type(2):before { content: "Đang Hướng Dẫn(SV)"; }
-                    td:nth-of-type(3):before { content: "Bộ Môn"; }
-                    td:nth-of-type(4):before { content: "Khoa"; }
-                    td:nth-of-type(5):before { content: "Học Vị"; }
-                    td:nth-of-type(6):before { content: "Trạng Thái"; }
-                    td:nth-of-type(7):before { content: "Tác Vụ"; }
-                }   
-                @include sp {
-                    table, thead, tbody, th, td, tr { 
-                        display: block; 
-                    }
-                    thead tr { 
-                        display: none;
-                    }
-                    td { 
-                        border: none;
-                        border-bottom: 1px solid #eee; 
-                        position: relative;
-                        padding-left: 50%; 
-                    }
-                    
-                    td:before {
-                        position: absolute;
-                        top: 16px;
-                        left: 16px;
-                        width: 50%; 
-                        padding-right: 10px; 
-                        white-space: nowrap;
-                    }
+    .nav {
+      h3 {
+        font-size: 46px;
+        line-height: 56px;
+        font-family: 'Inter', sans-serif;
+        color: #0D062D;
+        font-weight: 600;
+        padding-top: 41px;
+        padding-left: 22.5px;
+        margin-bottom: 39px;
+      }
 
-                    td:nth-of-type(1):before { content: "Giảng Viên"; }
-                    td:nth-of-type(2):before { content: "Đang Hướng Dẫn(SV)"; }
-                    td:nth-of-type(3):before { content: "Bộ Môn"; }
-                    td:nth-of-type(4):before { content: "Khoa"; }
-                    td:nth-of-type(5):before { content: "Học Vị"; }
-                    td:nth-of-type(6):before { content: "Trạng Thái"; }
-                    td:nth-of-type(7):before { content: "Tác Vụ"; }
-                }                
-            }
+      .btn {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 3px;
+        @include tablet {
+          display: unset;
+          margin-bottom: 20px;
         }
-        &_contact {
-            display: flex;
-            padding: 20px;
-            justify-content: space-around;
+        @include sp {
+          display: unset;
+          margin-bottom: get_sp(20);
+        }
+
+        &_item {
+          display: flex;
+          margin-bottom: 0;
+          @include tablet {
+            margin-bottom: 10px;
+          }
+          @include sp {
+            margin-bottom: 10px;
+          }
+
+          .btn_complete {
+            border: 1px solid #787486;
+            border-radius: 6px;
+          }
+        }
+
+        .search {
+          display: flex;
+          @include tablet {
+            margin-bottom: 10px;
+          }
+
+          .search_ {
+            width: 417px;
+            @include pc {
+              width: get_pc(417);
+            }
             @include tablet {
-                display: block;
+              width: get_tablet(417);
             }
             @include sp {
-                display: block;
+              width: get_sp(417);
             }
-            .thumb {
-                width: 200px;
-                height: 200px;
-                object-fit: cover;
-                @include tablet {
-                    margin: 0 auto 20px;
-                }
-                @include sp {
-                    margin: 0 auto 20px;
-                }
-                img {
-                    width: 100%;
-                    height: 100%;
-                }
-            }
-            .list {
-                width: 60%;
-                justify-content: space-around;
-                @include tablet {
-                    margin: 0 auto;
-                    width: 100%;
-                }
-                @include sp {
-                    margin: 0 auto;
-                    width: 100%;
-                }
-                ul {
-                    display: flex;
-                    padding: 0;
-                    @include sp {
-                        display: block;
-                    }
-                    a {
-                        color: #787486;
-                        svg {
-                            width: 8px;
-                            height: 8px;
-                            margin-right: 8px;
-                        }
-                    }
-                }
-            }
-            .contact {
-                padding: 50px 10px;
-                width: 10%;
-                display: initial;
-                text-align: center;
-                @include tablet {
-                    display: block;
-                    width: unset;
-                }
-                @include sp {
-                    display: block;
-                    width: unset;
-                }
-                svg {
-                    margin-bottom: 10px;
-                }
-            }
+          }
+
+          button {
+            background-color: #FFFFFF;
+            border-color: #787486;
+            color: #787486;
+            margin-left: 10px;
+            padding: 3.5px 15px;
+          }
         }
+      }
+
+      .table {
+        box-shadow: unset;
+
+        table {
+          th {
+            padding: 13px 16px;
+          }
+        }
+
+        @include tablet {
+          table, thead, tbody, th, td, tr {
+            display: block;
+          }
+          thead tr {
+            display: none;
+          }
+          td {
+            border: none;
+            border-bottom: 1px solid #eee;
+            position: relative;
+            padding-left: 50%;
+          }
+
+          td:before {
+            position: absolute;
+            top: 16px;
+            left: 16px;
+            width: 50%;
+            padding-right: 10px;
+            white-space: nowrap;
+          }
+
+          td:nth-of-type(1):before {
+            content: "Giảng Viên";
+          }
+          td:nth-of-type(2):before {
+            content: "Đang Hướng Dẫn(SV)";
+          }
+          td:nth-of-type(3):before {
+            content: "Bộ Môn";
+          }
+          td:nth-of-type(4):before {
+            content: "Khoa";
+          }
+          td:nth-of-type(5):before {
+            content: "Học Vị";
+          }
+          td:nth-of-type(6):before {
+            content: "Trạng Thái";
+          }
+          td:nth-of-type(7):before {
+            content: "Tác Vụ";
+          }
+        }
+        @include sp {
+          table, thead, tbody, th, td, tr {
+            display: block;
+          }
+          thead tr {
+            display: none;
+          }
+          td {
+            border: none;
+            border-bottom: 1px solid #eee;
+            position: relative;
+            padding-left: 50%;
+          }
+
+          td:before {
+            position: absolute;
+            top: 16px;
+            left: 16px;
+            width: 50%;
+            padding-right: 10px;
+            white-space: nowrap;
+          }
+
+          td:nth-of-type(1):before {
+            content: "Giảng Viên";
+          }
+          td:nth-of-type(2):before {
+            content: "Đang Hướng Dẫn(SV)";
+          }
+          td:nth-of-type(3):before {
+            content: "Bộ Môn";
+          }
+          td:nth-of-type(4):before {
+            content: "Khoa";
+          }
+          td:nth-of-type(5):before {
+            content: "Học Vị";
+          }
+          td:nth-of-type(6):before {
+            content: "Trạng Thái";
+          }
+          td:nth-of-type(7):before {
+            content: "Tác Vụ";
+          }
+        }
+      }
     }
+
+    &_contact {
+      display: flex;
+      padding: 20px;
+      justify-content: space-around;
+      @include tablet {
+        display: block;
+      }
+      @include sp {
+        display: block;
+      }
+
+      .thumb {
+        width: 200px;
+        height: 200px;
+        object-fit: cover;
+        @include tablet {
+          margin: 0 auto 20px;
+        }
+        @include sp {
+          margin: 0 auto 20px;
+        }
+
+        img {
+          width: 100%;
+          height: 100%;
+        }
+      }
+
+      .list {
+        width: 60%;
+        justify-content: space-around;
+        @include tablet {
+          margin: 0 auto;
+          width: 100%;
+        }
+        @include sp {
+          margin: 0 auto;
+          width: 100%;
+        }
+
+        ul {
+          display: flex;
+          padding: 0;
+          @include sp {
+            display: block;
+          }
+
+          a {
+            color: #787486;
+
+            svg {
+              width: 8px;
+              height: 8px;
+              margin-right: 8px;
+            }
+          }
+        }
+      }
+
+      .contact {
+        padding: 50px 10px;
+        width: 10%;
+        display: initial;
+        text-align: center;
+        @include tablet {
+          display: block;
+          width: unset;
+        }
+        @include sp {
+          display: block;
+          width: unset;
+        }
+
+        svg {
+          margin-bottom: 10px;
+        }
+      }
+    }
+  }
 }
 

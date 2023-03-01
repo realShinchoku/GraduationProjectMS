@@ -1,7 +1,6 @@
 ﻿using Application.Core;
 using Domain;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 using Persistence;
 
 namespace Application.GraduationProjectPeriods;
@@ -12,6 +11,7 @@ public class List
     {
         public PagingParams Params { get; set; }
     }
+
     public class Handler : IRequestHandler<Query, Result<PageList<GraduationProjectPeriod>>>
     {
         private readonly DataContext _context;
@@ -20,7 +20,9 @@ public class List
         {
             _context = context;
         }
-        public async Task<Result<PageList<GraduationProjectPeriod>>> Handle(Query request, CancellationToken cancellationToken)
+
+        public async Task<Result<PageList<GraduationProjectPeriod>>> Handle(Query request,
+            CancellationToken cancellationToken)
         {
             var query = _context.GraduationProjectPeriods.AsQueryable();
 

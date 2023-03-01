@@ -12,6 +12,7 @@ import VpnKeyIcon from '@mui/icons-material/VpnKey';
 import MarkEmailReadIcon from "@mui/icons-material/MarkEmailRead";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import './Account.scss';
+
 const validationSchema = Yup.object().shape({
     email: Yup.string()
         .email("Vui lòng nhập email")
@@ -39,12 +40,14 @@ function PasswordReset() {
                             <Typography variant="h3">Kiểm tra Email của bạn</Typography>
                             <Typography variant="h6">Chúng tôi gửi liên kết đặt lại mật khẩu tới {email}.</Typography>
                             <Typography className="h2_fget h2_resent" variant="h6">Không nhận được email ? <Link
-                                onClick={() => sendResetPasswordLink(email)} className='resent'>Gửi lại</Link></Typography>
+                                onClick={() => sendResetPasswordLink(email)} className='resent'>Gửi
+                                lại</Link></Typography>
 
                         </Grid>
                         <Grid className="form_Bottom">
                             <ArrowBackIcon className="back_Icon"></ArrowBackIcon>
-                            <Link className="backLogin h2_fget" href={route.login} underline="none">Trở lại trang đăng nhập</Link>
+                            <Link className="backLogin h2_fget" href={route.login} underline="none">Trở lại trang đăng
+                                nhập</Link>
                         </Grid>
                     </Grid>
                     :

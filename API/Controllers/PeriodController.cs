@@ -23,10 +23,10 @@ public class PeriodController : BaseApiController
     {
         return HandlePageResult(await Mediator.Send(new List.Query { Params = pagingParams }));
     }
-    
+
     [HttpGet("{id}")]
     public async Task<IActionResult> Single(Guid id)
     {
-        return HandleResult(await Mediator.Send(new Single.Query{Id = id}));
+        return HandleResult(await Mediator.Send(new Single.Query { Id = id }));
     }
 }

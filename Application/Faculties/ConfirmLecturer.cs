@@ -42,9 +42,10 @@ public class ConfirmLecturer
                     .FirstOrDefaultAsync(x => x.Id == request.Ids.LecturerId, cancellationToken);
             if (lecturer == null)
                 return null;
-            
+
             var instructor = await _context.Instructors.FirstOrDefaultAsync(
-                x => x.StudentId == student.Id && x.LecturerId == lecturer.Id && x.FacultyId == faculty.Id && !x.IsConfirm,
+                x => x.StudentId == student.Id && x.LecturerId == lecturer.Id && x.FacultyId == faculty.Id &&
+                     !x.IsConfirm,
                 cancellationToken);
 
             if (instructor == null)

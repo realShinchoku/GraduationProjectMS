@@ -1,9 +1,7 @@
 ﻿using Application.Core;
-using Application.Lecturers;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 using Persistence;
 
 namespace Application.Students;
@@ -14,7 +12,7 @@ public class List
     {
         public StudentParams Params { get; set; }
     }
-    
+
     public class Handler : IRequestHandler<Query, Result<PageList<StudentDto>>>
     {
         private readonly DataContext _context;
@@ -25,6 +23,7 @@ public class List
             _context = context;
             _mapper = mapper;
         }
+
         public async Task<Result<PageList<StudentDto>>> Handle(Query request, CancellationToken cancellationToken)
         {
             var query = _context.Students

@@ -39,6 +39,7 @@
     align-items: stretch;
     padding: 14px 14px 15px 14px;
   }
+
   .tlt {
     font-size: 12px;
     font-family: "Inter", sans-serif;
@@ -53,8 +54,10 @@
     margin-right: 14px;
     border-top: 1px solid #DBDBDB;
   }
+
   .tab {
     padding: 0 14px;
+
     .tab_ {
       justify-content: left;
       min-height: unset;
@@ -66,15 +69,18 @@
       line-height: 19px;
       font-family: 'Inter', sans-serif;
       text-align: left;
+
       svg {
         width: 8px;
         height: 8px;
         margin-right: 16px;
       }
+
       &.Mui-selected {
         background: rgba(80, 48, 229, 0.0784313725);
         border-radius: 6px;
       }
+
       + .tab_ {
         margin-top: 10px;
       }
@@ -219,14 +225,17 @@
     .menu_item {
       &.active {
         background: none;
+
         .icon {
           color: #5030E514;
         }
       }
     }
+
     .tlt {
       display: none;
     }
+
     .tab {
       display: none;
     }

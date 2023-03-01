@@ -67,8 +67,10 @@ public class AssignLecturer
                 _context.Instructors.Add(instructor);
             }
             else
+            {
                 instructor.IsConfirm = true;
-            
+            }
+
             student.Lecturer = lecturer;
 
             var result = await _context.SaveChangesAsync(cancellationToken) > 0;

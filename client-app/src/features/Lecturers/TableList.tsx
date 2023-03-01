@@ -16,10 +16,10 @@ import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
-import { Typography } from "@mui/material";
+import {Typography} from "@mui/material";
 
 import SimpleBadge from "./SimpaleMail";
-import { AvatarSP } from "../../assets";
+import {AvatarSP} from "../../assets";
 
 function createData(
     lecturers: any,
@@ -42,100 +42,107 @@ function createData(
 }
 
 function Row(props: { row: ReturnType<typeof createData> }) {
-    const { row } = props;
+    const {row} = props;
     const [open, setOpen] = React.useState(false);
 
     return (
         <React.Fragment>
-        <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
-            <TableCell align="center">
-            {row.lecturers}
-            </TableCell>
-            <TableCell align="center">{row.instructing}</TableCell>
-            <TableCell align="center">{row.subject}</TableCell>
-            <TableCell align="center">{row.faculty}</TableCell>
-            <TableCell align="center">{row.degree}</TableCell>
-            <TableCell align="center">{row.status}</TableCell>
-            {open ? <TableCell></TableCell>:<TableCell align="center">{row.action}</TableCell>}
-            <TableCell>
-            <IconButton
-                aria-label="expand row"
-                size="small"
-                onClick={() => setOpen(!open)}
-            >
-                {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-            </IconButton>
-            </TableCell>
-        </TableRow>
-        <TableRow>
-            <TableCell component="th" style={{ padding: 0 }} colSpan={12}>
-                <Collapse in={open} timeout="auto" unmountOnExit>
-                    <Grid className="inner_contact">
-                        <Grid className="thumb">
-                            <img src={AvatarSP} />
+            <TableRow sx={{"& > *": {borderBottom: "unset"}}}>
+                <TableCell align="center">
+                    {row.lecturers}
+                </TableCell>
+                <TableCell align="center">{row.instructing}</TableCell>
+                <TableCell align="center">{row.subject}</TableCell>
+                <TableCell align="center">{row.faculty}</TableCell>
+                <TableCell align="center">{row.degree}</TableCell>
+                <TableCell align="center">{row.status}</TableCell>
+                {open ? <TableCell></TableCell> : <TableCell align="center">{row.action}</TableCell>}
+                <TableCell>
+                    <IconButton
+                        aria-label="expand row"
+                        size="small"
+                        onClick={() => setOpen(!open)}
+                    >
+                        {open ? <KeyboardArrowUpIcon/> : <KeyboardArrowDownIcon/>}
+                    </IconButton>
+                </TableCell>
+            </TableRow>
+            <TableRow>
+                <TableCell component="th" style={{padding: 0}} colSpan={12}>
+                    <Collapse in={open} timeout="auto" unmountOnExit>
+                        <Grid className="inner_contact">
+                            <Grid className="thumb">
+                                <img src={AvatarSP}/>
+                            </Grid>
+                            <Grid className="list">
+                                <List>
+                                    <ListItem component="a" href="https://www.google.com">
+                                        <FiberManualRecordIcon/>
+                                        <ListItemText primary="Các Đề Tài Hướng Dẫn"/>
+                                    </ListItem>
+                                    <ListItem component="a" href="https://www.google.com">
+                                        <FiberManualRecordIcon/>
+                                        <ListItemText primary="Các Đề Tài Hướng Dẫn"/>
+                                    </ListItem>
+                                </List>
+                                <List>
+                                    <ListItem component="a" href="https://www.google.com">
+                                        <FiberManualRecordIcon/>
+                                        <ListItemText primary="Thông Tin..."/>
+                                    </ListItem>
+                                    <ListItem component="a" href="https://www.google.com">
+                                        <FiberManualRecordIcon/>
+                                        <ListItemText primary="Thông Tin..."/>
+                                    </ListItem>
+                                </List>
+                                <List>
+                                    <ListItem component="a" href="https://www.google.com">
+                                        <FiberManualRecordIcon/>
+                                        <ListItemText primary="Thông Tin..."/>
+                                    </ListItem>
+                                    <ListItem component="a" href="https://www.google.com">
+                                        <FiberManualRecordIcon/>
+                                        <ListItemText primary="Thông Tin..."/>
+                                    </ListItem>
+                                </List>
+                                <List>
+                                    <ListItem component="a" href="https://www.google.com">
+                                        <FiberManualRecordIcon/>
+                                        <ListItemText primary="Thông Tin..."/>
+                                    </ListItem>
+                                    <ListItem component="a" href="https://www.google.com">
+                                        <FiberManualRecordIcon/>
+                                        <ListItemText primary="Thông Tin..."/>
+                                    </ListItem>
+                                </List>
+                            </Grid>
+                            <Grid className="contact">
+                                <SimpleBadge/>
+                                <Typography>Liên Hệ Hướng Dẫn</Typography>
+                            </Grid>
                         </Grid>
-                        <Grid className="list">
-                            <List>
-                                <ListItem component="a" href="https://www.google.com">
-                                    <FiberManualRecordIcon/>
-                                    <ListItemText primary="Các Đề Tài Hướng Dẫn" />
-                                </ListItem>
-                                <ListItem component="a" href="https://www.google.com">
-                                    <FiberManualRecordIcon/>
-                                    <ListItemText primary="Các Đề Tài Hướng Dẫn" />
-                                </ListItem>
-                            </List>
-                            <List>
-                                <ListItem component="a" href="https://www.google.com">
-                                    <FiberManualRecordIcon/>
-                                    <ListItemText primary="Thông Tin..." />
-                                </ListItem>
-                                <ListItem component="a" href="https://www.google.com">
-                                    <FiberManualRecordIcon/>
-                                    <ListItemText primary="Thông Tin..." />
-                                </ListItem>
-                            </List>
-                            <List>
-                                <ListItem component="a" href="https://www.google.com">
-                                    <FiberManualRecordIcon/>
-                                    <ListItemText primary="Thông Tin..." />
-                                </ListItem>
-                                <ListItem component="a" href="https://www.google.com">
-                                    <FiberManualRecordIcon/>
-                                    <ListItemText primary="Thông Tin..." />
-                                </ListItem>
-                            </List>
-                            <List>
-                                <ListItem component="a" href="https://www.google.com">
-                                    <FiberManualRecordIcon/>
-                                    <ListItemText primary="Thông Tin..." />
-                                </ListItem>
-                                <ListItem component="a" href="https://www.google.com">
-                                    <FiberManualRecordIcon/>
-                                    <ListItemText primary="Thông Tin..." />
-                                </ListItem>
-                            </List>
-                        </Grid>
-                        <Grid className="contact">
-                            <SimpleBadge/>
-                            <Typography>Liên Hệ Hướng Dẫn</Typography>
-                        </Grid>
-                    </Grid>
-                </Collapse>
-            </TableCell>
-        </TableRow>
+                    </Collapse>
+                </TableCell>
+            </TableRow>
         </React.Fragment>
     );
 }
 
 const rows = [
-    createData('Nguyễn Thị Phương Thảo', '3/5', 'Mạng Máy Tính', 'Hệ Thống Thông Tin', 'Tiến Sĩ', 'Tiếp Nhận', <SimpleBadge/>),
-    createData('Nguyễn Thị Phương Thảo', '3/5', 'Mạng Máy Tính', 'Hệ Thống Thông Tin', 'Tiến Sĩ', 'Tiếp Nhận', <SimpleBadge/>),
-    createData('Nguyễn Thị Phương Thảo', '3/5', 'Mạng Máy Tính', 'Hệ Thống Thông Tin', 'Tiến Sĩ', 'Tiếp Nhận', <SimpleBadge/>),
-    createData('Nguyễn Thị Phương Thảo', '3/5', 'Mạng Máy Tính', 'Hệ Thống Thông Tin', 'Tiến Sĩ', 'Tiếp Nhận', <SimpleBadge/>),
-    createData('Nguyễn Thị Phương Thảo', '3/5', 'Mạng Máy Tính', 'Hệ Thống Thông Tin', 'Tiến Sĩ', 'Tiếp Nhận', <SimpleBadge/>),
-    createData('Nguyễn Thị Phương Thảo', '3/5', 'Mạng Máy Tính', 'Hệ Thống Thông Tin', 'Tiến Sĩ', 'Tiếp Nhận', <SimpleBadge/>),
-    createData('Nguyễn Thị Phương Thảo', '3/5', 'Mạng Máy Tính', 'Hệ Thống Thông Tin', 'Tiến Sĩ', 'Tiếp Nhận', <SimpleBadge/>),
+    createData('Nguyễn Thị Phương Thảo', '3/5', 'Mạng Máy Tính', 'Hệ Thống Thông Tin', 'Tiến Sĩ', 'Tiếp Nhận',
+        <SimpleBadge/>),
+    createData('Nguyễn Thị Phương Thảo', '3/5', 'Mạng Máy Tính', 'Hệ Thống Thông Tin', 'Tiến Sĩ', 'Tiếp Nhận',
+        <SimpleBadge/>),
+    createData('Nguyễn Thị Phương Thảo', '3/5', 'Mạng Máy Tính', 'Hệ Thống Thông Tin', 'Tiến Sĩ', 'Tiếp Nhận',
+        <SimpleBadge/>),
+    createData('Nguyễn Thị Phương Thảo', '3/5', 'Mạng Máy Tính', 'Hệ Thống Thông Tin', 'Tiến Sĩ', 'Tiếp Nhận',
+        <SimpleBadge/>),
+    createData('Nguyễn Thị Phương Thảo', '3/5', 'Mạng Máy Tính', 'Hệ Thống Thông Tin', 'Tiến Sĩ', 'Tiếp Nhận',
+        <SimpleBadge/>),
+    createData('Nguyễn Thị Phương Thảo', '3/5', 'Mạng Máy Tính', 'Hệ Thống Thông Tin', 'Tiến Sĩ', 'Tiếp Nhận',
+        <SimpleBadge/>),
+    createData('Nguyễn Thị Phương Thảo', '3/5', 'Mạng Máy Tính', 'Hệ Thống Thông Tin', 'Tiến Sĩ', 'Tiếp Nhận',
+        <SimpleBadge/>),
 ];
 
 export default function TableList() {
@@ -169,10 +176,10 @@ export default function TableList() {
                         <TableCell align="center">Học Vị</TableCell>
                         <TableCell align="center">Trạng thái</TableCell>
                         <TableCell align="center">Tác vụ</TableCell>
-                        <TableCell />
+                        <TableCell/>
                     </TableRow>
                 </TableHead>
-                <TableBody sx={{ background: '#F7F6FE' }}>
+                <TableBody sx={{background: '#F7F6FE'}}>
                     {currentRows.map((row, index) => (
                         <Row key={index} row={row}/>
                     ))}
