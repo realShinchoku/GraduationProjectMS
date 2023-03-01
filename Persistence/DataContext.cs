@@ -1,4 +1,5 @@
 ﻿using Domain;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -23,6 +24,10 @@ public class DataContext : IdentityDbContext<AppUser, AppRole, string>
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
+        builder.Ignore<IdentityUserClaim<string>>();
+        builder.Ignore<IdentityUserLogin<string>>();
+        builder.Ignore<IdentityUserToken<string>>();
+        builder.Ignore<IdentityRoleClaim<string>>();
 
         builder.Entity<Student>().ToTable("Students");
         builder.Entity<Lecturer>().ToTable("Lecturers");
