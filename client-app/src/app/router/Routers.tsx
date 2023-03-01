@@ -12,7 +12,6 @@ import HomePage from "../../features/Hompage/HomePage";
 import Lecturers from "../../features/Lecturers/Lecturers";
 
 
-
 export const route = {
     login: '/login',
     resetPassword: '/account/password_reset',

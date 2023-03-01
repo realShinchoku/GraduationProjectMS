@@ -98,7 +98,7 @@
             line-height: get_pc(50);
             margin-bottom: get_pc(20);
           }
-          
+
           @include tablet {
             font-size: get_tablet(40);
             line-height: get_tablet(50);
@@ -121,7 +121,7 @@
             line-height: get_pc(20);
             margin-bottom: get_pc(30);
           }
-          
+
           @include tablet {
             font-size: get_tablet(20);
             line-height: get_tablet(20);
@@ -159,7 +159,7 @@
             @include sp {
               padding: get_sp(10) get_pc(16);
             }
-          }         
+          }
         }
       }
 
@@ -180,7 +180,7 @@
         height: 70px;
         padding-top: 12.5px;
         border-radius: 50%;
-        margin:0 auto 10px;
+        margin: 0 auto 10px;
       }
 
       .h2_fget {
@@ -245,7 +245,7 @@
       height: 70px;
       padding-top: 8px;
       border-radius: 50%;
-      margin:0 auto 15px;
+      margin: 0 auto 15px;
     }
 
     .form_Bottom {

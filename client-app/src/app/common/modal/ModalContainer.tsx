@@ -6,8 +6,8 @@ function ModalContainer() {
     const {modalStore} = useStore();
 
     return (
-        <Modal open={modalStore.modal.open} onClose={modalStore.closeModal} >
-                {modalStore.modal.body}
+        <Modal open={modalStore.modal.open} onClose={modalStore.closeModal}>
+            {modalStore.modal.body}
         </Modal>
     )
 }

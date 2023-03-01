@@ -7,7 +7,9 @@ function Test() {
     const {modalStore} = useStore();
     return (
         <>
-            <Button onClick={() => {modalStore.openModal(<div>modal here</div>)}}> open modal</Button>
+            <Button onClick={() => {
+                modalStore.openModal(<div>modal here</div>)
+            }}> open modal</Button>
             <TestApi/>
         </>
     )

@@ -40,10 +40,10 @@ public partial class Create
 
     public partial class Handler : IRequestHandler<Command, Result<Unit>>
     {
-        private readonly UserManager<AppUser> _userManager;
-        private readonly IUserAccessor _userAccessor;
         private readonly DataContext _context;
         private readonly IEmailSender _emailSender;
+        private readonly IUserAccessor _userAccessor;
+        private readonly UserManager<AppUser> _userManager;
 
         public Handler(UserManager<AppUser> userManager, IUserAccessor userAccessor, DataContext context,
             IEmailSender emailSender)
@@ -93,7 +93,7 @@ public partial class Create
                     user.Faculty = faculty;
                     user.Role = request.Role;
                     user.UserName = user.Email!.Split("@")[0];
-                    if(request.Role == Role.Student) user.GraduationProjectPeriod = period;
+                    if (request.Role == Role.Student) user.GraduationProjectPeriod = period;
                     if (user.Birthday != null) user.Birthday = user.Birthday.Value.ToUniversalTime();
 
                     var password = GeneratePassword();
@@ -118,10 +118,7 @@ public partial class Create
                 var randomNumber = new Random();
                 var len = randomNumber.Next(6, 20);
                 var bld = new StringBuilder();
-                for (int i = 0; i < len; ++i)
-                {
-                    bld.Append(chars[i]);
-                }
+                for (var i = 0; i < len; ++i) bld.Append(chars[i]);
 
                 var randomStr = bld.ToString();
                 if (!PasswordRegex().IsMatch(randomStr)) continue;

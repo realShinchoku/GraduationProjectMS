@@ -49,7 +49,8 @@ function PasswordResetToken() {
                         </Grid>
                         <Grid className="form_Bottom">
                             <ArrowBackIcon className="back_Icon"></ArrowBackIcon>
-                            <Link className="back_Reset" href={route.login} underline="none">Trở lại trang đăng nhập</Link>
+                            <Link className="back_Reset" href={route.login} underline="none">Trở lại trang đăng
+                                nhập</Link>
                         </Grid>
                     </Grid>
                     :
