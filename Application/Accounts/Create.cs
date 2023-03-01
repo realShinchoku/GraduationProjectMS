@@ -94,7 +94,7 @@ public partial class Create
                     user.Role = request.Role;
                     user.UserName = user.Email!.Split("@")[0];
                     if (request.Role == Role.Student) user.GraduationProjectPeriod = period;
-                    if (user.Birthday != null) user.Birthday = user.Birthday.Value.ToUniversalTime();
+                    if (user.Birthday != null) user.Birthday = user.Birthday.ToUniversalTime();
 
                     var password = GeneratePassword();
                     var result = await _userManager.CreateAsync(user, password);
@@ -115,10 +115,10 @@ public partial class Create
 
             while (true)
             {
-                var randomNumber = new Random();
-                var len = randomNumber.Next(6, 20);
+                var random = new Random();
+                var len = random.Next(6, 20);
                 var bld = new StringBuilder();
-                for (var i = 0; i < len; ++i) bld.Append(chars[i]);
+                for (var i = 0; i < len; ++i) bld.Append(chars[random.Next(chars.Length)]);
 
                 var randomStr = bld.ToString();
                 if (!PasswordRegex().IsMatch(randomStr)) continue;
