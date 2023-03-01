@@ -21,7 +21,7 @@ public class Create
         }
     }
 
-    private class CustomValidator : AbstractValidator<GraduationProjectPeriod>
+    public class CustomValidator : AbstractValidator<GraduationProjectPeriod>
     {
         public CustomValidator()
         {

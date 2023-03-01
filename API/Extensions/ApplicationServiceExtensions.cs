@@ -1,6 +1,8 @@
 ﻿using Application.Core;
+using Application.Accounts;
 using Application.Interfaces;
 using Application.Lecturers;
+using FluentValidation;
 using FluentValidation.AspNetCore;
 using Infrastructure.Email;
 using Infrastructure.Photos;
@@ -72,6 +74,7 @@ public static class ApplicationServiceExtensions
         });
         services.AddMediatR(typeof(List.Handler));
         services.AddAutoMapper(typeof(MappingProfiles).Assembly);
+        services.AddValidatorsFromAssemblyContaining<Create>();
         services.AddFluentValidationAutoValidation();
         services.AddHttpContextAccessor();
         services.AddScoped<IUserAccessor, UserAccessor>();

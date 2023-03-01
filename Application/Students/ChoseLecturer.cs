@@ -39,22 +39,24 @@ public class ChoseLecturer
                 return Result<Unit>.Failure("Bạn đã có giảng viên hướng dẫn");
 
             var lecturer =
-                await _context.Lecturers.Include(s => s.Students)
+                await _context.Lecturers
+                    .Include(s => s.Students)
+                    .Include(f => f.Faculty)
                     .FirstOrDefaultAsync(x => x.Id == request.Id, cancellationToken);
 
             if (lecturer == null) return null;
 
-            if (lecturer.Students.Count >= lecturer.MaxStudentsNumber)
+            if (lecturer.Students.Count >= lecturer.MaxStudentsNumber && lecturer.MaxStudentsNumber != 0)
                 return Result<Unit>.Failure("Giảng viên không thể nhận thêm sinh viên");
 
             instructor = new Instructor
             {
-                Faculty = student.Faculty,
+                Faculty = lecturer.Faculty,
                 Lecturer = lecturer,
                 Student = student,
                 StudentId = student.Id,
                 LecturerId = lecturer.Id,
-                FacultyId = student.Faculty.Id
+                FacultyId = lecturer.Faculty.Id
             };
 
             _context.Instructors.Add(instructor);

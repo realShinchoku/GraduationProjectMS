@@ -292,7 +292,8 @@ public class Seed
                 new()
                 {
                     DisplayName = "Sinh viên 9",
-                    UserName = "sv9"
+                    UserName = "sv9",
+                    Email = "sv9@test.com"
                 },
                 new()
                 {

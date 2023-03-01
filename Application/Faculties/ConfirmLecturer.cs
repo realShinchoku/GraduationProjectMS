@@ -1,4 +1,5 @@
 ﻿using Application.Core;
+using Application.Faculties.DTOs;
 using Application.Interfaces;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -10,8 +11,7 @@ public class ConfirmLecturer
 {
     public class Command : IRequest<Result<Unit>>
     {
-        public string StudentId { get; set; }
-        public string LecturerId { get; set; }
+        public IdsDto Ids { get; set; }
     }
 
     public class Handler : IRequestHandler<Command, Result<Unit>>
@@ -33,27 +33,27 @@ public class ConfirmLecturer
                 return null;
 
             var student =
-                await _context.Students.FirstOrDefaultAsync(x => x.Id == request.StudentId, cancellationToken);
+                await _context.Students.FirstOrDefaultAsync(x => x.Id == request.Ids.StudentId, cancellationToken);
             if (student == null)
                 return null;
 
             var lecturer =
                 await _context.Lecturers.Include(s => s.Students)
-                    .FirstOrDefaultAsync(x => x.Id == request.LecturerId, cancellationToken);
+                    .FirstOrDefaultAsync(x => x.Id == request.Ids.LecturerId, cancellationToken);
             if (lecturer == null)
+                return null;
+            
+            var instructor = await _context.Instructors.FirstOrDefaultAsync(
+                x => x.StudentId == student.Id && x.LecturerId == lecturer.Id && x.FacultyId == faculty.Id && !x.IsConfirm,
+                cancellationToken);
+
+            if (instructor == null)
                 return null;
 
             if (lecturer.Students.Count >= lecturer.MaxStudentsNumber)
                 return Result<Unit>.Failure("Giảng viên không thể nhận thêm sinh viên");
 
             student.Lecturer = lecturer;
-
-            var instructor = await _context.Instructors.FirstOrDefaultAsync(
-                x => x.StudentId == student.Id && x.LecturerId == lecturer.Id && x.FacultyId == faculty.Id,
-                cancellationToken);
-
-            if (instructor == null)
-                return null;
 
             instructor.IsConfirm = true;
 

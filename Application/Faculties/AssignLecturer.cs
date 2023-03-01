@@ -1,4 +1,5 @@
 ﻿using Application.Core;
+using Application.Faculties.DTOs;
 using Application.Interfaces;
 using Domain;
 using MediatR;
@@ -11,8 +12,7 @@ public class AssignLecturer
 {
     public class Command : IRequest<Result<Unit>>
     {
-        public string StudentId { get; set; }
-        public string LecturerId { get; set; }
+        public IdsDto Ids { get; set; }
     }
 
     public class Handler : IRequestHandler<Command, Result<Unit>>
@@ -34,7 +34,7 @@ public class AssignLecturer
                 return null;
 
             var student =
-                await _context.Students.FirstOrDefaultAsync(x => x.Id == request.StudentId, cancellationToken);
+                await _context.Students.FirstOrDefaultAsync(x => x.Id == request.Ids.StudentId, cancellationToken);
             if (student == null)
                 return null;
 
@@ -43,31 +43,37 @@ public class AssignLecturer
 
             var lecturer =
                 await _context.Lecturers.Include(s => s.Students)
-                    .FirstOrDefaultAsync(x => x.Id == request.LecturerId, cancellationToken);
+                    .FirstOrDefaultAsync(x => x.Id == request.Ids.LecturerId, cancellationToken);
 
             if (lecturer == null) return null;
 
-            if (lecturer.Students.Count >= lecturer.MaxStudentsNumber)
-                return Result<Unit>.Failure("Giảng viên không thể nhận thêm sinh viên");
 
-            student.Lecturer = lecturer;
+            var instructor = await _context.Instructors.FirstOrDefaultAsync(
+                x => x.StudentId == request.Ids.StudentId && x.LecturerId == request.Ids.LecturerId &&
+                     x.FacultyId == faculty.Id, cancellationToken);
 
-            var instructor = new Instructor
+            if (instructor == null)
             {
-                Faculty = faculty,
-                Lecturer = lecturer,
-                Student = student,
-                StudentId = student.Id,
-                LecturerId = lecturer.Id,
-                FacultyId = faculty.Id,
-                IsConfirm = true
-            };
-
-            _context.Instructors.Add(instructor);
+                instructor = new Instructor
+                {
+                    Faculty = faculty,
+                    Lecturer = lecturer,
+                    Student = student,
+                    StudentId = student.Id,
+                    LecturerId = lecturer.Id,
+                    FacultyId = faculty.Id,
+                    IsConfirm = true
+                };
+                _context.Instructors.Add(instructor);
+            }
+            else
+                instructor.IsConfirm = true;
+            
+            student.Lecturer = lecturer;
 
             var result = await _context.SaveChangesAsync(cancellationToken) > 0;
 
-            if (!result) return Result<Unit>.Failure("Có lỗi khi chọn giảng viên");
+            if (!result) return Result<Unit>.Failure("Có lỗi khi chọn giảng viên hướng dẫn");
             return Result<Unit>.Success(Unit.Value);
         }
     }
