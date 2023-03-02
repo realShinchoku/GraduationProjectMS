@@ -1,5 +1,5 @@
 ﻿using Application.Lecturers.DTOs;
-using Application.Students;
+using Application.Students.DTOs;
 using AutoMapper;
 using Domain;
 

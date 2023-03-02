@@ -11,6 +11,7 @@ public class LecturerDto
     public int Status { get; set; }
     public string PhoneNumber { get; set; }
     public int StudentCount { get; set; }
+    public int MaxStudentsNumber { get; set; }
     public string Education { get; set; }
     public string DepartmentSubjects { get; set; }
     public string Faculty { get; set; }

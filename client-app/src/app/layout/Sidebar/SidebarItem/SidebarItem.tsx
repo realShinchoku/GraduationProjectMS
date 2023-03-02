@@ -1,8 +1,8 @@
-import {Box} from "@mui/material";
+﻿import {Box} from "@mui/material";
 import {NavLink} from "react-router-dom";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
 
-import "./MenuItem.scss"
+import "./SidebarItem.scss"
 
 interface Props {
     title: any,
@@ -10,7 +10,7 @@ interface Props {
     icon: any,
 }
 
-function MenuItem({title, to, icon}: Props) {
+function SidebarItem({title, to, icon}: Props) {
     return (
         <NavLink to={to} className="menu_item" style={{textDecoration: 'none'}}>
             <Grid className="icon">{icon}</Grid>
@@ -19,4 +19,4 @@ function MenuItem({title, to, icon}: Props) {
     );
 }
 
-export default MenuItem;
+export default SidebarItem;

@@ -1,29 +1,26 @@
 import {useStore} from "../stores/store";
-import {Outlet, useLocation} from "react-router-dom";
+import {Navigate, Outlet, useLocation} from "react-router-dom";
 import Sidebar from "../layout/Sidebar/Sidebar";
 import Header from "../layout/Header/Header";
-import {useState} from "react";
 import {Grid} from "@mui/material";
 import "../../assets/css/config/_reset.scss"
+import {route} from "./Routers";
 import {observer} from "mobx-react-lite";
 
 function RequireAuth() {
-    const {userStore: {isLoggedIn}} = useStore();
+    const {userStore,commonStore: {isActive}} = useStore();
     const location = useLocation();
-    const [value, setValue] = useState(0);
+    
 
-    // if (!isLoggedIn)
-    //     return <Navigate to={route.login} state={{from: location}}/>
-    const {
-        commonStore: {isActive}
-    } = useStore();
+    if (!userStore.isLoggedIn)
+        return <Navigate to={route.login} state={{from: location}}/>
 
     return (
         <>
             <Header/>
-            <Sidebar setValue={setValue} value={value}/>
+            <Sidebar/>
             <Grid className={`container ${isActive}`}>
-                <Outlet context={value}/>
+                <Outlet/>
             </Grid>
         </>
     )

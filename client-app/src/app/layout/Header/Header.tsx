@@ -17,9 +17,13 @@ import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 import Badge, {badgeClasses} from "@mui/material/Badge";
 
-import MenuItem from "../Menu/MenuItem";
 import {route} from "../../router/Routers";
 import "./Header.scss";
+import Grid from "@mui/material/Unstable_Grid2/Grid2";
+import {NavLink} from "react-router-dom";
+import {useStore} from "../../stores/store";
+import {ListItemIcon, MenuItem} from "@mui/material";
+import {AccountCircle, Logout, Settings} from "@mui/icons-material";
 
 function Header() {
 
@@ -32,6 +36,8 @@ function Header() {
     const handleCloseUserMenu = () => {
         setAnchorElUser(null);
     };
+    
+    const {userStore:{logout}} = useStore();
 
     return (
         <AppBar position="static" id="app_bar" sx={{position: 'fixed'}}>
@@ -93,9 +99,24 @@ function Header() {
                             open={Boolean(anchorElUser)}
                             onClose={handleCloseUserMenu}
                         >
-                            <MenuItem title="Thông tin tài khoản" to={route.login} icon={<PersonIcon/>}/>
-                            <MenuItem title="Đổi mật khẩu" to={route.login} icon={<GppBadIcon/>}/>
-                            <MenuItem title="Đóng phiên làm việc" to={route.login} icon={<LogoutIcon/>}/>
+                            <MenuItem onClick={() => console.log("profile")}>
+                                <ListItemIcon>
+                                    <AccountCircle fontSize="small" />
+                                </ListItemIcon>
+                                hông tin tài khoản
+                            </MenuItem>
+                            <MenuItem onClick={() => console.log("doi mk")}>
+                                <ListItemIcon>
+                                    <Settings fontSize="small" />
+                                </ListItemIcon>
+                                Đổi mật khẩu
+                            </MenuItem>
+                            <MenuItem onClick={logout}>
+                                <ListItemIcon>
+                                    <Logout fontSize="small" />
+                                </ListItemIcon>
+                                Đăng xuất
+                            </MenuItem>
                         </Menu>
                     </Box>
                 </Toolbar>

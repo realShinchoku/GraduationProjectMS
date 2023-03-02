@@ -1,4 +1,4 @@
-﻿namespace Application.Students;
+﻿namespace Application.Students.DTOs;
 
 public class StudentDto
 {

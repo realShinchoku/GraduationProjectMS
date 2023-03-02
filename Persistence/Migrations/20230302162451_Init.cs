@@ -1,6 +1,5 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
-using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
@@ -137,27 +136,6 @@ namespace Persistence.Migrations
                         principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "RefreshToken",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    AppUserId = table.Column<string>(type: "text", nullable: true),
-                    Token = table.Column<string>(type: "text", nullable: true),
-                    Expires = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    Revoked = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_RefreshToken", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_RefreshToken_Users_AppUserId",
-                        column: x => x.AppUserId,
-                        principalTable: "Users",
-                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -359,11 +337,6 @@ namespace Persistence.Migrations
                 column: "FacultyId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_RefreshToken_AppUserId",
-                table: "RefreshToken",
-                column: "AppUserId");
-
-            migrationBuilder.CreateIndex(
                 name: "RoleNameIndex",
                 table: "Roles",
                 column: "NormalizedName",
@@ -426,9 +399,6 @@ namespace Persistence.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Instructors");
-
-            migrationBuilder.DropTable(
-                name: "RefreshToken");
 
             migrationBuilder.DropTable(
                 name: "UserRoles");

@@ -8,21 +8,12 @@ import "./Sidebar.scss"
 
 function a11yProps(index: number) {
     return {
-        id: `vertical-tab-${index}`,
-        'aria-controls': `vertical-tabpanel-${index}`,
+        id: `vertical-tab-${index}`, 'aria-controls': `vertical-tabpanel-${index}`,
     };
 }
 
-interface VerticalTabsProps {
-    setValue: (value: number) => void;
-    value: number;
-}
 
-export default function VerticalTabs(props: VerticalTabsProps) {
-
-    const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-        props.setValue(newValue);
-    };
+export default function VerticalTabs() {
 
     return (
         <Box
@@ -30,8 +21,6 @@ export default function VerticalTabs(props: VerticalTabsProps) {
         >
             <Tabs
                 orientation="vertical"
-                value={props.value}
-                onChange={handleChange}
             >
                 <Tab className="tab_" label="Danh Sách" {...a11yProps(0)} icon={<FiberManualRecordIcon/>}
                      iconPosition="start"/>

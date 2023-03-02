@@ -105,7 +105,7 @@
 
   > div {
     position: relative;
-    top: 11px;
+    top: 20.5px;
     right: 0;
     width: 20px;
     left: 0;
@@ -124,14 +124,30 @@
 
       &:nth-child(1) {
         top: 0;
+        width: 70%;
+        transform: rotate(-45deg);
+        transform-origin: left;
       }
 
       &:nth-child(2) {
-        top: 8px;
+        top: 0;
+        width: 70%;
+        transform: rotate(45deg);
+        transform-origin: left;
       }
 
       &:nth-child(3) {
-        top: 16px;
+        left: 12px;
+        width: 70%;
+        transform: rotate(-45deg);
+        transform-origin: left;
+      }
+
+      &:nth-child(4) {
+        left: 12px;
+        width: 70%;
+        transform: rotate(45deg);
+        transform-origin: left;
       }
     }
   }
@@ -170,33 +186,37 @@
 
       > div {
         width: 22px;
+        top: 11px;
         @include sp {
           width: 4.695vw;
         }
 
         span {
-          height: 3px;
-          @include sp {
-            height: 0.4830vw;
-          }
+          display: block;
+          position: absolute;
+          height: 2px;
+          width: 100%;
+          background: $clr-base-font;
+          left: 0;
+          zoom: 1;
+          top: 11px;
+          transition: .35s ease-in-out;
+          transform: rotate(0deg);
 
           &:nth-child(1) {
-            top: 9px;
-            -webkit-transform: rotate(-135deg);
-            transform: rotate(-135deg);
-            zoom: 1;
+            top: 0;
           }
 
           &:nth-child(2) {
-            width: 0;
-            left: 50%;
+            top: 8px;
           }
 
           &:nth-child(3) {
-            top: 9px;
-            -webkit-transform: rotate(135deg);
-            transform: rotate(135deg);
-            zoom: 1;
+            top: 16px;
+          }
+
+          &:nth-child(4) {
+            width: 0;
           }
         }
       }

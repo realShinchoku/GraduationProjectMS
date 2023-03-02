@@ -5,13 +5,9 @@ export interface User {
     role: Role;
 }
 
-export interface UserFormValues {
+export interface LoginFormValues {
     email: string;
     password: string;
-    displayName?: string;
-    userName?: string;
-    oldPassword?: string;
-    newPassword?: string;
 }
 
 export interface PasswordFormValues {

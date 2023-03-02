@@ -51,8 +51,7 @@ public class AccountController : BaseApiController
             ModelState.AddModelError("password", "Sai mật khẩu");
             return BadRequest(ModelState);
         }
-
-        await SetRefreshToken(user);
+        
         return CreateUserObject(user);
     }
 
@@ -120,57 +119,18 @@ public class AccountController : BaseApiController
     {
         var user = await _userManager.Users.FirstOrDefaultAsync(
             x => x.Email == User.FindFirstValue(ClaimTypes.Email));
-        await SetRefreshToken(user);
-        return CreateUserObject(user);
-    }
-
-
-    [Authorize]
-    [HttpPost("refreshToken")]
-    public async Task<ActionResult<UserDto>> RefreshToken()
-    {
-        var refreshToken = Request.Cookies["refreshToken"];
-        var user = await _userManager.Users.Include(r => r.RefreshTokens)
-            .FirstOrDefaultAsync(x => x.UserName == User.FindFirstValue(ClaimTypes.Name));
-
-        if (user == null)
-            return Unauthorized();
-        var oldToken = user.RefreshTokens.SingleOrDefault(x => x.Token == refreshToken);
-
-        if (oldToken is { IsActive: false }) return Unauthorized();
-
         return CreateUserObject(user);
     }
 
     private UserDto CreateUserObject(AppUser user)
     {
-        var userDto = new UserDto
+        return new UserDto
         {
             DisplayName = user.DisplayName,
             Token = _tokenService.CreateToken(user),
             UserName = user.UserName,
             Role = user.Role,
-            Birthday = user.Birthday,
-            Sex = user.Sex
-        };
-
-
-        return userDto;
+        };;
     }
-
-    private async Task SetRefreshToken(AppUser user)
-    {
-        var refreshToken = _tokenService.GenerateRefreshToken();
-        user.RefreshTokens.Add(refreshToken);
-
-        await _userManager.UpdateAsync(user);
-
-        var cookieOptions = new CookieOptions
-        {
-            HttpOnly = true,
-            Expires = refreshToken.Expires
-        };
-
-        Response.Cookies.Append("refreshToken", refreshToken.Token, cookieOptions);
-    }
+    
 }

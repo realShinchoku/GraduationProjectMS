@@ -42,12 +42,4 @@ public class TokenService
 
         return tokenHandle.WriteToken(token);
     }
-
-    public RefreshToken GenerateRefreshToken()
-    {
-        var radonNumber = new byte[32];
-        using var rng = RandomNumberGenerator.Create();
-        rng.GetBytes(radonNumber);
-        return new RefreshToken { Token = Convert.ToBase64String(radonNumber) };
-    }
 }
