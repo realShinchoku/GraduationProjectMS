@@ -27,7 +27,7 @@ export const routes: RouteObject[] = [
         children: [
             {
                 element: <RequireAuth/>, children: [
-                    {path:'', element: <HomePage/>},
+                    {path: '', element: <HomePage/>},
                     {path: 'lecturer', element: <LecturerList />},
                 ]
             },

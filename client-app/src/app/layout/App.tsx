@@ -3,6 +3,7 @@ import {observer} from "mobx-react-lite";
 import ModalContainer from "../common/modal/ModalContainer";
 import {useEffect} from "react";
 import {useStore} from "../stores/store";
+import {CircularProgress, Container} from "@mui/material";
 
 function App() {
 
@@ -14,6 +15,13 @@ function App() {
         else
             commonStore.setAppLoaded();
     }, [commonStore, userStore])
+    
+    if(!commonStore.appLoaded)
+        return(
+           <Container>
+               <CircularProgress size={40} />
+           </Container>
+       )
 
     return (
         <>
