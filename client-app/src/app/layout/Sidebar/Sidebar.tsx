@@ -41,6 +41,7 @@ function Sidebar(props: SidebarProps) {
                         <Box component="span"></Box>
                         <Box component="span"></Box>
                         <Box component="span"></Box>
+                        <Box component="span"></Box>
                     </Box>
                 </Box>
             </Box>

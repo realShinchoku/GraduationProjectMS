@@ -8,7 +8,7 @@ import {IconButton, TextField} from "@mui/material";
 import {SearchOutlined} from "@mui/icons-material";
 import Autocomplete from '@mui/material/Autocomplete';
 
-import TableList from "./TableList";
+import LecturersTable from "./LecturersTable";
 import {useStore} from "../../app/stores/store";
 import "./lecturers.scss"
 
@@ -115,7 +115,7 @@ function HomePageTest() {
                             </Box>
                         </Box>
                         <Box>
-                            <TableList/>
+                            <LecturersTable/>
                         </Box>
                     </Box>
                 </TabPanel>
