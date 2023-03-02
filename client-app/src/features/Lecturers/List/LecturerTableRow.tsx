@@ -11,48 +11,30 @@ import ListItemText from "@mui/material/ListItemText";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 import {Typography} from "@mui/material";
+import {observer} from "mobx-react-lite";
+import SimpleMail from "./SimpleMail";
+import {Lecturer} from "../../../app/models/lecturer";
+import {AvatarSP} from "../../../assets";
 
-import SimpleBadge from "./SimpaleMail";
-import {AvatarSP} from "../../assets";
-import { observer } from "mobx-react-lite";
 
-function createData(
-    lecturers: any,
-    instructing: any,
-    subject: any,
-    faculty: any,
-    degree: any,
-    status: any,
-    action: any,
-) {
-    return {
-        lecturers,
-        instructing,
-        subject,
-        faculty,
-        degree,
-        status,
-        action,
-    };
+interface Props {
+    lecturer: Lecturer;
 }
 
-function Row(props: { row: ReturnType<typeof createData> }) {
+function LecturerTableRow({lecturer}: Props) {
 
-    const {row} = props;
     const [open, setOpen] = React.useState(false);
 
     return (
         <React.Fragment>
             <TableRow sx={{"& > *": {borderBottom: "unset"}}}>
-                <TableCell align="center">
-                    {row.lecturers}
-                </TableCell>
-                <TableCell align="center">{row.instructing}</TableCell>
-                <TableCell align="center">{row.subject}</TableCell>
-                <TableCell align="center">{row.faculty}</TableCell>
-                <TableCell align="center">{row.degree}</TableCell>
-                <TableCell align="center">{row.status}</TableCell>
-                {open ? <TableCell></TableCell> : <TableCell align="center">{row.action}</TableCell>}
+                <TableCell align="center">{lecturer.displayName}</TableCell>
+                <TableCell align="center">{lecturer.studentCount + "/" + lecturer.maxStudentsNumber}</TableCell>
+                <TableCell align="center">{lecturer.departmentSubjects}</TableCell>
+                <TableCell align="center">{lecturer.faculty}</TableCell>
+                <TableCell align="center">{lecturer.education}</TableCell>
+                <TableCell align="center">{lecturer.status}</TableCell>
+                {open ? <TableCell></TableCell> : <TableCell align="center"><SimpleMail/></TableCell>}
                 <TableCell>
                     <IconButton
                         aria-label="expand row"
@@ -68,7 +50,7 @@ function Row(props: { row: ReturnType<typeof createData> }) {
                     <Collapse in={open} timeout="auto" unmountOnExit>
                         <Grid className="inner_contact">
                             <Grid className="thumb">
-                                <img src={AvatarSP}/>
+                                <img src={AvatarSP} alt={""}/>
                             </Grid>
                             <Grid className="list">
                                 <List>
@@ -113,7 +95,7 @@ function Row(props: { row: ReturnType<typeof createData> }) {
                                 </List>
                             </Grid>
                             <Grid className="contact">
-                                <SimpleBadge/>
+                                <SimpleMail/>
                                 <Typography>Liên Hệ Hướng Dẫn</Typography>
                             </Grid>
                         </Grid>
@@ -123,5 +105,6 @@ function Row(props: { row: ReturnType<typeof createData> }) {
         </React.Fragment>
     );
 }
-export default observer(Row)
+
+export default observer(LecturerTableRow)
 

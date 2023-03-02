@@ -1,8 +1,11 @@
 import axios, {AxiosError, AxiosResponse} from "axios";
 import {router} from "../router/Routers";
 import {store, useStore} from "../stores/store";
-import {PasswordFormValues, User, UserFormValues} from "../models/user";
+import {PasswordFormValues, User, LoginFormValues} from "../models/user";
 import {PaginationResult} from "../models/pagination";
+import {Lecturer} from "../models/lecturer";
+import {Student} from "../models/student";
+import {GraduationProjectPeriod} from "../models/graduationProjectPeriod";
 
 const sleep = (delay: number) => {
     return new Promise((resolve) => {
@@ -78,9 +81,7 @@ const requests = {
 
 const Account = {
     current: () => requests.get<User>('/account'),
-    login: (user: UserFormValues) => requests.post<User>('/account/login', user),
-    register: (user: UserFormValues) => requests.post<User>('/account/register', user),
-    refreshToken: () => requests.post<User>('/account/refreshToken', {}),
+    login: (user: LoginFormValues) => requests.post<User>('/account/login', user),
     sendResetPasswordLink: (email: string) => requests.post<void>(`/account/sendResetPasswordLink?email=${email}`, {}),
     resetPassword: (email: string, password: string, token: string) => requests.put<void>(`/account/resetPassword`, {
         email,
@@ -90,8 +91,39 @@ const Account = {
     changePassword: (values: PasswordFormValues) => requests.put<void>('/account/changePassword', values),
 }
 
+const Lecturers = {
+    list: (params: URLSearchParams) => requests.get<PaginationResult<Lecturer[]>>('/lecturer'),
+}
+
+const Students = {
+    list: () => requests.get<Student[]>('/student'),
+    confirmLecturer: () => requests.post<void>('/student/lecturer/confirm', {}),
+    choseLecturer: (id: string) => requests.post<void>(`/api/student/lecturer/${id}`, {}),
+}
+
+const GraduationProjectPeriods = {
+    create: (period: GraduationProjectPeriod) => requests.post<void>('/period', {period}),
+    list: () => requests.get<GraduationProjectPeriod[]>('/period'),
+    single: (id: string) => requests.get<GraduationProjectPeriod>(`/period/${id}`),
+}
+
+const Faculties = {
+    confirmLecturer: (studentId: string, lecturerId: string) => requests.post<void>('/faculty/lecturer/confirm', {
+        studentId,
+        lecturerId
+    }),
+    assignLecturer: (studentId: string, lecturerId: string) => requests.post<void>('/faculty/lecturer/assign', {
+        studentId,
+        lecturerId
+    }),
+}
+
 const agent = {
     Account,
+    Lecturers,
+    Students,
+    GraduationProjectPeriods,
+    Faculties,
 }
 
 export default agent;

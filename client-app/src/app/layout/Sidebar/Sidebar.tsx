@@ -9,18 +9,13 @@ import WidgetsIcon from '@mui/icons-material/Widgets';
 import SmsIcon from '@mui/icons-material/Sms';
 
 import {route} from "../../router/Routers";
-import MenuItem from "../Menu/MenuItem";
 import {LogoSP} from "../../../assets";
 import VerticalTabs from "./Tab";
 import {useStore} from "../../stores/store";
 import "./Sidebar.scss";
+import SidebarItem from "./SidebarItem/SidebarItem";
 
-interface SidebarProps {
-    setValue: (value: number) => void;
-    value: number;
-}
-
-function Sidebar(props: SidebarProps) {
+function Sidebar() {
 
     const location = useLocation();
 
@@ -28,9 +23,7 @@ function Sidebar(props: SidebarProps) {
         isActive ? closeSideBar() : openSideBar();
     };
 
-    const {
-        commonStore: {isActive, openSideBar, closeSideBar}
-    } = useStore();
+    const {commonStore: {isActive, openSideBar, closeSideBar}} = useStore();
 
     return (
         <Grid sx={{background: '#FFFFFF'}} className={`side_bar ${isActive}`}>
@@ -46,17 +39,15 @@ function Sidebar(props: SidebarProps) {
                 </Box>
             </Box>
             <Box className="side_bar_inner">
-                <MenuItem title="Trang chủ" to={route.homepage} icon={<WidgetsIcon/>}/>
-                <MenuItem title="Giảng viên" to={route.homepagetest} icon={<SmsIcon/>}/>
-                <MenuItem title="Nhiệm vụ" to={route.homepagetest} icon={<PersonIcon/>}/>
-                <MenuItem title="Cá nhân" to={route.homepagetest} icon={<GppBadIcon/>}/>
-                <MenuItem title="Quản lý" to={route.homepagetest} icon={<LogoutIcon/>}/>
+                <SidebarItem title="Trang chủ" to={route.home} icon={<WidgetsIcon/>}/>
+                <SidebarItem title="Giảng viên" to={route.lecturer} icon={<SmsIcon/>}/>
+                <SidebarItem title="Nhiệm vụ" to={route.lecturer} icon={<PersonIcon/>}/>
+                <SidebarItem title="Cá nhân" to={route.lecturer} icon={<GppBadIcon/>}/>
+                <SidebarItem title="Quản lý" to={route.lecturer} icon={<LogoutIcon/>}/>
             </Box>
             <Typography className="tlt">GIẢNG VIÊN</Typography>
-            {(location.pathname === '/lecturers') ? (
-                <Box>
-                    <VerticalTabs setValue={props.setValue} value={props.value}/>
-                </Box>
+            {(location.pathname === '/lecturer') ? (
+                <VerticalTabs/>
             ) : (<Box></Box>)}
         </Grid>
     )

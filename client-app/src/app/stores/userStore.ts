@@ -1,13 +1,11 @@
-import {PasswordFormValues, User, UserFormValues} from "../models/user";
+import {PasswordFormValues, User, LoginFormValues} from "../models/user";
 import {makeAutoObservable, runInAction} from "mobx";
 import agent from "../api/agent";
 import {store} from "./store";
-import {router} from "../router/Routers";
+import {route, router} from "../router/Routers";
 
 export default class UserStore {
     user: User | null = null;
-    isSend = false;
-    isReset = false;
     refreshTokenTimeout: any;
 
     constructor() {
@@ -18,15 +16,14 @@ export default class UserStore {
         return !!this.user;
     }
 
-    login = async (formValues: UserFormValues) => {
+    login = async (formValues: LoginFormValues) => {
         try {
             const user = await agent.Account.login(formValues);
             store.commonStore.setToken(user.token);
-            this.startRefreshTokenTimer(user);
             runInAction(() => {
                 this.user = user;
             });
-            await router.navigate('/');
+            await router.navigate(route.home);
         } catch (err: any) {
             const error = {email: null, password: null}
             if (err.response.data.email)
@@ -40,32 +37,22 @@ export default class UserStore {
     logout = async () => {
         store.commonStore.setToken(null);
         this.user = null;
-        await router.navigate('/login');
+        await router.navigate(route.login);
     }
 
     getUser = async () => {
         try {
             const user = await agent.Account.current();
             store.commonStore.setToken(user.token);
-            this.startRefreshTokenTimer(user);
             runInAction(() => this.user = user);
         } catch (err) {
             console.log(err);
         }
     }
 
-    register = async (formValues: UserFormValues) => {
-        try {
-            await agent.Account.register(formValues);
-        } catch (err) {
-            throw err;
-        }
-    }
-
     sendResetPasswordLink = async (email: string) => {
         try {
             await agent.Account.sendResetPasswordLink(email);
-            runInAction(() => this.isSend = true);
         } catch (e) {
             throw e;
         }
@@ -75,8 +62,6 @@ export default class UserStore {
     resetPassword = async (email: string, password: string, token: string) => {
         try {
             await agent.Account.resetPassword(email, password, token);
-            runInAction(() => this.isReset = true);
-            // await router.navigate('/login');
         } catch (e) {
             throw e;
         }
@@ -85,8 +70,6 @@ export default class UserStore {
     changePassword = async (values: PasswordFormValues) => {
         try {
             await agent.Account.changePassword(values);
-            await this.logout();
-            await router.navigate('/login')
         } catch (e: any) {
             throw e.response.data;
         }
@@ -96,33 +79,5 @@ export default class UserStore {
     //     if (this.user)
     //         this.user.image = image;
     // }
-
-    setDisplayName = (displayName: string) => {
-        if (this.user)
-            this.user.displayName = displayName;
-    }
-
-
-    refreshToken = async () => {
-        this.stopRefreshTokenTimer();
-        try {
-            const user = await agent.Account.refreshToken();
-            runInAction(() => this.user = user);
-            store.commonStore.setToken(user.token);
-            this.startRefreshTokenTimer(user);
-        } catch (e) {
-            console.log(e);
-        }
-    }
-
-    private startRefreshTokenTimer(user: User) {
-        const jwtToken = JSON.parse(atob(user.token.split('.')[1]));
-        const expires = new Date(jwtToken.exp * 1000);
-        const timeout = expires.getTime() - Date.now() - (120 * 1000);
-        this.refreshTokenTimeout = setTimeout(this.refreshToken, timeout);
-    }
-
-    private stopRefreshTokenTimer() {
-        clearTimeout(this.refreshTokenTimeout);
-    }
+    
 }

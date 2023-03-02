@@ -1,4 +1,4 @@
-import { observer } from "mobx-react-lite";
+import {observer} from "mobx-react-lite";
 import * as React from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -8,54 +8,16 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import TablePagination from "@mui/material/TablePagination";
+import LecturerTableRow from "./LecturerTableRow";
+import {useStore} from "../../../app/stores/store";
 
-import Row from "./LecturersRow";
-import SimpleBadge from "./SimpaleMail";
-
-function createData(
-    lecturers: any,
-    instructing: any,
-    subject: any,
-    faculty: any,
-    degree: any,
-    status: any,
-    action: any,
-) {
-    return {
-        lecturers,
-        instructing,
-        subject,
-        faculty,
-        degree,
-        status,
-        action,
-    };
-}
-
-const rows = [
-    createData('Nguyễn Thị Phương Thảo', '3/5', 'Mạng Máy Tính', 'Hệ Thống Thông Tin', 'Tiến Sĩ', 'Tiếp Nhận',
-        <SimpleBadge/>),
-    createData('Nguyễn Thị Phương Thảo', '3/5', 'Mạng Máy Tính', 'Hệ Thống Thông Tin', 'Tiến Sĩ', 'Tiếp Nhận',
-        <SimpleBadge/>),
-    createData('Nguyễn Thị Phương Thảo', '3/5', 'Mạng Máy Tính', 'Hệ Thống Thông Tin', 'Tiến Sĩ', 'Tiếp Nhận',
-        <SimpleBadge/>),
-    createData('Nguyễn Thị Phương Thảo', '3/5', 'Mạng Máy Tính', 'Hệ Thống Thông Tin', 'Tiến Sĩ', 'Tiếp Nhận',
-        <SimpleBadge/>),
-    createData('Nguyễn Thị Phương Thảo', '3/5', 'Mạng Máy Tính', 'Hệ Thống Thông Tin', 'Tiến Sĩ', 'Tiếp Nhận',
-        <SimpleBadge/>),
-    createData('Nguyễn Thị Phương Thảo', '3/5', 'Mạng Máy Tính', 'Hệ Thống Thông Tin', 'Tiến Sĩ', 'Tiếp Nhận',
-        <SimpleBadge/>),
-    createData('Nguyễn Thị Phương Thảo', '3/5', 'Mạng Máy Tính', 'Hệ Thống Thông Tin', 'Tiến Sĩ', 'Tiếp Nhận',
-        <SimpleBadge/>),
-];
-
-function LecturersTable() {
+function LecturerTable() {
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
-    const currentRows = rows.filter((r, ind) => {
-        return ind >= rowsPerPage * page && ind < rowsPerPage * (page + 1);
-    });
+    // const currentRows = rows.filter((r, ind) => {
+    //     return ind >= rowsPerPage * page && ind < rowsPerPage * (page + 1);
+    // });
 
     const handleChangePage = (event: unknown, newPage: number) => {
         setPage(newPage);
@@ -67,6 +29,9 @@ function LecturersTable() {
         setRowsPerPage(parseInt(event.target.value, 10));
         setPage(0);
     };
+
+    const {lecturerStore: {lecturersList}} = useStore();
+
 
     return (
         <TableContainer component={Paper} className="table">
@@ -84,15 +49,15 @@ function LecturersTable() {
                     </TableRow>
                 </TableHead>
                 <TableBody sx={{background: '#F7F6FE'}}>
-                    {currentRows.map((row, index) => (
-                        <Row key={index} row={row}/>
-                    ))}
+                    {lecturersList.map((lecturer) =>
+                        <LecturerTableRow key={lecturer.id} lecturer={lecturer}/>
+                    )}
                 </TableBody>
             </Table>
             <TablePagination
                 rowsPerPageOptions={[5, 10, 25]}
                 component="div"
-                count={rows.length}
+                count={12}
                 rowsPerPage={rowsPerPage}
                 page={page}
                 onPageChange={handleChangePage}
@@ -101,4 +66,5 @@ function LecturersTable() {
         </TableContainer>
     );
 }
-export default observer(LecturersTable)
+
+export default observer(LecturerTable)
