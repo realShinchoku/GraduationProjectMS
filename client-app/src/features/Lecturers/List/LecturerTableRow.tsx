@@ -6,9 +6,8 @@ import TableRow from "@mui/material/TableRow";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import SimpleMail from "./SimpleMail";
-
 import {Lecturer} from "../../../app/models/lecturer";
-import LecturerRowContact from "./LecturerRowContact";
+import LecturerTableRowDetail from "./LecturerTableRowDetail";
 
 interface Props {
     lecturer: Lecturer;
@@ -38,7 +37,7 @@ function LecturerTableRow({lecturer}: Props) {
                     </IconButton>
                 </TableCell>
             </TableRow>
-            <LecturerRowContact value={open}/>
+            <LecturerTableRowDetail value={open}/>
         </React.Fragment>
     );
 }

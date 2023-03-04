@@ -4,8 +4,7 @@ import {IconButton, TextField} from "@mui/material";
 import {SearchOutlined} from "@mui/icons-material";
 import Button from "@mui/material/Button";
 import ImportExportIcon from "@mui/icons-material/ImportExport";
-
-import ButtonComplete from "../../../app/layout/ButtonComplete/ButtonComplete";
+import AutoComplete from "../../../app/common/AutoComplete/AutoComplete";
 
 function LecturerListFilter() {
 
@@ -28,9 +27,9 @@ function LecturerListFilter() {
     return (
         <Box className="btn">
             <Box className="btn_item">
-                <ButtonComplete options={complete1} label={"Trạng Thái"}/>
-                <ButtonComplete options={complete2} label={"Khoa"}/>
-                <ButtonComplete options={complete3} label={"Bộ môn"}/>
+                <AutoComplete options={complete1} label={"Trạng Thái"}/>
+                <AutoComplete options={complete2} label={"Khoa"}/>
+                <AutoComplete options={complete3} label={"Bộ môn"}/>
             </Box>
             <Box className="search">
                 <TextField

@@ -13,9 +13,9 @@ import TableCell from "@mui/material/TableCell";
 import {AvatarSP} from "../../../assets";
 
 type Props = {
-    value: any,
+    value: boolean,
 };
-function LecturerRowContact({value}: Props) {
+function LecturerTableRowDetail({value}: Props) {
     return (
         <TableRow>
             <TableCell component="th" style={{padding: 0}} colSpan={12}>
@@ -77,5 +77,5 @@ function LecturerRowContact({value}: Props) {
     );
 }
 
-export default observer(LecturerRowContact)
+export default observer(LecturerTableRowDetail)
 

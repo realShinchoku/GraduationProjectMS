@@ -8,7 +8,7 @@ export default class LecturerStore {
     lecturers = new Map<string, Lecturer>();
     pagingParams = new PagingParams();
     pagination: Pagination | null = null;
-    loading: boolean = false;
+    loading: boolean = true;
 
     constructor() {
         makeAutoObservable(this);
@@ -40,7 +40,7 @@ export default class LecturerStore {
     }
 
     loadLecturers = async () => {
-        this.loading = false;
+        this.loading = true;
         try {
             const result = await agent.Lecturers.list(this.axiosParams);
             result.data.forEach(lecturer => {

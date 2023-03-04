@@ -1,13 +1,14 @@
 import {observer} from "mobx-react-lite";
 import Autocomplete from "@mui/material/Autocomplete";
 import {TextField} from "@mui/material";
+import "./AutoComplete.scss";
 
 type Props = {
     options: any,
     label: any,
 };
 
-function ButtonComplete({options, label}: Props) {
+function AutoComplete({options, label}: Props) {
     return (
         <Autocomplete
             className="btn_complete"
@@ -19,4 +20,4 @@ function ButtonComplete({options, label}: Props) {
     )
 }
 
-export default observer(ButtonComplete);
+export default AutoComplete;
