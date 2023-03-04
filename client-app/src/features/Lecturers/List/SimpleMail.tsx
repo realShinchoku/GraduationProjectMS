@@ -3,7 +3,7 @@ import MailIcon from '@mui/icons-material/Mail';
 
 export default function SimpleMail() {
     return (
-        <Badge badgeContent={4} color="primary">
+        <Badge color="primary">
             <MailIcon color="action"/>
         </Badge>
     );

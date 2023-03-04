@@ -4,6 +4,7 @@ import ModalContainer from "../common/modal/ModalContainer";
 import {useEffect} from "react";
 import {useStore} from "../stores/store";
 import {CircularProgress, Container} from "@mui/material";
+import LoadingCircular from "./LoadingCircular";
 
 function App() {
 
@@ -17,11 +18,7 @@ function App() {
     }, [commonStore, userStore])
     
     if(!commonStore.appLoaded)
-        return(
-           <Container>
-               <CircularProgress size={40} />
-           </Container>
-       )
+       return <LoadingCircular size={60} />
 
     return (
         <>

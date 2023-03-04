@@ -7,6 +7,7 @@ import LecturerTable from "./LecturerTable";
 import LecturerListFilter from "./LecturerListFilter";
 import {useEffect} from "react";
 import {CircularProgress} from "@mui/material";
+import LoadingCircular from "../../../app/layout/LoadingCircular";
 
 
 function LecturerList() {
@@ -22,9 +23,7 @@ function LecturerList() {
                     <Typography variant="h3">Giảng Viên</Typography>
                     <LecturerListFilter/>
                     {loading ?
-                        <Box sx={{display: 'flex'}}>
-                            <CircularProgress/>
-                        </Box>
+                        <LoadingCircular />
                         : <LecturerTable/>}
                 </Box>
             </Box>
