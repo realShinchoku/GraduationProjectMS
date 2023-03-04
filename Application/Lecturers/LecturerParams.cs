@@ -4,5 +4,7 @@ namespace Application.Lecturers;
 
 public class LecturerParams : PagingParams
 {
-    public bool IsActive { get; set; }
+    public int? Status { get; set; }
+    public string FacultyId { get; set; }
+    public string DepartmentSubjectId { get; set; }
 }

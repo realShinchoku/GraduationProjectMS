@@ -19,8 +19,8 @@ public class Seed
                 },
                 new()
                 {
-                    RoleId = Role.DepartmentSubjects,
-                    Name = Role.DepartmentSubjects.ToString()
+                    RoleId = Role.DepartmentSubject,
+                    Name = Role.DepartmentSubject.ToString()
                 },
                 new()
                 {
@@ -62,7 +62,7 @@ public class Seed
                     DisplayName = "Bộ môn 1",
                     UserName = "bm1",
                     Email = "bm1@test.com",
-                    Role = Role.DepartmentSubjects,
+                    Role = Role.DepartmentSubject,
                     Faculty = faculties[0]
                 },
                 new()
@@ -70,7 +70,7 @@ public class Seed
                     DisplayName = "Bộ môn 2",
                     UserName = "bm2",
                     Email = "bm2@test.com",
-                    Role = Role.DepartmentSubjects,
+                    Role = Role.DepartmentSubject,
                     Faculty = faculties[0]
                 },
                 new()
@@ -78,7 +78,7 @@ public class Seed
                     DisplayName = "Bộ môn 3",
                     UserName = "bm3",
                     Email = "bm3@test.com",
-                    Role = Role.DepartmentSubjects,
+                    Role = Role.DepartmentSubject,
                     Faculty = faculties[0]
                 },
                 new()
@@ -86,7 +86,7 @@ public class Seed
                     DisplayName = "Bộ môn 4",
                     UserName = "bm4",
                     Email = "bm4@test.com",
-                    Role = Role.DepartmentSubjects,
+                    Role = Role.DepartmentSubject,
                     Faculty = faculties[1]
                 },
                 new()
@@ -94,7 +94,7 @@ public class Seed
                     DisplayName = "Bộ môn 5",
                     UserName = "bm5",
                     Email = "bm5@test.com",
-                    Role = Role.DepartmentSubjects,
+                    Role = Role.DepartmentSubject,
                     Faculty = faculties[1]
                 },
                 new()
@@ -102,7 +102,7 @@ public class Seed
                     DisplayName = "Bộ môn 6",
                     UserName = "bm6",
                     Email = "bm6@test.com",
-                    Role = Role.DepartmentSubjects,
+                    Role = Role.DepartmentSubject,
                     Faculty = faculties[1]
                 }
             };

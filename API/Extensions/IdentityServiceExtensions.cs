@@ -62,7 +62,7 @@ public static class IdentityServiceExtensions
         {
             opt.AddPolicy("IsFacultyOffice", policy => policy.Requirements.Add(new IsRole(Role.FacultyOffice)));
             opt.AddPolicy("IsDepartmentSubjects",
-                policy => policy.Requirements.Add(new IsRole(Role.DepartmentSubjects)));
+                policy => policy.Requirements.Add(new IsRole(Role.DepartmentSubject)));
             opt.AddPolicy("IsLecturer", policy => policy.Requirements.Add(new IsRole(Role.Lecturer)));
             opt.AddPolicy("IsStudent", policy => policy.Requirements.Add(new IsRole(Role.Student)));
         });
