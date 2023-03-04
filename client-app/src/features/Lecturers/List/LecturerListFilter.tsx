@@ -1,10 +1,11 @@
 ﻿import {observer} from "mobx-react-lite";
 import Box from "@mui/material/Box";
-import Autocomplete from "@mui/material/Autocomplete";
 import {IconButton, TextField} from "@mui/material";
 import {SearchOutlined} from "@mui/icons-material";
 import Button from "@mui/material/Button";
 import ImportExportIcon from "@mui/icons-material/ImportExport";
+
+import ButtonComplete from "../../../app/layout/ButtonComplete/ButtonComplete";
 
 function LecturerListFilter() {
 
@@ -27,27 +28,9 @@ function LecturerListFilter() {
     return (
         <Box className="btn">
             <Box className="btn_item">
-                <Autocomplete
-                    className="btn_complete"
-                    disablePortal
-                    options={complete1}
-                    style={{width: 130, marginRight: 10}}
-                    renderInput={(params) => <TextField {...params} label="Trạng Thái"/>}
-                />
-                <Autocomplete
-                    className="btn_complete"
-                    disablePortal
-                    options={complete2}
-                    style={{width: 130, marginRight: 10}}
-                    renderInput={(params) => <TextField {...params} label="Khoa"/>}
-                />
-                <Autocomplete
-                    className="btn_complete"
-                    disablePortal
-                    options={complete3}
-                    style={{width: 130}}
-                    renderInput={(params) => <TextField {...params} label="Bộ Môn"/>}
-                />
+                <ButtonComplete options={complete1} label={"Trạng Thái"}/>
+                <ButtonComplete options={complete2} label={"Khoa"}/>
+                <ButtonComplete options={complete3} label={"Bộ môn"}/>
             </Box>
             <Box className="search">
                 <TextField

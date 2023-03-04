@@ -1,21 +1,14 @@
+import {observer} from "mobx-react-lite";
 import * as React from "react";
-import Collapse from "@mui/material/Collapse";
 import IconButton from "@mui/material/IconButton";
 import TableCell from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemText from "@mui/material/ListItemText";
-import Grid from "@mui/material/Unstable_Grid2/Grid2";
-import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
-import {Typography} from "@mui/material";
-import {observer} from "mobx-react-lite";
 import SimpleMail from "./SimpleMail";
-import {Lecturer} from "../../../app/models/lecturer";
-import {AvatarSP} from "../../../assets";
 
+import {Lecturer} from "../../../app/models/lecturer";
+import LecturerRowContact from "./LecturerRowContact";
 
 interface Props {
     lecturer: Lecturer;
@@ -45,63 +38,7 @@ function LecturerTableRow({lecturer}: Props) {
                     </IconButton>
                 </TableCell>
             </TableRow>
-            <TableRow>
-                <TableCell component="th" style={{padding: 0}} colSpan={12}>
-                    <Collapse in={open} timeout="auto" unmountOnExit>
-                        <Grid className="inner_contact">
-                            <Grid className="thumb">
-                                <img src={AvatarSP} alt={""}/>
-                            </Grid>
-                            <Grid className="list">
-                                <List>
-                                    <ListItem component="a" href="https://www.google.com">
-                                        <FiberManualRecordIcon/>
-                                        <ListItemText primary="Các Đề Tài Hướng Dẫn"/>
-                                    </ListItem>
-                                    <ListItem component="a" href="https://www.google.com">
-                                        <FiberManualRecordIcon/>
-                                        <ListItemText primary="Các Đề Tài Hướng Dẫn"/>
-                                    </ListItem>
-                                </List>
-                                <List>
-                                    <ListItem component="a" href="https://www.google.com">
-                                        <FiberManualRecordIcon/>
-                                        <ListItemText primary="Thông Tin..."/>
-                                    </ListItem>
-                                    <ListItem component="a" href="https://www.google.com">
-                                        <FiberManualRecordIcon/>
-                                        <ListItemText primary="Thông Tin..."/>
-                                    </ListItem>
-                                </List>
-                                <List>
-                                    <ListItem component="a" href="https://www.google.com">
-                                        <FiberManualRecordIcon/>
-                                        <ListItemText primary="Thông Tin..."/>
-                                    </ListItem>
-                                    <ListItem component="a" href="https://www.google.com">
-                                        <FiberManualRecordIcon/>
-                                        <ListItemText primary="Thông Tin..."/>
-                                    </ListItem>
-                                </List>
-                                <List>
-                                    <ListItem component="a" href="https://www.google.com">
-                                        <FiberManualRecordIcon/>
-                                        <ListItemText primary="Thông Tin..."/>
-                                    </ListItem>
-                                    <ListItem component="a" href="https://www.google.com">
-                                        <FiberManualRecordIcon/>
-                                        <ListItemText primary="Thông Tin..."/>
-                                    </ListItem>
-                                </List>
-                            </Grid>
-                            <Grid className="contact">
-                                <SimpleMail/>
-                                <Typography>Liên Hệ Hướng Dẫn</Typography>
-                            </Grid>
-                        </Grid>
-                    </Collapse>
-                </TableCell>
-            </TableRow>
+            <LecturerRowContact value={open}/>
         </React.Fragment>
     );
 }
