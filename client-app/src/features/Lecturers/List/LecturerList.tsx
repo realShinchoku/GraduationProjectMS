@@ -6,7 +6,6 @@ import {useStore} from "../../../app/stores/store";
 import LecturerTable from "./LecturerTable";
 import LecturerListFilter from "./LecturerListFilter";
 import {useEffect} from "react";
-import {CircularProgress} from "@mui/material";
 import LoadingCircular from "../../../app/layout/LoadingCircular";
 
 
