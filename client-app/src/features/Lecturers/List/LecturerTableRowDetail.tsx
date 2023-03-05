@@ -15,6 +15,7 @@ import {AvatarSP} from "../../../assets";
 type Props = {
     value: boolean,
 };
+
 function LecturerTableRowDetail({value}: Props) {
     return (
         <TableRow>
@@ -66,7 +67,7 @@ function LecturerTableRowDetail({value}: Props) {
                                 </ListItem>
                             </List>
                         </Grid>
-                        <Grid className="contact">
+                        <Grid className="contact" onClick={() => window.location.href = 'mailto:vpk1@test.com'}>
                             <SimpleMail/>
                             <Typography>Liên Hệ Hướng Dẫn</Typography>
                         </Grid>

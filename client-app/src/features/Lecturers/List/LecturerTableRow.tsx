@@ -5,6 +5,7 @@ import TableCell from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+
 import SimpleMail from "./SimpleMail";
 import {Lecturer} from "../../../app/models/lecturer";
 import LecturerTableRowDetail from "./LecturerTableRowDetail";
@@ -26,7 +27,13 @@ function LecturerTableRow({lecturer}: Props) {
                 <TableCell align="center">{lecturer.faculty}</TableCell>
                 <TableCell align="center">{lecturer.education}</TableCell>
                 <TableCell align="center">{lecturer.status}</TableCell>
-                {open ? <TableCell></TableCell> : <TableCell align="center"><SimpleMail/></TableCell>}
+                {open ? 
+                    <TableCell></TableCell>
+                : 
+                    <TableCell align="center" onClick={() => window.location.href = 'mailto:vpk1@test.com'} >
+                        <SimpleMail/>
+                    </TableCell>
+                }
                 <TableCell>
                     <IconButton
                         aria-label="expand row"

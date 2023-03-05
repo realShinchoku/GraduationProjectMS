@@ -9,8 +9,8 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import TablePagination from "@mui/material/TablePagination";
 import LecturerTableRow from "./LecturerTableRow";
+
 import {useStore} from "../../../app/stores/store";
-import LoadingCircular from "../../../app/layout/LoadingCircular";
 
 function LecturerTable() {
     const [page, setPage] = React.useState(0);
