@@ -43,13 +43,15 @@ public class List
                 .Where(x => x.Faculty == faculty)
                 .AsQueryable();
 
+            if (!string.IsNullOrEmpty(request.Params.Keyword))
+                query = query.Where(x => x.DisplayName.ToLower().Contains(request.Params.Keyword.ToLower()) || x.UserName.ToLower().Contains(request.Params.Keyword.ToLower()));
+                
             if (request.Params.Status != null)
                 query = query.Where(x => x.InstructorStatus == request.Params.Status);
             
             if (request.Params.DepartmentSubjectId != null)
                 query = query.Where(x => x.DepartmentSubject.Id == request.Params.DepartmentSubjectId);
 
-            
             var result = query.ProjectTo<LecturerDto>(_mapper.ConfigurationProvider).AsQueryable();
 
             return Result<PageList<LecturerDto>>.Success(

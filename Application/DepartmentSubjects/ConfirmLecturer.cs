@@ -1,11 +1,12 @@
 ﻿using Application.Core;
+using Application.DepartmentSubjects.DTOs;
 using Application.Faculties.DTOs;
 using Application.Interfaces;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
 
-namespace Application.Faculties;
+namespace Application.DepartmentSubjects;
 
 public class ConfirmLecturer
 {
@@ -27,9 +28,9 @@ public class ConfirmLecturer
 
         public async Task<Result<Unit>> Handle(Command request, CancellationToken cancellationToken)
         {
-            var faculty = await _context.Faculties.FirstOrDefaultAsync(x => x.UserName == _userAccessor.GetUserName(),
+            var departmentSubject = await _context.DepartmentSubjects.FirstOrDefaultAsync(x => x.UserName == _userAccessor.GetUserName(),
                 cancellationToken);
-            if (faculty == null)
+            if (departmentSubject == null)
                 return null;
 
             var student =
@@ -44,7 +45,7 @@ public class ConfirmLecturer
                 return null;
 
             var instructor = await _context.Instructors.FirstOrDefaultAsync(
-                x => x.StudentId == student.Id && x.LecturerId == lecturer.Id && x.FacultyId == faculty.Id &&
+                x => x.StudentId == student.Id && x.LecturerId == lecturer.Id && x.DepartmentSubjectId == departmentSubject.Id &&
                      !x.IsConfirm,
                 cancellationToken);
 

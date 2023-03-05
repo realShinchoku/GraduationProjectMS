@@ -1,4 +1,5 @@
 ﻿using Application.Core;
+using Application.DepartmentSubjects.DTOs;
 using Application.Faculties.DTOs;
 using Application.Interfaces;
 using Domain;
@@ -6,7 +7,7 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
 
-namespace Application.Faculties;
+namespace Application.DepartmentSubjects;
 
 public class AssignLecturer
 {
@@ -28,9 +29,9 @@ public class AssignLecturer
 
         public async Task<Result<Unit>> Handle(Command request, CancellationToken cancellationToken)
         {
-            var faculty = await _context.Faculties.FirstOrDefaultAsync(x => x.UserName == _userAccessor.GetUserName(),
+            var departmentSubject = await _context.DepartmentSubjects.FirstOrDefaultAsync(x => x.UserName == _userAccessor.GetUserName(),
                 cancellationToken);
-            if (faculty == null)
+            if (departmentSubject == null)
                 return null;
 
             var student =
@@ -50,18 +51,18 @@ public class AssignLecturer
 
             var instructor = await _context.Instructors.FirstOrDefaultAsync(
                 x => x.StudentId == request.Ids.StudentId && x.LecturerId == request.Ids.LecturerId &&
-                     x.FacultyId == faculty.Id, cancellationToken);
+                     x.DepartmentSubjectId == departmentSubject.Id, cancellationToken);
 
             if (instructor == null)
             {
                 instructor = new Instructor
                 {
-                    Faculty = faculty,
+                    DepartmentSubject = departmentSubject,
                     Lecturer = lecturer,
                     Student = student,
                     StudentId = student.Id,
                     LecturerId = lecturer.Id,
-                    FacultyId = faculty.Id,
+                    DepartmentSubjectId = departmentSubject.Id,
                     IsConfirm = true
                 };
                 _context.Instructors.Add(instructor);

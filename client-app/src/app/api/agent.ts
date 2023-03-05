@@ -6,6 +6,7 @@ import {PaginationResult} from "../models/pagination";
 import {Lecturer} from "../models/lecturer";
 import {Student} from "../models/student";
 import {GraduationProjectPeriod} from "../models/graduationProjectPeriod";
+import {DepartmentSubjectFilterItem} from "../models/departmentSubject";
 
 const sleep = (delay: number) => {
     return new Promise((resolve) => {
@@ -74,6 +75,7 @@ axios.interceptors.response.use(async response => {
 
 const requests = {
     get: <T>(url: string) => axios.get<T>(url).then(responseBody),
+    getList: <T>(url: string,config: { }) => axios.get<T>(url,config).then(responseBody),
     post: <T>(url: string, body: {}) => axios.post<T>(url, body).then(responseBody),
     put: <T>(url: string, body: {}) => axios.put<T>(url, body).then(responseBody),
     delete: <T>(url: string) => axios.delete<T>(url).then(responseBody),
@@ -92,7 +94,7 @@ const Account = {
 }
 
 const Lecturers = {
-    list: (params: URLSearchParams) => requests.get<PaginationResult<Lecturer[]>>('/lecturer'),
+    list: (params: URLSearchParams) => requests.getList<PaginationResult<Lecturer[]>>('/lecturer', {params}),
 }
 
 const Students = {
@@ -107,15 +109,16 @@ const GraduationProjectPeriods = {
     single: (id: string) => requests.get<GraduationProjectPeriod>(`/period/${id}`),
 }
 
-const Faculties = {
-    confirmLecturer: (studentId: string, lecturerId: string) => requests.post<void>('/faculty/lecturer/confirm', {
+const DepartmentSubjects = {
+    confirmLecturer: (studentId: string, lecturerId: string) => requests.post<void>('/departmentSubjects/lecturer/confirm', {
         studentId,
         lecturerId
     }),
-    assignLecturer: (studentId: string, lecturerId: string) => requests.post<void>('/faculty/lecturer/assign', {
+    assignLecturer: (studentId: string, lecturerId: string) => requests.post<void>('/departmentSubjects/lecturer/assign', {
         studentId,
         lecturerId
     }),
+    listForFilter: () => requests.get<DepartmentSubjectFilterItem[]>('/departmentSubject/listForFilter')
 }
 
 const agent = {
@@ -123,7 +126,7 @@ const agent = {
     Lecturers,
     Students,
     GraduationProjectPeriods,
-    Faculties,
+    DepartmentSubjects,
 }
 
 export default agent;

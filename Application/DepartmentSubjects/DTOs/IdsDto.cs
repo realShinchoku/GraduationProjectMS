@@ -1,4 +1,4 @@
-﻿namespace Application.Faculties.DTOs;
+﻿namespace Application.DepartmentSubjects.DTOs;
 
 public class IdsDto
 {

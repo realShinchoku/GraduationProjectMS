@@ -9,14 +9,13 @@ export default class LecturerStore {
     pagingParams = new PagingParams();
     pagination: Pagination | null = null;
     loading: boolean = true;
+    predicate = new Map();
 
     constructor() {
         makeAutoObservable(this);
-        reaction(() => {
-            },
+        reaction(() => this.predicate.keys(),
             async () => {
-                this.pagingParams = new PagingParams();
-                this.lecturers.clear();
+                this.pagingParams.pageNumber = 0;
                 await this.loadLecturers();
             });
     }
@@ -29,19 +28,14 @@ export default class LecturerStore {
         const params = new URLSearchParams();
         params.append('pageNumber', this.pagingParams.pageNumber.toString());
         params.append('pageSize', this.pagingParams.pageSize.toString());
-        // this.predicate.forEach((value, key) => {
-        //     if (key === 'startDate') {
-        //         params.append(key, (value as Date).toISOString());
-        //     } else {
-        //         params.append(key, value);
-        //     }
-        // });
+        this.predicate.forEach((value, key) => params.append(key, value));
         return params;
     }
 
     loadLecturers = async () => {
         this.loading = true;
         try {
+            runInAction(() => this.lecturers.clear());
             const result = await agent.Lecturers.list(this.axiosParams);
             result.data.forEach(lecturer => {
                 this.setLecturer(lecturer);
@@ -56,6 +50,22 @@ export default class LecturerStore {
     }
     setPagination = (pagination: Pagination) => this.pagination = pagination;
 
+    setPagingParams = (pagingParams: PagingParams) => this.pagingParams = pagingParams;
+    setPredicate = (predicate: string, value: string | number) => {
+        if(this.predicate.get(predicate))
+            this.removePredicate(predicate);
+        
+        if(value === null || value === '')
+            return this.removePredicate(predicate);
+        
+        this.predicate.set(predicate, value);
+    }
+    removePredicate = (predicate: string) => {
+        this.predicate.delete(predicate);
+    }
+    resetPredicate = () => {
+        this.predicate.clear();
+    }
     private setLecturer = (lecturer: Lecturer) => {
         lecturer.birthday = new Date(lecturer.birthday!)
         this.lecturers.set(lecturer.id, lecturer);

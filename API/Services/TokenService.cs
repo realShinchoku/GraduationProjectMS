@@ -4,6 +4,7 @@ using System.Security.Cryptography;
 using System.Text;
 using Domain;
 using Microsoft.IdentityModel.Tokens;
+using NuGet.Protocol;
 
 namespace API.Services;
 
@@ -33,7 +34,7 @@ public class TokenService
         var tokenDescriptor = new SecurityTokenDescriptor
         {
             Subject = new ClaimsIdentity(claims),
-            Expires = DateTime.UtcNow.AddMinutes(10),
+            Expires = DateTime.UtcNow.AddDays(10),
             SigningCredentials = cred
         };
 

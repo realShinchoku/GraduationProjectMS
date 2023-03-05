@@ -30,7 +30,7 @@ function LecturerTableRow({lecturer}: Props) {
                 {open ? 
                     <TableCell></TableCell>
                 : 
-                    <TableCell align="center" onClick={() => window.location.href = 'mailto:vpk1@test.com'} >
+                    <TableCell align="center" onClick={() => window.location.href = `mailto:${lecturer.email}`} >
                         <SimpleMail/>
                     </TableCell>
                 }
@@ -44,7 +44,7 @@ function LecturerTableRow({lecturer}: Props) {
                     </IconButton>
                 </TableCell>
             </TableRow>
-            <LecturerTableRowDetail value={open}/>
+            <LecturerTableRowDetail value={open} lecturer={lecturer}/>
         </React.Fragment>
     );
 }

@@ -11,12 +11,14 @@ import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
 
 import {AvatarSP} from "../../../assets";
+import {Lecturer} from "../../../app/models/lecturer";
 
 type Props = {
     value: boolean,
+    lecturer: Lecturer,
 };
 
-function LecturerTableRowDetail({value}: Props) {
+function LecturerTableRowDetail({value,lecturer}: Props) {
     return (
         <TableRow>
             <TableCell component="th" style={{padding: 0}} colSpan={12}>
@@ -67,7 +69,7 @@ function LecturerTableRowDetail({value}: Props) {
                                 </ListItem>
                             </List>
                         </Grid>
-                        <Grid className="contact" onClick={() => window.location.href = 'mailto:vpk1@test.com'}>
+                        <Grid className="contact" onClick={() => window.location.href = `mailto:${lecturer.email}`}>
                             <SimpleMail/>
                             <Typography>Liên Hệ Hướng Dẫn</Typography>
                         </Grid>

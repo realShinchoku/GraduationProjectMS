@@ -217,7 +217,7 @@ namespace Persistence.Migrations
                     b.Property<string>("StudentId")
                         .HasColumnType("text");
 
-                    b.Property<string>("FacultyId")
+                    b.Property<string>("DepartmentSubjectId")
                         .HasColumnType("text");
 
                     b.Property<string>("LecturerId")
@@ -229,9 +229,9 @@ namespace Persistence.Migrations
                     b.Property<bool>("IsRead")
                         .HasColumnType("boolean");
 
-                    b.HasKey("StudentId", "FacultyId", "LecturerId");
+                    b.HasKey("StudentId", "DepartmentSubjectId", "LecturerId");
 
-                    b.HasIndex("FacultyId");
+                    b.HasIndex("DepartmentSubjectId");
 
                     b.HasIndex("LecturerId");
 
@@ -373,9 +373,9 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.Instructor", b =>
                 {
-                    b.HasOne("Domain.Faculty", "Faculty")
+                    b.HasOne("Domain.DepartmentSubject", "DepartmentSubject")
                         .WithMany()
-                        .HasForeignKey("FacultyId")
+                        .HasForeignKey("DepartmentSubjectId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -391,7 +391,7 @@ namespace Persistence.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Faculty");
+                    b.Navigation("DepartmentSubject");
 
                     b.Navigation("Lecturer");
 

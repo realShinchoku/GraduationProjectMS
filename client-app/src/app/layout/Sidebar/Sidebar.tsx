@@ -46,9 +46,9 @@ function Sidebar() {
                 <SidebarItem title="Quản lý" to={route.lecturer} icon={<LogoutIcon/>}/>
             </Box>
             <Typography className="tlt">GIẢNG VIÊN</Typography>
-            {(location.pathname === '/lecturer') ? (
-                <VerticalTabs/>
-            ) : (<Box></Box>)}
+            {/*{(location.pathname === '/lecturer') && (*/}
+            {/*    <VerticalTabs/>*/}
+            {/*)}*/}
         </Grid>
     )
 }

@@ -31,7 +31,7 @@ public class PageList<T> : List<T>
     {
         var count = await source.CountAsync();
 
-        var items = await source.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToListAsync();
+        var items = await source.Skip(pageNumber * pageSize).Take(pageSize).ToListAsync();
         return new PageList<T>(items, count, pageNumber, pageSize);
     }
 
@@ -40,7 +40,7 @@ public class PageList<T> : List<T>
     {
         var count = await source.CountAsync(cancellationToken);
 
-        var items = await source.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToListAsync(cancellationToken);
+        var items = await source.Skip(pageNumber * pageSize).Take(pageSize).ToListAsync(cancellationToken);
         return new PageList<T>(items, count, pageNumber, pageSize);
     }
 
@@ -48,7 +48,7 @@ public class PageList<T> : List<T>
     {
         var count = await source.CountAsync();
 
-        var items = await source.Skip((param.PageNumber - 1) * param.PageSize).Take(param.PageSize).ToListAsync();
+        var items = await source.Skip(param.PageNumber * param.PageSize).Take(param.PageSize).ToListAsync();
         return new PageList<T>(items, count, param);
     }
 
@@ -58,7 +58,7 @@ public class PageList<T> : List<T>
     {
         var count = await source.CountAsync(cancellationToken);
 
-        var items = await source.Skip((param.PageNumber - 1) * param.PageSize).Take(param.PageSize)
+        var items = await source.Skip(param.PageNumber  * param.PageSize).Take(param.PageSize)
             .ToListAsync(cancellationToken);
         return new PageList<T>(items, count, param);
     }

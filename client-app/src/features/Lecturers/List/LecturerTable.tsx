@@ -1,37 +1,37 @@
-import {observer} from "mobx-react-lite";
-import * as React from "react";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
-import TablePagination from "@mui/material/TablePagination";
+import React, {useState} from "react";
+import { useStore } from "../../../app/stores/store";
+import {PagingParams} from "../../../app/models/pagination";
+import {
+    Paper,
+    Skeleton,
+    Table,
+    TableBody,
+    TableCell,
+    TableContainer,
+    TableHead,
+    TablePagination,
+    TableRow
+} from "@mui/material";
+import LoadingCircular from "../../../app/layout/LoadingCircular";
 import LecturerTableRow from "./LecturerTableRow";
-
-import {useStore} from "../../../app/stores/store";
+import {observer} from "mobx-react-lite";
 
 function LecturerTable() {
-    const [page, setPage] = React.useState(0);
-    const [rowsPerPage, setRowsPerPage] = React.useState(5);
+    const [loadingNext, setLoadingNext] = useState(false);
 
-    // const currentRows = rows.filter((r, ind) => {
-    //     return ind >= rowsPerPage * page && ind < rowsPerPage * (page + 1);
-    // });
+    const {lecturerStore: {loadLecturers, lecturersList, setPagingParams, pagination, loading}} = useStore();
 
     const handleChangePage = (event: unknown, newPage: number) => {
-        setPage(newPage);
+        setLoadingNext(true);
+        setPagingParams(new PagingParams(newPage, pagination!.itemsPerPage));
+        loadLecturers().then(() => setLoadingNext(false));
     };
 
-    const handleChangeRowsPerPage = (
-        event: React.ChangeEvent<HTMLInputElement>
-    ) => {
-        setRowsPerPage(parseInt(event.target.value, 10));
-        setPage(0);
+    const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setLoadingNext(true);
+        setPagingParams(new PagingParams(0, parseInt(event.target.value, 10)));
+        loadLecturers().then(() => setLoadingNext(false));
     };
-
-    const {lecturerStore: {lecturersList}} = useStore();
 
 
     return (
@@ -49,18 +49,24 @@ function LecturerTable() {
                         <TableCell/>
                     </TableRow>
                 </TableHead>
-                <TableBody sx={{background: '#F7F6FE'}}>
-                    {lecturersList.map((lecturer) =>
-                        <LecturerTableRow key={lecturer.id} lecturer={lecturer}/>
-                    )}
-                </TableBody>
+                {loading ?
+                    <>
+                        <Skeleton animation="wave" sx={{width: "100%"}} />
+                    </>
+                    :
+                    <TableBody sx={{background: '#F7F6FE'}}>
+                        {lecturersList.map((lecturer) =>
+                            <LecturerTableRow key={lecturer.id} lecturer={lecturer}/>
+                        )}
+                    </TableBody>
+                }
             </Table>
             <TablePagination
                 rowsPerPageOptions={[5, 10, 25]}
                 component="div"
-                count={12}
-                rowsPerPage={rowsPerPage}
-                page={page}
+                count={pagination?.totalItems || 0}
+                rowsPerPage={pagination?.itemsPerPage || 5}
+                page={pagination?.currentPage || 0}
                 onPageChange={handleChangePage}
                 onRowsPerPageChange={handleChangeRowsPerPage}
             />
@@ -68,4 +74,4 @@ function LecturerTable() {
     );
 }
 
-export default observer(LecturerTable)
+export default observer(LecturerTable);

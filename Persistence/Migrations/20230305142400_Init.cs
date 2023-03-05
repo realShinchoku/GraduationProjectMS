@@ -284,17 +284,17 @@ namespace Persistence.Migrations
                 {
                     StudentId = table.Column<string>(type: "text", nullable: false),
                     LecturerId = table.Column<string>(type: "text", nullable: false),
-                    FacultyId = table.Column<string>(type: "text", nullable: false),
+                    DepartmentSubjectId = table.Column<string>(type: "text", nullable: false),
                     IsConfirm = table.Column<bool>(type: "boolean", nullable: false),
                     IsRead = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Instructors", x => new { x.StudentId, x.FacultyId, x.LecturerId });
+                    table.PrimaryKey("PK_Instructors", x => new { x.StudentId, x.DepartmentSubjectId, x.LecturerId });
                     table.ForeignKey(
-                        name: "FK_Instructors_Faculties_FacultyId",
-                        column: x => x.FacultyId,
-                        principalTable: "Faculties",
+                        name: "FK_Instructors_DepartmentSubjects_DepartmentSubjectId",
+                        column: x => x.DepartmentSubjectId,
+                        principalTable: "DepartmentSubjects",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -317,9 +317,9 @@ namespace Persistence.Migrations
                 column: "FacultyId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Instructors_FacultyId",
+                name: "IX_Instructors_DepartmentSubjectId",
                 table: "Instructors",
-                column: "FacultyId");
+                column: "DepartmentSubjectId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Instructors_LecturerId",

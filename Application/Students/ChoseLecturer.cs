@@ -51,12 +51,12 @@ public class ChoseLecturer
 
             instructor = new Instructor
             {
-                Faculty = lecturer.Faculty,
+                DepartmentSubject = lecturer.DepartmentSubject,
                 Lecturer = lecturer,
                 Student = student,
                 StudentId = student.Id,
                 LecturerId = lecturer.Id,
-                FacultyId = lecturer.Faculty.Id
+                DepartmentSubjectId = lecturer.DepartmentSubject.Id
             };
 
             _context.Instructors.Add(instructor);
