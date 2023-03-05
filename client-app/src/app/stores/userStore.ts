@@ -35,7 +35,7 @@ export default class UserStore {
     }
 
     logout = async () => {
-        store.commonStore.setToken(null);
+        store.commonStore.setToken(undefined);
         this.user = null;
         await router.navigate(route.login);
     }
