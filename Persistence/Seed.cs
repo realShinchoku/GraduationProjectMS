@@ -300,7 +300,16 @@ public class Seed
                     DisplayName = "Sinh viên 10",
                     UserName = "sv10",
                     Email = "sv10@test.com"
-                }
+                },
+                new()
+                {
+                    DisplayName = "1951060778",
+                    UserName = "1951060778",
+                    Email = "1951060778@e.tlu.edu.vn",
+                    Lecturer = lecturers[1],
+                    DepartmentSubject = lecturers[1].DepartmentSubject,
+                    Faculty = lecturers[1].Faculty
+                },
             };
 
             foreach (var user in faculties)
