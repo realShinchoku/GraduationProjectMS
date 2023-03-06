@@ -1,4 +1,3 @@
-import {observer} from "mobx-react-lite";
 import Autocomplete from "@mui/material/Autocomplete";
 import {TextField} from "@mui/material";
 import "./AutoComplete.scss";

@@ -27,10 +27,10 @@ function LecturerTableRow({lecturer}: Props) {
                 <TableCell align="center">{lecturer.faculty}</TableCell>
                 <TableCell align="center">{lecturer.education}</TableCell>
                 <TableCell align="center">{lecturer.status}</TableCell>
-                {open ? 
+                {open ?
                     <TableCell></TableCell>
-                : 
-                    <TableCell align="center" onClick={() => window.location.href = `mailto:${lecturer.email}`} >
+                    :
+                    <TableCell align="center" onClick={() => window.location.href = `mailto:${lecturer.email}`}>
                         <SimpleMail/>
                     </TableCell>
                 }

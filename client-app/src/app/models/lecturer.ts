@@ -1,4 +1,4 @@
-﻿export interface Lecturer {
+export interface Lecturer {
     id: string;
     displayName: string;
     email: string;

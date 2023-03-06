@@ -1,4 +1,4 @@
-﻿import {useStore} from "../../stores/store";
+import {useStore} from "../../stores/store";
 import {observer} from "mobx-react-lite";
 import {Modal} from "@mui/material";
 

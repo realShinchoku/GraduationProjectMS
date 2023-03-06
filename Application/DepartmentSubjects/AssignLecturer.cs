@@ -1,6 +1,5 @@
 ﻿using Application.Core;
 using Application.DepartmentSubjects.DTOs;
-using Application.Faculties.DTOs;
 using Application.Interfaces;
 using Domain;
 using MediatR;
@@ -29,7 +28,8 @@ public class AssignLecturer
 
         public async Task<Result<Unit>> Handle(Command request, CancellationToken cancellationToken)
         {
-            var departmentSubject = await _context.DepartmentSubjects.FirstOrDefaultAsync(x => x.UserName == _userAccessor.GetUserName(),
+            var departmentSubject = await _context.DepartmentSubjects.FirstOrDefaultAsync(
+                x => x.UserName == _userAccessor.GetUserName(),
                 cancellationToken);
             if (departmentSubject == null)
                 return null;

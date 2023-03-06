@@ -8,9 +8,9 @@ import {route} from "./Routers";
 import {observer} from "mobx-react-lite";
 
 function RequireAuth() {
-    const {userStore,commonStore: {isActive}} = useStore();
+    const {userStore, commonStore: {sideBarState}} = useStore();
     const location = useLocation();
-    
+
 
     if (!userStore.isLoggedIn)
         return <Navigate to={route.login} state={{from: location}}/>
@@ -19,7 +19,7 @@ function RequireAuth() {
         <>
             <Header/>
             <Sidebar/>
-            <Grid className={`container ${isActive}`}>
+            <Grid className={`container ${sideBarState}`}>
                 <Outlet/>
             </Grid>
         </>

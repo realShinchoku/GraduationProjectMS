@@ -1,4 +1,4 @@
-﻿import {Box} from "@mui/material";
+import {Box} from "@mui/material";
 import {NavLink} from "react-router-dom";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
 

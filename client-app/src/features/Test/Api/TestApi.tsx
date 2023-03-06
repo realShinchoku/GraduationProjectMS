@@ -1,4 +1,4 @@
-﻿import {observer} from "mobx-react-lite";
+import {observer} from "mobx-react-lite";
 import Grid2 from "@mui/material/Unstable_Grid2";
 import TextField from "@mui/material/TextField";
 import {useEffect, useState} from "react";

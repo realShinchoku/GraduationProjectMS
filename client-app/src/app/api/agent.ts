@@ -1,7 +1,7 @@
 import axios, {AxiosError, AxiosResponse} from "axios";
 import {router} from "../router/Routers";
 import {store, useStore} from "../stores/store";
-import {PasswordFormValues, User, LoginFormValues} from "../models/user";
+import {LoginFormValues, PasswordFormValues, User} from "../models/user";
 import {PaginationResult} from "../models/pagination";
 import {Lecturer} from "../models/lecturer";
 import {Student} from "../models/student";
@@ -75,7 +75,7 @@ axios.interceptors.response.use(async response => {
 
 const requests = {
     get: <T>(url: string) => axios.get<T>(url).then(responseBody),
-    getList: <T>(url: string,config: { }) => axios.get<T>(url,config).then(responseBody),
+    getList: <T>(url: string, config: {}) => axios.get<T>(url, config).then(responseBody),
     post: <T>(url: string, body: {}) => axios.post<T>(url, body).then(responseBody),
     put: <T>(url: string, body: {}) => axios.put<T>(url, body).then(responseBody),
     delete: <T>(url: string) => axios.delete<T>(url).then(responseBody),

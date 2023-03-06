@@ -1,18 +1,19 @@
-﻿import {DepartmentSubjectFilterItem} from "../models/departmentSubject";
-import {makeAutoObservable} from "mobx";
+import {DepartmentSubjectFilterItem} from "../models/departmentSubject";
+import {makeAutoObservable, runInAction} from "mobx";
 import agent from "../api/agent";
 
 export default class DepartmentSubjectStore {
     departmentSubjectFilterItems: DepartmentSubjectFilterItem[] = [];
+
     constructor() {
         makeAutoObservable(this);
     }
-    
-    getFilterItem = async () =>{
+
+    getFilterItem = async () => {
         try {
-            this.departmentSubjectFilterItems = await agent.DepartmentSubjects.listForFilter();
-        }
-        catch (e) {
+            const filterItem = await agent.DepartmentSubjects.listForFilter();
+            runInAction(() => this.departmentSubjectFilterItems = filterItem);
+        } catch (e) {
             console.log(e);
         }
     }

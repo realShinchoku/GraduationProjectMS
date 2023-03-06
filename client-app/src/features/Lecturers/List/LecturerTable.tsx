@@ -1,5 +1,4 @@
-import React, {useState} from "react";
-import { useStore } from "../../../app/stores/store";
+import {useStore} from "../../../app/stores/store";
 import {PagingParams} from "../../../app/models/pagination";
 import {
     Paper,
@@ -12,33 +11,27 @@ import {
     TablePagination,
     TableRow
 } from "@mui/material";
-import LoadingCircular from "../../../app/layout/LoadingCircular";
 import LecturerTableRow from "./LecturerTableRow";
 import {observer} from "mobx-react-lite";
 
 function LecturerTable() {
-    const [loadingNext, setLoadingNext] = useState(false);
 
-    const {lecturerStore: {loadLecturers, lecturersList, setPagingParams, pagination, loading}} = useStore();
+    const {lecturerStore: {lecturersList, setPagingParams, pagination, loading}} = useStore();
 
     const handleChangePage = (event: unknown, newPage: number) => {
-        setLoadingNext(true);
         setPagingParams(new PagingParams(newPage, pagination!.itemsPerPage));
-        loadLecturers().then(() => setLoadingNext(false));
     };
 
     const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setLoadingNext(true);
         setPagingParams(new PagingParams(0, parseInt(event.target.value, 10)));
-        loadLecturers().then(() => setLoadingNext(false));
     };
 
 
     return (
         <TableContainer component={Paper} className="table">
-            <Table aria-label="collapsible table">
+            <Table aria-label="collapsible table" >
                 <TableHead>
-                    <TableRow>
+                    <TableRow >
                         <TableCell align="center">Giảng Viên</TableCell>
                         <TableCell align="center">Đang Hướng Dẫn(SV)</TableCell>
                         <TableCell align="center">Bộ Môn</TableCell>
@@ -49,11 +42,7 @@ function LecturerTable() {
                         <TableCell/>
                     </TableRow>
                 </TableHead>
-                {loading ?
-                    <>
-                        <Skeleton animation="wave" sx={{width: "100%"}} />
-                    </>
-                    :
+                {!loading &&
                     <TableBody sx={{background: '#F7F6FE'}}>
                         {lecturersList.map((lecturer) =>
                             <LecturerTableRow key={lecturer.id} lecturer={lecturer}/>
@@ -61,11 +50,18 @@ function LecturerTable() {
                     </TableBody>
                 }
             </Table>
+            {loading &&
+                <>
+                    {[...Array(pagination?.itemsPerPage || 10)].map((x, i) =>
+                        <Skeleton key={i} animation="wave" sx={{width: "100%"}}/>
+                    )}
+                </>
+            }
             <TablePagination
                 rowsPerPageOptions={[5, 10, 25]}
                 component="div"
                 count={pagination?.totalItems || 0}
-                rowsPerPage={pagination?.itemsPerPage || 5}
+                rowsPerPage={pagination?.itemsPerPage || 10}
                 page={pagination?.currentPage || 0}
                 onPageChange={handleChangePage}
                 onRowsPerPageChange={handleChangeRowsPerPage}

@@ -10,12 +10,12 @@ import {useEffect} from "react";
 
 function LecturerList() {
 
-    const {commonStore: {isActive}, lecturerStore: {lecturers, loadLecturers}} = useStore();
+    const {lecturerStore: {lecturers, loadLecturers}} = useStore();
     useEffect(() => {
         if (lecturers.size <= 0) loadLecturers();
     }, [loadLecturers, lecturers.size]);
     return (
-        <Box className={`lecturer ${isActive}`}>
+        <Box className={'lecturer'}>
             <Box className="inner">
                 <Box className="nav">
                     <Typography variant="h3">Giảng Viên</Typography>

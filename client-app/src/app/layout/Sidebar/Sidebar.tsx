@@ -20,16 +20,16 @@ function Sidebar() {
 
     const location = useLocation();
 
+    const {commonStore: {sideBarState, openSideBar, closeSideBar}} = useStore();
+
     const handleClick = () => {
-        isActive ? closeSideBar() : openSideBar();
+        sideBarState ? closeSideBar() : openSideBar();
     };
 
-    const {commonStore: {isActive, openSideBar, closeSideBar}} = useStore();
-
     return (
-        <Grid sx={{background: '#FFFFFF'}} className={`side_bar ${isActive}`}>
+        <Grid sx={{background: '#FFFFFF'}} className={`side_bar ${sideBarState}`}>
             <Box className="side_bar_logo">
-                <Box sx={{display: 'flex', alignItems: 'center'}} >
+                <Box sx={{display: 'flex', alignItems: 'center'}}>
                     <Avatar alt="Logo" className="Logo" src={LogoSP}/>
                     <Typography variant="body1" sx={{marginLeft: 1.33}}>TLU.PM</Typography>
                 </Box>
@@ -51,12 +51,13 @@ function Sidebar() {
             </Box>
             <Typography className="tlt">GIẢNG VIÊN</Typography>
             {(location.pathname === '/lecturer') && (
-            <VerticalTabs/>
+                <VerticalTabs/>
             )}
             <Box className="confirm">
                 <Box className="inner">
                     <Typography variant="h3">Thông báo xác nhận</Typography>
-                    <Typography variant="body1">Giảng viên Nguyễn Thị Phương Thảo đã chấp nhận yêu cầu hướng dẫn của bạn.</Typography>
+                    <Typography variant="body1">Giảng viên Nguyễn Thị Phương Thảo đã chấp nhận yêu cầu hướng dẫn của
+                        bạn.</Typography>
                     <Button variant="contained">OK</Button>
                     <Button variant="outlined">Đóng</Button>
                 </Box>

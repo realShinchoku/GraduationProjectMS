@@ -18,7 +18,7 @@ type Props = {
     lecturer: Lecturer,
 };
 
-function LecturerTableRowDetail({value,lecturer}: Props) {
+function LecturerTableRowDetail({value, lecturer}: Props) {
     return (
         <TableRow>
             <TableCell component="th" style={{padding: 0}} colSpan={12}>

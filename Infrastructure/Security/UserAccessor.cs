@@ -1,9 +1,5 @@
 ﻿using System.Security.Claims;
-using Application.Core;
-using Application.Faculties.DTOs;
 using Application.Interfaces;
-using AutoMapper;
-using AutoMapper.QueryableExtensions;
 using Domain;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
@@ -13,8 +9,8 @@ namespace Infrastructure.Security;
 
 public class UserAccessor : IUserAccessor
 {
-    private readonly IHttpContextAccessor _httpContextAccessor;
     private readonly DataContext _context;
+    private readonly IHttpContextAccessor _httpContextAccessor;
 
     public UserAccessor(IHttpContextAccessor httpContextAccessor, DataContext context)
     {
@@ -26,7 +22,7 @@ public class UserAccessor : IUserAccessor
     {
         return _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.Name);
     }
-    
+
     public Role GetUserRole()
     {
         var r = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.Role);
@@ -50,6 +46,7 @@ public class UserAccessor : IUserAccessor
         };
         return query.FirstOrDefault();
     }
+
     public DepartmentSubject DepartmentSubject()
     {
         var query = _context.DepartmentSubjects.AsQueryable();
@@ -65,6 +62,7 @@ public class UserAccessor : IUserAccessor
         };
         return query.FirstOrDefault();
     }
+
     public Lecturer Lecturer()
     {
         var query = _context.Lecturers.AsQueryable();
@@ -79,6 +77,7 @@ public class UserAccessor : IUserAccessor
         };
         return query.FirstOrDefault();
     }
+
     public Student Student()
     {
         var query = _context.Students.AsQueryable();

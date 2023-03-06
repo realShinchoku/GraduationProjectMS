@@ -1,10 +1,9 @@
-﻿import {observer} from "mobx-react-lite";
+import {observer} from "mobx-react-lite";
 import Box from "@mui/material/Box";
 import {IconButton, TextField} from "@mui/material";
 import {SearchOutlined} from "@mui/icons-material";
 import Button from "@mui/material/Button";
 import ImportExportIcon from "@mui/icons-material/ImportExport";
-import AutoComplete from "../../../app/common/AutoComplete/AutoComplete";
 import {useStore} from "../../../app/stores/store";
 import {useEffect, useState} from "react";
 import Autocomplete from "@mui/material/Autocomplete";
@@ -12,17 +11,20 @@ import Autocomplete from "@mui/material/Autocomplete";
 function LecturerListFilter() {
 
     const lecturerStatus = [
-        {id: 0,label: 'Tiếp nhận'},
-        {id: 1,label: 'Chờ Duyệt'},
-        {id: 2,label: 'Từ Chối'},
+        {id: 0, label: 'Tiếp nhận'},
+        {id: 1, label: 'Chờ Duyệt'},
+        {id: 2, label: 'Từ Chối'},
     ];
-    const {departmentSubjectStore:{getFilterItem, departmentSubjectFilterItems}, lecturerStore:{setPredicate,removePredicate, loading}} = useStore();
-    
+    const {
+        departmentSubjectStore: {getFilterItem, departmentSubjectFilterItems},
+        lecturerStore: {setPredicate, removePredicate, loading}
+    } = useStore();
+
     useEffect(() => {
-        if(departmentSubjectFilterItems.length <= 0)
+        if (departmentSubjectFilterItems.length <= 0)
             getFilterItem();
-    }, [departmentSubjectFilterItems, getFilterItem]);
-    
+    }, [departmentSubjectFilterItems.length, getFilterItem]);
+
     const [keyword, setKeyword] = useState<string>('');
 
     return (
@@ -35,12 +37,13 @@ function LecturerListFilter() {
                     getOptionLabel={option => option.label}
                     style={{width: 130, marginRight: 10}}
                     renderInput={(params) => <TextField {...params} label={"Bộ môn"}/>}
-                    onChange={(event,value) => {
-                        if(value)
+                    onChange={(event, value) => {
+                        if (value)
                             setPredicate('status', value!.id);
                         else
                             removePredicate('status');
                     }}
+                    isOptionEqualToValue={(option, value) => option.id === value.id}
                     disabled={loading}
                 />
                 <Autocomplete
@@ -50,8 +53,8 @@ function LecturerListFilter() {
                     getOptionLabel={option => option.displayName}
                     style={{width: 130, marginRight: 10}}
                     renderInput={(params) => <TextField {...params} label={"Bộ môn"}/>}
-                    onChange={(event,value) => {
-                        if(value)
+                    onChange={(event, value) => {
+                        if (value)
                             setPredicate('departmentSubjectId', value!.id);
                         else
                             removePredicate('departmentSubjectId');
@@ -67,15 +70,15 @@ function LecturerListFilter() {
                     placeholder="Tìm tên giảng viên..."
                     InputProps={{
                         startAdornment: (
-                            <IconButton onClick={() => setPredicate('Keyword', keyword)} >
+                            <IconButton onClick={() => setPredicate('Keyword', keyword)}>
                                 <SearchOutlined/>
                             </IconButton>
                         ),
                     }}
                     onChange={(e) => setKeyword(e.target.value)}
                     onKeyDown={(e) => {
-                        if(e.key == 'Enter')
-                            setPredicate('Keyword',keyword)
+                        if (e.key === 'Enter')
+                            setPredicate('Keyword', keyword)
                     }}
                 />
                 <Button variant="outlined" startIcon={<ImportExportIcon/>}>

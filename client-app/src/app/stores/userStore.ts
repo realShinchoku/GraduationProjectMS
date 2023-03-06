@@ -1,4 +1,4 @@
-import {PasswordFormValues, User, LoginFormValues} from "../models/user";
+import {LoginFormValues, PasswordFormValues, User} from "../models/user";
 import {makeAutoObservable, runInAction} from "mobx";
 import agent from "../api/agent";
 import {store} from "./store";
@@ -79,5 +79,5 @@ export default class UserStore {
     //     if (this.user)
     //         this.user.image = image;
     // }
-    
+
 }

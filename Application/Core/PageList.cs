@@ -58,7 +58,7 @@ public class PageList<T> : List<T>
     {
         var count = await source.CountAsync(cancellationToken);
 
-        var items = await source.Skip(param.PageNumber  * param.PageSize).Take(param.PageSize)
+        var items = await source.Skip(param.PageNumber * param.PageSize).Take(param.PageSize)
             .ToListAsync(cancellationToken);
         return new PageList<T>(items, count, param);
     }

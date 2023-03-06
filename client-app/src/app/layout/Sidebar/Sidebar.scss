@@ -31,6 +31,7 @@
     @include sp {
       padding: 20px 24px;
     }
+
     p {
       color: #0D062D;
       font-size: 20px;
@@ -63,13 +64,16 @@
     margin-right: 14px;
     border-top: 1px solid #DBDBDB;
   }
+
   .confirm {
     position: absolute;
     padding: 31px;
     bottom: 34px;
     text-align: center;
+
     .inner {
       padding: 40px 26px 23px;
+
       h3 {
         font-family: 'Inter';
         font-weight: 500;
@@ -77,6 +81,7 @@
         line-height: 17px;
         margin-bottom: 15px;
       }
+
       p {
         font-size: 12px;
         line-height: 15px;
@@ -84,14 +89,17 @@
         color: #787486;
         margin-bottom: 33px;
       }
+
       button {
         width: 100px;
       }
+
       button + button {
         margin-left: 20px;
       }
     }
   }
+
   .tab {
     padding: 0 14px;
 
@@ -107,17 +115,21 @@
       font-family: 'Inter', sans-serif;
       text-align: left;
       display: flex;
+
       svg {
         width: 8px;
         height: 8px;
         margin-right: 16px;
       }
+
       .green {
         color: #7AC555;
       }
+
       .red {
         color: #E94677;
       }
+
       .blu {
         color: #76A5EA;
       }
@@ -213,6 +225,7 @@
       .Logo {
         display: none;
       }
+
       p {
         display: none;
       }
@@ -286,6 +299,7 @@
         }
       }
     }
+
     .confirm {
       display: none;
     }

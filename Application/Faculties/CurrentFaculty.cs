@@ -15,11 +15,12 @@ public class CurrentFaculty
     public class Query : IRequest<Result<FacultyDto>>
     {
     }
+
     public class Handler : IRequestHandler<Query, Result<FacultyDto>>
     {
-        private readonly IUserAccessor _userAccessor;
         private readonly DataContext _context;
         private readonly IMapper _mapper;
+        private readonly IUserAccessor _userAccessor;
 
         public Handler(IUserAccessor userAccessor, DataContext context, IMapper mapper)
         {
@@ -27,6 +28,7 @@ public class CurrentFaculty
             _context = context;
             _mapper = mapper;
         }
+
         public async Task<Result<FacultyDto>> Handle(Query request, CancellationToken cancellationToken)
         {
             var faculty = _userAccessor.GetUserRole() switch

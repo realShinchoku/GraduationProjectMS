@@ -6,7 +6,7 @@ export default class CommonStore {
     error: ServerError | null = null;
     token: string | undefined = Cookies.get('jwt');
     appLoaded: boolean = false;
-    isActive: string = '';
+    sideBarState: string = '';
 
     constructor() {
         makeAutoObservable(this);
@@ -30,7 +30,7 @@ export default class CommonStore {
 
     setAppLoaded = () => this.appLoaded = true;
 
-    openSideBar = () => this.isActive = 'active';
-    closeSideBar = () => this.isActive = '';
+    openSideBar = () => this.sideBarState = 'active';
+    closeSideBar = () => this.sideBarState = '';
 
 }

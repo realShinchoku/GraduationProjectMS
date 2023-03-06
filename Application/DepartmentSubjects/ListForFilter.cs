@@ -14,11 +14,12 @@ public class ListForFilter
     public class Query : IRequest<Result<List<DepartmentSubjectFilterDto>>>
     {
     }
+
     public class Handler : IRequestHandler<Query, Result<List<DepartmentSubjectFilterDto>>>
     {
         private readonly DataContext _context;
-        private readonly IUserAccessor _userAccessor;
         private readonly IMapper _mapper;
+        private readonly IUserAccessor _userAccessor;
 
         public Handler(DataContext context, IUserAccessor userAccessor, IMapper mapper)
         {
@@ -26,7 +27,9 @@ public class ListForFilter
             _userAccessor = userAccessor;
             _mapper = mapper;
         }
-        public async Task<Result<List<DepartmentSubjectFilterDto>>> Handle(Query request, CancellationToken cancellationToken)
+
+        public async Task<Result<List<DepartmentSubjectFilterDto>>> Handle(Query request,
+            CancellationToken cancellationToken)
         {
             var faculty = _userAccessor.Faculty();
             var departmentSubjects = await _context.DepartmentSubjects.Where(x => x.Faculty == faculty)

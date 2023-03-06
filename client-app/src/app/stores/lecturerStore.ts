@@ -1,4 +1,4 @@
-﻿import {makeAutoObservable, reaction, runInAction} from "mobx";
+import {makeAutoObservable, reaction, runInAction} from "mobx";
 import {Lecturer} from "../models/lecturer";
 import agent from "../api/agent";
 import {Pagination, PagingParams} from "../models/pagination";
@@ -13,9 +13,15 @@ export default class LecturerStore {
 
     constructor() {
         makeAutoObservable(this);
-        reaction(() => this.predicate.keys(),
+        reaction(() => this.predicate.values() || this.predicate.keys()
+            ,
             async () => {
                 this.pagingParams.pageNumber = 0;
+                await this.loadLecturers();
+            });
+        
+        reaction(() => this.pagingParams,
+            async () => {
                 await this.loadLecturers();
             });
     }
@@ -43,8 +49,7 @@ export default class LecturerStore {
             this.setPagination(result.pagination);
         } catch (err) {
             console.log(err)
-        }
-        finally {
+        } finally {
             runInAction(() => this.loading = false);
         }
     }
@@ -52,12 +57,12 @@ export default class LecturerStore {
 
     setPagingParams = (pagingParams: PagingParams) => this.pagingParams = pagingParams;
     setPredicate = (predicate: string, value: string | number) => {
-        if(this.predicate.get(predicate))
+        if (this.predicate.get(predicate) !== undefined)
             this.removePredicate(predicate);
-        
-        if(value === null || value === '')
+
+        if (value === null || value === '')
             return this.removePredicate(predicate);
-        
+
         this.predicate.set(predicate, value);
     }
     removePredicate = (predicate: string) => {

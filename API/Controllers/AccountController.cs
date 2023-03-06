@@ -51,7 +51,7 @@ public class AccountController : BaseApiController
             ModelState.AddModelError("password", "Sai mật khẩu");
             return BadRequest(ModelState);
         }
-        
+
         return CreateUserObject(user);
     }
 
@@ -129,8 +129,8 @@ public class AccountController : BaseApiController
             DisplayName = user.DisplayName,
             Token = _tokenService.CreateToken(user),
             UserName = user.UserName,
-            Role = user.Role,
-        };;
+            Role = user.Role
+        };
+        ;
     }
-    
 }

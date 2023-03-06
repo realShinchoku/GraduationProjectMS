@@ -22,13 +22,13 @@ export const route = {
 
 export const routes: RouteObject[] = [
     {
-        path:'/',
+        path: '/',
         element: <App/>,
         children: [
             {
                 element: <RequireAuth/>, children: [
                     {path: '', element: <HomePage/>},
-                    {path: 'lecturer', element: <LecturerList />},
+                    {path: 'lecturer', element: <LecturerList/>},
                 ]
             },
             {
