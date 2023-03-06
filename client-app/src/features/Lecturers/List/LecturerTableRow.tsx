@@ -26,7 +26,7 @@ function LecturerTableRow({lecturer}: Props) {
                 <TableCell align="center">{lecturer.departmentSubjects}</TableCell>
                 <TableCell align="center">{lecturer.faculty}</TableCell>
                 <TableCell align="center">{lecturer.education}</TableCell>
-                <TableCell align="center">{lecturer.status}</TableCell>
+                <TableCell align="center">{lecturer.lecturerStatus}</TableCell>
                 {open ?
                     <TableCell></TableCell>
                     :

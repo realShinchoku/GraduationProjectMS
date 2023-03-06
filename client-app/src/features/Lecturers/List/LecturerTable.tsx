@@ -29,9 +29,9 @@ function LecturerTable() {
 
     return (
         <TableContainer component={Paper} className="table">
-            <Table aria-label="collapsible table" >
+            <Table aria-label="collapsible table">
                 <TableHead>
-                    <TableRow >
+                    <TableRow>
                         <TableCell align="center">Giảng Viên</TableCell>
                         <TableCell align="center">Đang Hướng Dẫn(SV)</TableCell>
                         <TableCell align="center">Bộ Môn</TableCell>

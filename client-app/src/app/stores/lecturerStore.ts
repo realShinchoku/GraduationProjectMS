@@ -19,7 +19,7 @@ export default class LecturerStore {
                 this.pagingParams.pageNumber = 0;
                 await this.loadLecturers();
             });
-        
+
         reaction(() => this.pagingParams,
             async () => {
                 await this.loadLecturers();
@@ -72,6 +72,17 @@ export default class LecturerStore {
         this.predicate.clear();
     }
     private setLecturer = (lecturer: Lecturer) => {
+        switch (lecturer.instructorStatus) {
+            case 0:
+                lecturer.lecturerStatus = 'Tiếp nhận';
+                break;
+            case 1:
+                lecturer.lecturerStatus = 'Chờ duyệt';
+                break;
+            case 2:
+                lecturer.lecturerStatus = 'Từ chối';
+                break;
+        }
         lecturer.birthday = new Date(lecturer.birthday!)
         this.lecturers.set(lecturer.id, lecturer);
     }

@@ -5,7 +5,8 @@ export interface Lecturer {
     birthday?: Date;
     bio: string;
     sex?: boolean;
-    status: number;
+    instructorStatus: number;
+    lecturerStatus: string;
     phoneNumber: string;
     studentCount: number;
     maxStudentsNumber: number;

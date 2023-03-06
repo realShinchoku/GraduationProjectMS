@@ -1,7 +1,7 @@
 import {observer} from "mobx-react-lite";
 import Box from "@mui/material/Box";
 import {IconButton, TextField} from "@mui/material";
-import {SearchOutlined} from "@mui/icons-material";
+import {ExpandMoreSharp, SearchOutlined} from "@mui/icons-material";
 import Button from "@mui/material/Button";
 import ImportExportIcon from "@mui/icons-material/ImportExport";
 import {useStore} from "../../../app/stores/store";
@@ -36,7 +36,7 @@ function LecturerListFilter() {
                     options={lecturerStatus}
                     getOptionLabel={option => option.label}
                     style={{width: 130, marginRight: 10}}
-                    renderInput={(params) => <TextField {...params} label={"Bộ môn"}/>}
+                    renderInput={(params) => <TextField {...params} label={"Trạng thái"}/>}
                     onChange={(event, value) => {
                         if (value)
                             setPredicate('status', value!.id);
@@ -44,6 +44,7 @@ function LecturerListFilter() {
                             removePredicate('status');
                     }}
                     isOptionEqualToValue={(option, value) => option.id === value.id}
+                    popupIcon={<ExpandMoreSharp/>}
                     disabled={loading}
                 />
                 <Autocomplete
@@ -59,6 +60,7 @@ function LecturerListFilter() {
                         else
                             removePredicate('departmentSubjectId');
                     }}
+                    popupIcon={<ExpandMoreSharp/>}
                     disabled={loading}
                 />
             </Box>
