@@ -5,7 +5,7 @@ import {ExpandMoreSharp, SearchOutlined} from "@mui/icons-material";
 import Button from "@mui/material/Button";
 import ImportExportIcon from "@mui/icons-material/ImportExport";
 import {useStore} from "../../../app/stores/store";
-import {useEffect, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import Autocomplete from "@mui/material/Autocomplete";
 
 function LecturerListFilter() {
@@ -17,7 +17,7 @@ function LecturerListFilter() {
     ];
     const {
         departmentSubjectStore: {getFilterItem, departmentSubjectFilterItems},
-        lecturerStore: {setPredicate, removePredicate, loading}
+        lecturerStore: {setPredicate, removePredicate, loading, resetPredicate}
     } = useStore();
 
     useEffect(() => {
@@ -25,7 +25,9 @@ function LecturerListFilter() {
             getFilterItem();
     }, [departmentSubjectFilterItems.length, getFilterItem]);
 
+
     const [keyword, setKeyword] = useState<string>('');
+    const autoC = useRef(null);
 
     return (
         <Box className="btn">
@@ -77,13 +79,18 @@ function LecturerListFilter() {
                             </IconButton>
                         ),
                     }}
+                    value={keyword}
                     onChange={(e) => setKeyword(e.target.value)}
                     onKeyDown={(e) => {
                         if (e.key === 'Enter')
                             setPredicate('Keyword', keyword)
                     }}
+                    disabled={loading}
                 />
-                <Button variant="outlined" startIcon={<ImportExportIcon/>}>
+                <Button variant="outlined" onClick={() => {
+                    setKeyword('');
+                    resetPredicate();
+                }} startIcon={<ImportExportIcon/>}>
                     Làm Mới
                 </Button>
             </Box>
