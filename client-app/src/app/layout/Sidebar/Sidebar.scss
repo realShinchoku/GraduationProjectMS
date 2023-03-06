@@ -8,7 +8,7 @@
   bottom: 0;
   display: block;
   width: 100%;
-  max-width: 250px;
+  max-width: 335px;
   padding-right: 0;
   padding-left: 0;
   min-width: 252px;
@@ -30,6 +30,15 @@
     border-bottom: 1px solid #DBDBDB;
     @include sp {
       padding: 20px 24px;
+    }
+    p {
+      color: #0D062D;
+      font-size: 20px;
+      font-weight: 600;
+      line-height: 24px;
+      font-family: 'Inter';
+      font-style: normal;
+
     }
   }
 
@@ -54,7 +63,35 @@
     margin-right: 14px;
     border-top: 1px solid #DBDBDB;
   }
-
+  .confirm {
+    position: absolute;
+    padding: 31px;
+    bottom: 34px;
+    text-align: center;
+    .inner {
+      padding: 40px 26px 23px;
+      h3 {
+        font-family: 'Inter';
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 17px;
+        margin-bottom: 15px;
+      }
+      p {
+        font-size: 12px;
+        line-height: 15px;
+        font-weight: 400;
+        color: #787486;
+        margin-bottom: 33px;
+      }
+      button {
+        width: 100px;
+      }
+      button + button {
+        margin-left: 20px;
+      }
+    }
+  }
   .tab {
     padding: 0 14px;
 
@@ -69,11 +106,20 @@
       line-height: 19px;
       font-family: 'Inter', sans-serif;
       text-align: left;
-
+      display: flex;
       svg {
         width: 8px;
         height: 8px;
         margin-right: 16px;
+      }
+      .green {
+        color: #7AC555;
+      }
+      .red {
+        color: #E94677;
+      }
+      .blu {
+        color: #76A5EA;
       }
 
       &.Mui-selected {
@@ -167,6 +213,9 @@
       .Logo {
         display: none;
       }
+      p {
+        display: none;
+      }
     }
 
     #nav_toggle {
@@ -236,6 +285,9 @@
           display: none;
         }
       }
+    }
+    .confirm {
+      display: none;
     }
   }
 }
