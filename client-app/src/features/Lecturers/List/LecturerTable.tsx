@@ -1,6 +1,7 @@
 import {useStore} from "../../../app/stores/store";
 import {PagingParams} from "../../../app/models/pagination";
 import {
+    Box,
     Paper,
     Skeleton,
     Table,
@@ -53,7 +54,9 @@ function LecturerTable() {
             {loading &&
                 <>
                     {[...Array(pagination?.itemsPerPage || 10)].map((x, i) =>
-                        <Skeleton key={i} animation="wave" sx={{width: "100%"}}/>
+                        <Box>
+                            <Skeleton variant="rectangular" sx={{ my: 4, mx: 1 }} />
+                        </Box>
                     )}
                 </>
             }
