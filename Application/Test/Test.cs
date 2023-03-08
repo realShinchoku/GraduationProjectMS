@@ -24,7 +24,7 @@ public class TestUpload
         
         public async Task<Result<string>> Handle(Command request, CancellationToken cancellationToken)
         {
-            var url = await _cloudStorage.UploadFileAsync(request.File);
+            var url = await _cloudStorage.UploadFileAsync(request.File,cancellationToken);
             return Result<string>.Success(url);
         }
     }

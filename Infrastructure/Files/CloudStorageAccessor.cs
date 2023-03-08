@@ -40,14 +40,14 @@ public class CloudStorageAccessor : ICloudStorageAccessor
                 .CreateScoped(StorageService.Scope.DevstorageFullControl)
         }));
     }
-    public async Task<string> UploadFileAsync(IFormFile file)
+    public async Task<string> UploadFileAsync(IFormFile file, CancellationToken cancellationToken = default(CancellationToken))
     {
         _destination.Name = file.FileName;
         _destination.ContentType = file.ContentType;
         await using var stream = file.OpenReadStream();
-        var request = await _storageClient.UploadObjectAsync(_destination, stream, new UploadObjectOptions{PredefinedAcl = PredefinedObjectAcl.PublicRead});
         
-        return request.MediaLink;
+        var response = await _storageClient.UploadObjectAsync(_destination, stream, new UploadObjectOptions{PredefinedAcl = PredefinedObjectAcl.PublicRead}, cancellationToken);
+        return response.MediaLink;
     }
 
     public async Task DeleteFileAsync(string fileId)
