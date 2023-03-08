@@ -1,11 +1,9 @@
-﻿using Application.Accounts;
+using Application.Accounts;
 using Application.Core;
 using Application.Interfaces;
 using Application.Lecturers;
-using Application.Test;
 using FluentValidation;
 using FluentValidation.AspNetCore;
-using Google.Apis.Auth.OAuth2;
 using Infrastructure.Email;
 using Infrastructure.Files;
 using Infrastructure.Photos;

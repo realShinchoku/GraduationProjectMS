@@ -1,9 +1,10 @@
-﻿using Microsoft.AspNetCore.Http;
+using Infrastructure.Files;
+using Microsoft.AspNetCore.Http;
 
 namespace Application.Interfaces;
 
 public interface ICloudStorageAccessor
 {
-    Task<string> UploadFileAsync(IFormFile file, CancellationToken cancellationToken = default(CancellationToken));
-    Task DeleteFileAsync(string fileId);
+    Task<FileUploadResult> UploadFileAsync(IFormFile file, CancellationToken cancellationToken = default);
+    Task<bool> DeleteFileAsync(string fileId, CancellationToken cancellationToken = default);
 }

@@ -1,7 +1,6 @@
-﻿using Application.Test;
+using Application.Test;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Net.Http.Headers;
 
 namespace API.Controllers;
 
@@ -12,5 +11,12 @@ public class TestController : BaseApiController
     public async Task<IActionResult> Test([FromForm] TestUpload.Command command)
     {
         return HandleResult(await Mediator.Send(command));
+    }
+
+    [HttpDelete]
+    [AllowAnonymous]
+    public async Task<IActionResult> Delete(string id)
+    {
+        return HandleResult(await Mediator.Send(new TestDelete.Command { FileId = id }));
     }
 }

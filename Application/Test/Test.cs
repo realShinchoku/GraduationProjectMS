@@ -1,8 +1,7 @@
-﻿using Application.Core;
+using Application.Core;
 using Application.Interfaces;
 using MediatR;
 using Microsoft.AspNetCore.Http;
-using Microsoft.Net.Http.Headers;
 
 namespace Application.Test;
 
@@ -12,7 +11,7 @@ public class TestUpload
     {
         public IFormFile File { get; set; }
     }
-    
+
     public class Handler : IRequestHandler<Command, Result<string>>
     {
         private readonly ICloudStorageAccessor _cloudStorage;
@@ -21,11 +20,13 @@ public class TestUpload
         {
             _cloudStorage = cloudStorage;
         }
-        
+
         public async Task<Result<string>> Handle(Command request, CancellationToken cancellationToken)
         {
-            var url = await _cloudStorage.UploadFileAsync(request.File,cancellationToken);
-            return Result<string>.Success(url);
+            var fileUploadResult = await _cloudStorage.UploadFileAsync(request.File, cancellationToken);
+            if (fileUploadResult == null)
+                return Result<string>.Failure("Error while uploading file");
+            return Result<string>.Success(fileUploadResult.FileName);
         }
     }
 }

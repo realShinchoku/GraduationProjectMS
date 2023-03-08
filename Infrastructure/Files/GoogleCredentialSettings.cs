@@ -1,4 +1,4 @@
-﻿namespace Infrastructure.Files;
+namespace Infrastructure.Files;
 
 public class GoogleCredentialSettings
 {
@@ -11,7 +11,5 @@ public class GoogleCredentialSettings
     public string ClientSecret { get; set; }
     public string AuthUri { get; set; }
     public string TokenUri { get; set; }
-    public string AuthProviderX509CertUrl { get; set; }
-    public string ClientX509CertUrl { get; set; }
     public string BucketName { get; set; }
 }

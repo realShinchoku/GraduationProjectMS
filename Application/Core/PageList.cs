@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
 namespace Application.Core;
 
@@ -26,16 +26,18 @@ public class PageList<T> : List<T>
     public int TotalPages { get; set; }
     public int PageSize { get; set; }
     public int TotalCount { get; set; }
-    
-    public static async Task<PageList<T>> CreateAsync(IQueryable<T> source, int pageNumber, int pageSize, CancellationToken cancellationToken = default(CancellationToken))
+
+    public static async Task<PageList<T>> CreateAsync(IQueryable<T> source, int pageNumber, int pageSize,
+        CancellationToken cancellationToken = default)
     {
         var count = await source.CountAsync(cancellationToken);
 
         var items = await source.Skip(pageNumber * pageSize).Take(pageSize).ToListAsync(cancellationToken);
         return new PageList<T>(items, count, pageNumber, pageSize);
     }
-    
-    public static async Task<PageList<T>> CreateAsync(IQueryable<T> source, PagingParams param, CancellationToken cancellationToken = default(CancellationToken))
+
+    public static async Task<PageList<T>> CreateAsync(IQueryable<T> source, PagingParams param,
+        CancellationToken cancellationToken = default)
     {
         var count = await source.CountAsync(cancellationToken);
 

@@ -1,4 +1,4 @@
-﻿using Application.Core;
+using Application.Core;
 using Domain;
 using FluentValidation;
 using MediatR;

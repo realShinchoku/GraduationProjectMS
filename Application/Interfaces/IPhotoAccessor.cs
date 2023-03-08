@@ -1,4 +1,4 @@
-﻿using Application.Photos;
+using Application.Photos;
 using Microsoft.AspNetCore.Http;
 
 namespace Application.Interfaces;
