@@ -1,48 +1,15 @@
-import { Box, Button, Card, CardContent, Divider, TableCell,  Typography } from "@mui/material";
-import { styled } from '@mui/material/styles';
-import MuiGrid from '@mui/material/Grid';
+import { Box, Button, Card, CardContent, Divider, Grid, TableCell,  Typography } from "@mui/material";
 import "./AccountManagement.scss"
-import React, { useState } from "react";
+import { useState } from "react";
 import AccountTableRow from "./AccountTableRow";
 import AddAccountManagement from "./AddAccountManagement";
+import { useStore } from "../../app/stores/store";
 
-
-const Grid = styled(MuiGrid)(({ theme }) => ({
-    width: '100%',
-    ...theme.typography.body2,
-    '& [role="separator"]': {
-      margin: theme.spacing(0, 2),
-    },
-  }));
-
-  interface TabPanelProps {
-    children?: React.ReactNode;
-    dir?: string;
-    index: number;
-    value: number;
-  }
-  function TabPanel(props: TabPanelProps) {
-    const { children, value, index, ...other } = props;
-    return (
-      <Typography
-        component="div"
-        role="tabpanel"
-        hidden={value !== index}
-        id={`action-tabpanel-${index}`}
-        aria-labelledby={`action-tab-${index}`}
-        {...other}
-      >
-        {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
-      </Typography>
-    );
-  }
-  
 
 export default function AccountTableList() {
-  const [show, setShow] = useState(false)
-  const [open, setOpen] = useState(false)
-  var buttonText = show ? "Thu Gọn" : "Chi Tiết";
-;
+  const [detail, setDetail] = useState(false)
+  const {modalStore} = useStore();
+
   return (
     <Card sx={{background:'#F7F9FB',borderRadius:'16px',boxShadow:'none'}} className="account_table_list">
         <Typography variant="h6" className="name_table">Đồ Án Khoá K61 Đợt 1</Typography>
@@ -80,16 +47,25 @@ export default function AccountTableList() {
                         </Typography>
                     </CardContent>
                 </Grid>
+                <Divider sx={{height:'40%',margin:'auto',}}  orientation="vertical" flexItem></Divider>
+                <Grid sx={{marginTop:'15px'}} item xs>
+                    <CardContent className="center_text">
+                     <Typography sx={{fontFamily:'Inter'}} variant="body2" color="text.secondary" >
+                            Khoa 
+                        </Typography>
+                        <Typography className="text_bold" gutterBottom component="div">
+                            CNTT
+                        </Typography>
+                    </CardContent>
+                </Grid>
+                <Divider sx={{height:'40%',margin:'auto',}}  orientation="vertical" flexItem></Divider>
             </Grid>
             <TableCell className ="button_account_management">
-                <Button color="inherit" variant="outlined" className="button_" onClick={() => setShow(prev => !prev)}>{buttonText}</Button>
-                <Button color="inherit" variant="outlined" className="button_" onClick={() => setOpen(prev => !prev)}>Thêm</Button>
-                {open && <Box><AddAccountManagement></AddAccountManagement></Box>}
+                <Button color="inherit" variant="outlined" className="button_" onClick={() => setDetail(prev => !prev)}>{detail ? "Thu Gọn" : "Chi Tiết"}</Button>
+                <Button color="inherit" variant="outlined" className="button_" onClick={() => modalStore.openModal(<AddAccountManagement/>)}>Thêm</Button>
             </TableCell>
         </Box>
-        <Box>
-        {show && <Box><AccountTableRow></AccountTableRow></Box>}
-        </Box>
+        {detail && <AccountTableRow/>}
     </Card>
     
   );

@@ -2,7 +2,7 @@ import "./AccountManagement.scss"
 import {  Box, Button, ButtonGroup, Grid, Typography } from '@mui/material';
 import UploadFileIcon from '@mui/icons-material/UploadFile';
 import {useDropzone} from 'react-dropzone';
-import { useState } from "react";
+import { useStore } from "../../app/stores/store";
 
 const buttons = [
     <Button className="button_add_account" key="one">Sinh Viên</Button>,
@@ -21,18 +21,16 @@ export default function AddAccountManagement() {
           'text/csv': ['.csv',]
         }
       });
-      const [showBox, setShowBox] = useState(true)
+      const {modalStore} = useStore();
   return (
-    <div>
-        {showBox ? <div>
     <Grid className='add_account'>
         <Grid className="modal_add_account"></Grid>
         <Grid className="modal_body">
-            <Box>
-                <Typography className="title_account" variant="h5" gutterBottom>
+            <Box className="title_account">
+                <Typography className="title_account_" variant="h5" gutterBottom>
                     Thêm Tài Khoản
                 </Typography>
-                </Box>
+            </Box>
                 <Box>
                     <Box display="grid" gridTemplateColumns="repeat(12, 1fr)" gap={1}>
                         <Box className="select_user">
@@ -66,13 +64,11 @@ export default function AddAccountManagement() {
                             </Box>
                         </Box>
                         <Box className="button_exit" sx={{position:'absolute', right:'0',left:'0',bottom:'0',display:'flex',justifyContent:'center', marginBottom:'30px',marginLeft:'160px'}}>
-                        <Button className="button_exit_dropzone" variant="contained" disabled={!showBox} onClick={() => setShowBox(false)}>Thoát</Button>
+                        <Button className="button_exit_dropzone" variant="contained" onClick={() => modalStore.closeModal()}>Thoát</Button>
                         </Box>
                     </Box>
                 </Box>
         </Grid>
     </Grid>
-        </div> : null}
-    </div>
   );
 }

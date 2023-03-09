@@ -238,8 +238,8 @@
         z-index: 1052;
     }
     .modal_body{
-        width: 1100px;
-        height: 650px;
+        width: 855px;
+        height: 523px;
         margin: auto;
         position: absolute;
         background: gainsboro;
@@ -255,7 +255,7 @@
     }
     .select_user{
         box-shadow: 1px 0px 0px 0px rgb(0 0 0 / 20%);
-         height:585px;
+         height:457px;
          background:#fff;
          width: unset;
          margin-left: unset;
@@ -273,6 +273,9 @@
         }
     }
     .title_account{
+        box-shadow: 0 6px 4px 0 rgb(0 0 0 / 20%);
+    }
+    .title_account_{
         height: 50px;
         background: #424242;
         color: #e4e3e3;
