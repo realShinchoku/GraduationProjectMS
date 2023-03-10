@@ -11,6 +11,7 @@ import Login from "../../features/Account/Login";
 import HomePage from "../../features/Hompage/HomePage";
 import LecturerList from "../../features/Lecturers/List/LecturerList";
 import AccountManagement from "../../features/AccountManagement/AccountManagement";
+import StudentManagement from "../../features/StudentManagement/StudentManagement";
 
 
 export const route = {
@@ -31,6 +32,8 @@ export const routes: RouteObject[] = [
                     {path: '', element: <HomePage/>},
                     {path: 'lecturer', element: <LecturerList/>},
                     {path: 'accountmanagement', element: <AccountManagement/>},
+                    {path: 'studentmanagement', element: <StudentManagement/>},
+
                 ]
             },
             {
