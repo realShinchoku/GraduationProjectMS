@@ -57,7 +57,6 @@ export default function AccountManagementTable() {
                 <TableCell className='color_background' align="left">Khoa</TableCell>
                 <TableCell className='color_background' align="left">Ngày Tạo</TableCell>
                 <TableCell className='color_background' align="left">Email</TableCell>
-                <TableCell/>
             </TableRow>
           </TableHead>
           <TableBody>

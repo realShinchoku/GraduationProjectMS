@@ -160,13 +160,13 @@
             }
     }
     .select_user{
-        width: 450px;
+        width: auto;
         margin-left: 30px;
         @include tablet{
-            width: 300px;
         }
     }
     .tab_account{
+        text-transform: capitalize;
         @include tablet{
             white-space: nowrap;
         }
