@@ -11,13 +11,13 @@ function HomePage() {
                 <Typography variant="h2">Trang Chủ</Typography>
                 <Box className="wrapper">
                     <Box className="wrapper_right">
-                        <ListItemLink name="lecturer" to="/lecturer" title="GIẢNG VIÊN" image={Cap}/>
+                        <ListItemLink name="lecturer" to="/lecturer" title="Giảng Viên" image={Cap}/>
                         <Box className="wrapper_child">
-                            <ListItemLink name="mission" to="/lecturer" title="NHIỆM VỤ" image={Book}/>
-                            <ListItemLink name="individual" to="/lecturer" title="CÁ NHÂN" image={Bag}/>
+                            <ListItemLink name="mission" to="/lecturer" title="Nhiệm Vụ" image={Book}/>
+                            <ListItemLink name="individual" to="/lecturer" title="Cá Nhân" image={Bag}/>
                         </Box>
                     </Box>
-                    <ListItemLink name="manage" to="/lecturer" title="QUẢN LÝ" image={File}/>
+                    <ListItemLink name="manage" to="/lecturer" title="Quản Lý" image={File}/>
                 </Box>
             </Box>
         </Box>
