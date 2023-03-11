@@ -8,7 +8,7 @@ import PasswordReset from "../../features/Account/PasswordReset";
 import PasswordResetToken from "../../features/Account/PasswordResetToken";
 import RequireNonAuth from "./RequireNonAuth";
 import Login from "../../features/Account/Login";
-import HomePage from "../../features/Hompage/HomePage";
+import HomePage from "../../features/Homepage/HomePage";
 import LecturerList from "../../features/Lecturers/List/LecturerList";
 
 
