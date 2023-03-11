@@ -57,7 +57,10 @@ export default function AddAccountManagement() {
                         {file && <Box>{/* preview icon css lai cho giong ben kia*/}
                             Icon csv o day
                             <div className={"doan ten csv"}>{file.name}</div>
-                            <Button className={"icon xoa"} onClick={() => acceptedFiles.slice(0)}/>
+                            <Button className={"icon xoa"} onClick={() => {
+                                acceptedFiles.slice(0);
+                                setFile(undefined);
+                            }}/>
                         </Box>}
                     </Box>
                     <Box className="button_exit">
