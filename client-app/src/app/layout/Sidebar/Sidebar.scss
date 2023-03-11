@@ -67,12 +67,12 @@
 
   .confirm {
     position: absolute;
-    padding: 31px;
+    padding: 31px 31px 0 31px;
     bottom: 34px;
     text-align: center;
     .inner {
       @include bgsetup("../../../assets/images/Union.png",no-repeat, top center, 100% auto);
-      padding: 76px 26px 23px;
+      padding: 76px 26px 0;
       height: 171px;
       h3 {
         font-family: 'Inter';
@@ -101,10 +101,18 @@
     .thumb {
       @include bgsetup("../../../assets/images/LampOn.png",no-repeat, top center, 100% auto);
       position: relative;
-      width: 48px;
+      width: 45px;
       height: 38px;
       margin: 0 auto;
-      top: 60px;
+      top: 140px;
+    }
+    .thumb_ {
+      @include bgsetup("../../../assets/images/Ellipse.png",no-repeat, top center, 100% auto);
+      position: relative;
+      width: 87px;
+      height: 76px;
+      margin: 0 auto;
+      top: 78px;
     }
   }
 

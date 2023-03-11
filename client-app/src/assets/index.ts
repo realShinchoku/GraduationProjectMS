@@ -14,6 +14,7 @@ import ProfileUser from "./images/ProfileUser.png";
 import TaskSquare from "./images/TaskSquare.png";
 import Union from "./images/Union.png";
 import LampOn from "./images/LampOn.png";
+import Ellipse from "./images/Ellipse.png";
 
 export {
     Logo,
@@ -32,4 +33,5 @@ export {
     TaskSquare,
     Union,
     LampOn,
+    Ellipse,
 };

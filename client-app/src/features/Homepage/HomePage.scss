@@ -103,7 +103,7 @@
                             height: get_sp(120);
                         }
                         img {
-                            filter: drop-shadow(0px 10px 10px #4444dd);
+                            filter: drop-shadow(0px 20px 12px $clr-box-shodow);
                         }
                     }
                     h4 {
@@ -137,7 +137,7 @@
                         }
                         img {
                             transform: scale(1.3);
-                            filter: drop-shadow(-20px 40px 10px #4444dd);
+                            filter: drop-shadow(-20px 40px 10px $clr-box-shodow);
                         }
                     }
                     h4 {
@@ -188,7 +188,7 @@
                                 height: get_pc(208);
                             }
                             img {
-                                filter: drop-shadow(0px 10px 10px #4444dd);
+                                filter: drop-shadow(0px 16px 10px $clr-box-shodow)
                             }
                         }
                         h4 {
@@ -222,7 +222,7 @@
                             }
                             img {
                                 transform: scale(1.3);
-                                filter: drop-shadow(0px 30px 10px #4444dd);
+                                filter: drop-shadow(0px 30px 10px $clr-box-shodow);
                             }
                         }
                         h4 {
@@ -262,7 +262,7 @@
                                 top: get_pc(81);
                             }
                             img {
-                                filter: drop-shadow(10px 10px 4px #4444dd);
+                                filter: drop-shadow(14px 8px 10px $clr-box-shodow);
                             }
                         }
                         h4 {
@@ -290,7 +290,7 @@
                         .thumb {
                             img {
                                 transform: scale(1.3);
-                                filter: drop-shadow(13px 10px 4px #4444dd);
+                                filter: drop-shadow(13px 10px 4px $clr-box-shodow);
                             }
                         }
                         h4 {
@@ -340,7 +340,7 @@
                         height: get_sp(120);
                     }
                     img {
-                        filter: drop-shadow(20px 15px 10px #4444dd);
+                        filter: drop-shadow(23px 18px 7px $clr-box-shodow);
                     }
                 }
                 h4 {
@@ -372,7 +372,7 @@
                         top: get_pc(120);
                     }
                     img {
-                        filter: drop-shadow(-15px 15px 10px #4444dd);
+                        filter: drop-shadow(-15px 15px 10px $clr-box-shodow);
                     }
                 }
                 h4 {
