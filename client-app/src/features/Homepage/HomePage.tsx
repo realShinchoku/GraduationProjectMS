@@ -2,17 +2,23 @@ import {observer} from "mobx-react-lite";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import ListItemLink from "./ListItemLink";
-import { List } from "@mui/material";
-import { images } from "../../assets";
-
+import { Bag, Book, Cap, File } from "../../assets";
+import "./HomePage.scss"
 function HomePage() {
     return (
         <Box className={'homepage'}>
             <Box className="inner">
                 <Typography variant="h2">Trang Chủ</Typography>
-                <List>
-                    <ListItemLink to="/lecturer" primary="Drafts" image={images.logo}/>
-                </List>
+                <Box className="wrapper">
+                    <Box className="wrapper_right">
+                        <ListItemLink name="lecturer" to="/lecturer" title="GIẢNG VIÊN" image={Cap}/>
+                        <Box className="wrapper_child">
+                            <ListItemLink name="mission" to="/lecturer" title="NHIỆM VỤ" image={Book}/>
+                            <ListItemLink name="individual" to="/lecturer" title="CÁ NHÂN" image={Bag}/>
+                        </Box>
+                    </Box>
+                    <ListItemLink name="manage" to="/lecturer" title="QUẢN LÝ" image={File}/>
+                </Box>
             </Box>
         </Box>
     )

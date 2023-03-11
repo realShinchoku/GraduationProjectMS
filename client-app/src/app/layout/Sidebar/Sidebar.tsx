@@ -10,7 +10,7 @@ import WalletIcon from '@mui/icons-material/Wallet';
 import Button from '@mui/material/Button';
 
 import {route} from "../../router/Routers";
-import {LogoSP} from "../../../assets";
+import {LampOn, LogoSP} from "../../../assets";
 import VerticalTabs from "./Tab";
 import {useStore} from "../../stores/store";
 import SidebarItem from "./SidebarItem/SidebarItem";
@@ -54,6 +54,7 @@ function Sidebar() {
                 <VerticalTabs/>
             )}
             <Box className="confirm">
+                <Box className="thumb"/>
                 <Box className="inner">
                     <Typography variant="h3">Thông báo xác nhận</Typography>
                     <Typography variant="body1">Giảng viên Nguyễn Thị Phương Thảo đã chấp nhận yêu cầu hướng dẫn của

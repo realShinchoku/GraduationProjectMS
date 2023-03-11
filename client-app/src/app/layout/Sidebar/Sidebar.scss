@@ -70,10 +70,10 @@
     padding: 31px;
     bottom: 34px;
     text-align: center;
-
     .inner {
-      padding: 40px 26px 23px;
-
+      @include bgsetup("../../../assets/images/Union.png",no-repeat, top center, 100% auto);
+      padding: 76px 26px 23px;
+      height: 171px;
       h3 {
         font-family: 'Inter';
         font-weight: 500;
@@ -81,7 +81,7 @@
         line-height: 17px;
         margin-bottom: 15px;
       }
-
+      
       p {
         font-size: 12px;
         line-height: 15px;
@@ -89,14 +89,22 @@
         color: #787486;
         margin-bottom: 33px;
       }
-
+      
       button {
         width: 100px;
       }
-
+      
       button + button {
         margin-left: 20px;
       }
+    }
+    .thumb {
+      @include bgsetup("../../../assets/images/LampOn.png",no-repeat, top center, 100% auto);
+      position: relative;
+      width: 48px;
+      height: 38px;
+      margin: 0 auto;
+      top: 60px;
     }
   }
 
