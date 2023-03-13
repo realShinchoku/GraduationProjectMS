@@ -94,7 +94,8 @@ export default function StudentManagementTable() {
                                         border: '1px solid #ffffff',
                                         borderRadius: '8px',
                                         boxShadow: 'none',
-                                        width: '95px'
+                                        width: '95px',
+                                        textTransform:'capitalize'
                                     }} variant="contained" onClick={() => handleClick(row.msv)}>Duyệt</Button>
                                 </TableCell>
                             </TableRow>

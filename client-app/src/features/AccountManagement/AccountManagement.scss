@@ -355,9 +355,9 @@
 
   .container_dropzone {
     height: 300px;
-    align-items: center;
+    align-items: start;
     display: flex;
-    justify-content: center;
+    justify-content: start;
     background: #ffffff;
     border-radius: 15px;
     margin: 20px;
@@ -416,6 +416,28 @@
     @include tablet {
       font-size: x-small;
     }
+  }
+  .dropzone_file_csv{
+    position: absolute;
+    background: #FFFFFF;
+    border: 1px solid #DBDBDB;
+    box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.15);
+    width: 83px;
+    height: 88px;
+    margin: 25px;
+  }
+  .icon_dropfile{
+    display: flex;
+    width: auto;
+    height: 55px;
+    margin: auto;
+    padding-top: 10px;
+    color: gainsboro;
+  }
+  .file_name{
+    font-size: x-small;
+    text-align: center;
+    width: auto;
   }
 }
 

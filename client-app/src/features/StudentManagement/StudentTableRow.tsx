@@ -3,7 +3,8 @@ import {useTheme} from '@mui/material/styles';
 import {SearchOutlined} from "@mui/icons-material";
 import React from "react";
 import "./StudentManagement.scss"
-import StudentManagementTable from "./StudentManagementTable";
+import StudentManagementTableRegistered from "./StudentManagementTableRegistered";
+import StudentManagementTableUnregister from "./StudentManagementTableUnregister";
 
 interface TabPanelProps {
     children?: React.ReactNode;
@@ -85,13 +86,10 @@ export default function StudentTableRow() {
                         />
                     </Box>
                     <TabPanel value={value} index={0} dir={theme.direction}>
-                        <StudentManagementTable/>
+                        <StudentManagementTableRegistered/>
                     </TabPanel>
                     <TabPanel value={value} index={1} dir={theme.direction}>
-                        <StudentManagementTable/>
-                    </TabPanel>
-                    <TabPanel value={value} index={2} dir={theme.direction}>
-                        <StudentManagementTable/>
+                        <StudentManagementTableUnregister/>
                     </TabPanel>
                 </Box>
             </Box>

@@ -1,9 +1,11 @@
-import "./AccountManagement.scss"
 import {Box, Button, ButtonGroup, Grid, Typography} from '@mui/material';
 import UploadFileIcon from '@mui/icons-material/UploadFile';
 import {useDropzone} from 'react-dropzone';
 import {useStore} from "../../app/stores/store";
 import {useState} from "react";
+import DescriptionOutlinedIcon from '@mui/icons-material/DescriptionOutlined';
+import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined';
+import "./AccountManagement.scss"
 
 export default function AddAccountManagement() {
 
@@ -53,15 +55,16 @@ export default function AddAccountManagement() {
                         <Box {...getRootProps({className: 'container_dropzone'})}>
                             <UploadFileIcon className="icon_dropzone"/>
                             <input {...getInputProps()} />
-                        </Box>
-                        {file && <Box>{/* preview icon css lai cho giong ben kia*/}
-                            Icon csv o day
-                            <div className={"doan ten csv"}>{file.name}</div>
-                            <Button className={"icon xoa"} onClick={() => {
+                            {file && <Box className='dropzone_file_csv'>{/* preview icon css lai cho giong ben kia*/}
+                                <DescriptionOutlinedIcon className='icon_dropfile'></DescriptionOutlinedIcon>
+                            <div className={"file_name"}>{file.name}</div>
+                            <Button className={"icon_delete"} onClick={() => {
                                 acceptedFiles.slice(0);
                                 setFile(undefined);
-                            }}/>
+                            }}
+                            />
                         </Box>}
+                        </Box>
                     </Box>
                     <Box className="button_exit">
                         <Button className="button_exit_dropzone" variant="contained"

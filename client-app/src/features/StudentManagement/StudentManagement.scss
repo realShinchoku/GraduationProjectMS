@@ -357,20 +357,20 @@
     }
   }
 
-  .container_dropzone {
-    height: 300px;
-    align-items: center;
-    display: flex;
-    justify-content: center;
-    background: #ffffff;
-    border-radius: 15px;
-    margin: 20px;
-    @include tablet {
-      height: 120px;
-      margin: 10px 20px 10px 10px;
-      place-items: end;
-    }
-  }
+  // .container_dropzone {
+  //   height: 300px;
+  //   align-items: center;
+  //   display: flex;
+  //   justify-content: center;
+  //   background: #ffffff;
+  //   border-radius: 15px;
+  //   margin: 20px;
+  //   @include tablet {
+  //     height: 120px;
+  //     margin: 10px 20px 10px 10px;
+  //     place-items: end;
+  //   }
+  // }
 
   .icon_dropzone {
     font-size: 70px;
