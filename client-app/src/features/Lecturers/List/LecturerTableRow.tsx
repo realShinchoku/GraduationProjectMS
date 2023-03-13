@@ -14,7 +14,7 @@ interface Props {
 }
 
 function LecturerTableRow({lecturer}: Props) {
-
+    const [detail, setDetail] = React.useState(false);
     const [open, setOpen] = React.useState(false);
 
     return (
