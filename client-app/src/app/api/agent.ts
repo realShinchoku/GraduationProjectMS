@@ -100,7 +100,7 @@ const Lecturers = {
 const Students = {
     list: () => requests.get<Student[]>('/student'),
     confirmLecturer: () => requests.post<void>('/student/lecturer/confirm', {}),
-    choseLecturer: (id: string) => requests.post<void>(`/api/student/lecturer/${id}`, {}),
+    choseLecturer: (id: string) => requests.post<void>(`/api/student/lecturer/${id}`, {id}),
 }
 
 const GraduationProjectPeriods = {
