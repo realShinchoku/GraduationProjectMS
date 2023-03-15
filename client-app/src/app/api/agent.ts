@@ -7,7 +7,6 @@ import {Lecturer} from "../models/lecturer";
 import {Student} from "../models/student";
 import {GraduationProjectPeriod} from "../models/graduationProjectPeriod";
 import {DepartmentSubjectFilterItem} from "../models/departmentSubject";
-import { SinhVien } from './../models/sinhVien';
 
 const sleep = (delay: number) => {
     return new Promise((resolve) => {
@@ -98,11 +97,6 @@ const Lecturers = {
     list: (params: URLSearchParams) => requests.getList<PaginationResult<Lecturer[]>>('/lecturer', {params}),
 }
 
-
-const SinhVienAPI = {
-    list: ()=> requests.get<PaginationResult<SinhVien[]>>('/student')
-}
-
 const Students = {
     list: () => requests.get<Student[]>('/student'),
     confirmLecturer: () => requests.post<void>('/student/lecturer/confirm', {}),
@@ -133,7 +127,6 @@ const agent = {
     Students,
     GraduationProjectPeriods,
     DepartmentSubjects,
-    SinhVienAPI,
 }
 
 export default agent;

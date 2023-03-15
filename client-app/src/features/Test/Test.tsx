@@ -6,22 +6,10 @@ import { SinhVien } from "../../app/models/sinhVien";
 import { useEffect } from "react";
 
 function Test() {
-    const {modalStore ,SinhVienStore:{ SinhVienDS, list }} = useStore();
-
-    useEffect(() => {
-        list()
-    },[list]);
+    const {modalStore} = useStore();
 
     return (
         <>
-            <div>
-                {
-                    SinhVienDS.map((sinhVien : SinhVien) =>
-                    <div>
-                        {sinhVien.displayName}
-                    </div>)
-                }
-            </div>
             <Button onClick={() => {
                 modalStore.openModal(<div>modal here</div>)
             }}> 
