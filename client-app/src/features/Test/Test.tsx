@@ -5,11 +5,14 @@ import {Button} from "@mui/material";
 
 function Test() {
     const {modalStore} = useStore();
+
     return (
         <>
             <Button onClick={() => {
                 modalStore.openModal(<div>modal here</div>)
-            }}> open modal</Button>
+            }}> 
+            open modal
+            </Button>
             <TestApi/>
         </>
     )

@@ -1,6 +1,7 @@
 import {useStore} from "../../../app/stores/store";
 import {PagingParams} from "../../../app/models/pagination";
 import {
+    Box,
     Paper,
     Skeleton,
     Table,
@@ -13,6 +14,7 @@ import {
 } from "@mui/material";
 import LecturerTableRow from "./LecturerTableRow";
 import {observer} from "mobx-react-lite";
+import { red } from "@mui/material/colors";
 
 function LecturerTable() {
 
@@ -42,21 +44,38 @@ function LecturerTable() {
                         <TableCell/>
                     </TableRow>
                 </TableHead>
-                {!loading &&
-                    <TableBody sx={{background: '#F7F6FE'}}>
-                        {lecturersList.map((lecturer) =>
-                            <LecturerTableRow key={lecturer.id} lecturer={lecturer}/>
-                        )}
-                    </TableBody>
+                {!loading ?
+                    (
+                        <TableBody sx={{background: '#F7F6FE'}}>
+                            {lecturersList.map((lecturer) =>
+                                <LecturerTableRow key={lecturer.id} lecturer={lecturer}/>
+                            )}
+                        </TableBody>
+                    ):(
+                        <TableBody sx={{background: '#F7F6FE'}}>
+                            {[...Array(pagination?.itemsPerPage || 5)].map((x, i) =>
+                                <TableRow sx={{
+                                    padding: 0,
+                                    marginTop: 0.125,
+                                    marginBottom: 0.125, 
+                                    height: 67,
+                                    "& > *": {borderBottom: "unset", 
+                                }}} 
+                                    key={i}>
+                                    <TableCell align="center"><Skeleton sx={{width: 100}}/></TableCell>
+                                    <TableCell align="center"><Skeleton sx={{width: 30}}/></TableCell>
+                                    <TableCell align="center"><Skeleton sx={{width: 80}}/></TableCell>
+                                    <TableCell align="center"><Skeleton sx={{width: 120}}/></TableCell>
+                                    <TableCell align="center"><Skeleton sx={{width: 60}}/></TableCell>
+                                    <TableCell align="center"><Skeleton sx={{width: 20}}/></TableCell>
+                                    <TableCell align="center"><Skeleton sx={{width: 30}}/></TableCell>
+                                    <TableCell align="center"><Skeleton sx={{width: 30}}/></TableCell>
+                                </TableRow>
+                            )}
+                        </TableBody>
+                    )
                 }
             </Table>
-            {loading &&
-                <>
-                    {[...Array(pagination?.itemsPerPage || 10)].map((x, i) =>
-                        <Skeleton key={i} animation="wave" sx={{width: "100%"}}/>
-                    )}
-                </>
-            }
             <TablePagination
                 rowsPerPageOptions={[5, 10, 25]}
                 component="div"

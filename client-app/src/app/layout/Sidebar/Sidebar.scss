@@ -67,13 +67,21 @@
 
   .confirm {
     position: absolute;
-    padding: 31px;
+    padding: 31px 31px 0 31px;
     bottom: 34px;
     text-align: center;
-
+    @include tablet{
+      position: unset;
+      margin-bottom: 34px;
+    }
+    @include sp{
+      position: unset;
+      margin-bottom: 34px;
+    }
     .inner {
-      padding: 40px 26px 23px;
-
+      @include bgsetup("../../../assets/images/Union.png",no-repeat, top center, 100% auto);
+      padding: 76px 26px 0;
+      height: 187px;
       h3 {
         font-family: 'Inter';
         font-weight: 500;
@@ -81,7 +89,7 @@
         line-height: 17px;
         margin-bottom: 15px;
       }
-
+      
       p {
         font-size: 12px;
         line-height: 15px;
@@ -89,14 +97,34 @@
         color: #787486;
         margin-bottom: 33px;
       }
-
+      
       button {
         width: 100px;
       }
-
+      
       button + button {
         margin-left: 20px;
       }
+    }
+    .thumb {
+      @include bgsetup("../../../assets/images/LampOn.png",no-repeat, top center, 100% auto);
+      position: relative;
+      width: 45px;
+      height: 38px;
+      margin: 0 auto;
+      top: -55px;
+    }
+    .thumb_ {
+      @include bgsetup("../../../assets/images/Ellipse.png",no-repeat, top center, 100% auto);
+      position: relative;
+      width: 87px;
+      height: 76px;
+      margin: 0 auto;
+      top: -113px;
+    }
+    .txt {
+      position: relative;
+      top: -113px;
     }
   }
 

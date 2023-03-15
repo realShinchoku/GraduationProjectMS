@@ -1,8 +1,8 @@
 $base-font-family: "Roboto", sans-serif;
 
 $breakpoint-lagre: 1920px;
-$breakpoint-pc: 1000px;
-$breakpoint-md: 576px;
+$breakpoint-pc: 900px;
+$breakpoint-md: 600px;
 
 $ease-inout: ease-in-out;
 $ease-liner: linear;
@@ -10,7 +10,9 @@ $ease-cubic: cubic-bezier(0.215, 0.61, 0.355, 1);
 $ease-cubic-out: cubic-bezier(0.915, 0.03, 0.91, 0.35);
 $color-base: #fff;
 $clr-base-font: #000000;
+$clr-box-shodow: rgba(0, 0, 0, 0.25);
 $color-base-1: rgb(69, 69, 69);
 $background-login: #fafafa;
 $background-linear-1: #67D7F5;
 $background-linear-2: #86F7CC;
+$background-color-2: #F4F4F4;
