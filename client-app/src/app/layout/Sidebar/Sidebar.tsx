@@ -54,31 +54,33 @@ function Sidebar() {
                 <VerticalTabs/>
             )}
             <Box className="confirm">
-                <Box className="thumb"/>
-                <Box className="thumb_"/>
                 <Box className="inner">
-                    <Typography variant="h3">Thông báo xác nhận</Typography>
-                    <Typography variant="body1">Giảng viên Nguyễn Thị Phương Thảo đã chấp nhận yêu cầu hướng dẫn của bạn.</Typography>
-                    <Button 
-                        style={{
-                            backgroundColor: "#fff",
-                            color: "#000000",
-                            boxShadow: "unset"
-                        }}
-                        variant="contained"
-                    >
-                        OK
-                    </Button>
-                    <Button 
-                        style={{
-                            backgroundColor: "#fff",
-                            color: "#000000",
-                            boxShadow: "unset"
-                        }}
-                        variant="contained"
-                    >
-                        Đóng
-                    </Button>
+                    <Box className="thumb"/>
+                    <Box className="thumb_"/>
+                    <Box className="txt">
+                        <Typography variant="h3">Thông báo xác nhận</Typography>
+                        <Typography variant="body1">Giảng viên Nguyễn Thị Phương Thảo đã chấp nhận yêu cầu hướng dẫn của bạn.</Typography>
+                        <Button 
+                            style={{
+                                backgroundColor: "#fff",
+                                color: "#000000",
+                                boxShadow: "unset"
+                            }}
+                            variant="contained"
+                        >
+                            OK
+                        </Button>
+                        <Button 
+                            style={{
+                                backgroundColor: "#fff",
+                                color: "#000000",
+                                boxShadow: "unset"
+                            }}
+                            variant="contained"
+                        >
+                            Đóng
+                        </Button>
+                    </Box>
                 </Box>
             </Box>
         </Grid>
