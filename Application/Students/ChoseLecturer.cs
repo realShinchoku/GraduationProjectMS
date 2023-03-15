@@ -41,7 +41,7 @@ public class ChoseLecturer
             var lecturer =
                 await _context.Lecturers
                     .Include(s => s.Students)
-                    .Include(f => f.Faculty)
+                    .Include(ds => ds.DepartmentSubject)
                     .FirstOrDefaultAsync(x => x.Id == request.Id, cancellationToken);
 
             if (lecturer == null) return null;

@@ -30,7 +30,7 @@ public class List
 
         public async Task<Result<PageList<LecturerDto>>> Handle(Query request, CancellationToken cancellationToken)
         {
-            var faculty = _userAccessor.Faculty();
+            var faculty = await _userAccessor.Faculty();
             if (faculty == null)
                 return null;
 

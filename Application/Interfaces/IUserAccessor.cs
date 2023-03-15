@@ -6,8 +6,8 @@ public interface IUserAccessor
 {
     string GetUserName();
     Role GetUserRole();
-    Faculty Faculty();
-    DepartmentSubject DepartmentSubject();
-    Lecturer Lecturer();
-    Student Student();
+    Task<Faculty> Faculty();
+    Task<DepartmentSubject> DepartmentSubject();
+    Task<Lecturer> Lecturer();
+    Task<Student> Student();
 }

@@ -30,7 +30,7 @@ public class UserAccessor : IUserAccessor
         return role;
     }
 
-    public Faculty Faculty()
+    public async Task<Faculty> Faculty()
     {
         var query = _context.Faculties.AsQueryable();
         query = GetUserRole() switch
@@ -44,10 +44,10 @@ public class UserAccessor : IUserAccessor
                 .Where(x => x.Students.Any(s => s.UserName == GetUserName())),
             _ => throw new ArgumentOutOfRangeException()
         };
-        return query.FirstOrDefault();
+        return await query.FirstOrDefaultAsync();
     }
 
-    public DepartmentSubject DepartmentSubject()
+    public async Task<DepartmentSubject> DepartmentSubject()
     {
         var query = _context.DepartmentSubjects.AsQueryable();
         query = GetUserRole() switch
@@ -60,10 +60,10 @@ public class UserAccessor : IUserAccessor
                 .Where(x => x.Students.Any(s => s.UserName == GetUserName())),
             _ => throw new ArgumentOutOfRangeException()
         };
-        return query.FirstOrDefault();
+        return await query.FirstOrDefaultAsync();
     }
 
-    public Lecturer Lecturer()
+    public async Task<Lecturer> Lecturer()
     {
         var query = _context.Lecturers.AsQueryable();
         query = GetUserRole() switch
@@ -75,10 +75,10 @@ public class UserAccessor : IUserAccessor
                 .Where(x => x.Students.Any(s => s.UserName == GetUserName())),
             _ => throw new ArgumentOutOfRangeException()
         };
-        return query.FirstOrDefault();
+        return await query.FirstOrDefaultAsync();
     }
 
-    public Student Student()
+    public async Task<Student> Student()
     {
         var query = _context.Students.AsQueryable();
         query = GetUserRole() switch
@@ -89,6 +89,6 @@ public class UserAccessor : IUserAccessor
             Role.Student => query.Where(x => x.UserName == GetUserName()),
             _ => throw new ArgumentOutOfRangeException()
         };
-        return query.FirstOrDefault();
+        return await query.FirstOrDefaultAsync();
     }
 }
