@@ -1,4 +1,4 @@
-﻿using Application.DepartmentSubjects;
+using Application.DepartmentSubjects;
 using Application.DepartmentSubjects.DTOs;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

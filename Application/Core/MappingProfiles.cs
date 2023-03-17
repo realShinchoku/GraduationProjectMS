@@ -1,4 +1,4 @@
-﻿using Application.DepartmentSubjects.DTOs;
+using Application.DepartmentSubjects.DTOs;
 using Application.Lecturers.DTOs;
 using Application.Students.DTOs;
 using AutoMapper;

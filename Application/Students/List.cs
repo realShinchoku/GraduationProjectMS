@@ -1,4 +1,4 @@
-﻿using Application.Core;
+using Application.Core;
 using Application.Students.DTOs;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;

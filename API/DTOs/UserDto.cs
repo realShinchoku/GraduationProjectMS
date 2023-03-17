@@ -1,4 +1,4 @@
-﻿using Domain;
+using Domain;
 
 namespace API.DTOs;
 
