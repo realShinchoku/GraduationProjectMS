@@ -1,6 +1,8 @@
 import Logo from "./images/Logo.png";
 import LogoSP from "./images/LogoSP.png";
 import AvatarSP from "./images/Avatar_.jpeg";
+import AvatarLecturer from "./images/Lecturers/AvatarLecturer.png"
+import ContactLecturer from "./images/Lecturers/ContactLecturer.png"
 import Bag from "./images/Bag.png";
 import Book from "./images/Book.png";
 import Cap from "./images/Cap.png";
@@ -35,3 +37,8 @@ export {
     LampOn,
     Ellipse,
 };
+
+export const LecturerImages = {
+    AvatarLecturer,
+    ContactLecturer,
+}
