@@ -12,7 +12,6 @@ import HomePage from "../../features/Hompage/HomePage";
 import LecturerList from "../../features/Lecturers/List/LecturerList";
 import AccountManagement from "../../features/AccountManagement/AccountManagement";
 import StudentManagement from "../../features/StudentManagement/StudentManagement";
-import AddAccountManagement from "../../features/AccountManagement/AddAccountManagement";
 
 
 export const route = {
@@ -34,7 +33,6 @@ export const routes: RouteObject[] = [
                     {path: 'lecturer', element: <LecturerList/>},
                     {path: 'accountmanagement', element: <AccountManagement/>},
                     {path: 'studentmanagement', element: <StudentManagement/>},
-
                 ]
             },
             {
@@ -51,7 +49,6 @@ export const routes: RouteObject[] = [
             {path: 'server-error', element: <ServerError/>},
             {path: 'test', element: <Test/>},
             {path: '*', element: <Navigate replace to={'/not-found'}/>},
-            {path: 'addaccountmanagement', element: <AddAccountManagement/>},
         ],
     }
 ]
