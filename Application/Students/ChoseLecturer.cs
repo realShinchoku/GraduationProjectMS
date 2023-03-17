@@ -1,4 +1,4 @@
-﻿using Application.Core;
+using Application.Core;
 using Application.Interfaces;
 using Domain;
 using MediatR;
@@ -33,7 +33,8 @@ public class ChoseLecturer
             if (student == null) return null;
 
             var instructor =
-                await _context.Instructors.FirstOrDefaultAsync(x => x.StudentId == student.Id, cancellationToken);
+                await _context.Instructors.Include(s => s.Student)
+                    .FirstOrDefaultAsync(x => x.Student.StudentId == student.Id, cancellationToken);
 
             if (instructor != null || student.Lecturer != null)
                 return Result<Unit>.Failure("Bạn đã có giảng viên hướng dẫn");
@@ -41,7 +42,7 @@ public class ChoseLecturer
             var lecturer =
                 await _context.Lecturers
                     .Include(s => s.Students)
-                    .Include(f => f.Faculty)
+                    .Include(ds => ds.DepartmentSubject)
                     .FirstOrDefaultAsync(x => x.Id == request.Id, cancellationToken);
 
             if (lecturer == null) return null;
@@ -53,10 +54,7 @@ public class ChoseLecturer
             {
                 DepartmentSubject = lecturer.DepartmentSubject,
                 Lecturer = lecturer,
-                Student = student,
-                StudentId = student.Id,
-                LecturerId = lecturer.Id,
-                DepartmentSubjectId = lecturer.DepartmentSubject.Id
+                Student = student
             };
 
             _context.Instructors.Add(instructor);

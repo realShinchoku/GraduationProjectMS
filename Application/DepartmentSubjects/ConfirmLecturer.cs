@@ -1,4 +1,4 @@
-﻿using Application.Core;
+using Application.Core;
 using Application.DepartmentSubjects.DTOs;
 using Application.Interfaces;
 using MediatR;
@@ -44,11 +44,13 @@ public class ConfirmLecturer
             if (lecturer == null)
                 return null;
 
-            var instructor = await _context.Instructors.FirstOrDefaultAsync(
-                x => x.StudentId == student.Id && x.LecturerId == lecturer.Id &&
-                     x.DepartmentSubjectId == departmentSubject.Id &&
-                     !x.IsConfirm,
-                cancellationToken);
+            var instructor = await _context.Instructors
+                .Include(s => s.Student)
+                .Include(l => l.Lecturer)
+                .Include(ds => ds.DepartmentSubject)
+                .FirstOrDefaultAsync(
+                    x => x.Student.Id == student.Id && x.Lecturer.Id == lecturer.Id &&
+                         x.DepartmentSubject.Id == departmentSubject.Id && !x.IsConfirm, cancellationToken);
 
             if (instructor == null)
                 return null;

@@ -1,4 +1,4 @@
-﻿using Application.Lecturers;
+using Application.Lecturers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

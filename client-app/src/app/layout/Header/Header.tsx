@@ -17,10 +17,13 @@ import {useStore} from "../../stores/store";
 import {ListItemIcon, MenuItem} from "@mui/material";
 import {AccountCircle, Logout, Settings} from "@mui/icons-material";
 import "./Header.scss";
+import ChangePassword from "../../../features/Account/ChangePassword";
 
 function Header() {
 
     const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
+
+    const {modalStore} = useStore();
 
     const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorElUser(event.currentTarget);
@@ -30,7 +33,7 @@ function Header() {
         setAnchorElUser(null);
     };
 
-    const {userStore: {logout}} = useStore();
+    const {userStore: {logout, user}} = useStore();
 
     return (
         <AppBar position="static" id="app_bar" sx={{position: 'fixed'}}>
@@ -66,8 +69,8 @@ function Header() {
                             </Badge>
                         </Box>
                         <Box className="tlt">
-                            <Typography variant="h5">Phạm Thị Tuyết Anh</Typography>
-                            <Box component="span">xxxxxxx@e.tlu.edu.vn</Box>
+                            <Typography variant="h5">{user?.displayName}</Typography>
+                            <Box component="span">{user?.email}</Box>
                         </Box>
                     </Box>
                     <Box sx={{flexGrow: 0}}>
@@ -96,9 +99,11 @@ function Header() {
                                 <ListItemIcon>
                                     <AccountCircle fontSize="small"/>
                                 </ListItemIcon>
-                                hông tin tài khoản
+                                Thông tin tài khoản
                             </MenuItem>
-                            <MenuItem onClick={() => console.log("doi mk")}>
+                            <MenuItem onClick={() => {
+                                modalStore.openModal(<ChangePassword/>)
+                            }}>
                                 <ListItemIcon>
                                     <Settings fontSize="small"/>
                                 </ListItemIcon>

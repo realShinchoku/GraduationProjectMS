@@ -1,4 +1,4 @@
-﻿using CsvHelper.Configuration;
+using CsvHelper.Configuration;
 using Domain;
 
 namespace Application.Accounts.ClassMap;

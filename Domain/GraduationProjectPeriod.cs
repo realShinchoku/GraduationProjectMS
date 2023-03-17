@@ -1,4 +1,4 @@
-﻿namespace Domain;
+namespace Domain;
 
 public class GraduationProjectPeriod
 {
@@ -11,4 +11,6 @@ public class GraduationProjectPeriod
     public DateTime GraduationProjectTime { get; set; }
     public DateTime ProtectionTime { get; set; }
     public ICollection<Student> Students { get; set; }
+    public ICollection<Syllabus> Syllabi { get; set; }
+    public ICollection<Class> Classes { get; set; }
 }

@@ -1,4 +1,4 @@
-﻿using Application.Core;
+using Application.Core;
 using Application.DepartmentSubjects.DTOs;
 using Application.Interfaces;
 using AutoMapper;
@@ -31,7 +31,7 @@ public class ListForFilter
         public async Task<Result<List<DepartmentSubjectFilterDto>>> Handle(Query request,
             CancellationToken cancellationToken)
         {
-            var faculty = _userAccessor.Faculty();
+            var faculty = await _userAccessor.Faculty();
             var departmentSubjects = await _context.DepartmentSubjects.Where(x => x.Faculty == faculty)
                 .ProjectTo<DepartmentSubjectFilterDto>(_mapper.ConfigurationProvider).ToListAsync(cancellationToken);
             if (departmentSubjects.Count == 0)

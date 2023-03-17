@@ -5,7 +5,7 @@ import {ExpandMoreSharp, SearchOutlined} from "@mui/icons-material";
 import Button from "@mui/material/Button";
 import ImportExportIcon from "@mui/icons-material/ImportExport";
 import {useStore} from "../../../app/stores/store";
-import {useEffect, useRef, useState} from "react";
+import {useEffect, useState} from "react";
 import Autocomplete from "@mui/material/Autocomplete";
 
 function LecturerListFilter() {
@@ -24,10 +24,7 @@ function LecturerListFilter() {
         if (departmentSubjectFilterItems.length <= 0)
             getFilterItem();
     }, [departmentSubjectFilterItems.length, getFilterItem]);
-
-
     const [keyword, setKeyword] = useState<string>('');
-    const autoC = useRef(null);
 
     return (
         <Box className="btn">

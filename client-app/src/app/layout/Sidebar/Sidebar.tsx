@@ -8,7 +8,6 @@ import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 import BallotIcon from '@mui/icons-material/Ballot';
 import WalletIcon from '@mui/icons-material/Wallet';
 import Button from '@mui/material/Button';
-
 import {route} from "../../router/Routers";
 import {LogoSP} from "../../../assets";
 import VerticalTabs from "./Tab";
@@ -45,9 +44,9 @@ function Sidebar() {
             <Box className="side_bar_inner">
                 <SidebarItem title="Trang chủ" to={route.home} icon={<WidgetsIcon/>}/>
                 <SidebarItem title="Giảng viên" to={route.lecturer} icon={<SmsIcon/>}/>
-                <SidebarItem title="Nhiệm vụ" to={route.lecturer} icon={<BallotIcon/>}/>
-                <SidebarItem title="Cá nhân" to={route.lecturer} icon={<PeopleAltIcon/>}/>
-                <SidebarItem title="Quản lý" to={route.lecturer} icon={<WalletIcon/>}/>
+                <SidebarItem title="Nhiệm vụ" to={route.empty} icon={<BallotIcon/>}/>
+                <SidebarItem title="Cá nhân" to={route.empty} icon={<PeopleAltIcon/>}/>
+                <SidebarItem title="Quản lý" to={route.empty} icon={<WalletIcon/>}/>
             </Box>
             <Typography className="tlt">GIẢNG VIÊN</Typography>
             {(location.pathname === '/lecturer') && (
@@ -55,11 +54,33 @@ function Sidebar() {
             )}
             <Box className="confirm">
                 <Box className="inner">
-                    <Typography variant="h3">Thông báo xác nhận</Typography>
-                    <Typography variant="body1">Giảng viên Nguyễn Thị Phương Thảo đã chấp nhận yêu cầu hướng dẫn của
-                        bạn.</Typography>
-                    <Button variant="contained">OK</Button>
-                    <Button variant="outlined">Đóng</Button>
+                    <Box className="thumb"/>
+                    <Box className="thumb_"/>
+                    <Box className="txt">
+                        <Typography variant="h3">Thông báo xác nhận</Typography>
+                        <Typography variant="body1">Giảng viên Nguyễn Thị Phương Thảo đã chấp nhận yêu cầu hướng dẫn của
+                            bạn.</Typography>
+                        <Button
+                            style={{
+                                backgroundColor: "#fff",
+                                color: "#000000",
+                                boxShadow: "unset"
+                            }}
+                            variant="contained"
+                        >
+                            OK
+                        </Button>
+                        <Button
+                            style={{
+                                backgroundColor: "#fff",
+                                color: "#000000",
+                                boxShadow: "unset"
+                            }}
+                            variant="contained"
+                        >
+                            Đóng
+                        </Button>
+                    </Box>
                 </Box>
             </Box>
         </Grid>

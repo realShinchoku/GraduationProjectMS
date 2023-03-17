@@ -2,8 +2,9 @@ import {AppBar, Box, IconButton, Tab, Tabs, TextField, Typography} from "@mui/ma
 import {useTheme} from '@mui/material/styles';
 import {SearchOutlined} from "@mui/icons-material";
 import React from "react";
-import "./AccountManagement.scss"
-import AccountManagementTable from "./AccountManagementTable";
+
+import StudentManagementTableRegistered from "./StudentManagementTableRegistered";
+import StudentManagementTableUnregister from "./StudentManagementTableUnregister";
 
 interface TabPanelProps {
     children?: React.ReactNode;
@@ -36,16 +37,12 @@ function a11yProps(index: any) {
     };
 }
 
-export default function AccountTableRow() {
+export default function StudentTableRow() {
     const theme = useTheme();
     const [value, setValue] = React.useState(0);
 
     const handleChange = (event: unknown, newValue: number) => {
         setValue(newValue);
-    };
-
-    const handleChangeIndex = (index: number) => {
-        setValue(index);
     };
 
     return (
@@ -63,9 +60,8 @@ export default function AccountTableRow() {
                                       variant="fullWidth"
                                       aria-label="action tabs example"
                                 >
-                                    <Tab className="tab_account" label="Sinh Viên" {...a11yProps(0)} />
-                                    <Tab className="tab_account" label="Giảng Viên" {...a11yProps(1)} />
-                                    <Tab className="tab_account" label="Bộ Môn" {...a11yProps(2)} />
+                                    <Tab className="tab_account" label="Đã Đăng Ký" {...a11yProps(0)} />
+                                    <Tab className="tab_account" label="Chưa đăng Ký" {...a11yProps(1)} />
                                 </Tabs>
                             </AppBar>
                         </Box>
@@ -86,13 +82,10 @@ export default function AccountTableRow() {
                         />
                     </Box>
                     <TabPanel value={value} index={0} dir={theme.direction}>
-                        <AccountManagementTable/>
+                        <StudentManagementTableRegistered/>
                     </TabPanel>
                     <TabPanel value={value} index={1} dir={theme.direction}>
-                        <AccountManagementTable/>
-                    </TabPanel>
-                    <TabPanel value={value} index={2} dir={theme.direction}>
-                        <AccountManagementTable/>
+                        <StudentManagementTableUnregister/>
                     </TabPanel>
                 </Box>
             </Box>

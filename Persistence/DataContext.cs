@@ -1,4 +1,4 @@
-﻿using Domain;
+using Domain;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -38,7 +38,5 @@ public class DataContext : IdentityDbContext<AppUser, AppRole, string>
         builder.Entity<Lecturer>().ToTable("Lecturers");
         builder.Entity<DepartmentSubject>().ToTable("DepartmentSubjects");
         builder.Entity<Faculty>().ToTable("Faculties");
-
-        builder.Entity<Instructor>(i => i.HasKey(x => new { x.StudentId, x.DepartmentSubjectId, x.LecturerId }));
     }
 }

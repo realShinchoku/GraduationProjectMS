@@ -1,4 +1,4 @@
-﻿using Application.Core;
+using Application.Core;
 using Application.DepartmentSubjects.DTOs;
 using Application.Interfaces;
 using Domain;
@@ -49,9 +49,13 @@ public class AssignLecturer
             if (lecturer == null) return null;
 
 
-            var instructor = await _context.Instructors.FirstOrDefaultAsync(
-                x => x.StudentId == request.Ids.StudentId && x.LecturerId == request.Ids.LecturerId &&
-                     x.DepartmentSubjectId == departmentSubject.Id, cancellationToken);
+            var instructor = await _context.Instructors
+                .Include(s => s.Student)
+                .Include(l => l.Lecturer)
+                .Include(ds => ds.DepartmentSubject)
+                .FirstOrDefaultAsync(
+                    x => x.Student.Id == student.Id && x.Lecturer.Id == lecturer.Id &&
+                         x.DepartmentSubject.Id == departmentSubject.Id && !x.IsConfirm, cancellationToken);
 
             if (instructor == null)
             {
@@ -60,9 +64,6 @@ public class AssignLecturer
                     DepartmentSubject = departmentSubject,
                     Lecturer = lecturer,
                     Student = student,
-                    StudentId = student.Id,
-                    LecturerId = lecturer.Id,
-                    DepartmentSubjectId = departmentSubject.Id,
                     IsConfirm = true
                 };
                 _context.Instructors.Add(instructor);

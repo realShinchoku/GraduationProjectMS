@@ -1,4 +1,4 @@
-﻿namespace Application.Lecturers.DTOs;
+namespace Application.Lecturers.DTOs;
 
 public class LecturerDto
 {

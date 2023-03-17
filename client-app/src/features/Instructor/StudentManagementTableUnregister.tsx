@@ -7,35 +7,31 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
-import "./StudentManagement.scss"
+
 import {Button} from '@mui/material';
-import BrowsingStatus from './BrowsingStatus';
-import { useStore } from '../../app/stores/store';
+import ListOfInstructors from './ListOfInstructors';
+import {useStore} from '../../app/stores/store';
 
 function createData(
     msv: number,
     name: string,
     classroom: string,
     khoa: string,
-    date: string,
-    magv: number,
-    namegv: string,
-    status: string,
-    status_wait: string,
+    email: string,
 ) {
-    return {msv, name, classroom, khoa, date, magv, namegv, status, status_wait};
+    return {msv, name, classroom, khoa, email};
 }
 
 const rows = [
-    createData(1951060909, 'Nguyễn Thị Phương Thảo', '61THNB', 'CNTT', '03/03/2001', 1951060911, 'Nguyễn Thị Phương Thảo', 'Null', ''),
-    createData(1951060909, 'Nguyễn Thị Phương Thảo', '61THNB', 'CNTT', '03/03/2001', 1951060911, 'Nguyễn Thị Phương Thảo', 'Null', ''),
-    createData(1951060909, 'Nguyễn Thị Phương Thảo', '61THNB', 'CNTT', '03/03/2001', 1951060911, 'Nguyễn Thị Phương Thảo', 'Null', ''),
-    createData(1951060909, 'Nguyễn Thị Phương Thảo', '61THNB', 'CNTT', '03/03/2001', 1951060911, 'Nguyễn Thị Phương Thảo', 'Null', ''),
-    createData(1951060909, 'Nguyễn Thị Phương Thảo', '61THNB', 'CNTT', '03/03/2001', 1951060911, 'Nguyễn Thị Phương Thảo', 'Null', ''),
-    createData(1951060909, 'Nguyễn Thị Phương Thảo', '61THNB', 'CNTT', '03/03/2001', 1951060911, 'Nguyễn Thị Phương Thảo', 'Null', ''),
-    createData(1951060909, 'Nguyễn Thị Phương Thảo', '61THNB', 'CNTT', '03/03/2001', 1951060911, 'Nguyễn Thị Phương Thảo', 'Null', ''),
-    createData(1951060909, 'Nguyễn Thị Phương Thảo', '61THNB', 'CNTT', '03/03/2001', 1951060911, 'Nguyễn Thị Phương Thảo', 'Null', ''),
-    createData(1951060909, 'Nguyễn Thị Phương Thảo', '61THNB', 'CNTT', '03/03/2001', 1951060911, 'Nguyễn Thị Phương Thảo', 'Null', ''),
+    createData(1951060909, 'Nguyễn Thị Phương Thảo', '61THNB', 'CNTT', '19510609111@e.tlu.edu.vn'),
+    createData(1951060909, 'Nguyễn Thị Phương Thảo', '61THNB', 'CNTT', '19510609111@e.tlu.edu.vn'),
+    createData(1951060909, 'Nguyễn Thị Phương Thảo', '61THNB', 'CNTT', '19510609111@e.tlu.edu.vn'),
+    createData(1951060909, 'Nguyễn Thị Phương Thảo', '61THNB', 'CNTT', '19510609111@e.tlu.edu.vn'),
+    createData(1951060909, 'Nguyễn Thị Phương Thảo', '61THNB', 'CNTT', '19510609111@e.tlu.edu.vn'),
+    createData(1951060909, 'Nguyễn Thị Phương Thảo', '61THNB', 'CNTT', '19510609111@e.tlu.edu.vn'),
+    createData(1951060909, 'Nguyễn Thị Phương Thảo', '61THNB', 'CNTT', '19510609111@e.tlu.edu.vn'),
+    createData(1951060909, 'Nguyễn Thị Phương Thảo', '61THNB', 'CNTT', '19510609111@e.tlu.edu.vn'),
+    createData(1951060909, 'Nguyễn Thị Phương Thảo', '61THNB', 'CNTT', '19510609111@e.tlu.edu.vn'),
 
 ];
 
@@ -51,7 +47,8 @@ export default function StudentManagementTable() {
         setRowsPerPage(+event.target.value);
         setPage(0);
     };
-    const {modalStore} = useStore();
+
+    const {modalStore: {openModal}} = useStore();
 
     return (
         <Paper sx={{width: '100%', overflow: 'hidden', boxShadow: 'none'}}>
@@ -63,17 +60,15 @@ export default function StudentManagementTable() {
                             <TableCell className='color_background' align="left">Tên Sinh Viên</TableCell>
                             <TableCell className='color_background' align="left">Lớp</TableCell>
                             <TableCell className='color_background' align="left">Khoa</TableCell>
-                            <TableCell className='color_background' align="left">Ngày Đăng Ký</TableCell>
-                            <TableCell className='color_background' align="left">Mã Giáo Viên</TableCell>
-                            <TableCell className='color_background' align="left">Tên Giáo Viên</TableCell>
-                            <TableCell className='color_background' align="left">Trạng Thái</TableCell>
-                            <TableCell className='color_background' align="left">Trạng Thái</TableCell>
+                            <TableCell className='color_background' align="left">Email</TableCell>
+                            <TableCell className='color_background' align="left"></TableCell>
+
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {rows.map((row) => (
+                        {rows.map((row, index) => (
                             <TableRow
-                                key={row.msv}
+                                key={index}
                                 sx={{'&:last-child td, &:last-child th': {border: 0}}}
                             >
                                 <TableCell component="th" scope="row">
@@ -82,10 +77,7 @@ export default function StudentManagementTable() {
                                 <TableCell align="left">{row.name}</TableCell>
                                 <TableCell align="left">{row.classroom}</TableCell>
                                 <TableCell align="left">{row.khoa}</TableCell>
-                                <TableCell align="left">{row.date}</TableCell>
-                                <TableCell align="left">{row.magv}</TableCell>
-                                <TableCell align="left">{row.namegv}</TableCell>
-                                <TableCell align="left">{row.status}</TableCell>
+                                <TableCell align="left">{row.email}</TableCell>
                                 <TableCell align="left">
                                     <Button sx={{
                                         background: '#3690E3',
@@ -94,8 +86,10 @@ export default function StudentManagementTable() {
                                         borderRadius: '8px',
                                         boxShadow: 'none',
                                         width: '95px',
-                                        textTransform:'capitalize'
-                                    }} variant="contained" onClick={() => modalStore.openModal(<BrowsingStatus/>)} >Duyệt</Button>
+                                        whiteSpace: 'nowrap',
+                                        textTransform: 'capitalize'
+                                    }} variant="contained" onClick={() => openModal(<ListOfInstructors/>)}>Phân
+                                        Công</Button>
                                 </TableCell>
                             </TableRow>
                         ))}

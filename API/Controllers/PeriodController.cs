@@ -1,4 +1,4 @@
-﻿using Application.Core;
+using Application.Core;
 using Application.GraduationProjectPeriods;
 using Domain;
 using Microsoft.AspNetCore.Authorization;

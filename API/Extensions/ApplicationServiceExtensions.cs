@@ -1,10 +1,11 @@
-﻿using Application.Accounts;
+using Application.Accounts;
 using Application.Core;
 using Application.Interfaces;
 using Application.Lecturers;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using Infrastructure.Email;
+using Infrastructure.Files;
 using Infrastructure.Photos;
 using Infrastructure.Security;
 using MediatR;
@@ -80,9 +81,10 @@ public static class ApplicationServiceExtensions
         services.AddScoped<IUserAccessor, UserAccessor>();
         services.AddScoped<IPhotoAccessor, PhotoAccessor>();
         services.AddScoped<IEmailSender, EmailSender>();
+        services.AddScoped<ICloudStorageAccessor, CloudStorageAccessor>();
         services.Configure<CloudinarySettings>(configuration.GetSection("Cloudinary"));
+        services.Configure<GoogleCredentialSettings>(configuration.GetSection("Google"));
         services.AddSignalR();
-
         return services;
     }
 }

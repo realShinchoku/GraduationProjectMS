@@ -4,8 +4,8 @@ import Typography from "@mui/material/Typography";
 import {IconButton, TextField} from "@mui/material";
 import {SearchOutlined} from "@mui/icons-material";
 import Autocomplete from '@mui/material/Autocomplete';
-import AccountTableList from "./AccountTableList";
 import "./AccountManagement.scss"
+import AccountManagementListItem from "./AccountManagementListItem";
 
 
 const complete1 = [
@@ -50,7 +50,7 @@ function AccountManagement() {
                         </Box>
                     </Box>
                     <Box>
-                        <AccountTableList/>
+                        <AccountManagementListItem/>
                     </Box>
                 </Box>
             </Box>

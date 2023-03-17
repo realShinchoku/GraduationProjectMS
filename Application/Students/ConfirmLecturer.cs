@@ -1,4 +1,4 @@
-﻿using Application.Core;
+using Application.Core;
 using Application.Interfaces;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -32,12 +32,11 @@ public class ConfirmLecturer
                 return null;
 
             var instructor =
-                await _context.Instructors.FirstOrDefaultAsync(x => x.StudentId == student.Id, cancellationToken);
+                await _context.Instructors.Include(s => s.Student)
+                    .FirstOrDefaultAsync(x => x.Student.Id == student.Id, cancellationToken);
 
             if (instructor == null)
                 return null;
-
-            instructor.IsRead = true;
 
             var result = await _context.SaveChangesAsync(cancellationToken) > 0;
 

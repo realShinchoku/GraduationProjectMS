@@ -1,4 +1,4 @@
-﻿using Application.Students;
+using Application.Students;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
