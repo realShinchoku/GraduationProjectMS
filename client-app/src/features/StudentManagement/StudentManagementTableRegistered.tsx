@@ -10,7 +10,7 @@ import TableRow from '@mui/material/TableRow';
 import "./StudentManagement.scss"
 import {Button} from '@mui/material';
 import BrowsingStatus from './BrowsingStatus';
-import {useStore} from '../../app/stores/store';
+import { useStore } from '../../app/stores/store';
 
 function createData(
     msv: number,
@@ -94,9 +94,8 @@ export default function StudentManagementTable() {
                                         borderRadius: '8px',
                                         boxShadow: 'none',
                                         width: '95px',
-                                        textTransform: 'capitalize'
-                                    }} variant="contained"
-                                            onClick={() => modalStore.openModal(<BrowsingStatus/>)}>Duyệt</Button>
+                                        textTransform:'capitalize'
+                                    }} variant="contained" onClick={() => modalStore.openModal(<BrowsingStatus/>)} >Duyệt</Button>
                                 </TableCell>
                             </TableRow>
                         ))}

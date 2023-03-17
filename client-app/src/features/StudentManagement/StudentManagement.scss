@@ -416,33 +416,28 @@
   }
 
 }
-
-#controlled-radio-buttons-group {
+#controlled-radio-buttons-group{
   font-family: 'Inter';
   font-style: normal;
   font-weight: 500;
   font-size: 24px;
-  text-align: center;
+  text-align: center; 
   color: #000000;
   margin-left: -35px;
-
+  
 }
-
-#modal-modal-description {
-  margin-top: 60px;
+#modal-modal-description{
+ margin-top: 60px;
 }
-
-.browsing_status_box {
+.browsing_status_box{
   border-radius: 15px;
   border: aliceblue;
 }
-
-.button_browsing_status {
+.button_browsing_status{
   white-space: nowrap;
   text-transform: capitalize;
 }
-
-#modal-modal-title {
+#modal-modal-title{
   font-family: 'Inter';
   font-style: normal;
   font-weight: 400;
@@ -451,15 +446,14 @@
   text-align: center;
   margin-bottom: 40px;
 }
-
-.select_choice {
+.select_choice{
   font-family: 'Inter';
-  font-style: normal;
-  font-weight: 500;
-  font-size: 24px;
-  line-height: 29px;
-  text-align: center;
-  color: #000000;
+font-style: normal;
+font-weight: 500;
+font-size: 24px;
+line-height: 29px;
+text-align: center;
+color: #000000;
 }
 
 
