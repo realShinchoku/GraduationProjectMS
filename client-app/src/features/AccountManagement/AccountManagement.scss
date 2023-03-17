@@ -376,6 +376,21 @@
       font-size: 40px;
     }
   }
+  .icon_dropzone_{
+    position: absolute;
+    top: 45%;
+    left: 55%;
+    font-size: 70px;
+    color: #bebebe;
+  }
+  .typo_dropzone{
+    font-family: 'Roboto';
+font-style: normal;
+font-weight: 400;
+font-size: 11px;
+line-height: 13px;
+margin-top: 160px;
+  }
 
   .typo_notification {
     margin-top: 20px;
@@ -422,8 +437,8 @@
     background: #FFFFFF;
     border: 1px solid #DBDBDB;
     box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.15);
-    width: 83px;
-    height: 88px;
+    width: 75px;
+    height: 87px;
     margin: 25px;
   }
   .icon_dropfile{
@@ -432,12 +447,13 @@
     height: 55px;
     margin: auto;
     padding-top: 10px;
-    color: gainsboro;
+    color: rgb(220, 220, 220);
   }
   .file_name{
     font-size: x-small;
     text-align: center;
     width: auto;
+    color: #808080;
   }
 }
 
