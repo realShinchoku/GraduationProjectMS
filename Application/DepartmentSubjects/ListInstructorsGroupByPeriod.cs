@@ -1,7 +1,6 @@
 ﻿using Application.Core;
 using Application.DepartmentSubjects.DTOs;
 using Application.Interfaces;
-using Domain;
 using MediatR;
 using Persistence;
 
@@ -13,7 +12,7 @@ public class ListInstructorsGroupByPeriod
     {
         public PagingParams Params { get; set; }
     }
-    
+
     public class Handler : IRequestHandler<Query, Result<PageList<InstructorsGroupByPeriodDto>>>
     {
         private readonly DataContext _context;
@@ -24,9 +23,11 @@ public class ListInstructorsGroupByPeriod
             _context = context;
             _userAccessor = userAccessor;
         }
-        public Task<Result<PageList<InstructorsGroupByPeriodDto>>> Handle(Query request, CancellationToken cancellationToken)
+
+        public async Task<Result<PageList<InstructorsGroupByPeriodDto>>> Handle(Query request,
+            CancellationToken cancellationToken)
         {
-            var ds = _userAccessor;
+            var ds = await _userAccessor.DepartmentSubject();
             throw new NotImplementedException();
         }
     }

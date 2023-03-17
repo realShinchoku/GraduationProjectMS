@@ -32,7 +32,8 @@ public class ConfirmLecturer
                 return null;
 
             var instructor =
-                await _context.Instructors.Include(s => s.Student).FirstOrDefaultAsync(x => x.Student.Id == student.Id, cancellationToken);
+                await _context.Instructors.Include(s => s.Student)
+                    .FirstOrDefaultAsync(x => x.Student.Id == student.Id, cancellationToken);
 
             if (instructor == null)
                 return null;

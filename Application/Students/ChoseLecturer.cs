@@ -33,7 +33,8 @@ public class ChoseLecturer
             if (student == null) return null;
 
             var instructor =
-                await _context.Instructors.Include(s => s.Student).FirstOrDefaultAsync(x => x.Student.StudentId == student.Id, cancellationToken);
+                await _context.Instructors.Include(s => s.Student)
+                    .FirstOrDefaultAsync(x => x.Student.StudentId == student.Id, cancellationToken);
 
             if (instructor != null || student.Lecturer != null)
                 return Result<Unit>.Failure("Bạn đã có giảng viên hướng dẫn");
@@ -53,7 +54,7 @@ public class ChoseLecturer
             {
                 DepartmentSubject = lecturer.DepartmentSubject,
                 Lecturer = lecturer,
-                Student = student,
+                Student = student
             };
 
             _context.Instructors.Add(instructor);
