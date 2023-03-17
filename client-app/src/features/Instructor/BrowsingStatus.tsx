@@ -8,7 +8,7 @@ import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import {Radio, Stack, TextField} from '@mui/material';
 import {useStore} from '../../app/stores/store';
-import UpdateSucces from './UpdateSucces';
+import UpdateSuccess from './UpdateSuccess';
 
 const style = {
     position: 'absolute' as 'absolute',
@@ -17,7 +17,7 @@ const style = {
     transform: 'translate(-50%, -50%)',
     width: 586,
     height: 414,
-    bgcolor: 'background.paper',
+    bgColor: 'background.paper',
     boxShadow: 24,
     p: 4,
     padding: '35px 44px',
@@ -53,7 +53,7 @@ export default function BrowsingStatus() {
                     height: '54px',
                     fontSize: '24px',
                     borderRadius: '8px'
-                }} variant="contained" type='submit' onClick={() => modalStore.openModal(<UpdateSucces/>)}>
+                }} variant="contained" type='submit' onClick={() => modalStore.openModal(<UpdateSuccess/>)}>
                     Xác nhận
                 </Button>
                 <Button sx={{

@@ -14,9 +14,9 @@ import {
     TableRow
 } from '@mui/material';
 import {useStore} from '../../app/stores/store';
-import "./StudentManagement.scss"
+
 import CloseIcon from '@mui/icons-material/Close';
-import UpdateSucces from './UpdateSucces';
+import UpdateSuccess from './UpdateSuccess';
 
 function createData(
     mgv: number,
@@ -126,7 +126,7 @@ export default function BasicModal() {
                     textTransform: 'capitalize',
                     padding: '0px 40px',
                     margin: 'auto'
-                }} variant="contained" onClick={() => modalStore.openModal(<UpdateSucces/>)}>Lưu</Button>
+                }} variant="contained" onClick={() => modalStore.openModal(<UpdateSuccess/>)}>Lưu</Button>
             </Box>
         </div>
     );

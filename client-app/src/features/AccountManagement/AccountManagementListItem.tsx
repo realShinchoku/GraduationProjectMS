@@ -1,11 +1,11 @@
 import {Box, Button, Card, CardContent, Divider, Grid, TableCell, Typography} from "@mui/material";
 import {useState} from "react";
-import AccountTableRow from "./AccountTableRow";
-import AddAccountManagement from "./AddAccountManagement";
 import {useStore} from "../../app/stores/store";
+import AccountManagementListItemDetail from "./AccountManagementListItemDetail";
+import AddAccount from "./AddAccount";
 
 
-export default function AccountTableList() {
+function AccountManagementListItem() {
     const [detail, setDetail] = useState(false)
     const {modalStore} = useStore();
 
@@ -63,12 +63,13 @@ export default function AccountTableList() {
                     <Button color="inherit" variant="outlined" className="button_"
                             onClick={() => setDetail(prev => !prev)}>{detail ? "Thu Gọn" : "Chi Tiết"}</Button>
                     <Button color="inherit" variant="outlined" className="button_"
-                            onClick={() => modalStore.openModal(<AddAccountManagement/>)}>Thêm</Button>
+                            onClick={() => modalStore.openModal(<AddAccount/>)}>Thêm</Button>
                 </TableCell>
             </Box>
-            {detail && <AccountTableRow/>}
+            {detail && <AccountManagementListItemDetail/>}
         </Card>
 
     );
 }
 
+export default AccountManagementListItem;

@@ -2,7 +2,7 @@ import {AppBar, Box, IconButton, Tab, Tabs, TextField, Typography} from "@mui/ma
 import {useTheme} from '@mui/material/styles';
 import {SearchOutlined} from "@mui/icons-material";
 import React from "react";
-import "./StudentManagement.scss"
+
 import StudentManagementTableRegistered from "./StudentManagementTableRegistered";
 import StudentManagementTableUnregister from "./StudentManagementTableUnregister";
 

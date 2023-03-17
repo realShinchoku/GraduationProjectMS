@@ -7,7 +7,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
-import "./StudentManagement.scss"
+
 import {Button} from '@mui/material';
 import BrowsingStatus from './BrowsingStatus';
 import {useStore} from '../../app/stores/store';

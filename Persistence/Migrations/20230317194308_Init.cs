@@ -75,22 +75,6 @@ namespace Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Syllabi",
-                columns: table => new
-                {
-                    Id = table.Column<string>(type: "text", nullable: false),
-                    SyllabusStatus = table.Column<int>(type: "integer", nullable: false),
-                    Note = table.Column<string>(type: "text", nullable: true),
-                    Url = table.Column<string>(type: "text", nullable: true),
-                    Name = table.Column<string>(type: "text", nullable: true),
-                    CreateTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Syllabi", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Users",
                 columns: table => new
                 {
@@ -119,6 +103,46 @@ namespace Persistence.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Users", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Class",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    Name = table.Column<string>(type: "text", nullable: true),
+                    GraduationProjectPeriodId = table.Column<Guid>(type: "uuid", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Class", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Class_GraduationProjectPeriods_GraduationProjectPeriodId",
+                        column: x => x.GraduationProjectPeriodId,
+                        principalTable: "GraduationProjectPeriods",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Syllabi",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "text", nullable: false),
+                    SyllabusStatus = table.Column<int>(type: "integer", nullable: false),
+                    Note = table.Column<string>(type: "text", nullable: true),
+                    GraduationProjectPeriodId = table.Column<Guid>(type: "uuid", nullable: true),
+                    Url = table.Column<string>(type: "text", nullable: true),
+                    Name = table.Column<string>(type: "text", nullable: true),
+                    CreateTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Syllabi", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Syllabi_GraduationProjectPeriods_GraduationProjectPeriodId",
+                        column: x => x.GraduationProjectPeriodId,
+                        principalTable: "GraduationProjectPeriods",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -230,11 +254,17 @@ namespace Persistence.Migrations
                     GraduationProjectReportId = table.Column<string>(type: "text", nullable: true),
                     SyllabusId = table.Column<string>(type: "text", nullable: true),
                     Point = table.Column<decimal>(type: "numeric", nullable: false),
-                    StudentId = table.Column<string>(type: "text", nullable: true)
+                    StudentId = table.Column<string>(type: "text", nullable: true),
+                    ClassId = table.Column<Guid>(type: "uuid", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Students", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Students_Class_ClassId",
+                        column: x => x.ClassId,
+                        principalTable: "Class",
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Students_DepartmentSubjects_DepartmentSubjectId",
                         column: x => x.DepartmentSubjectId,
@@ -282,34 +312,43 @@ namespace Persistence.Migrations
                 name: "Instructors",
                 columns: table => new
                 {
-                    StudentId = table.Column<string>(type: "text", nullable: false),
-                    LecturerId = table.Column<string>(type: "text", nullable: false),
-                    DepartmentSubjectId = table.Column<string>(type: "text", nullable: false),
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    GraduationProjectPeriodId = table.Column<Guid>(type: "uuid", nullable: true),
+                    StudentId = table.Column<string>(type: "text", nullable: true),
+                    LecturerId = table.Column<string>(type: "text", nullable: true),
+                    DepartmentSubjectId = table.Column<string>(type: "text", nullable: true),
                     IsConfirm = table.Column<bool>(type: "boolean", nullable: false),
-                    IsRead = table.Column<bool>(type: "boolean", nullable: false)
+                    CreatedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Instructors", x => new { x.StudentId, x.DepartmentSubjectId, x.LecturerId });
+                    table.PrimaryKey("PK_Instructors", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Instructors_DepartmentSubjects_DepartmentSubjectId",
                         column: x => x.DepartmentSubjectId,
                         principalTable: "DepartmentSubjects",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Instructors_GraduationProjectPeriods_GraduationProjectPerio~",
+                        column: x => x.GraduationProjectPeriodId,
+                        principalTable: "GraduationProjectPeriods",
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Instructors_Lecturers_LecturerId",
                         column: x => x.LecturerId,
                         principalTable: "Lecturers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Instructors_Students_StudentId",
                         column: x => x.StudentId,
                         principalTable: "Students",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Class_GraduationProjectPeriodId",
+                table: "Class",
+                column: "GraduationProjectPeriodId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_DepartmentSubjects_FacultyId",
@@ -322,9 +361,19 @@ namespace Persistence.Migrations
                 column: "DepartmentSubjectId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Instructors_GraduationProjectPeriodId",
+                table: "Instructors",
+                column: "GraduationProjectPeriodId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Instructors_LecturerId",
                 table: "Instructors",
                 column: "LecturerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Instructors_StudentId",
+                table: "Instructors",
+                column: "StudentId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Lecturers_DepartmentSubjectId",
@@ -341,6 +390,11 @@ namespace Persistence.Migrations
                 table: "Roles",
                 column: "NormalizedName",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Students_ClassId",
+                table: "Students",
+                column: "ClassId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Students_DepartmentSubjectId",
@@ -378,6 +432,11 @@ namespace Persistence.Migrations
                 column: "SyllabusId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Syllabi_GraduationProjectPeriodId",
+                table: "Syllabi",
+                column: "GraduationProjectPeriodId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_UserRoles_RoleId",
                 table: "UserRoles",
                 column: "RoleId");
@@ -410,7 +469,7 @@ namespace Persistence.Migrations
                 name: "Roles");
 
             migrationBuilder.DropTable(
-                name: "GraduationProjectPeriods");
+                name: "Class");
 
             migrationBuilder.DropTable(
                 name: "GraduationProjectReports");
@@ -426,6 +485,9 @@ namespace Persistence.Migrations
 
             migrationBuilder.DropTable(
                 name: "DepartmentSubjects");
+
+            migrationBuilder.DropTable(
+                name: "GraduationProjectPeriods");
 
             migrationBuilder.DropTable(
                 name: "Faculties");

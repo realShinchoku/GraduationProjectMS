@@ -16,4 +16,5 @@ public class Student : AppUser
     public Syllabus Syllabus { get; set; }
     public decimal Point { get; set; }
     public string StudentId { get; set; }
+    public Class Class { get; set; }
 }

@@ -7,7 +7,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
-import "./StudentManagement.scss"
+
 import {Button} from '@mui/material';
 import ListOfInstructors from './ListOfInstructors';
 import {useStore} from '../../app/stores/store';
@@ -48,7 +48,7 @@ export default function StudentManagementTable() {
         setPage(0);
     };
 
-    const {modalStore : {openModal}} = useStore();
+    const {modalStore: {openModal}} = useStore();
 
     return (
         <Paper sx={{width: '100%', overflow: 'hidden', boxShadow: 'none'}}>

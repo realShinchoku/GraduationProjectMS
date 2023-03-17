@@ -2,11 +2,14 @@ import {AppBar, Box, IconButton, Tab, Tabs, TextField} from "@mui/material";
 import {useTheme} from '@mui/material/styles';
 import {SearchOutlined} from "@mui/icons-material";
 import React from "react";
-import AccountManagementTable from "./AccountManagementTable";
 import {TabContext, TabPanel} from "@mui/lab";
-export default function AccountTableRow() {
+import AccountManagementListItemStudentTable from "./AccountManagementListItemStudentTable";
+import AccountManagementListItemLecturerTable from "./AccountManagementListItemLecturerTable";
+import AccountManagementListItemDepartmentSubjectTable from "./AccountManagementListItemDepartmentSubjectTable";
+
+function AccountManagementListItemDetail() {
     const theme = useTheme();
-    const [value, setValue] = React.useState('0');
+    const [value, setValue] = React.useState<string>('0');
 
     const handleChange = (event: React.SyntheticEvent, newValue: string) => {
         setValue(newValue);
@@ -26,9 +29,9 @@ export default function AccountTableRow() {
                                       variant="fullWidth"
                                       aria-label="action tabs example"
                                 >
-                                    <Tab className="tab_account" label="Sinh Viên" value={'0'} />
-                                    <Tab className="tab_account" label="Giảng Viên" value={'1'} />
-                                    <Tab className="tab_account" label="Bộ Môn" value={'2'} />
+                                    <Tab className="tab_account" label="Sinh Viên" value={'0'}/>
+                                    <Tab className="tab_account" label="Giảng Viên" value={'1'}/>
+                                    <Tab className="tab_account" label="Bộ Môn" value={'2'}/>
                                 </Tabs>
                             </AppBar>
                         </Box>
@@ -49,16 +52,18 @@ export default function AccountTableRow() {
                         />
                     </Box>
                     <TabPanel value={'0'} dir={theme.direction}>
-                        <AccountManagementTable/>
+                        <AccountManagementListItemStudentTable/>
                     </TabPanel>
                     <TabPanel value={'1'} dir={theme.direction}>
-                        <AccountManagementTable/>
+                        <AccountManagementListItemLecturerTable/>
                     </TabPanel>
                     <TabPanel value={'2'} dir={theme.direction}>
-                        <AccountManagementTable/>
+                        <AccountManagementListItemDepartmentSubjectTable/>
                     </TabPanel>
                 </TabContext>
             </Box>
         </Box>
     );
 }
+
+export default AccountManagementListItemDetail;

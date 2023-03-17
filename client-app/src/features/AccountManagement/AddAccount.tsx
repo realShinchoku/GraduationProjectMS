@@ -6,7 +6,7 @@ import {useState} from "react";
 import DescriptionOutlinedIcon from '@mui/icons-material/DescriptionOutlined';
 import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined';
 
-export default function AddAccountManagement() {
+function AddAccount() {
 
     const [file, setFile] = useState<any>();
     const {getRootProps, getInputProps, acceptedFiles, isDragActive} = useDropzone({
@@ -92,3 +92,5 @@ export default function AddAccountManagement() {
         </Grid>
     );
 }
+
+export default AddAccount;
