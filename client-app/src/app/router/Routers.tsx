@@ -12,7 +12,6 @@ import HomePage from "../../features/Hompage/HomePage";
 import LecturerList from "../../features/Lecturers/List/LecturerList";
 import AccountManagement from "../../features/AccountManagement/AccountManagement";
 import StudentManagement from "../../features/StudentManagement/StudentManagement";
-import AddAccountManagement from "../../features/AccountManagement/AddAccountManagement";
 
 
 export const route = {
@@ -42,8 +41,7 @@ export const routes: RouteObject[] = [
                     {path: 'login', element: <Login/>},
                     {path: 'account/password_reset', element: <PasswordReset/>},
                     {path: 'account/password_reset/with', element: <PasswordResetToken/>},
-
-
+                    
                     
                 ]
             },
@@ -51,7 +49,6 @@ export const routes: RouteObject[] = [
             {path: 'server-error', element: <ServerError/>},
             {path: 'test', element: <Test/>},
             {path: '*', element: <Navigate replace to={'/not-found'}/>},
-            {path: 'addaccountmanagement', element: <AddAccountManagement/>},
         ],
     }
 ]
