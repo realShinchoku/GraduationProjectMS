@@ -33,6 +33,7 @@ export const routes: RouteObject[] = [
                     {path: 'lecturer', element: <LecturerList/>},
                     {path: 'accountmanagement', element: <AccountManagement/>},
                     {path: 'studentmanagement', element: <StudentManagement/>},
+                    
                 ]
             },
             {
@@ -40,8 +41,6 @@ export const routes: RouteObject[] = [
                     {path: 'login', element: <Login/>},
                     {path: 'account/password_reset', element: <PasswordReset/>},
                     {path: 'account/password_reset/with', element: <PasswordResetToken/>},
-
-
                     
                 ]
             },
