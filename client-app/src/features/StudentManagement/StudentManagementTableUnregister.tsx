@@ -9,6 +9,9 @@ import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import "./StudentManagement.scss"
 import { Button } from '@mui/material';
+import ListOfInstructors from './ListOfInstructors';
+import modalStore from '../../app/stores/modalStore';
+import { useStore } from '../../app/stores/store';
 
 function createData(
   msv: number,
@@ -46,10 +49,8 @@ export default function StudentManagementTable() {
     setPage(0);
   };
 
-  function handleClick(msv: number): void {
-    throw new Error('Function not implemented.');
-  }
-
+  const {modalStore} = useStore();
+  
   return (
     <Paper sx={{ width: '100%', overflow: 'hidden', boxShadow:'none'}}>
       <TableContainer>
@@ -61,12 +62,14 @@ export default function StudentManagementTable() {
                 <TableCell className='color_background' align="left">Lớp</TableCell>
                 <TableCell className='color_background' align="left">Khoa</TableCell>
                 <TableCell className='color_background' align="left">Email</TableCell>
+                <TableCell className='color_background' align="left"></TableCell>
+
             </TableRow>
           </TableHead>
           <TableBody>
-              {rows.map((row) => (
+              {rows.map((row, index) => (
                 <TableRow
-                  key={row.msv}
+                  key={index}
                   sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                 >
                   <TableCell component="th" scope="row">
@@ -77,7 +80,7 @@ export default function StudentManagementTable() {
                   <TableCell align="left">{row.khoa}</TableCell>
                   <TableCell align="left">{row.email}</TableCell>
                   <TableCell align="left">
-                  <Button sx={{background:'#3690E3', color:'#ffffff', border:'1px solid #ffffff', borderRadius:'8px', boxShadow:'none', width:'95px', whiteSpace:'nowrap',textTransform:'capitalize'}} variant="contained" onClick={() => handleClick(row.msv)}>Phân Công</Button>
+                  <Button sx={{background:'#3690E3', color:'#ffffff', border:'1px solid #ffffff', borderRadius:'8px', boxShadow:'none', width:'95px', whiteSpace:'nowrap',textTransform:'capitalize'}} variant="contained" onClick={() => modalStore.openModal(<ListOfInstructors/>)}>Phân Công</Button>
                   </TableCell>
                 </TableRow>
               ))}

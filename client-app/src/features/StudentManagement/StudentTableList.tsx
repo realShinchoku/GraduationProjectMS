@@ -1,9 +1,12 @@
 import {Box, Card, CardContent, Divider, Grid, Typography} from "@mui/material";
 import "./StudentManagement.scss"
 import StudentTableRow from "./StudentTableRow";
+import { useStore } from "../../app/stores/store";
+import { useState } from "react";
 
 export default function StudentTableList() {
-
+    const [detail, setDetail] = useState(false)
+    const {modalStore} = useStore();
     return (
         <Card sx={{background: '#F7F9FB', borderRadius: '16px', boxShadow: 'none'}} className="account_table_list">
             <Typography variant="h6" className="name_table">Đồ Án Khoá K61 Đợt 1</Typography>

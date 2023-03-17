@@ -9,6 +9,8 @@ import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import "./StudentManagement.scss"
 import {Button} from '@mui/material';
+import BrowsingStatus from './BrowsingStatus';
+import { useStore } from '../../app/stores/store';
 
 function createData(
     msv: number,
@@ -49,10 +51,7 @@ export default function StudentManagementTable() {
         setRowsPerPage(+event.target.value);
         setPage(0);
     };
-
-    function handleClick(msv: number): void {
-        throw new Error('Function not implemented.');
-    }
+    const {modalStore} = useStore();
 
     return (
         <Paper sx={{width: '100%', overflow: 'hidden', boxShadow: 'none'}}>
@@ -96,7 +95,7 @@ export default function StudentManagementTable() {
                                         boxShadow: 'none',
                                         width: '95px',
                                         textTransform:'capitalize'
-                                    }} variant="contained" onClick={() => handleClick(row.msv)}>Duyệt</Button>
+                                    }} variant="contained" onClick={() => modalStore.openModal(<BrowsingStatus/>)} >Duyệt</Button>
                                 </TableCell>
                             </TableRow>
                         ))}

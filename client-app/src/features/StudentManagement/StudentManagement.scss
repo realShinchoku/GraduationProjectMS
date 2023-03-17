@@ -249,6 +249,7 @@
 
   .color_background {
     color: #b6b6b6;
+    white-space: nowrap;
   }
 }
 
@@ -415,7 +416,45 @@
   }
 
 }
-
+#controlled-radio-buttons-group{
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  text-align: center; 
+  color: #000000;
+  margin-left: -35px;
+  
+}
+#modal-modal-description{
+ margin-top: 60px;
+}
+.browsing_status_box{
+  border-radius: 15px;
+  border: aliceblue;
+}
+.button_browsing_status{
+  white-space: nowrap;
+  text-transform: capitalize;
+}
+#modal-modal-title{
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 18px;
+  text-align: center;
+  margin-bottom: 40px;
+}
+.select_choice{
+  font-family: 'Inter';
+font-style: normal;
+font-weight: 500;
+font-size: 24px;
+line-height: 29px;
+text-align: center;
+color: #000000;
+}
 
 
 
