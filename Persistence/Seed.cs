@@ -288,22 +288,21 @@ public class Seed
                     DisplayName = "Sinh viên 8",
                     UserName = "sv8",
                     Email = "sv8@test.com",
-                    Faculty = faculties[0],
+                    Faculty = faculties[0]
                 },
                 new()
                 {
                     DisplayName = "Sinh viên 9",
                     UserName = "sv9",
                     Email = "sv9@test.com",
-                    Faculty = faculties[0],
-
+                    Faculty = faculties[0]
                 },
                 new()
                 {
                     DisplayName = "Sinh viên 10",
                     UserName = "sv10",
                     Email = "sv10@test.com",
-                    Faculty = faculties[0],
+                    Faculty = faculties[0]
                 }
             };
 

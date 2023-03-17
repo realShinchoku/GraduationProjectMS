@@ -29,7 +29,7 @@ const validationSchema = Yup.object().shape({
 
 function ChangePassword() {
 
-    const {userStore: {changePassword}, modalStore:{closeModal}} = useStore();
+    const {userStore: {changePassword}, modalStore: {closeModal}} = useStore();
 
     return (
         <Box className="change_password">

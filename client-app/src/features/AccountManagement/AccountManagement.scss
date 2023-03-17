@@ -192,18 +192,16 @@
   }
 
   .name_table {
-    padding: 16px 16px 0px 16px;
+    padding: 16px 16px 0 16px;
     margin-top: 8px;
     font-family: 'Inter', sans-serif;
   }
 
   .button_account_management {
     display: flex;
-    margin: auto;
     white-space: nowrap;
-    margin-right: 5px;
     border-bottom: none;
-    margin-bottom: 20px;
+    margin: auto 5px 20px auto;
     font-family: 'Inter', sans-serif;
     @include tablet {
       margin-bottom: 15px;
@@ -212,7 +210,7 @@
   }
 
   .button_ {
-    margin: 0px 10px;
+    margin: 0 10px;
     border-radius: 10px;
     text-transform: capitalize;
     font-family: 'Inter', sans-serif;
@@ -223,7 +221,7 @@
     font-family: 'Inter', sans-serif;
   }
 
-  .font_famyly {
+  .font_family {
     font-family: 'Inter', sans-serif;
   }
 
@@ -285,7 +283,7 @@
   }
 
   .select_user {
-    box-shadow: 1px 0px 0px 0px rgb(0 0 0 / 20%);
+    box-shadow: 1px 0 0 0 rgb(0 0 0 / 20%);
     height: 457px;
     background: #fff;
     width: unset;
@@ -355,9 +353,9 @@
 
   .container_dropzone {
     height: 300px;
-    align-items: start;
+    align-items: flex-start;
     display: flex;
-    justify-content: start;
+    justify-content: flex-start;
     background: #ffffff;
     border-radius: 15px;
     margin: 20px;
@@ -376,20 +374,22 @@
       font-size: 40px;
     }
   }
-  .icon_dropzone_{
+
+  .icon_dropzone_ {
     position: absolute;
     top: 45%;
     left: 55%;
     font-size: 70px;
     color: #bebebe;
   }
-  .typo_dropzone{
-    font-family: 'Roboto';
-font-style: normal;
-font-weight: 400;
-font-size: 11px;
-line-height: 13px;
-margin-top: 160px;
+
+  .typo_dropzone {
+    font-family: 'Roboto', serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 11px;
+    line-height: 13px;
+    margin-top: 160px;
   }
 
   .typo_notification {
@@ -432,16 +432,18 @@ margin-top: 160px;
       font-size: x-small;
     }
   }
-  .dropzone_file_csv{
+
+  .dropzone_file_csv {
     position: absolute;
     background: #FFFFFF;
     border: 1px solid #DBDBDB;
-    box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.15);
     width: 75px;
     height: 87px;
     margin: 25px;
   }
-  .icon_dropfile{
+
+  .icon_dropFile {
     display: flex;
     width: auto;
     height: 55px;
@@ -449,7 +451,8 @@ margin-top: 160px;
     padding-top: 10px;
     color: rgb(220, 220, 220);
   }
-  .file_name{
+
+  .file_name {
     font-size: x-small;
     text-align: center;
     width: auto;

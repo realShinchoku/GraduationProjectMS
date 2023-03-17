@@ -10,8 +10,8 @@ function Test() {
         <>
             <Button onClick={() => {
                 modalStore.openModal(<div>modal here</div>)
-            }}> 
-            open modal
+            }}>
+                open modal
             </Button>
             <TestApi/>
         </>

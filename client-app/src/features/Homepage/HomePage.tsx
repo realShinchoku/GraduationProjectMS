@@ -2,9 +2,10 @@ import {observer} from "mobx-react-lite";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import ListItemLink from "./ListItemLink";
-import { Bag, Book, Cap, File } from "../../assets";
+import {Bag, Book, Cap, File} from "../../assets";
 import "./HomePage.scss"
-import { route } from "../../app/router/Routers";
+import {route} from "../../app/router/Routers";
+
 function HomePage() {
     return (
         <Box className={'homepage'}>

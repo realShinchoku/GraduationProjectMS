@@ -130,7 +130,7 @@ public class AccountController : BaseApiController
             Token = _tokenService.CreateToken(user),
             UserName = user.UserName,
             Role = user.Role,
-            Email = user.Email,
+            Email = user.Email
         };
         ;
     }

@@ -15,7 +15,7 @@
         font-weight: 600;
         padding-top: 41px;
         padding-left: 22.5px;
-        margin-bottom: 0px;
+        margin-bottom: 0;
       }
 
       .btn {
@@ -178,7 +178,6 @@
   }
 
   .select_user {
-    width: 450px;
     margin-left: 30px;
     width: auto;
     @include tablet {
@@ -196,18 +195,16 @@
   }
 
   .name_table {
-    padding: 16px 16px 0px 16px;
+    padding: 16px 16px 0 16px;
     margin-top: 8px;
     font-family: 'Inter', sans-serif;
   }
 
   .button_account_management {
     display: flex;
-    margin: auto;
     white-space: nowrap;
-    margin-right: 5px;
     border-bottom: none;
-    margin-bottom: 20px;
+    margin: auto 5px 20px auto;
     font-family: 'Inter', sans-serif;
     @include tablet {
       margin-bottom: 15px;
@@ -216,7 +213,7 @@
   }
 
   .button_ {
-    margin: 0px 10px;
+    margin: 0 10px;
     border-radius: 10px;
     text-transform: capitalize;
     font-family: 'Inter', sans-serif;
@@ -227,7 +224,7 @@
     font-family: 'Inter', sans-serif;
   }
 
-  .font_famyly {
+  .font_family {
     font-family: 'Inter', sans-serif;
   }
 
@@ -290,7 +287,7 @@
   }
 
   .select_user {
-    box-shadow: 1px 0px 0px 0px rgb(0 0 0 / 20%);
+    box-shadow: 1px 0 0 0 rgb(0 0 0 / 20%);
     height: 457px;
     background: #fff;
     width: unset;
@@ -416,29 +413,34 @@
   }
 
 }
-#controlled-radio-buttons-group{
-  font-family: 'Inter';
+
+#controlled-radio-buttons-group {
+  font-family: 'Inter', sans-serif;
   font-style: normal;
   font-weight: 500;
   font-size: 24px;
-  text-align: center; 
+  text-align: center;
   color: #000000;
   margin-left: -35px;
-  
+
 }
-#modal-modal-description{
- margin-top: 60px;
+
+#modal-modal-description {
+  margin-top: 60px;
 }
-.browsing_status_box{
+
+.browsing_status_box {
   border-radius: 15px;
   border: aliceblue;
 }
-.button_browsing_status{
+
+.button_browsing_status {
   white-space: nowrap;
   text-transform: capitalize;
 }
-#modal-modal-title{
-  font-family: 'Inter';
+
+#modal-modal-title {
+  font-family: 'Inter', sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 24px;
@@ -446,14 +448,15 @@
   text-align: center;
   margin-bottom: 40px;
 }
-.select_choice{
-  font-family: 'Inter';
-font-style: normal;
-font-weight: 500;
-font-size: 24px;
-line-height: 29px;
-text-align: center;
-color: #000000;
+
+.select_choice {
+  font-family: 'Inter', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 29px;
+  text-align: center;
+  color: #000000;
 }
 
 

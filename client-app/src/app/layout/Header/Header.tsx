@@ -102,8 +102,8 @@ function Header() {
                                 Thông tin tài khoản
                             </MenuItem>
                             <MenuItem onClick={() => {
-                                    modalStore.openModal(<ChangePassword/>)
-                                }}>
+                                modalStore.openModal(<ChangePassword/>)
+                            }}>
                                 <ListItemIcon>
                                     <Settings fontSize="small"/>
                                 </ListItemIcon>

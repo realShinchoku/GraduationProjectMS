@@ -2,386 +2,424 @@
 @import "../../assets/css/mixin/function";
 
 .homepage {
-    .txt {
-        position: absolute;
-        font-weight: 800;
-        color: $clr-base-font;
-        transition: all .5s ease;
+  .txt {
+    position: absolute;
+    font-weight: 800;
+    color: $clr-base-font;
+    transition: all .5s ease;
+  }
+
+  img {
+    width: 100%;
+    height: 100%;
+    transition: all .5s;
+  }
+
+  .inner {
+    font-family: 'Inter';
+    font-style: normal;
+    padding: 48px 205px 0 39px;
+    max-width: 1330px;
+    margin: 0 auto;
+    @include pc {
+      padding: get_pc(48) get_pc(205) 0 get_pc(39);
+      max-width: get_pc(1330);
     }
-    img {
-        width: 100%;
-        height: 100%;
-        transition: all .5s;
+    @include sp {
+      max-width: 100%;
+      padding: get_sp(20);
+      text-align: center;
     }
-    .inner {
-        font-family: 'Inter';
-        font-style: normal;
-        padding: 48px 205px 0 39px;
-        max-width: 1330px;
-        margin: 0 auto;
+
+    h2 {
+      font-size: 46px;
+      color: #0D062D;
+      font-weight: 600;
+      line-height: 56px;
+      margin-bottom: 31px;
+      margin-left: 25px;
+      @include pc {
+        font-size: get_pc(46);
+        line-height: get_pc(56);
+        margin-bottom: get_pc(31);
+        margin-left: get_pc(25);
+      }
+      @include sp {
+        margin-left: 0;
+      }
+    }
+
+    .wrapper {
+      display: flex;
+      @include tablet {
+        display: unset;
+      }
+      @include sp {
+        display: block;
+      }
+
+      &_right {
+        width: 743px;
+        margin-right: 16px;
+        flex: none;
         @include pc {
-            padding: get_pc(48) get_pc(205) 0 get_pc(39);
-            max-width: get_pc(1330);
+          width: get_pc(743);
+          margin-right: get_pc(16);
+        }
+        @include tablet {
+          width: get_tablet(743)
         }
         @include sp {
-            max-width: 100%;
-            padding: get_sp(20);
-            text-align: center;
+          width: 100%;
         }
-        h2 {
-            font-size: 46px;
-            color: #0D062D;
-            font-weight: 600;
-            line-height: 56px;
-            margin-bottom: 31px;
-            margin-left: 25px;
+
+        a {
+          padding: 0;
+        }
+
+        .lecturer {
+          position: relative;
+          border-radius: 10px;
+          height: 212px;
+          margin-bottom: 14px;
+          background-color: $background-color-2;
+          border: 1px solid $background-color-2;
+          @include pc {
+            border-radius: get_pc(10);
+            height: get_pc(212);
+            margin-bottom: get_pc(14);
+          }
+          @include sp {
+            width: 100%;
+            height: get_sp(300);
+          }
+
+          .thumb {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 333px;
+            height: 185px;
+            transition: all .5s;
             @include pc {
-                font-size: get_pc(46);
-                line-height: get_pc(56);
-                margin-bottom: get_pc(31);
-                margin-left: get_pc(25);
+              width: get_pc(333);
+              height: get_pc(185);
             }
             @include sp {
-                margin-left: 0;
+              position: unset;
+              width: get_sp(200);
+              height: get_sp(120);
             }
+
+            img {
+              filter: drop-shadow(0px 20px 12px $clr-box-shodow);
+            }
+          }
+
+          h4 {
+            font-size: 36px;
+            line-height: 44px;
+            top: 95px;
+            right: 240px;
+            @extend .txt;
+            @include pc {
+              font-size: get_pc(36);
+              line-height: get_pc(44);
+              top: get_pc(95);
+              right: get_pc(240);
+            }
+            @include sp {
+              font-size: get_sp(36);
+              line-height: get_sp(44);
+              top: get_sp(62);
+              left: get_sp(30);
+            }
+          }
         }
-        .wrapper {
-           display: flex;
-           @include tablet {
-            display: unset;
-           }
-           @include sp {
+
+        .lecturer:hover {
+          border: 1px solid $clr-base-font;
+
+          .thumb {
+            top: -65px;
+            left: 60px;
+            @include pc {
+              top: get_pc(-65);
+              left: get_pc(60);
+            }
+
+            img {
+              transform: scale(1.3);
+              filter: drop-shadow(-20px 40px 10px $clr-box-shodow);
+            }
+          }
+
+          h4 {
+            top: 75px;
+            right: 100px;
+            @include pc {
+              top: get_pc(75);
+              right: get_pc(100);
+            }
+          }
+        }
+
+        .wrapper_child {
+          display: flex;
+          @include tablet {
+            margin-bottom: 14px;
+          }
+          @include sp {
             display: block;
-           }
-            &_right {
-                width: 743px;
-                margin-right: 16px;
-                flex: none;
-                @include pc {
-                    width: get_pc(743);
-                    margin-right: get_pc(16);
-                }
-                @include tablet {
-                    width: get_tablet(743)
-                }
-                @include sp {
-                    width: 100%;
-                }
-                a {
-                    padding: 0;
-                }
-                .lecturer {
-                    position: relative;
-                    border-radius: 10px;
-                    height: 212px;
-                    margin-bottom: 14px;
-                    background-color: $background-color-2;
-                    border: 1px solid $background-color-2;
-                    @include pc {
-                        border-radius: get_pc(10);
-                        height: get_pc(212);
-                        margin-bottom: get_pc(14);
-                    }
-                    @include sp {
-                        width: 100%;
-                        height: get_sp(300);
-                    }
-                    .thumb {
-                        position: absolute;
-                        left: 0;
-                        top: 0;
-                        width: 333px;
-                        height: 185px;
-                        transition: all .5s;
-                        @include pc {
-                            width: get_pc(333);
-                            height: get_pc(185);
-                        }
-                        @include sp {
-                            position: unset;
-                            width: get_sp(200);
-                            height: get_sp(120);
-                        }
-                        img {
-                            filter: drop-shadow(0px 20px 12px $clr-box-shodow);
-                        }
-                    }
-                    h4 {
-                        font-size: 36px;
-                        line-height: 44px;
-                        top: 95px;
-                        right: 240px;
-                        @extend .txt;
-                        @include pc {
-                            font-size:  get_pc(36);
-                            line-height:  get_pc(44);
-                            top:  get_pc(95);
-                            right:  get_pc(240);
-                        }
-                        @include sp {
-                            font-size: get_sp(36);
-                            line-height: get_sp(44);
-                            top: get_sp(62);
-                            left: get_sp(30);
-                        }
-                    }
-                }
-                .lecturer:hover {
-                    border: 1px solid $clr-base-font;
-                    .thumb {
-                        top: -65px;
-                        left: 60px;
-                        @include pc {
-                            top:  get_pc(-65);
-                            left:  get_pc(60);
-                        }
-                        img {
-                            transform: scale(1.3);
-                            filter: drop-shadow(-20px 40px 10px $clr-box-shodow);
-                        }
-                    }
-                    h4 {
-                        top: 75px;
-                        right: 100px;
-                        @include pc {
-                            top:  get_pc(75);
-                            right:  get_pc(100);
-                        }
-                    }
-                }
-                .wrapper_child {
-                    display: flex;
-                    @include tablet {
-                        margin-bottom: 14px;
-                    }
-                    @include sp {
-                        display: block;
-                    }
-                    .mission {
-                        position: relative;
-                        width: 463px;
-                        height: 278px;
-                        border-radius: 10px;
-                        margin-right: 17px;
-                        background-color: $background-color-2;
-                        border: 1px solid $background-color-2;
-                        @include pc {
-                            width: get_pc(463);
-                            height: get_pc(278);
-                            border-radius: get_pc(10);
-                            margin-right: get_pc(17);
-                        }
-                        @include sp {
-                            width: 100%;
-                            height: get_sp(300);
-                            margin-bottom: 14px;
-                        }
-                        .thumb {
-                            position: absolute;
-                            width: 232px;
-                            height: 208px;
-                            top: 0;
-                            right: 0;
-                            transition: all .5s;
-                            @include pc {
-                                width: get_pc(232);
-                                height: get_pc(208);
-                            }
-                            img {
-                                filter: drop-shadow(0px 16px 10px $clr-box-shodow)
-                            }
-                        }
-                        h4 {
-                            font-size: 36px;
-                            line-height: 39px;
-                            top: 121px;
-                            left: 50px;
-                            @extend .txt;
-                            @include pc {
-                                font-size: get_pc(36);
-                                line-height: get_pc(39);
-                                top: get_pc(121);
-                                left: get_pc(50);
-                            }
-                            @include sp {
-                                font-size: get_sp(36);
-                                line-height: get_sp(44);
-                                top: get_sp(62);
-                                left: get_sp(30);
-                            }
-                        }
-                    }
-                    .mission:hover {
-                        border: 1px solid $clr-base-font;
-                        .thumb {
-                            top: -26px;
-                            right: 18px;
-                            @include pc {
-                                top: get_pc(-26);
-                                right: get_pc(18);
-                            }
-                            img {
-                                transform: scale(1.3);
-                                filter: drop-shadow(0px 30px 10px $clr-box-shodow);
-                            }
-                        }
-                        h4 {
-                            top: 180px;
-                            @include pc {
-                                top: get_pc(180);
-                            }
-                        }
-                    }
-                    .individual {
-                        position: relative;
-                        width: 263px;
-                        height: 278px;
-                        border-radius: 10px;
-                        background-color: $background-color-2;
-                        border: 1px solid $background-color-2;
-                        @include pc {
-                            width: get_pc(263);
-                            height: get_pc(278);
-                            border-radius: get_pc(10);
-                        }
-                        @include sp {
-                            width: 100%;
-                            height: get_sp(300);
-                            margin-bottom: 14px;
-                        }
-                        .thumb {
-                            position: absolute;
-                            width: 185px;
-                            height: 178px;
-                            right: 0;
-                            top: 81px;
-                            transition: all .5s;
-                            @include pc {
-                                width: get_pc(185);
-                                height: get_pc(178);
-                                top: get_pc(81);
-                            }
-                            img {
-                                filter: drop-shadow(14px 8px 10px $clr-box-shodow);
-                            }
-                        }
-                        h4 {
-                            font-size: 36px;
-                            line-height: 44px;
-                            top: 62px;
-                            left: 30px;
-                            @extend .txt;
-                            @include pc {
-                                font-size: get_pc(36);
-                                line-height: get_pc(44);
-                                top: get_pc(62);
-                                left: get_pc(30);
-                            }
-                            @include sp {
-                                font-size: get_sp(36);
-                                line-height: get_sp(44);
-                                top: get_sp(62);
-                                left: get_sp(30);
-                            }
-                        }
-                    }
-                    .individual:hover {
-                        border: 1px solid $clr-base-font;
-                        .thumb {
-                            img {
-                                transform: scale(1.3);
-                                filter: drop-shadow(13px 10px 4px $clr-box-shodow);
-                            }
-                        }
-                        h4 {
-                            top: 15px;
-                            @include pc {
-                                top: get_pc(15);
-                            }
-                        }
-                    }
-                }
+          }
+
+          .mission {
+            position: relative;
+            width: 463px;
+            height: 278px;
+            border-radius: 10px;
+            margin-right: 17px;
+            background-color: $background-color-2;
+            border: 1px solid $background-color-2;
+            @include pc {
+              width: get_pc(463);
+              height: get_pc(278);
+              border-radius: get_pc(10);
+              margin-right: get_pc(17);
             }
-            .manage {
-                position: relative;
-                border-radius: 10px;
-                width: 571px;
-                height: 504px;
-                background-color: $background-color-2;
-                border: 1px solid $background-color-2;
-                @include pc {
-                    border-radius: get_pc(10);
-                    width: get_pc(571);
-                    height: get_pc(504);
-                }
-                @include tablet {
-                    width: get_tablet(743);
-                }
-                @include sp {
-                    width: 100%;
-                    height: get_sp(300);
-                    margin-bottom: 14px;
-                }
-                .thumb {
-                    position: absolute;
-                    width: 465px;
-                    height: 338px;
-                    right: 0;
-                    top: 15px;
-                    transition: all .5s;
-                    @include pc {
-                        width: get_pc(465);
-                        height: get_pc(338);
-                        top: get_pc(15);
-                    }
-                    @include sp {
-                        position: unset;
-                        width: get_sp(200);
-                        height: get_sp(120);
-                    }
-                    img {
-                        filter: drop-shadow(23px 18px 7px $clr-box-shodow);
-                    }
-                }
-                h4 {
-                    font-size: 64px;
-                    line-height: 77px;
-                    bottom: 28px;
-                    left: 50px;
-                    @extend .txt;
-                    transition: all .9s;
-                    @include pc {
-                        font-size: get_pc(64);
-                        line-height: get_pc(77);
-                        bottom: get_pc(28);
-                        left: get_pc(50);
-                    }
-                    @include sp {
-                        font-size: get_sp(36);
-                        line-height: get_sp(44);
-                        top: get_sp(62);
-                        left: get_sp(30);
-                    }
-                }
+            @include sp {
+              width: 100%;
+              height: get_sp(300);
+              margin-bottom: 14px;
             }
-            .manage:hover {
-                border: 1px solid $clr-base-font;
-                .thumb {
-                    top: 120px;
-                    @include pc {
-                        top: get_pc(120);
-                    }
-                    img {
-                        filter: drop-shadow(-15px 15px 10px $clr-box-shodow);
-                    }
-                }
-                h4 {
-                    bottom: 380px;
-                    @include pc {
-                        bottom: get_pc(380);
-                    }
-                }
+
+            .thumb {
+              position: absolute;
+              width: 232px;
+              height: 208px;
+              top: 0;
+              right: 0;
+              transition: all .5s;
+              @include pc {
+                width: get_pc(232);
+                height: get_pc(208);
+              }
+
+              img {
+                filter: drop-shadow(0px 16px 10px $clr-box-shodow)
+              }
             }
+
+            h4 {
+              font-size: 36px;
+              line-height: 39px;
+              top: 121px;
+              left: 50px;
+              @extend .txt;
+              @include pc {
+                font-size: get_pc(36);
+                line-height: get_pc(39);
+                top: get_pc(121);
+                left: get_pc(50);
+              }
+              @include sp {
+                font-size: get_sp(36);
+                line-height: get_sp(44);
+                top: get_sp(62);
+                left: get_sp(30);
+              }
+            }
+          }
+
+          .mission:hover {
+            border: 1px solid $clr-base-font;
+
+            .thumb {
+              top: -26px;
+              right: 18px;
+              @include pc {
+                top: get_pc(-26);
+                right: get_pc(18);
+              }
+
+              img {
+                transform: scale(1.3);
+                filter: drop-shadow(0px 30px 10px $clr-box-shodow);
+              }
+            }
+
+            h4 {
+              top: 180px;
+              @include pc {
+                top: get_pc(180);
+              }
+            }
+          }
+
+          .individual {
+            position: relative;
+            width: 263px;
+            height: 278px;
+            border-radius: 10px;
+            background-color: $background-color-2;
+            border: 1px solid $background-color-2;
+            @include pc {
+              width: get_pc(263);
+              height: get_pc(278);
+              border-radius: get_pc(10);
+            }
+            @include sp {
+              width: 100%;
+              height: get_sp(300);
+              margin-bottom: 14px;
+            }
+
+            .thumb {
+              position: absolute;
+              width: 185px;
+              height: 178px;
+              right: 0;
+              top: 81px;
+              transition: all .5s;
+              @include pc {
+                width: get_pc(185);
+                height: get_pc(178);
+                top: get_pc(81);
+              }
+
+              img {
+                filter: drop-shadow(14px 8px 10px $clr-box-shodow);
+              }
+            }
+
+            h4 {
+              font-size: 36px;
+              line-height: 44px;
+              top: 62px;
+              left: 30px;
+              @extend .txt;
+              @include pc {
+                font-size: get_pc(36);
+                line-height: get_pc(44);
+                top: get_pc(62);
+                left: get_pc(30);
+              }
+              @include sp {
+                font-size: get_sp(36);
+                line-height: get_sp(44);
+                top: get_sp(62);
+                left: get_sp(30);
+              }
+            }
+          }
+
+          .individual:hover {
+            border: 1px solid $clr-base-font;
+
+            .thumb {
+              img {
+                transform: scale(1.3);
+                filter: drop-shadow(13px 10px 4px $clr-box-shodow);
+              }
+            }
+
+            h4 {
+              top: 15px;
+              @include pc {
+                top: get_pc(15);
+              }
+            }
+          }
         }
+      }
+
+      .manage {
+        position: relative;
+        border-radius: 10px;
+        width: 571px;
+        height: 504px;
+        background-color: $background-color-2;
+        border: 1px solid $background-color-2;
+        @include pc {
+          border-radius: get_pc(10);
+          width: get_pc(571);
+          height: get_pc(504);
+        }
+        @include tablet {
+          width: get_tablet(743);
+        }
+        @include sp {
+          width: 100%;
+          height: get_sp(300);
+          margin-bottom: 14px;
+        }
+
+        .thumb {
+          position: absolute;
+          width: 465px;
+          height: 338px;
+          right: 0;
+          top: 15px;
+          transition: all .5s;
+          @include pc {
+            width: get_pc(465);
+            height: get_pc(338);
+            top: get_pc(15);
+          }
+          @include sp {
+            position: unset;
+            width: get_sp(200);
+            height: get_sp(120);
+          }
+
+          img {
+            filter: drop-shadow(23px 18px 7px $clr-box-shodow);
+          }
+        }
+
+        h4 {
+          font-size: 64px;
+          line-height: 77px;
+          bottom: 28px;
+          left: 50px;
+          @extend .txt;
+          transition: all .9s;
+          @include pc {
+            font-size: get_pc(64);
+            line-height: get_pc(77);
+            bottom: get_pc(28);
+            left: get_pc(50);
+          }
+          @include sp {
+            font-size: get_sp(36);
+            line-height: get_sp(44);
+            top: get_sp(62);
+            left: get_sp(30);
+          }
+        }
+      }
+
+      .manage:hover {
+        border: 1px solid $clr-base-font;
+
+        .thumb {
+          top: 120px;
+          @include pc {
+            top: get_pc(120);
+          }
+
+          img {
+            filter: drop-shadow(-15px 15px 10px $clr-box-shodow);
+          }
+        }
+
+        h4 {
+          bottom: 380px;
+          @include pc {
+            bottom: get_pc(380);
+          }
+        }
+      }
     }
+  }
 }

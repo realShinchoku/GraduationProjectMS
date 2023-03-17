@@ -8,9 +8,8 @@ import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 import BallotIcon from '@mui/icons-material/Ballot';
 import WalletIcon from '@mui/icons-material/Wallet';
 import Button from '@mui/material/Button';
-
 import {route} from "../../router/Routers";
-import {LampOn, LogoSP} from "../../../assets";
+import {LogoSP} from "../../../assets";
 import VerticalTabs from "./Tab";
 import {useStore} from "../../stores/store";
 import SidebarItem from "./SidebarItem/SidebarItem";
@@ -59,8 +58,9 @@ function Sidebar() {
                     <Box className="thumb_"/>
                     <Box className="txt">
                         <Typography variant="h3">Thông báo xác nhận</Typography>
-                        <Typography variant="body1">Giảng viên Nguyễn Thị Phương Thảo đã chấp nhận yêu cầu hướng dẫn của bạn.</Typography>
-                        <Button 
+                        <Typography variant="body1">Giảng viên Nguyễn Thị Phương Thảo đã chấp nhận yêu cầu hướng dẫn của
+                            bạn.</Typography>
+                        <Button
                             style={{
                                 backgroundColor: "#fff",
                                 color: "#000000",
@@ -70,7 +70,7 @@ function Sidebar() {
                         >
                             OK
                         </Button>
-                        <Button 
+                        <Button
                             style={{
                                 backgroundColor: "#fff",
                                 color: "#000000",

@@ -45,10 +45,6 @@ export default function StudentTableRow() {
         setValue(newValue);
     };
 
-    const handleChangeIndex = (index: number) => {
-        setValue(index);
-    };
-
     return (
         <Box>
             <Box className="account_table_list">

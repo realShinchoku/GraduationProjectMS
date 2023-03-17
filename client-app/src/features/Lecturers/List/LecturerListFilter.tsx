@@ -24,10 +24,7 @@ function LecturerListFilter() {
         if (departmentSubjectFilterItems.length <= 0)
             getFilterItem();
     }, [departmentSubjectFilterItems.length, getFilterItem]);
-
-
     const [keyword, setKeyword] = useState<string>('');
-    const autoC = useRef(null);
 
     return (
         <Box className="btn">

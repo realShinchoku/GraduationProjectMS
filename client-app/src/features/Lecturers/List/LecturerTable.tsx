@@ -1,7 +1,6 @@
 import {useStore} from "../../../app/stores/store";
 import {PagingParams} from "../../../app/models/pagination";
 import {
-    Box,
     Paper,
     Skeleton,
     Table,
@@ -14,7 +13,6 @@ import {
 } from "@mui/material";
 import LecturerTableRow from "./LecturerTableRow";
 import {observer} from "mobx-react-lite";
-import { red } from "@mui/material/colors";
 
 function LecturerTable() {
 
@@ -51,17 +49,19 @@ function LecturerTable() {
                                 <LecturerTableRow key={lecturer.id} lecturer={lecturer}/>
                             )}
                         </TableBody>
-                    ):(
+                    ) : (
                         <TableBody sx={{background: '#F7F6FE'}}>
                             {[...Array(pagination?.itemsPerPage || 5)].map((x, i) =>
                                 <TableRow sx={{
                                     padding: 0,
                                     marginTop: 0.125,
-                                    marginBottom: 0.125, 
+                                    marginBottom: 0.125,
                                     height: 67,
-                                    "& > *": {borderBottom: "unset", 
-                                }}} 
-                                    key={i}>
+                                    "& > *": {
+                                        borderBottom: "unset",
+                                    }
+                                }}
+                                          key={i}>
                                     <TableCell align="center"><Skeleton sx={{width: 100}}/></TableCell>
                                     <TableCell align="center"><Skeleton sx={{width: 30}}/></TableCell>
                                     <TableCell align="center"><Skeleton sx={{width: 80}}/></TableCell>

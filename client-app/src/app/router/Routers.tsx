@@ -10,8 +10,8 @@ import RequireNonAuth from "./RequireNonAuth";
 import Login from "../../features/Account/Login";
 import HomePage from "../../features/Homepage/HomePage";
 import LecturerList from "../../features/Lecturers/List/LecturerList";
-import AccountManagement from "../../features/AccountManagement/AccountManagement";
 import StudentManagement from "../../features/StudentManagement/StudentManagement";
+import AccountManagement from "../../features/AccountManagement/AccountManagement";
 
 
 export const route = {
@@ -31,7 +31,7 @@ export const routes: RouteObject[] = [
                 element: <RequireAuth/>, children: [
                     {path: '', element: <HomePage/>},
                     {path: 'lecturer', element: <LecturerList/>},
-                    {path: 'accountmanagement', element: <AccountManagement/>},
+                    {path: 'account/management', element: <AccountManagement/>},
                     {path: 'studentmanagement', element: <StudentManagement/>},
 
                 ]
@@ -41,8 +41,8 @@ export const routes: RouteObject[] = [
                     {path: 'login', element: <Login/>},
                     {path: 'account/password_reset', element: <PasswordReset/>},
                     {path: 'account/password_reset/with', element: <PasswordResetToken/>},
-                    
-                    
+
+
                 ]
             },
             {path: 'not-found', element: <NotFound/>},

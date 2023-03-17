@@ -1,5 +1,4 @@
 import {Box, Button, Card, CardContent, Divider, Grid, TableCell, Typography} from "@mui/material";
-import "./AccountManagement.scss"
 import {useState} from "react";
 import AccountTableRow from "./AccountTableRow";
 import AddAccountManagement from "./AddAccountManagement";

@@ -268,7 +268,7 @@
       font-family: system-ui;
     }
   }
-} 
+}
 
 .change_password {
   margin: 0 auto;
@@ -308,13 +308,16 @@
       line-height: 56px;
       margin-bottom: 10px;
     }
+
     p {
       margin-bottom: 10px;
     }
+
     button {
       float: right;
       padding: 10px 30px;
     }
+
     button + button {
       margin-right: 20px;
     }
