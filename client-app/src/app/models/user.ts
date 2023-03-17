@@ -3,6 +3,7 @@ export interface User {
     displayName: string;
     token: string;
     role: Role;
+    email: string;
 }
 
 export interface LoginFormValues {
