@@ -33,7 +33,7 @@ function Header() {
         setAnchorElUser(null);
     };
 
-    const {userStore: {logout}} = useStore();
+    const {userStore: {logout, user}} = useStore();
 
     return (
         <AppBar position="static" id="app_bar" sx={{position: 'fixed'}}>
@@ -69,8 +69,8 @@ function Header() {
                             </Badge>
                         </Box>
                         <Box className="tlt">
-                            <Typography variant="h5">Phạm Thị Tuyết Anh</Typography>
-                            <Box component="span">xxxxxxx@e.tlu.edu.vn</Box>
+                            <Typography variant="h5">{user?.displayName}</Typography>
+                            <Box component="span">{user?.email}</Box>
                         </Box>
                     </Box>
                     <Box sx={{flexGrow: 0}}>
