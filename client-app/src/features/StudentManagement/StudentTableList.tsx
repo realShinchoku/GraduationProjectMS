@@ -1,8 +1,8 @@
 import {Box, Card, CardContent, Divider, Grid, Typography} from "@mui/material";
 import "./StudentManagement.scss"
 import StudentTableRow from "./StudentTableRow";
-import { useStore } from "../../app/stores/store";
-import { useState } from "react";
+import {useStore} from "../../app/stores/store";
+import {useState} from "react";
 
 export default function StudentTableList() {
     const [detail, setDetail] = useState(false)
