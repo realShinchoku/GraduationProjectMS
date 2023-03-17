@@ -15,11 +15,12 @@ import AccountManagement from "../../features/AccountManagement/AccountManagemen
 
 
 export const route = {
+    home: '/',
     login: '/login',
     resetPassword: '/account/password_reset',
     confirmResetPassword: '/account/password_reset/with',
-    home: '/',
     lecturer: '/lecturer',
+    empty: 'null'
 };
 
 export const routes: RouteObject[] = [

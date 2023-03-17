@@ -44,9 +44,9 @@ function Sidebar() {
             <Box className="side_bar_inner">
                 <SidebarItem title="Trang chủ" to={route.home} icon={<WidgetsIcon/>}/>
                 <SidebarItem title="Giảng viên" to={route.lecturer} icon={<SmsIcon/>}/>
-                <SidebarItem title="Nhiệm vụ" to={route.lecturer} icon={<BallotIcon/>}/>
-                <SidebarItem title="Cá nhân" to={route.lecturer} icon={<PeopleAltIcon/>}/>
-                <SidebarItem title="Quản lý" to={route.lecturer} icon={<WalletIcon/>}/>
+                <SidebarItem title="Nhiệm vụ" to={route.empty} icon={<BallotIcon/>}/>
+                <SidebarItem title="Cá nhân" to={route.empty} icon={<PeopleAltIcon/>}/>
+                <SidebarItem title="Quản lý" to={route.empty} icon={<WalletIcon/>}/>
             </Box>
             <Typography className="tlt">GIẢNG VIÊN</Typography>
             {(location.pathname === '/lecturer') && (
