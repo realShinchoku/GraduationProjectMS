@@ -57,7 +57,8 @@ export default function AddAccountManagement() {
                             {!(isDragActive || acceptedFiles.length > 0) && <Box className="icon_dropzone">
                                 <Typography className='typo_dropzone'>Kéo thả file vào đây để nhập thông tin. Định dạng hỗ trợ .csv</Typography>
                             </Box>}
-                            {file && <Box className='dropzone_file_csv'>{}
+                        </Box>
+                        {file && <Box className='dropzone_file_csv'>{}
                                 <Button className={"icon_delete"} onClick={() => {
                                     acceptedFiles.slice(0);
                                     setFile(undefined);
@@ -67,7 +68,6 @@ export default function AddAccountManagement() {
                                 <DescriptionOutlinedIcon className='icon_dropfile'></DescriptionOutlinedIcon>
                                 <div className={"file_name"}>{file.name}</div>
                             </Box>}
-                        </Box>
                     </Box>
                     <Box className="button_exit">
                         <Button className="button_exit_dropzone" variant="contained"

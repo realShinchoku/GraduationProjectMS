@@ -4,14 +4,14 @@ import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
-import {Typography} from "@mui/material";
-import SimpleMail from "./SimpleMail";
+import { Button, ButtonGroup, Typography} from "@mui/material";
 import Collapse from "@mui/material/Collapse";
 import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
 
-import {AvatarSP} from "../../../assets";
+import {AvatarSP, LecturerImages} from "../../../assets";
 import {Lecturer} from "../../../app/models/lecturer";
+import LecturerList from "./LecturerList";
 
 type Props = {
     value: boolean,
@@ -25,7 +25,7 @@ function LecturerTableRowDetail({value, lecturer}: Props) {
                 <Collapse in={value} timeout="auto" unmountOnExit>
                     <Grid className="inner_contact">
                         <Grid className="thumb">
-                            <img src={AvatarSP} alt={""}/>
+                            <img src={LecturerImages.AvatarLecturer} alt={""}/>
                         </Grid>
                         <Grid className="list">
                             <List>
@@ -70,8 +70,19 @@ function LecturerTableRowDetail({value, lecturer}: Props) {
                             </List>
                         </Grid>
                         <Grid className="contact" onClick={() => window.location.href = `mailto:${lecturer.email}`}>
-                            <SimpleMail/>
-                            <Typography>Liên Hệ Hướng Dẫn</Typography>
+                            <ButtonGroup
+                                orientation="vertical"
+                                aria-label="vertical outlined button group"
+                                sx={{width:'fit-content',background: '#EBF9F1',}}
+                            >
+                            <Grid sx={{"&:hover": {backgroundColor: '#D1FBE3'},}}>
+                                <img className="img_contact_lecturer" src={LecturerImages.ContactLecturer} alt={""}/>
+                                <Button className="contact_guide">
+                                    <Typography className="typo_contact_guide">Liên hệ hướng dẫn</Typography>
+                                </Button>
+                            </Grid>
+                            <Button className="choose_lecturer">Chọn giảng viên</Button>
+                            </ButtonGroup>
                         </Grid>
                     </Grid>
                 </Collapse>
