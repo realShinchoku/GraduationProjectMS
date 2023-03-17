@@ -28,7 +28,8 @@ function TestApi() {
                 <Grid2 md={12}>
                     <Button onClick={() => changePassword({
                         oldPassword: 'Pa$$w0rd',
-                        newPassword: 'Pa$$w0rd'
+                        newPassword: 'Pa$$w0rd',
+                        retypePassword: 'Pa$$w0rd'
                     }).then(() => console.log('change password ok'))}>changePassword</Button>
                 </Grid2>
                 <Grid2 md={12}>

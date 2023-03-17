@@ -13,6 +13,7 @@ export interface LoginFormValues {
 export interface PasswordFormValues {
     oldPassword: string;
     newPassword: string;
+    retypePassword: string;
 }
 
 export enum Role {

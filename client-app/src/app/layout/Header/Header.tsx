@@ -17,10 +17,13 @@ import {useStore} from "../../stores/store";
 import {ListItemIcon, MenuItem} from "@mui/material";
 import {AccountCircle, Logout, Settings} from "@mui/icons-material";
 import "./Header.scss";
+import ChangePassword from "../../../features/Account/ChangePassword";
 
 function Header() {
 
     const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
+
+    const {modalStore} = useStore();
 
     const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorElUser(event.currentTarget);
@@ -96,9 +99,11 @@ function Header() {
                                 <ListItemIcon>
                                     <AccountCircle fontSize="small"/>
                                 </ListItemIcon>
-                                hông tin tài khoản
+                                Thông tin tài khoản
                             </MenuItem>
-                            <MenuItem onClick={() => console.log("doi mk")}>
+                            <MenuItem onClick={() => {
+                                    modalStore.openModal(<ChangePassword/>)
+                                }}>
                                 <ListItemIcon>
                                     <Settings fontSize="small"/>
                                 </ListItemIcon>
