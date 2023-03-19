@@ -56,7 +56,7 @@ function Header() {
                     <Box className="user">
                         <Box className="icon" sx={{color: 'action.active'}}>
                             <Box component="img" src={MessageQuestion} alt="" />
-                            <Box component="img" src={Notification} alt="" />
+                            <Box component="img" src={Notification} alt=""/>
                         </Box>
                         <Box className="tlt">
                             <Typography variant="h5">{user?.displayName}</Typography>
