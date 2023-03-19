@@ -18,6 +18,7 @@ import {ListItemIcon, MenuItem} from "@mui/material";
 import {AccountCircle, Logout, Settings} from "@mui/icons-material";
 import "./Header.scss";
 import ChangePassword from "../../../features/Account/ChangePassword";
+import { MessageQuestion, Notification } from "../../../assets";
 
 function Header() {
 
@@ -54,19 +55,8 @@ function Header() {
                     </Box>
                     <Box className="user">
                         <Box className="icon" sx={{color: 'action.active'}}>
-                            <Badge color="error" variant="dot" sx={{
-                                [`& .${badgeClasses.dot}`]: {
-                                    width: 6,
-                                    height: 6,
-                                    top: 5,
-                                    right: 6,
-                                    minWidth: "unset",
-                                    borderRadius: "50%"
-                                }
-                            }}>
-                                <ChatBubbleOutlineIcon/>
-                                <NotificationsNoneIcon/>
-                            </Badge>
+                            <Box component="img" src={MessageQuestion} alt="" />
+                            <Box component="img" src={Notification} alt="" />
                         </Box>
                         <Box className="tlt">
                             <Typography variant="h5">{user?.displayName}</Typography>

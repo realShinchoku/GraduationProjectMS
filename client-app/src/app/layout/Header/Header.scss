@@ -24,14 +24,11 @@
       .icon {
         margin-right: 15px;
 
-        svg {
-          width: 20px;
-          height: 20px;
+        img {
+          width: 32px;
+          height: 28px;
           position: relative;
-        }
-
-        svg + svg {
-          margin-left: 20px;
+          margin-right: 20px;
         }
       }
     }
