@@ -5,7 +5,7 @@ import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import "./SidebarItem.scss"
 
 interface Props {
-    title: any,
+    title: string,
     to: string,
     icon: any,
 }
@@ -13,7 +13,7 @@ interface Props {
 function SidebarItem({title, to, icon}: Props) {
     return (
         <NavLink to={to} className="menu_item" style={{textDecoration: 'none'}}>
-            <Grid className="icon">{icon}</Grid>
+            <Box component="img" src={icon} alt="" className="icon" />
             <Box component="span" className="title">{title}</Box>
         </NavLink>
     );

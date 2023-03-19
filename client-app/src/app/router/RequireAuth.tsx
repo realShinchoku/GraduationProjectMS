@@ -1,6 +1,8 @@
 import {useStore} from "../stores/store";
 import {Navigate, Outlet, useLocation} from "react-router-dom";
 import Sidebar from "../layout/Sidebar/Sidebar";
+import Sidebar1 from "../layout/Sidebar/Sidebar1";
+import Sidebar2 from "../layout/Sidebar/Sidebar2";
 import Header from "../layout/Header/Header";
 import {Grid} from "@mui/material";
 import "../../assets/css/config/_reset.scss"
@@ -19,6 +21,8 @@ function RequireAuth() {
         <>
             <Header/>
             <Sidebar/>
+            {/* <Sidebar1/> */}
+            {/* <Sidebar2/> */}
             <Grid className={`container ${sideBarState}`}>
                 <Outlet/>
             </Grid>
