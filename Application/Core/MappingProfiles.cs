@@ -1,4 +1,6 @@
-using Application.DepartmentSubjects.DTOs;
+﻿using Application.DepartmentSubjects.DTOs;
+using Application.GraduationProjectPeriods.DTOs;
+using Application.Instructors.DTOs;
 using Application.Lecturers.DTOs;
 using Application.Students.DTOs;
 using AutoMapper;
@@ -24,5 +26,14 @@ public class MappingProfiles : Profile
             .ForMember(d => d.GraduationProject, o => o.MapFrom(x => x.GraduationProject.Name))
             .ForMember(d => d.Syllabus, o => o.MapFrom(x => x.Syllabus.Name));
         CreateMap<DepartmentSubject, DepartmentSubjectFilterDto>();
+        CreateMap<Instructor, InstructorDto>()
+            .ForMember(d => d.Class, o => o.MapFrom(x => x.Student.Class.Name))
+            .ForMember(d => d.Student, o => o.MapFrom(x => x.Student.DisplayName))
+            .ForMember(d => d.Faculty, o => o.MapFrom(x => x.Student.Faculty.DisplayName))
+            .ForMember(d => d.Lecturer, o => o.MapFrom(x => x.Lecturer.DisplayName));
+        CreateMap<GraduationProjectPeriod, GraduationProjectPeriodDto>()
+            .ForMember(d => d.StudentsCount, o => o.MapFrom(x => x.Students.Count))
+            .ForMember(d => d.SyllabiCount, o => o.MapFrom(x => x.Syllabi.Count))
+            .ForMember(d => d.ClassesCount, o => o.MapFrom(x => x.Classes.Count));
     }
 }

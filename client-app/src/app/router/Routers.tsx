@@ -33,7 +33,7 @@ export const routes: RouteObject[] = [
                     {path: '', element: <HomePage/>},
                     {path: 'lecturer', element: <LecturerList/>},
                     {path: 'account/management', element: <AccountManagement/>},
-                    {path: 'student/management', element: <Instructor/>},
+                    {path: 'instructor', element: <Instructor/>},
 
                 ]
             },

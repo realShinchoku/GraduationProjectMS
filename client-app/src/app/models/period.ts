@@ -1,6 +1,6 @@
 import {Student} from "./student";
 
-export interface GraduationProjectPeriod {
+export interface Period {
     id: string;
     name: string;
     contactInstructorTime: Date;
@@ -9,5 +9,7 @@ export interface GraduationProjectPeriod {
     syllabusReviewTime: Date;
     graduationProjectTime: Date;
     protectionTime: Date;
-    students: Student[];
+    studentsCount: number;
+    syllabiCount: number;
+    classesCount: number;
 }

@@ -254,31 +254,40 @@
         svg {
           margin-bottom: 10px;
         }
-        .img_contact_lecturer{
+
+        .img_contact_lecturer {
           position: absolute;
           display: flex;
           margin-top: 45px;
           margin-left: 40px;
         }
-        .contact_guide{
+
+        .contact_guide {
           width: 169px;
           height: 184px;
         }
-        .typo_contact_guide{
+
+        .typo_contact_guide {
           margin-top: 80px;
           text-transform: capitalize;
         }
-        .choose_lecturer{
-          font-family: 'Inter';
+
+        .choose_lecturer {
+          font-family: 'Inter', sans-serif;
           text-align: center;
           text-transform: capitalize;
         }
-        .choose_lecturer:hover{
+
+        .choose_lecturer:hover {
           background-color: #D1FBE3;
         }
       }
 
     }
+  }
+
+  .img_contact_lecturer_ {
+    width: inherit;
   }
 
   td {

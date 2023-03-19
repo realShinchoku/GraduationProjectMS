@@ -11,37 +11,22 @@ import TableRow from '@mui/material/TableRow';
 import {Button} from '@mui/material';
 import BrowsingStatus from './BrowsingStatus';
 import {useStore} from '../../app/stores/store';
-
-function createData(
-    msv: number,
-    name: string,
-    classroom: string,
-    khoa: string,
-    date: string,
-    magv: number,
-    namegv: string,
-    status: string,
-    status_wait: string,
-) {
-    return {msv, name, classroom, khoa, date, magv, namegv, status, status_wait};
+import {useEffect} from "react";
+interface Props {
+    periodId: string;
 }
-
-const rows = [
-    createData(1951060909, 'Nguyễn Thị Phương Thảo', '61THNB', 'CNTT', '03/03/2001', 1951060911, 'Nguyễn Thị Phương Thảo', 'Null', ''),
-    createData(1951060909, 'Nguyễn Thị Phương Thảo', '61THNB', 'CNTT', '03/03/2001', 1951060911, 'Nguyễn Thị Phương Thảo', 'Null', ''),
-    createData(1951060909, 'Nguyễn Thị Phương Thảo', '61THNB', 'CNTT', '03/03/2001', 1951060911, 'Nguyễn Thị Phương Thảo', 'Null', ''),
-    createData(1951060909, 'Nguyễn Thị Phương Thảo', '61THNB', 'CNTT', '03/03/2001', 1951060911, 'Nguyễn Thị Phương Thảo', 'Null', ''),
-    createData(1951060909, 'Nguyễn Thị Phương Thảo', '61THNB', 'CNTT', '03/03/2001', 1951060911, 'Nguyễn Thị Phương Thảo', 'Null', ''),
-    createData(1951060909, 'Nguyễn Thị Phương Thảo', '61THNB', 'CNTT', '03/03/2001', 1951060911, 'Nguyễn Thị Phương Thảo', 'Null', ''),
-    createData(1951060909, 'Nguyễn Thị Phương Thảo', '61THNB', 'CNTT', '03/03/2001', 1951060911, 'Nguyễn Thị Phương Thảo', 'Null', ''),
-    createData(1951060909, 'Nguyễn Thị Phương Thảo', '61THNB', 'CNTT', '03/03/2001', 1951060911, 'Nguyễn Thị Phương Thảo', 'Null', ''),
-    createData(1951060909, 'Nguyễn Thị Phương Thảo', '61THNB', 'CNTT', '03/03/2001', 1951060911, 'Nguyễn Thị Phương Thảo', 'Null', ''),
-
-];
-
-export default function StudentManagementTable() {
+export default function StudentManagementTable({periodId}:Props) {
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
+
+    const {modalStore, instructorStore: {loadLists, instructors, instructorsList, setPredicate}} = useStore();
+    
+    useEffect(() => {
+        if (instructors.size <= 0) {
+            setPredicate('periodId', periodId);
+        }
+    }, [setPredicate, instructors.size]);
+
 
     const handleChangePage = (event: unknown, newPage: number) => {
         setPage(newPage);
@@ -51,7 +36,6 @@ export default function StudentManagementTable() {
         setRowsPerPage(+event.target.value);
         setPage(0);
     };
-    const {modalStore} = useStore();
 
     return (
         <Paper sx={{width: '100%', overflow: 'hidden', boxShadow: 'none'}}>
@@ -71,21 +55,19 @@ export default function StudentManagementTable() {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {rows.map((row) => (
+                        {instructorsList.map((row) => (
                             <TableRow
-                                key={row.msv}
+                                key={row.id}
                                 sx={{'&:last-child td, &:last-child th': {border: 0}}}
                             >
-                                <TableCell component="th" scope="row">
-                                    {row.msv}
-                                </TableCell>
-                                <TableCell align="left">{row.name}</TableCell>
-                                <TableCell align="left">{row.classroom}</TableCell>
-                                <TableCell align="left">{row.khoa}</TableCell>
-                                <TableCell align="left">{row.date}</TableCell>
-                                <TableCell align="left">{row.magv}</TableCell>
-                                <TableCell align="left">{row.namegv}</TableCell>
-                                <TableCell align="left">{row.status}</TableCell>
+                                <TableCell component="th" scope="row">{row.studentId}</TableCell>
+                                <TableCell align="left">{row.student}</TableCell>
+                                <TableCell align="left">{row.class}</TableCell>
+                                <TableCell align="left">{row.faculty}</TableCell>
+                                <TableCell align="left">{row.createdDate.toDateString()}</TableCell>
+                                <TableCell align="left">{row.lecturer}</TableCell>
+                                <TableCell align="left">{row.lecturer}</TableCell>
+                                <TableCell align="left">{row.approvalStatus}</TableCell>
                                 <TableCell align="left">
                                     <Button sx={{
                                         background: '#3690E3',

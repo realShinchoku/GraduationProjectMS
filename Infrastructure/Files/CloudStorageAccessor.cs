@@ -33,7 +33,7 @@ public class CloudStorageAccessor : ICloudStorageAccessor
                     PrivateKeyId = config.Value.PrivateKeyId,
                     ProjectId = config.Value.ProjectId,
                     Type = config.Value.Type,
-                    TokenUrl = config.Value.TokenUri,
+                    TokenUrl = config.Value.TokenUri
                 })
                 .CreateScoped(StorageService.Scope.DevstorageFullControl)
         }));

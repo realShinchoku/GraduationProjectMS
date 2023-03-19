@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Persistence;
@@ -11,9 +12,11 @@ using Persistence;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20230318141147_UpdateInstructor")]
+    partial class UpdateInstructor
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -186,9 +189,6 @@ namespace Persistence.Migrations
                     b.Property<DateTime>("ContactInstructorTime")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<string>("FacultyId")
-                        .HasColumnType("text");
-
                     b.Property<DateTime>("GraduationProjectTime")
                         .HasColumnType("timestamp with time zone");
 
@@ -208,8 +208,6 @@ namespace Persistence.Migrations
                         .HasColumnType("timestamp with time zone");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("FacultyId");
 
                     b.ToTable("GraduationProjectPeriods");
                 });
@@ -424,15 +422,6 @@ namespace Persistence.Migrations
                     b.HasOne("Domain.GraduationProjectPeriod", null)
                         .WithMany("Classes")
                         .HasForeignKey("GraduationProjectPeriodId");
-                });
-
-            modelBuilder.Entity("Domain.GraduationProjectPeriod", b =>
-                {
-                    b.HasOne("Domain.Faculty", "Faculty")
-                        .WithMany()
-                        .HasForeignKey("FacultyId");
-
-                    b.Navigation("Faculty");
                 });
 
             modelBuilder.Entity("Domain.Instructor", b =>

@@ -1,6 +1,8 @@
-namespace Domain;
+﻿using Application.Students.DTOs;
 
-public class GraduationProjectPeriod
+namespace Application.GraduationProjectPeriods.DTOs;
+
+public class GraduationProjectPeriodDto
 {
     public Guid Id { get; set; }
     public string Name { get; set; }
@@ -10,8 +12,7 @@ public class GraduationProjectPeriod
     public DateTime SyllabusReviewTime { get; set; }
     public DateTime GraduationProjectTime { get; set; }
     public DateTime ProtectionTime { get; set; }
-    public ICollection<Student> Students { get; set; }
-    public ICollection<Syllabus> Syllabi { get; set; }
-    public ICollection<Class> Classes { get; set; }
-    public Faculty Faculty { get; set; }
+    public int StudentsCount { get; set; }
+    public int SyllabiCount{ get; set; }
+    public int ClassesCount { get; set; }
 }

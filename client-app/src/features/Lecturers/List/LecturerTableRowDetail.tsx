@@ -4,14 +4,13 @@ import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
-import { Button, ButtonGroup, Typography} from "@mui/material";
+import {Button, ButtonGroup, Typography} from "@mui/material";
 import Collapse from "@mui/material/Collapse";
 import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
 
-import {AvatarSP, LecturerImages} from "../../../assets";
+import {LecturerImages} from "../../../assets";
 import {Lecturer} from "../../../app/models/lecturer";
-import LecturerList from "./LecturerList";
 
 type Props = {
     value: boolean,
@@ -73,15 +72,16 @@ function LecturerTableRowDetail({value, lecturer}: Props) {
                             <ButtonGroup
                                 orientation="vertical"
                                 aria-label="vertical outlined button group"
-                                sx={{width:'fit-content',background: '#EBF9F1',}}
+                                sx={{width: 'fit-content', background: '#EBF9F1',}}
                             >
-                            <Grid sx={{"&:hover": {backgroundColor: '#D1FBE3'},}}>
-                                <img className="img_contact_lecturer" src={LecturerImages.ContactLecturer} alt={""}/>
-                                <Button className="contact_guide">
-                                    <Typography className="typo_contact_guide">Liên hệ hướng dẫn</Typography>
-                                </Button>
-                            </Grid>
-                            <Button className="choose_lecturer">Chọn giảng viên</Button>
+                                <Grid sx={{"&:hover": {backgroundColor: '#D1FBE3'},}}>
+                                    <img className="img_contact_lecturer" src={LecturerImages.ContactLecturer}
+                                         alt={""}/>
+                                    <Button className="contact_guide">
+                                        <Typography className="typo_contact_guide">Liên hệ hướng dẫn</Typography>
+                                    </Button>
+                                </Grid>
+                                <Button className="choose_lecturer">Chọn giảng viên</Button>
                             </ButtonGroup>
                         </Grid>
                     </Grid>
