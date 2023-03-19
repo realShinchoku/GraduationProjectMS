@@ -2,10 +2,14 @@ import {observer} from "mobx-react-lite";
 import {useLocation} from "react-router-dom";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import {Avatar, Box, Typography} from "@mui/material";
+import WidgetsIcon from '@mui/icons-material/Widgets';
+import SmsIcon from '@mui/icons-material/Sms';
+import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
+import BallotIcon from '@mui/icons-material/Ballot';
+import WalletIcon from '@mui/icons-material/Wallet';
 import Button from '@mui/material/Button';
-
 import {route} from "../../router/Routers";
-import {Category, Folder, LogoSP, Message, ProfileUser, TaskSquare} from "../../../assets";
+import {LogoSP} from "../../../assets";
 import VerticalTabs from "./Tab";
 import {useStore} from "../../stores/store";
 import SidebarItem from "./SidebarItem/SidebarItem";
@@ -38,11 +42,11 @@ function Sidebar() {
                 </Box>
             </Box>
             <Box className="side_bar_inner">
-                <SidebarItem title="Trang chủ" to={route.home} icon={Category}/>
-                <SidebarItem title="Giảng viên" to={route.lecturer} icon={Message}/>
-                <SidebarItem title="Nhiệm vụ" to={route.empty} icon={TaskSquare}/>
-                <SidebarItem title="Cá nhân" to={route.empty} icon={ProfileUser}/>
-                <SidebarItem title="Quản lý" to={route.empty} icon={Folder}/>
+                <SidebarItem title="Trang chủ" to={route.home} icon={<WidgetsIcon/>}/>
+                <SidebarItem title="Giảng viên" to={route.lecturer} icon={<SmsIcon/>}/>
+                <SidebarItem title="Nhiệm vụ" to={route.empty} icon={<BallotIcon/>}/>
+                <SidebarItem title="Cá nhân" to={route.empty} icon={<PeopleAltIcon/>}/>
+                <SidebarItem title="Quản lý" to={route.empty} icon={<WalletIcon/>}/>
             </Box>
             <Typography className="tlt">GIẢNG VIÊN</Typography>
             {(location.pathname === '/lecturer') && (
