@@ -1,4 +1,4 @@
-import {AppBar, Box, IconButton, Tab, Tabs, TextField, Typography} from "@mui/material";
+import {AppBar, Box, IconButton, Tab, Tabs, TextField} from "@mui/material";
 import {useTheme} from '@mui/material/styles';
 import {SearchOutlined} from "@mui/icons-material";
 import React, {useState} from "react";
@@ -10,16 +10,16 @@ import {useStore} from "../../app/stores/store";
 import {observer} from "mobx-react-lite";
 
 interface Props {
-    periodId : string
+    periodId: string
 }
 
-function StudentTableRow({periodId} : Props) {
+function StudentTableRow({periodId}: Props) {
     const theme = useTheme();
     const [value, setValue] = React.useState('0');
     const [keyword, setKeyword] = useState<string>('');
-    
-    const {periodStore :{instructorStores}} = useStore();
-    const instructorStore  = instructorStores.get(periodId)!;
+
+    const {periodStore: {instructorStores}} = useStore();
+    const instructorStore = instructorStores.get(periodId)!;
 
     const handleChange = (event: unknown, newValue: string) => {
         setValue(newValue);
@@ -40,8 +40,8 @@ function StudentTableRow({periodId} : Props) {
                                       variant="fullWidth"
                                       aria-label="action tabs example"
                                 >
-                                    <Tab className="tab_account" label="Đã Đăng Ký" value={'0'} />
-                                    <Tab className="tab_account" label="Chưa đăng Ký" value={'1'} />
+                                    <Tab className="tab_account" label="Đã Đăng Ký" value={'0'}/>
+                                    <Tab className="tab_account" label="Chưa đăng Ký" value={'1'}/>
                                 </Tabs>
                             </AppBar>
                         </Box>
@@ -55,7 +55,7 @@ function StudentTableRow({periodId} : Props) {
                             InputProps={{
                                 startAdornment: (
                                     <IconButton onClick={() => {
-                                        if (value == '0')
+                                        if (value === '0')
                                             instructorStore.setPredicate('Keyword', keyword)
                                     }}>
                                         <SearchOutlined/>
@@ -66,7 +66,7 @@ function StudentTableRow({periodId} : Props) {
                             onChange={(e) => setKeyword(e.target.value)}
                             onKeyDown={(e) => {
                                 if (e.key === 'Enter')
-                                    if(value == '0')
+                                    if (value === '0')
                                         instructorStore.setPredicate('Keyword', keyword)
                             }}
                             disabled={instructorStore.loading}

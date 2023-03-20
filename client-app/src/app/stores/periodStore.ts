@@ -5,12 +5,13 @@ import {Period} from "../models/period";
 import InstructorStore from "./instructorStore";
 
 export default class PeriodStore {
-    periods = new Map<string,Period>();
+    periods = new Map<string, Period>();
     pagingParams = new PagingParams();
     pagination: Pagination | null = null;
     loading: boolean = true;
     predicate = new Map();
     instructorStores = new Map<string, InstructorStore>();
+
     constructor() {
         makeAutoObservable(this);
         reaction(() => this.predicate.values() || this.predicate.keys()
@@ -30,6 +31,14 @@ export default class PeriodStore {
         return Array.from(this.periods.values());
     }
 
+    get axiosParams() {
+        const params = new URLSearchParams();
+        params.append('pageNumber', this.pagingParams.pageNumber.toString());
+        params.append('pageSize', this.pagingParams.pageSize.toString());
+        this.predicate.forEach((value, key) => params.append(key, value));
+        return params;
+    }
+
     loadLists = async () => {
         this.loading = true;
         try {
@@ -44,14 +53,6 @@ export default class PeriodStore {
         } finally {
             runInAction(() => this.loading = false);
         }
-    }
-
-    get axiosParams() {
-        const params = new URLSearchParams();
-        params.append('pageNumber', this.pagingParams.pageNumber.toString());
-        params.append('pageSize', this.pagingParams.pageSize.toString());
-        this.predicate.forEach((value, key) => params.append(key, value));
-        return params;
     }
 
     setPagination = (pagination: Pagination) => this.pagination = pagination;
@@ -73,13 +74,14 @@ export default class PeriodStore {
     resetPredicate = () => {
         this.predicate.clear();
     }
-    
-    setInstructorStore = (periodId: string) => {
-        this.instructorStores.set(periodId, new InstructorStore(periodId));
+
+    setInstructorStore = async (periodId: string) => {
+        this.instructorStores.set(periodId, new InstructorStore());
+        await this.instructorStores.get(periodId)!.setPeriodId(periodId);
     }
-    
-    private setItem = (period: Period) => {
+
+    private setItem = async (period: Period) => {
         this.periods.set(period.id, period);
-        this.instructorStores.set(period.id, new InstructorStore(period.id));
+        await this.setInstructorStore(period.id)
     }
 }

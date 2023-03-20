@@ -44,8 +44,10 @@ public class List
 
             if (request.Params.PeriodId != null)
                 query = query.Where(x => x.GraduationProjectPeriod.Id == request.Params.PeriodId);
-            if(!string.IsNullOrEmpty(request.Params.Keyword))
-                query = query.Where(x => x.Student.StudentId.Contains(request.Params.Keyword) || x.Student.DisplayName.ToLower().Contains(request.Params.Keyword.ToLower()));
+            if (!string.IsNullOrEmpty(request.Params.Keyword))
+                query = query.Where(x =>
+                    x.Student.StudentId.Contains(request.Params.Keyword) || x.Student.DisplayName.ToLower()
+                        .Contains(request.Params.Keyword.ToLower()));
 
             return Result<PageList<InstructorDto>>.Success(
                 await PageList<InstructorDto>.CreateAsync(query.ProjectTo<InstructorDto>(_mapper.ConfigurationProvider),

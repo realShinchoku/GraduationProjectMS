@@ -4,9 +4,6 @@ import {store, StoreContext} from "./app/stores/store";
 import {router} from "./app/router/Routers";
 import {RouterProvider} from "react-router-dom";
 import reportWebVitals from "./reportWebVitals";
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { LocalizationProvider } from '@mui/x-date-pickers';
-
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
@@ -16,17 +13,18 @@ import '@fontsource/inter/500.css';
 import '@fontsource/inter/600.css';
 import '@fontsource/inter/700.css';
 import './assets/css/config/_reset.scss';
+import {LocalizationProvider} from "@mui/x-date-pickers";
+import {AdapterDateFns} from "@mui/x-date-pickers/AdapterDateFns";
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
 );
 root.render(
-    <StoreContext.Provider value={store}>
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
+    <LocalizationProvider dateAdapter={AdapterDateFns}>
+        <StoreContext.Provider value={store}>
             <RouterProvider router={router}/>
-        </LocalizationProvider>     
-    </StoreContext.Provider>
-
+        </StoreContext.Provider>
+    </LocalizationProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function

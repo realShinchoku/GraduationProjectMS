@@ -1,4 +1,5 @@
 import * as React from 'react';
+import {useEffect} from 'react';
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -10,25 +11,25 @@ import TableRow from '@mui/material/TableRow';
 import {Button} from '@mui/material';
 import BrowsingStatus from './BrowsingStatus';
 import {useStore} from '../../app/stores/store';
-import {useEffect, useState} from "react";
 import {observer} from "mobx-react-lite";
 import {format} from "date-fns";
-import InstructorStore from "../../app/stores/instructorStore";
 import LoadingCircular from "../../app/layout/LoadingCircular";
 import {PagingParams} from "../../app/models/pagination";
+
 interface Props {
     periodId: string;
 }
-function StudentManagementTable({periodId}:Props) {
 
-    const {modalStore, periodStore :{instructorStores}} = useStore();
-    const instructorStore  = instructorStores.get(periodId);
-    const {loadLists,instructors, instructorsList, loading, pagination, setPagingParams} = instructorStore!;
-    
+function StudentManagementTable({periodId}: Props) {
+
+    const {modalStore, periodStore: {instructorStores}} = useStore();
+    const instructorStore = instructorStores.get(periodId);
+    const {loadLists, instructors, instructorsList, loading, pagination, setPagingParams} = instructorStore!;
+
     useEffect(() => {
-        if(instructors.size <= 0)
+        if (instructors.size <= 0)
             loadLists();
-    },[loadLists,instructors.size])
+    }, [loadLists, instructors.size])
 
     const handleChangePage = (event: unknown, newPage: number) => {
         setPagingParams(new PagingParams(newPage, pagination!.itemsPerPage));
@@ -37,9 +38,9 @@ function StudentManagementTable({periodId}:Props) {
     const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
         setPagingParams(new PagingParams(0, parseInt(event.target.value, 10)));
     };
-    
-    if(loading)
-        return <LoadingCircular />
+
+    if (loading)
+        return <LoadingCircular/>
 
     return (
         <Paper sx={{width: '100%', overflow: 'hidden', boxShadow: 'none'}}>

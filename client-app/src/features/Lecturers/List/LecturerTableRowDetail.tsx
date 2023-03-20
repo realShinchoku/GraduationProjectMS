@@ -8,9 +8,9 @@ import {Button, ButtonGroup, Typography} from "@mui/material";
 import Collapse from "@mui/material/Collapse";
 import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
-
 import {LecturerImages} from "../../../assets";
 import {Lecturer} from "../../../app/models/lecturer";
+import {useStore} from "../../../app/stores/store";
 
 type Props = {
     value: boolean,
@@ -18,6 +18,9 @@ type Props = {
 };
 
 function LecturerTableRowDetail({value, lecturer}: Props) {
+  
+    const {instructorStore:{chose}} = useStore();
+    
     return (
         <TableRow>
             <TableCell component="th" style={{padding: 0}} colSpan={12}>
@@ -81,7 +84,7 @@ function LecturerTableRowDetail({value, lecturer}: Props) {
                                         <Typography className="typo_contact_guide">Liên hệ hướng dẫn</Typography>
                                     </Button>
                                 </Grid>
-                                <Button className="choose_lecturer">Chọn giảng viên</Button>
+                                <Button className="choose_lecturer" onClick={() => chose(lecturer.id)}>Chọn giảng viên</Button>
                             </ButtonGroup>
                         </Grid>
                     </Grid>

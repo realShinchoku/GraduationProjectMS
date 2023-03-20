@@ -2,10 +2,10 @@ import {AppBar, Box, IconButton, Tab, Tabs, TextField} from "@mui/material";
 import {useTheme} from '@mui/material/styles';
 import {SearchOutlined} from "@mui/icons-material";
 import React from "react";
-import {TabContext, TabPanel} from "@mui/lab";
 import AccountManagementListItemStudentTable from "./AccountManagementListItemStudentTable";
 import AccountManagementListItemLecturerTable from "./AccountManagementListItemLecturerTable";
 import AccountManagementListItemDepartmentSubjectTable from "./AccountManagementListItemDepartmentSubjectTable";
+import {TabContext, TabPanel} from "@mui/lab";
 
 function AccountManagementListItemDetail() {
     const theme = useTheme();

@@ -16,7 +16,7 @@ using Persistence;
 
 namespace Application.Accounts;
 
-public partial class Create
+public class Create
 {
     public class Command : IRequest<Result<Unit>>
     {

@@ -8,7 +8,7 @@ interface Props {
     period: Period;
 }
 
-function InstructorList({period}:Props) {
+function InstructorList({period}: Props) {
     return (
         <Card sx={{background: '#F7F9FB', borderRadius: '16px', boxShadow: 'none'}} className="account_table_list">
             <Typography variant="h6" className="name_table">{period.name}</Typography>

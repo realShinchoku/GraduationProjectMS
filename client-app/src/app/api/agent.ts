@@ -117,7 +117,7 @@ const Instructors = {
     list: (params: URLSearchParams, periodId: string) => requests.list<Instructor[]>(`/instructor?periodId=${periodId}`, {params}),
     chose: (id: string) => requests.post(`/instructor/chose/${id}`, {}),
     approval: (id: string) => requests.post(`/instructor/approval/${id}`, {}),
-    assign: (studentId: string, lecturerId: string) => requests.post(`/instructor/assign`, {studentId,lecturerId}),
+    assign: (studentId: string, lecturerId: string) => requests.post(`/instructor/assign`, {studentId, lecturerId}),
 }
 
 const agent = {

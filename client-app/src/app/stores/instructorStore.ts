@@ -2,22 +2,17 @@
 import {Instructor} from "../models/instructor";
 import {Pagination, PagingParams} from "../models/pagination";
 import agent from "../api/agent";
-import {run} from "node:test";
 
 export default class InstructorStore {
     periodId: string | null = null;
-    instructors = new Map<string,Instructor>();
+    instructors = new Map<string, Instructor>();
     pagingParams = new PagingParams();
     pagination: Pagination | null = null;
     loading: boolean = true;
     predicate = new Map();
-    
-    constructor(period: string) {
+
+    constructor() {
         makeAutoObservable(this);
-        runInAction(() => {
-            this.periodId = period;
-            this.loadLists();
-        });
         reaction(() => this.predicate.values() || this.predicate.keys()
             ,
             async () => {
@@ -31,10 +26,19 @@ export default class InstructorStore {
             });
     }
     
+
     get instructorsList() {
         return Array.from(this.instructors.values());
     }
-    
+
+    get axiosParams() {
+        const params = new URLSearchParams();
+        params.append('pageNumber', this.pagingParams.pageNumber.toString());
+        params.append('pageSize', this.pagingParams.pageSize.toString());
+        this.predicate.forEach((value, key) => params.append(key, value));
+        return params;
+    }
+
     loadLists = async () => {
         this.loading = true;
         try {
@@ -51,14 +55,6 @@ export default class InstructorStore {
         }
     }
 
-    get axiosParams() {
-        const params = new URLSearchParams();
-        params.append('pageNumber', this.pagingParams.pageNumber.toString());
-        params.append('pageSize', this.pagingParams.pageSize.toString());
-        this.predicate.forEach((value, key) => params.append(key, value));
-        return params;
-    }
-
     setPagination = (pagination: Pagination) => this.pagination = pagination;
     setPagingParams = (pagingParams: PagingParams) => this.pagingParams = pagingParams;
     setPredicate = (predicate: string, value: string | number) => {
@@ -70,16 +66,30 @@ export default class InstructorStore {
 
         this.predicate.set(predicate, value);
     }
-    
+
     removePredicate = (predicate: string) => {
         this.predicate.delete(predicate);
     }
-    
+
     resetPredicate = () => {
         this.predicate.clear();
     }
-    
+
+    setPeriodId = async (id: string) => {
+        this.periodId = id;
+        await this.loadLists();
+    }
+
     private setItem = (instructor: Instructor) => {
         this.instructors.set(instructor.id, instructor);
+    }
+    
+    chose = async (id: string) => {
+        try {
+            await agent.Instructors.chose(id);
+        }
+        catch (e) {
+            console.log(e);
+        }
     }
 }

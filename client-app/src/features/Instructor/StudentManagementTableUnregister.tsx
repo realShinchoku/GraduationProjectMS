@@ -32,7 +32,6 @@ const rows = [
     createData(1951060909, 'Nguyễn Thị Phương Thảo', '61THNB', 'CNTT', '19510609111@e.tlu.edu.vn'),
     createData(1951060909, 'Nguyễn Thị Phương Thảo', '61THNB', 'CNTT', '19510609111@e.tlu.edu.vn'),
     createData(1951060909, 'Nguyễn Thị Phương Thảo', '61THNB', 'CNTT', '19510609111@e.tlu.edu.vn'),
-
 ];
 
 export default function StudentManagementTable() {

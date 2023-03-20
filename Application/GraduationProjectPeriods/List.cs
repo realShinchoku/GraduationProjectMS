@@ -3,7 +3,6 @@ using Application.GraduationProjectPeriods.DTOs;
 using Application.Interfaces;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
-using Domain;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
@@ -20,8 +19,8 @@ public class List
     public class Handler : IRequestHandler<Query, Result<PageList<GraduationProjectPeriodDto>>>
     {
         private readonly DataContext _context;
-        private readonly IUserAccessor _userAccessor;
         private readonly IMapper _mapper;
+        private readonly IUserAccessor _userAccessor;
 
         public Handler(DataContext context, IUserAccessor userAccessor, IMapper mapper)
         {
@@ -30,7 +29,8 @@ public class List
             _mapper = mapper;
         }
 
-        public async Task<Result<PageList<GraduationProjectPeriodDto>>> Handle(Query request, CancellationToken cancellationToken)
+        public async Task<Result<PageList<GraduationProjectPeriodDto>>> Handle(Query request,
+            CancellationToken cancellationToken)
         {
             var faculty = await _userAccessor.GetFacultyAsync();
             if (faculty == null)

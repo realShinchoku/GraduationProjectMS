@@ -22,9 +22,9 @@ public class InstructorController : BaseApiController
 
     [Authorize(Policy = "IsDepartmentSubjects")]
     [HttpPost("approval/{id}")]
-    public async Task<IActionResult> ApprovalLecturer(Guid id,[FromBody] bool status)
+    public async Task<IActionResult> ApprovalLecturer(Guid id, [FromBody] bool status)
     {
-        return HandleResult(await Mediator.Send(new Approval.Command { InstructorId = id, Status = status}));
+        return HandleResult(await Mediator.Send(new Approval.Command { InstructorId = id, Status = status }));
     }
 
     [Authorize(Policy = "IsStudent")]

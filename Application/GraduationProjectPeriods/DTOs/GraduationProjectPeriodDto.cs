@@ -1,6 +1,4 @@
-﻿using Application.Students.DTOs;
-
-namespace Application.GraduationProjectPeriods.DTOs;
+﻿namespace Application.GraduationProjectPeriods.DTOs;
 
 public class GraduationProjectPeriodDto
 {
@@ -13,6 +11,6 @@ public class GraduationProjectPeriodDto
     public DateTime GraduationProjectTime { get; set; }
     public DateTime ProtectionTime { get; set; }
     public int StudentsCount { get; set; }
-    public int SyllabiCount{ get; set; }
+    public int SyllabiCount { get; set; }
     public int ClassesCount { get; set; }
 }

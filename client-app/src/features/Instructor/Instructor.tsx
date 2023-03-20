@@ -15,8 +15,8 @@ function Instructor() {
         <Box className={`instructor`}>
             <Box className="inner">
                 <Box className="nav">
-                    <Typography variant="h3">Quản Lý Đăng Ký Giảng Viên Hướng Dẫn</Typography>
-                    {periodsList.map(period => 
+                    <Typography variant="h3">Quản Lý Đăng ký Giảng viên hướng dẫn</Typography>
+                    {periodsList.map(period =>
                         <InstructorList period={period} key={period.id}/>
                     )}
                 </Box>

@@ -3,7 +3,6 @@ import {makeAutoObservable, runInAction} from "mobx";
 import agent from "../api/agent";
 import {store} from "./store";
 import {route, router} from "../router/Routers";
-import {useLocation} from "react-router-dom";
 
 export default class UserStore {
     user: User | null = null;
@@ -24,10 +23,10 @@ export default class UserStore {
             runInAction(() => {
                 this.user = user;
             });
-            await runInAction(async () => {
-                const state = router.state.location.state.from;
-                await router.navigate(state.pathname || route.home);
-            });
+            if(router.state.location.state)
+                await  router.navigate(router.state.location.state.from.pathname);
+            else 
+                await router.navigate( route.home);
         } catch (err: any) {
             const error = {email: null, password: null}
             if (err.response.data.email)

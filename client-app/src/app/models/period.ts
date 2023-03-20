@@ -1,5 +1,3 @@
-import {Student} from "./student";
-
 export interface Period {
     id: string;
     name: string;

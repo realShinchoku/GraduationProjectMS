@@ -29,11 +29,13 @@ public class List
         {
             var query = _context.Students
                 .OrderBy(x => x.UserName.Length)
-                .ThenBy(x => x.UserName)
-                .ProjectTo<StudentDto>(_mapper.ConfigurationProvider).AsQueryable();
-
+                .ThenBy(x => x.UserName).AsQueryable();
+            
+            if(!string.IsNullOrEmpty(request.Params.PeriodId.ToString()))
+                query = query.Where(x => x.GraduationProjectPeriod.Id == request.Params.PeriodId);
+            
             return Result<PageList<StudentDto>>.Success(
-                await PageList<StudentDto>.CreateAsync(query, request.Params, cancellationToken)
+                await PageList<StudentDto>.CreateAsync(query.ProjectTo<StudentDto>(_mapper.ConfigurationProvider), request.Params, cancellationToken)
             );
         }
     }

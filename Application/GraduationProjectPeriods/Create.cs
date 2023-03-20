@@ -52,7 +52,7 @@ public class Create
             var faculty = await _userAccessor.GetFacultyAsync();
             if (faculty == null)
                 return null;
-            
+
             request.GraduationProjectPeriod.Faculty = faculty;
             _context.GraduationProjectPeriods.Add(request.GraduationProjectPeriod);
             var result = await _context.SaveChangesAsync(cancellationToken) > 0;
