@@ -1,54 +1,34 @@
 import {AppBar, Box, IconButton, Tab, Tabs, TextField, Typography} from "@mui/material";
 import {useTheme} from '@mui/material/styles';
 import {SearchOutlined} from "@mui/icons-material";
-import React from "react";
+import React, {useState} from "react";
 
 import StudentManagementTableRegistered from "./StudentManagementTableRegistered";
 import StudentManagementTableUnregister from "./StudentManagementTableUnregister";
+import {TabContext, TabPanel} from "@mui/lab";
+import {useStore} from "../../app/stores/store";
+import {observer} from "mobx-react-lite";
 
-interface TabPanelProps {
-    children?: React.ReactNode;
-    dir?: string;
-    index: number;
-    value: number;
+interface Props {
+    periodId : string
 }
 
-function TabPanel(props: TabPanelProps) {
-    const {children, value, index, ...other} = props;
-
-    return (
-        <Typography
-            component="div"
-            role="tabpanel"
-            hidden={value !== index}
-            id={`action-tabpanel-${index}`}
-            aria-labelledby={`action-tab-${index}`}
-            {...other}
-        >
-            {value === index && <Box sx={{p: 3}}>{children}</Box>}
-        </Typography>
-    );
-}
-
-function a11yProps(index: any) {
-    return {
-        id: `action-tab-${index}`,
-        'aria-controls': `action-tabpanel-${index}`,
-    };
-}
-
-export default function StudentTableRow() {
+function StudentTableRow({periodId} : Props) {
     const theme = useTheme();
-    const [value, setValue] = React.useState(0);
+    const [value, setValue] = React.useState('0');
+    const [keyword, setKeyword] = useState<string>('');
+    
+    const {periodStore :{instructorStores}} = useStore();
+    const instructorStore  = instructorStores.get(periodId)!;
 
-    const handleChange = (event: unknown, newValue: number) => {
+    const handleChange = (event: unknown, newValue: string) => {
         setValue(newValue);
     };
 
     return (
         <Box>
             <Box className="account_table_list">
-                <Box>
+                <TabContext value={value}>
                     <Box className="detail_account">
                         <Box className="select_user">
                             <AppBar sx={{background: '#fffefe', boxShadow: 'none'}} position="static" color="default">
@@ -60,8 +40,8 @@ export default function StudentTableRow() {
                                       variant="fullWidth"
                                       aria-label="action tabs example"
                                 >
-                                    <Tab className="tab_account" label="Đã Đăng Ký" {...a11yProps(0)} />
-                                    <Tab className="tab_account" label="Chưa đăng Ký" {...a11yProps(1)} />
+                                    <Tab className="tab_account" label="Đã Đăng Ký" value={'0'} />
+                                    <Tab className="tab_account" label="Chưa đăng Ký" value={'1'} />
                                 </Tabs>
                             </AppBar>
                         </Box>
@@ -74,21 +54,34 @@ export default function StudentTableRow() {
                             placeholder="Tìm kiếm..."
                             InputProps={{
                                 startAdornment: (
-                                    <IconButton>
+                                    <IconButton onClick={() => {
+                                        if (value == '0')
+                                            instructorStore.setPredicate('Keyword', keyword)
+                                    }}>
                                         <SearchOutlined/>
                                     </IconButton>
                                 ),
                             }}
+                            value={keyword}
+                            onChange={(e) => setKeyword(e.target.value)}
+                            onKeyDown={(e) => {
+                                if (e.key === 'Enter')
+                                    if(value == '0')
+                                        instructorStore.setPredicate('Keyword', keyword)
+                            }}
+                            disabled={instructorStore.loading}
                         />
                     </Box>
-                    <TabPanel value={value} index={0} dir={theme.direction}>
-                        <StudentManagementTableRegistered/>
+                    <TabPanel value={'0'} dir={theme.direction}>
+                        <StudentManagementTableRegistered periodId={periodId}/>
                     </TabPanel>
-                    <TabPanel value={value} index={1} dir={theme.direction}>
+                    <TabPanel value={'1'} dir={theme.direction}>
                         <StudentManagementTableUnregister/>
                     </TabPanel>
-                </Box>
+                </TabContext>
             </Box>
         </Box>
     );
 }
+
+export default observer(StudentTableRow);

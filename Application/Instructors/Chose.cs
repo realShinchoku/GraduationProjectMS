@@ -5,9 +5,9 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
 
-namespace Application.Students;
+namespace Application.Instructors;
 
-public class ChoseLecturer
+public class Chose
 {
     public class Command : IRequest<Result<Unit>>
     {
@@ -27,7 +27,8 @@ public class ChoseLecturer
 
         public async Task<Result<Unit>> Handle(Command request, CancellationToken cancellationToken)
         {
-            var student = await _context.Students.FirstOrDefaultAsync(x => x.UserName == _userAccessor.GetUserName(),
+            var student = await _context.Students.Include(p => p.GraduationProjectPeriod).FirstOrDefaultAsync(
+                x => x.UserName == _userAccessor.GetUserName(),
                 cancellationToken);
 
             if (student == null) return null;
@@ -54,7 +55,8 @@ public class ChoseLecturer
             {
                 DepartmentSubject = lecturer.DepartmentSubject,
                 Lecturer = lecturer,
-                Student = student
+                Student = student,
+                GraduationProjectPeriod = student.GraduationProjectPeriod
             };
 
             _context.Instructors.Add(instructor);
