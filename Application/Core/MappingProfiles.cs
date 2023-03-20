@@ -29,6 +29,7 @@ public class MappingProfiles : Profile
         CreateMap<Instructor, InstructorDto>()
             .ForMember(d => d.Class, o => o.MapFrom(x => x.Student.Class.Name))
             .ForMember(d => d.Student, o => o.MapFrom(x => x.Student.DisplayName))
+            .ForMember(d => d.StudentId, o => o.MapFrom(x => x.Student.StudentId))
             .ForMember(d => d.Faculty, o => o.MapFrom(x => x.Student.Faculty.DisplayName))
             .ForMember(d => d.Lecturer, o => o.MapFrom(x => x.Lecturer.DisplayName));
         CreateMap<GraduationProjectPeriod, GraduationProjectPeriodDto>()

@@ -2,6 +2,7 @@
 import {Pagination, PagingParams} from "../models/pagination";
 import agent from "../api/agent";
 import {Period} from "../models/period";
+import InstructorStore from "./instructorStore";
 
 export default class PeriodStore {
     periods = new Map<string,Period>();
@@ -9,6 +10,7 @@ export default class PeriodStore {
     pagination: Pagination | null = null;
     loading: boolean = true;
     predicate = new Map();
+    instructorStores = new Map<string, InstructorStore>();
     constructor() {
         makeAutoObservable(this);
         reaction(() => this.predicate.values() || this.predicate.keys()
@@ -71,8 +73,13 @@ export default class PeriodStore {
     resetPredicate = () => {
         this.predicate.clear();
     }
-
+    
+    setInstructorStore = (periodId: string) => {
+        this.instructorStores.set(periodId, new InstructorStore(periodId));
+    }
+    
     private setItem = (period: Period) => {
         this.periods.set(period.id, period);
+        this.instructorStores.set(period.id, new InstructorStore(period.id));
     }
 }

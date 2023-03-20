@@ -1,19 +1,25 @@
 import {AppBar, Box, IconButton, Tab, Tabs, TextField, Typography} from "@mui/material";
 import {useTheme} from '@mui/material/styles';
 import {SearchOutlined} from "@mui/icons-material";
-import React from "react";
+import React, {useState} from "react";
 
 import StudentManagementTableRegistered from "./StudentManagementTableRegistered";
 import StudentManagementTableUnregister from "./StudentManagementTableUnregister";
 import {TabContext, TabPanel} from "@mui/lab";
+import {useStore} from "../../app/stores/store";
+import {observer} from "mobx-react-lite";
 
 interface Props {
     periodId : string
 }
 
-export default function StudentTableRow({periodId} : Props) {
+function StudentTableRow({periodId} : Props) {
     const theme = useTheme();
     const [value, setValue] = React.useState('0');
+    const [keyword, setKeyword] = useState<string>('');
+    
+    const {periodStore :{instructorStores}} = useStore();
+    const instructorStore  = instructorStores.get(periodId)!;
 
     const handleChange = (event: unknown, newValue: string) => {
         setValue(newValue);
@@ -48,11 +54,22 @@ export default function StudentTableRow({periodId} : Props) {
                             placeholder="Tìm kiếm..."
                             InputProps={{
                                 startAdornment: (
-                                    <IconButton>
+                                    <IconButton onClick={() => {
+                                        if (value == '0')
+                                            instructorStore.setPredicate('Keyword', keyword)
+                                    }}>
                                         <SearchOutlined/>
                                     </IconButton>
                                 ),
                             }}
+                            value={keyword}
+                            onChange={(e) => setKeyword(e.target.value)}
+                            onKeyDown={(e) => {
+                                if (e.key === 'Enter')
+                                    if(value == '0')
+                                        instructorStore.setPredicate('Keyword', keyword)
+                            }}
+                            disabled={instructorStore.loading}
                         />
                     </Box>
                     <TabPanel value={'0'} dir={theme.direction}>
@@ -66,3 +83,5 @@ export default function StudentTableRow({periodId} : Props) {
         </Box>
     );
 }
+
+export default observer(StudentTableRow);

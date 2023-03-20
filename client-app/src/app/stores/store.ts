@@ -13,7 +13,6 @@ interface Store {
     modalStore: ModalStore;
     lecturerStore: LecturerStore;
     departmentSubjectStore: DepartmentSubjectStore;
-    instructorStore : InstructorStore;
     periodStore : PeriodStore;
 }
 
@@ -23,7 +22,6 @@ export const store: Store = {
     modalStore: new ModalStore(),
     lecturerStore: new LecturerStore(),
     departmentSubjectStore: new DepartmentSubjectStore(),
-    instructorStore: new InstructorStore(),
     periodStore: new PeriodStore(),
 }
 

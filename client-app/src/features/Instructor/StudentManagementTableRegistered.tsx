@@ -7,35 +7,39 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
-
 import {Button} from '@mui/material';
 import BrowsingStatus from './BrowsingStatus';
 import {useStore} from '../../app/stores/store';
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
+import {observer} from "mobx-react-lite";
+import {format} from "date-fns";
+import InstructorStore from "../../app/stores/instructorStore";
+import LoadingCircular from "../../app/layout/LoadingCircular";
+import {PagingParams} from "../../app/models/pagination";
 interface Props {
     periodId: string;
 }
-export default function StudentManagementTable({periodId}:Props) {
-    const [page, setPage] = React.useState(0);
-    const [rowsPerPage, setRowsPerPage] = React.useState(10);
+function StudentManagementTable({periodId}:Props) {
 
-    const {modalStore, instructorStore: {loadLists, instructors, instructorsList, setPredicate}} = useStore();
+    const {modalStore, periodStore :{instructorStores}} = useStore();
+    const instructorStore  = instructorStores.get(periodId);
+    const {loadLists,instructors, instructorsList, loading, pagination, setPagingParams} = instructorStore!;
     
     useEffect(() => {
-        if (instructors.size <= 0) {
-            setPredicate('periodId', periodId);
-        }
-    }, [setPredicate, instructors.size]);
-
+        if(instructors.size <= 0)
+            loadLists();
+    },[loadLists,instructors.size])
 
     const handleChangePage = (event: unknown, newPage: number) => {
-        setPage(newPage);
+        setPagingParams(new PagingParams(newPage, pagination!.itemsPerPage));
     };
 
     const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setRowsPerPage(+event.target.value);
-        setPage(0);
+        setPagingParams(new PagingParams(0, parseInt(event.target.value, 10)));
     };
+    
+    if(loading)
+        return <LoadingCircular />
 
     return (
         <Paper sx={{width: '100%', overflow: 'hidden', boxShadow: 'none'}}>
@@ -56,15 +60,12 @@ export default function StudentManagementTable({periodId}:Props) {
                     </TableHead>
                     <TableBody>
                         {instructorsList.map((row) => (
-                            <TableRow
-                                key={row.id}
-                                sx={{'&:last-child td, &:last-child th': {border: 0}}}
-                            >
+                            <TableRow key={row.id} sx={{'&:last-child td, &:last-child th': {border: 0}}}>
                                 <TableCell component="th" scope="row">{row.studentId}</TableCell>
                                 <TableCell align="left">{row.student}</TableCell>
                                 <TableCell align="left">{row.class}</TableCell>
                                 <TableCell align="left">{row.faculty}</TableCell>
-                                <TableCell align="left">{row.createdDate.toDateString()}</TableCell>
+                                <TableCell align="left">{format(new Date(row.createdDate!), 'dd/MM/yyyy')}</TableCell>
                                 <TableCell align="left">{row.lecturer}</TableCell>
                                 <TableCell align="left">{row.lecturer}</TableCell>
                                 <TableCell align="left">{row.approvalStatus}</TableCell>
@@ -86,14 +87,16 @@ export default function StudentManagementTable({periodId}:Props) {
                 </Table>
             </TableContainer>
             <TablePagination
-                rowsPerPageOptions={[10, 25, 100]}
+                rowsPerPageOptions={[5, 10, 25]}
                 component="div"
-                count={12}
-                rowsPerPage={rowsPerPage}
-                page={page}
+                count={pagination?.totalItems || 0}
+                rowsPerPage={pagination?.itemsPerPage || 10}
+                page={pagination?.currentPage || 0}
                 onPageChange={handleChangePage}
                 onRowsPerPageChange={handleChangeRowsPerPage}
             />
         </Paper>
     );
 }
+
+export default observer(StudentManagementTable);
