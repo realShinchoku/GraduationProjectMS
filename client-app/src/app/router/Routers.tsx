@@ -10,6 +10,7 @@ import RequireNonAuth from "./RequireNonAuth";
 import Login from "../../features/Account/Login";
 import HomePage from "../../features/Homepage/HomePage";
 import LecturerList from "../../features/Lecturers/List/LecturerList";
+import GraduationList from "../../features/Graduation/GraduationList";
 import AccountManagement from "../../features/AccountManagement/AccountManagement";
 import Instructor from "../../features/Instructor/Instructor";
 
@@ -32,6 +33,7 @@ export const routes: RouteObject[] = [
                 element: <RequireAuth/>, children: [
                     {path: '', element: <HomePage/>},
                     {path: 'lecturer', element: <LecturerList/>},
+                    {path: 'graduation', element: <GraduationList/>},
                     {path: 'account/management', element: <AccountManagement/>},
                     {path: 'instructor', element: <Instructor/>},
 
