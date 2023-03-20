@@ -45,7 +45,7 @@ export default function BasicModal() {
     const {modalStore} = useStore();
   return (
     <div>
-        <Box sx={{  position: 'absolute' as 'absolute',top: '50%',left: '50%',transform: 'translate(-50%, -50%)',width: 1068,bgcolor: 'background.paper',boxShadow: 24,p: 4, background:'#f4f4f4',maxHeight:'495px',padding: '40px 80px 10px 80px'}}>
+        <Box className='list_of_instructor' sx={{  position: 'absolute' as 'absolute',top: '50%',left: '50%',transform: 'translate(-50%, -50%)',bgcolor: 'background.paper',boxShadow: 24,p: 4, background:'#f4f4f4',padding: '40px 80px 10px 80px'}}>
           <Typography id="modal-modal-title" variant="h6" component="h2">
             Danh sách giáo viên hướng dẫn
           </Typography>

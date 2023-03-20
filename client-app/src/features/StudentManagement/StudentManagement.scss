@@ -250,6 +250,9 @@
   .color_background {
     color: #b6b6b6;
     white-space: nowrap;
+    @include tablet{
+      white-space: nowrap;
+    }
   }
 }
 
@@ -455,6 +458,12 @@ line-height: 29px;
 text-align: center;
 color: #000000;
 }
-
+.list_of_instructor{
+  width: 1068px;
+  max-height: 495px;
+    @include tablet{
+      width: 600px;
+    }
+}
 
 
