@@ -4,6 +4,8 @@ import {store, StoreContext} from "./app/stores/store";
 import {router} from "./app/router/Routers";
 import {RouterProvider} from "react-router-dom";
 import reportWebVitals from "./reportWebVitals";
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
@@ -19,7 +21,9 @@ const root = ReactDOM.createRoot(
 );
 root.render(
     <StoreContext.Provider value={store}>
-        <RouterProvider router={router}/>
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <RouterProvider router={router}/>
+    </LocalizationProvider>       
     </StoreContext.Provider>
 );
 
