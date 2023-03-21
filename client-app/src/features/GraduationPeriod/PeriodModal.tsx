@@ -1,4 +1,4 @@
-import {Box, Button, FormHelperText, Typography} from "@mui/material";
+import {Box, Button, Typography} from "@mui/material";
 import "./Period.scss";
 import Grid from "@mui/material/Unstable_Grid2";
 import {useStore} from "../../app/stores/store";
