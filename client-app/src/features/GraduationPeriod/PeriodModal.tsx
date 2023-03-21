@@ -97,7 +97,7 @@ function PeriodModal({id}: Props) {
                                 </Button>
                             </Grid>
                             <Grid container md={12} spacing={4}>
-                                <Grid md={3} sx={dirty && Boolean(errors.name) && {backgroundColor:'red'}} >
+                                <Grid md={3}>
                                     <Typography variant="h6" sx={{paddingLeft: "14px"}}>
                                         Ngày bắt đầu
                                     </Typography>
@@ -118,7 +118,6 @@ function PeriodModal({id}: Props) {
                                             "& fieldset": {border: "none"},
                                         }}
                                     />
-                                    <FormHelperText error={dirty && Boolean(errors.name)}>{dirty && errors.name}</FormHelperText>
                                 </Grid>
                                 <Grid md={3}>
                                     <Typography variant="h6" sx={{paddingLeft: "14px"}}>
