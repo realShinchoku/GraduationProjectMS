@@ -26,8 +26,7 @@ function LecturerTableRowDetail({value, lecturer}: Props) {
     const [isActive, setIsActive] = useState(false);
 
     function handleSubmit() {
-        chose(lecturer.id)
-        setIsActive(current => !current);
+        chose(lecturer.id).then(() =>setIsActive(current => !current))
     }
     
     return (
