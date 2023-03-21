@@ -12,7 +12,7 @@ using Persistence;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230320160859_Init")]
+    [Migration("20230321032758_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -138,25 +138,6 @@ namespace Persistence.Migrations
                     b.UseTptMappingStrategy();
                 });
 
-            modelBuilder.Entity("Domain.Class", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid?>("GraduationProjectPeriodId")
-                        .HasColumnType("uuid");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("GraduationProjectPeriodId");
-
-                    b.ToTable("Class");
-                });
-
             modelBuilder.Entity("Domain.GraduationProject", b =>
                 {
                     b.Property<Guid>("Id")
@@ -165,6 +146,9 @@ namespace Persistence.Migrations
 
                     b.Property<string>("Description")
                         .HasColumnType("text");
+
+                    b.Property<Guid?>("GraduationProjectPeriodId")
+                        .HasColumnType("uuid");
 
                     b.Property<string>("Name")
                         .HasColumnType("text");
@@ -177,6 +161,8 @@ namespace Persistence.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("GraduationProjectPeriodId");
+
                     b.ToTable("GraduationProjects");
                 });
 
@@ -187,6 +173,9 @@ namespace Persistence.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<DateTime>("ContactInstructorTime")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<DateTime>("EndDate")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("FacultyId")
@@ -202,6 +191,9 @@ namespace Persistence.Migrations
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<DateTime>("RegisterTopicTime")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<DateTime>("StartDate")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<DateTime>("SyllabusReviewTime")
@@ -376,8 +368,8 @@ namespace Persistence.Migrations
                 {
                     b.HasBaseType("Domain.AppUser");
 
-                    b.Property<Guid?>("ClassId")
-                        .HasColumnType("uuid");
+                    b.Property<string>("Class")
+                        .HasColumnType("text");
 
                     b.Property<string>("DepartmentSubjectId")
                         .HasColumnType("text");
@@ -406,8 +398,6 @@ namespace Persistence.Migrations
                     b.Property<string>("SyllabusId")
                         .HasColumnType("text");
 
-                    b.HasIndex("ClassId");
-
                     b.HasIndex("DepartmentSubjectId");
 
                     b.HasIndex("FacultyId");
@@ -425,10 +415,10 @@ namespace Persistence.Migrations
                     b.ToTable("Students", (string)null);
                 });
 
-            modelBuilder.Entity("Domain.Class", b =>
+            modelBuilder.Entity("Domain.GraduationProject", b =>
                 {
                     b.HasOne("Domain.GraduationProjectPeriod", null)
-                        .WithMany("Classes")
+                        .WithMany("Projects")
                         .HasForeignKey("GraduationProjectPeriodId");
                 });
 
@@ -537,10 +527,6 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.Student", b =>
                 {
-                    b.HasOne("Domain.Class", "Class")
-                        .WithMany()
-                        .HasForeignKey("ClassId");
-
                     b.HasOne("Domain.DepartmentSubject", "DepartmentSubject")
                         .WithMany("Students")
                         .HasForeignKey("DepartmentSubjectId");
@@ -575,8 +561,6 @@ namespace Persistence.Migrations
                         .WithMany()
                         .HasForeignKey("SyllabusId");
 
-                    b.Navigation("Class");
-
                     b.Navigation("DepartmentSubject");
 
                     b.Navigation("Faculty");
@@ -594,7 +578,7 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.GraduationProjectPeriod", b =>
                 {
-                    b.Navigation("Classes");
+                    b.Navigation("Projects");
 
                     b.Navigation("Students");
 

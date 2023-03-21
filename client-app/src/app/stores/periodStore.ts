@@ -13,6 +13,7 @@ export default class PeriodStore {
     predicate = new Map();
     instructorStores = new Map<string, InstructorStore>();
     studentStores = new Map<string, StudentStore>();
+    isInstructor = false;
 
     constructor() {
         makeAutoObservable(this);
@@ -86,10 +87,19 @@ export default class PeriodStore {
         this.studentStores.set(periodId, new StudentStore());
         await this.studentStores.get(periodId)!.setPeriodId(periodId);
     }
+    
+    setInstructorStatus = () => this.isInstructor = true;
 
     private setItem = async (period: Period) => {
         this.periods.set(period.id, period);
-        await this.setInstructorStore(period.id);
-        await this.setStudentStore(period.id);
+        if(this.isInstructor) 
+        {
+            await this.setInstructorStore(period.id);
+            await this.setStudentStore(period.id);
+        }
+    }
+    
+    create = () => {
+        
     }
 }

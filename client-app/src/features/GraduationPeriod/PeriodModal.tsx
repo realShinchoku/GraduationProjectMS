@@ -1,63 +1,92 @@
 import {Box, Button, TextField, Typography} from "@mui/material";
-import "./Graduation.scss";
+import "./Period.scss";
 import Grid from "@mui/material/Unstable_Grid2";
 import {useStore} from "../../app/stores/store";
 import {Form, Formik} from "formik";
-import {DatePicker} from "@mui/x-date-pickers/DatePicker";
-import {date} from "yup";
-import SnackBar from "./SnackBar";
+import {v4 as uuid} from 'uuid';
+import {DatePickerField} from "../../app/common/DatePickerField";
+import * as Yup from 'yup';
+import {LoadingButton} from "@mui/lab";
+import {Period, PeriodFormValues} from "../../app/models/period";
+import {useEffect, useState} from "react";
 
-export default function GraduationModal() {
-    const {modalStore} = useStore();
+interface Props {
+    period?: Period;
+}
+
+export default function PeriodModal({period}:Props) {
+    
+    const {modalStore, periodStore:{}} = useStore();
+
+    function handleFormSubmit(period: PeriodFormValues, setErrors: any) {
+        if (!period.id) {
+            let newActivity = {
+                ...period,
+                id: uuid()
+            }
+            // createActivity(newActivity).then(() => navigate(`/activities/${newActivity.id}`)).catch(err => setErrors({error: err}));
+        } else {
+            // updateActivity(period).then(() => navigate(`/activities/${period.id}`)).catch(err => setErrors({error: err}));
+        }
+    }
+
+    useEffect(() => {
+        if (period)
+            console.log(period);
+    }, [period]);
+    
     return (
         <Box className="Modal">
             <Formik
-                initialValues={{
-                    name: "",
-                    contactInstructorTime: "",
-                    registerTopicTime: "",
-                    syllabusSubmissionTime: "",
-                    syllabusReviewTime: "",
-                    graduationProjectTime: "",
-                    protectionTime: "",
-                    startDate: date,
-                    endDate: "",
-                }}
+                initialValues={{... period}}
                 onSubmit={(values) => {
                     console.log(values);
                 }}
+                validationSchema={Yup.object().shape({
+                    name: Yup.string()
+                        .required("Vui lòng điền đủ thông tin"),
+                    startDate: Yup.date()
+                        .required("Vui lòng điền đủ thông tin"),
+                    endDate: Yup.date()
+                        .required("Vui lòng điền đủ thông tin"),
+                    contactInstructorTime: Yup.date()
+                        .required("Vui lòng điền đủ thông tin"),
+                    registerTopicTime: Yup.date()
+                        .required("Vui lòng điền đủ thông tin"),
+                    syllabusSubmissionTime: Yup.date()
+                        .required("Vui lòng điền đủ thông tin"),
+                    syllabusReviewTime: Yup.date()
+                        .required("Vui lòng điền đủ thông tin"),
+                    graduationProjectTime: Yup.date()
+                        .required("Vui lòng điền đủ thông tin"),
+                    protectionTime: Yup.date()
+                        .required("Vui lòng điền đủ thông tin"),
+                })}
             >
-                {({
-                      handleChange,
-                      handleSubmit,
-                      errors,
-                      isValid,
-                      dirty,
-                      isSubmitting,
-                      initialValues,
-                  }) => (
-                    <Form className="modalContent" onSubmit={handleSubmit}>
+                {({handleChange,dirty,isValid, isSubmitting}) => (
+                    <Form className="modalContent">
                         <Grid container style={{marginBottom: "20px"}} spacing={2}>
                             <Grid xs={8}>
                                 <TextField
                                     fullWidth
-                                    value="Đồ án khóa ..."
+                                    label="Tên đồ án"
+                                    name="name"
                                     onChange={handleChange}
                                     sx={{border: "none", "& fieldset": {border: "none"}}}
                                     inputProps={{style: {fontSize: "1.25rem", fontWeight: "500", lineHeight: "1.6"}}}
                                 />
-
                             </Grid>
                             <Grid xs={4}>
-                                <Button
+                                <LoadingButton
                                     type="submit"
                                     color="inherit"
                                     variant="outlined"
                                     className="button"
-                                    onClick={() => modalStore.openModal(<SnackBar/>)}
+                                    disabled={!dirty ||!isValid || isSubmitting}
+                                    loading={isSubmitting}
                                 >
                                     Tạo
-                                </Button>
+                                </LoadingButton>
                                 <Button
                                     color="inherit"
                                     variant="outlined"
@@ -72,24 +101,28 @@ export default function GraduationModal() {
                                     <Typography variant="h6" sx={{paddingLeft: "14px"}}>
                                         Ngày bắt đầu
                                     </Typography>
-                                    <DatePicker
+                                    <DatePickerField
+                                        name={'startDate'}
                                         sx={{
                                             width: "100%",
                                             border: "none",
                                             "& fieldset": {border: "none"},
                                         }}
+                                        slotProps={{textField: {placeholder: ''}}}
                                     />
                                 </Grid>
                                 <Grid md={3}>
                                     <Typography variant="h6" sx={{paddingLeft: "14px"}}>
                                         Ngày kết thúc
                                     </Typography>
-                                    <DatePicker
+                                    <DatePickerField
+                                        name={'endDate'}
                                         sx={{
                                             width: "100%",
                                             border: "none",
                                             "& fieldset": {border: "none"},
                                         }}
+                                        slotProps={{textField: {placeholder: ''}}}
                                     />
                                 </Grid>
                             </Grid>
@@ -101,12 +134,14 @@ export default function GraduationModal() {
                                     <Typography variant="body2" sx={{paddingLeft: "14px"}}>
                                         Thời Gian Liên Hệ Giảng Viên
                                     </Typography>
-                                    <DatePicker
+                                    <DatePickerField
+                                        name={'contactInstructorTime'}
                                         sx={{
                                             width: "100%",
                                             border: "none",
                                             "& fieldset": {border: "none"},
                                         }}
+                                        slotProps={{textField: {placeholder: ''}}}
                                     />
                                 </Box>
                             </Grid>
@@ -115,12 +150,14 @@ export default function GraduationModal() {
                                     <Typography variant="body2" sx={{paddingLeft: "14px"}}>
                                         Thời Gian Đăng Ký Đề Tài
                                     </Typography>
-                                    <DatePicker
+                                    <DatePickerField
+                                        name={'registerTopicTime'}
                                         sx={{
                                             width: "100%",
                                             border: "none",
                                             "& fieldset": {border: "none"},
                                         }}
+                                        slotProps={{textField: {placeholder: ''}}}
                                     />
                                 </Box>
                             </Grid>
@@ -129,12 +166,14 @@ export default function GraduationModal() {
                                     <Typography variant="body2" sx={{paddingLeft: "14px"}}>
                                         Thời Gian Nộp Đề Cương
                                     </Typography>
-                                    <DatePicker
+                                     <DatePickerField
+                                        name={'syllabusSubmissionTime'}
                                         sx={{
                                             width: "100%",
                                             border: "none",
                                             "& fieldset": {border: "none"},
                                         }}
+                                        slotProps={{textField: {placeholder: ''}}}
                                     />
                                 </Box>
                             </Grid>
@@ -143,12 +182,14 @@ export default function GraduationModal() {
                                     <Typography variant="body2" sx={{paddingLeft: "14px"}}>
                                         Thời Gian Duyệt Đề cương
                                     </Typography>
-                                    <DatePicker
+                                     <DatePickerField
+                                        name={'syllabusReviewTime'}
                                         sx={{
                                             width: "100%",
                                             border: "none",
                                             "& fieldset": {border: "none"},
                                         }}
+                                        slotProps={{textField: {placeholder: ''}}}
                                     />
                                 </Box>
                             </Grid>
@@ -157,12 +198,14 @@ export default function GraduationModal() {
                                     <Typography variant="body2" sx={{paddingLeft: "14px"}}>
                                         Thời Gian Làm Đồ Án
                                     </Typography>
-                                    <DatePicker
+                                     <DatePickerField
+                                        name={'graduationProjectTime'}
                                         sx={{
                                             width: "100%",
                                             border: "none",
                                             "& fieldset": {border: "none"},
                                         }}
+                                        slotProps={{textField: {placeholder: ''}}}
                                     />
                                 </Box>
                             </Grid>
@@ -173,12 +216,14 @@ export default function GraduationModal() {
                                             Thời Gian Bảo Vệ
                                         </Typography>
                                     </Box>
-                                    <DatePicker
+                                     <DatePickerField
+                                        name={'protectionTime'}
                                         sx={{
                                             width: "100%",
                                             border: "none",
                                             "& fieldset": {border: "none"},
                                         }}
+                                        slotProps={{textField: {placeholder: ''}}}
                                     />
                                 </Box>
                             </Grid>

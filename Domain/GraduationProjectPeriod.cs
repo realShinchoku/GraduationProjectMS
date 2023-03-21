@@ -4,6 +4,8 @@ public class GraduationProjectPeriod
 {
     public Guid Id { get; set; }
     public string Name { get; set; }
+    public DateTime StartDate { get; set; }
+    public DateTime EndDate { get; set; }
     public DateTime ContactInstructorTime { get; set; }
     public DateTime RegisterTopicTime { get; set; }
     public DateTime SyllabusSubmissionTime { get; set; }
@@ -12,6 +14,6 @@ public class GraduationProjectPeriod
     public DateTime ProtectionTime { get; set; }
     public ICollection<Student> Students { get; set; }
     public ICollection<Syllabus> Syllabi { get; set; }
-    public ICollection<Class> Classes { get; set; }
+    public ICollection<GraduationProject> Projects { get; set; }
     public Faculty Faculty { get; set; }
 }

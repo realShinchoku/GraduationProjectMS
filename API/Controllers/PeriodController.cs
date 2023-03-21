@@ -19,7 +19,7 @@ public class PeriodController : BaseApiController
     }
 
     [HttpGet]
-    public async Task<IActionResult> List([FromQuery] PagingParams pagingParams)
+    public async Task<IActionResult> List([FromQuery] List.PeriodParams pagingParams)
     {
         return HandlePageResult(await Mediator.Send(new List.Query { Params = pagingParams }));
     }

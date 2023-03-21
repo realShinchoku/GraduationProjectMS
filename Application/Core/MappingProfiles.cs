@@ -25,10 +25,10 @@ public class MappingProfiles : Profile
             .ForMember(d => d.GraduationProjectReport, o => o.MapFrom(x => x.GraduationProjectReport.Name))
             .ForMember(d => d.GraduationProject, o => o.MapFrom(x => x.GraduationProject.Name))
             .ForMember(d => d.Syllabus, o => o.MapFrom(x => x.Syllabus.Name))
-            .ForMember(d => d.Class, o => o.MapFrom(x => x.Class.Name));
+            .ForMember(d => d.Class, o => o.MapFrom(x => x.Class));
         CreateMap<DepartmentSubject, DepartmentSubjectFilterDto>();
         CreateMap<Instructor, InstructorDto>()
-            .ForMember(d => d.Class, o => o.MapFrom(x => x.Student.Class.Name))
+            .ForMember(d => d.Class, o => o.MapFrom(x => x.Student.Class))
             .ForMember(d => d.Student, o => o.MapFrom(x => x.Student.DisplayName))
             .ForMember(d => d.StudentId, o => o.MapFrom(x => x.Student.StudentId))
             .ForMember(d => d.Faculty, o => o.MapFrom(x => x.Student.Faculty.DisplayName))
@@ -36,6 +36,8 @@ public class MappingProfiles : Profile
         CreateMap<GraduationProjectPeriod, GraduationProjectPeriodDto>()
             .ForMember(d => d.StudentsCount, o => o.MapFrom(x => x.Students.Count))
             .ForMember(d => d.SyllabiCount, o => o.MapFrom(x => x.Syllabi.Count))
-            .ForMember(d => d.ClassesCount, o => o.MapFrom(x => x.Classes.Count));
+            .ForMember(d => d.ClassesCount, o => o.MapFrom(x => x.Students.GroupBy(s => s.Class).Count()))
+            .ForMember(d => d.ProjectsCount, o => o.MapFrom(x => x.Projects.Count))
+            .ForMember(d => d.LecturersCount, o => o.MapFrom(x => x.Faculty.Lecturers.Count));
     }
 }
