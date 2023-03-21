@@ -1,4 +1,4 @@
-import {Box, Button, Typography} from "@mui/material";
+import {Box, Button, FormHelperText, Typography} from "@mui/material";
 import "./Period.scss";
 import Grid from "@mui/material/Unstable_Grid2";
 import {useStore} from "../../app/stores/store";
@@ -97,7 +97,7 @@ function PeriodModal({id}: Props) {
                                 </Button>
                             </Grid>
                             <Grid container md={12} spacing={4}>
-                                <Grid md={3}>
+                                <Grid md={3} sx={dirty && Boolean(errors.name) && {backgroundColor:'red'}} >
                                     <Typography variant="h6" sx={{paddingLeft: "14px"}}>
                                         Ngày bắt đầu
                                     </Typography>
@@ -118,6 +118,7 @@ function PeriodModal({id}: Props) {
                                             "& fieldset": {border: "none"},
                                         }}
                                     />
+                                    <FormHelperText error={dirty && Boolean(errors.name)}>{dirty && errors.name}</FormHelperText>
                                 </Grid>
                                 <Grid md={3}>
                                     <Typography variant="h6" sx={{paddingLeft: "14px"}}>

@@ -181,22 +181,26 @@
 
     .modal {
       display: none;
+
       &.open {
         display: block;
         position: absolute;
         top: 0;
         width: 100%;
         height: 100%;
-        background-color: rgba(0,0,0,0.5);
+        background-color: rgba(0, 0, 0, 0.5);
         text-align: center;
+
         .content {
           padding-top: 100px;
+
           p {
             font-size: 32px;
             font-weight: 400;
             line-height: 38px;
             color: #FFFFFF;
           }
+
           span {
             font-size: 32px;
             font-weight: 800;
@@ -291,7 +295,7 @@
           p {
             text-transform: capitalize;
           }
-          
+
         }
 
 

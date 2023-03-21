@@ -27,14 +27,14 @@ function LecturerTableRow({lecturer}: Props) {
                 <TableCell align="center">{lecturer.education}</TableCell>
                 <TableCell align="center">{lecturer.lecturerStatus}</TableCell>
                 {open ?
-                    <TableCell sx={{ borderBottom: 'unset' }}/>
+                    <TableCell sx={{borderBottom: 'unset'}}/>
                     :
                     <TableCell sx={{width: '25px', borderBottom: 'unset'}} align="center"
-                        onClick={() => window.location.href = `mailto:${lecturer.email}`}>
+                               onClick={() => window.location.href = `mailto:${lecturer.email}`}>
                         <img className="img_contact_lecturer_" src={LecturerImages.ContactLecturer} alt={""}/>
                     </TableCell>
                 }
-                <TableCell sx={{ borderBottom: 'unset' }}>
+                <TableCell sx={{borderBottom: 'unset'}}>
                     <IconButton
                         aria-label="expand row"
                         size="small"

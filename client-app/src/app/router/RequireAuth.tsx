@@ -11,11 +11,10 @@ import DepartmentSubjectSidebar from "../layout/Sidebar/DepartmentSubjectSidebar
 import FacultySidebar from "../layout/Sidebar/FacultySidebar";
 
 function RequireAuth() {
-    const {commonStore: {sideBarState},userStore} = useStore();
+    const {commonStore: {sideBarState}, userStore} = useStore();
     const location = useLocation();
-    
-    function sidebar(role : Role)
-    {
+
+    function sidebar(role: Role) {
         switch (role) {
             case Role.Student:
                 return <StudentSidebar/>;

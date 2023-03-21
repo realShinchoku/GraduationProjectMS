@@ -37,19 +37,23 @@ export const routes: RouteObject[] = [
         element: <App/>,
         children: [
             {
-                element: <RequireAuth/>,children: [
-                    {element: <IsStudent/>, children: [
+                element: <RequireAuth/>, children: [
+                    {
+                        element: <IsStudent/>, children: [
                             {path: 'lecturer', element: <LecturerList/>},
                         ]
                     },
-                    {element: <IsLecturer/>, children: [
-                        ]}
+                    {
+                        element: <IsLecturer/>, children: []
+                    }
                     ,
-                    {element: <IsDepartmentSubject/>, children: [
+                    {
+                        element: <IsDepartmentSubject/>, children: [
                             {path: 'instructor', element: <Instructor/>},
                         ]
                     },
-                    {element: <IsFaculty/>, children: [
+                    {
+                        element: <IsFaculty/>, children: [
                             {path: 'period', element: <Period/>},
                             {path: 'account/management', element: <AccountManagement/>},
                         ]

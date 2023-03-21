@@ -15,8 +15,8 @@ export default class UserStore {
     get isLoggedIn() {
         return !!this.user;
     }
-    
-    get getRole(){
+
+    get getRole() {
         return this.user!.role;
     }
 
