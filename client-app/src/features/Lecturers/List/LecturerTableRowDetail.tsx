@@ -87,7 +87,7 @@ function LecturerTableRowDetail({value, lecturer}: Props) {
                                     <Box component="img" src={LecturerImages.ContactLecturer} alt="" />
                                     <Typography variant="body1">Liên hệ hướng dẫn</Typography>
                                 </Button>
-                                <Button className="choose_lecturer" onClick={chose(lecturer.id).then(() =>setIsActive(current => !current))}>Chọn giảng viên</Button>
+                                <Button className="choose_lecturer" onClick={() => chose(lecturer.id).then(() =>setIsActive(current => !current))}>Chọn giảng viên</Button>
                             </ButtonGroup>
                         </Grid>
                     </Grid>
