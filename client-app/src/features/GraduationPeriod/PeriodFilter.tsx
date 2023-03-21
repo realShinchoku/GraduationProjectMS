@@ -4,17 +4,15 @@ import {IconButton, TextField} from "@mui/material";
 import {SearchOutlined} from "@mui/icons-material";
 import Button from "@mui/material/Button";
 import AddIcon from '@mui/icons-material/Add';
-import AutoComplete from "../../app/common/AutoComplete/AutoComplete";
 import PeriodModal from "./PeriodModal";
 import {useStore} from "../../app/stores/store";
 import React, {useState} from "react";
 
 function PeriodFilter() {
-    const {modalStore, periodStore : {setPredicate, loading}} = useStore();
+    const {modalStore, periodStore: {setPredicate, loading}} = useStore();
     const [keyword, setKeyword] = useState('');
-    
-    
-    
+
+
     return (
         <React.Fragment>
             <Box className="btn">

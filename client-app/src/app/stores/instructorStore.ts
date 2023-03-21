@@ -1,4 +1,4 @@
-﻿import {makeAutoObservable, reaction, runInAction} from "mobx";
+import {makeAutoObservable, reaction, runInAction} from "mobx";
 import {Instructor} from "../models/instructor";
 import {Pagination, PagingParams} from "../models/pagination";
 import agent from "../api/agent";

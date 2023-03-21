@@ -7,7 +7,7 @@ import {Lecturer} from "../models/lecturer";
 import {Student} from "../models/student";
 import {DepartmentSubjectFilterItem} from "../models/departmentSubject";
 import {Instructor} from "../models/instructor";
-import {Period} from "../models/period";
+import {Period, PeriodFormValues} from "../models/period";
 
 const sleep = (delay: number) => {
     return new Promise((resolve) => {
@@ -104,7 +104,8 @@ const Students = {
 }
 
 const Periods = {
-    create: (period: Period) => requests.post<void>('/period', {period}),
+    create: (period: PeriodFormValues) => requests.post<void>('/period', period),
+    edit: (period: PeriodFormValues) => requests.put<void>('/period', period),
     list: (params: URLSearchParams) => requests.list<Period[]>('/period', {params}),
     single: (id: string) => requests.get<Period>(`/period/${id}`),
 }

@@ -47,8 +47,8 @@ public class List
                 .Where(x => x.Faculty == faculty)
                 .ProjectTo<GraduationProjectPeriodDto>(_mapper.ConfigurationProvider)
                 .AsQueryable();
-            
-            if(!string.IsNullOrEmpty(request.Params.Keyword))
+
+            if (!string.IsNullOrEmpty(request.Params.Keyword))
                 query = query.Where(x => x.Name.ToLower().Contains(request.Params.Keyword.ToLower()));
 
             return Result<PageList<GraduationProjectPeriodDto>>.Success(

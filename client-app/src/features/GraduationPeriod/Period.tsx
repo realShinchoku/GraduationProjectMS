@@ -7,8 +7,6 @@ import {useEffect} from "react";
 import PeriodListItem from "./PeriodListItem";
 import PeriodFilter from "./PeriodFilter";
 import LoadingCircular from "../../app/layout/LoadingCircular";
-import {Simulate} from "react-dom/test-utils";
-import load = Simulate.load;
 
 
 function Period() {

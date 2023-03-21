@@ -3,12 +3,16 @@ import React from "react";
 import PeriodItemDetail from "./PeriodItemDetail";
 import {Period} from "../../app/models/period";
 import {format} from "date-fns";
+import PeriodModal from "./PeriodModal";
+import {useStore} from "../../app/stores/store";
 
-interface Props{
+interface Props {
     period: Period;
 }
 
-export default function PeriodListItem({period} : Props) {
+export default function PeriodListItem({period}: Props) {
+
+    const {modalStore: {openModal}} = useStore();
 
     const [detail, setDetail] = React.useState(false);
     return (
@@ -61,7 +65,8 @@ export default function PeriodListItem({period} : Props) {
                             <Button
                                 color="inherit" variant="outlined" className="button_"
                                 onClick={() => setDetail(false)}>Ẩn</Button>
-                            <Button color="inherit" variant="outlined" className="button_">Cập nhật</Button>
+                            <Button color="inherit" variant="outlined" className="button_"
+                                    onClick={() => openModal(<PeriodModal id={period.id}/>)}>Cập nhật</Button>
                         </Box>}
                 </Box>
                 {detail && <PeriodItemDetail period={period}/>}

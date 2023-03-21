@@ -1,4 +1,3 @@
-using Application.Core;
 using Application.GraduationProjectPeriods;
 using Domain;
 using Microsoft.AspNetCore.Authorization;
@@ -28,5 +27,11 @@ public class PeriodController : BaseApiController
     public async Task<IActionResult> Single(Guid id)
     {
         return HandleResult(await Mediator.Send(new Single.Query { Id = id }));
+    }
+
+    [HttpPut]
+    public async Task<IActionResult> Edit(GraduationProjectPeriod period)
+    {
+        return HandleResult(await Mediator.Send(new Edit.Command { GraduationProjectPeriod = period }));
     }
 }

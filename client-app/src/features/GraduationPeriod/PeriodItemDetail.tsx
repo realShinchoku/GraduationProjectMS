@@ -4,7 +4,7 @@ import Grid from '@mui/material/Unstable_Grid2';
 import {Period} from "../../app/models/period";
 import {format} from "date-fns";
 
-interface Props{
+interface Props {
     period: Period;
 }
 

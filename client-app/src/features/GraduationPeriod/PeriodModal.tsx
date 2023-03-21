@@ -6,44 +6,41 @@ import {Field, Form, Formik} from "formik";
 import {v4 as uuid} from 'uuid';
 import * as Yup from 'yup';
 import {LoadingButton} from "@mui/lab";
-import {Period, PeriodFormValues} from "../../app/models/period";
+import {PeriodFormValues} from "../../app/models/period";
 import {useEffect, useState} from "react";
 import {TextField} from "formik-mui";
 import {DatePicker} from "formik-mui-x-date-pickers";
 import {observer} from "mobx-react-lite";
 
 interface Props {
-    period?: Period;
+    id?: string;
 }
 
-function PeriodModal({period}:Props) {
-    
-    const {modalStore, periodStore:{}} = useStore();
+function PeriodModal({id}: Props) {
 
-    function handleFormSubmit(period: PeriodFormValues, setErrors: any) {
-        if (!period.id) {
-            let newActivity = {
-                ...period,
-                id: uuid()
-            }
-            // createActivity(newActivity).then(() => navigate(`/activities/${newActivity.id}`)).catch(err => setErrors({error: err}));
+    const {modalStore, periodStore: {create, edit, get}} = useStore();
+    const [periodFormValues, setPeriodFormValues] = useState<PeriodFormValues>(new PeriodFormValues());
+
+    function handleFormSubmit(periodFormValues: PeriodFormValues, setErrors: any) {
+        if (!periodFormValues.id) {
+            create({...periodFormValues, id: uuid()}).then(modalStore.closeModal);
         } else {
-            // updateActivity(period).then(() => navigate(`/activities/${period.id}`)).catch(err => setErrors({error: err}));
+            edit(periodFormValues).then(modalStore.closeModal);
         }
     }
 
     useEffect(() => {
-        if (period)
-            console.log(period);
-    }, [period]);
-    
+        if (id)
+            get(id).then((period) => setPeriodFormValues(new PeriodFormValues(period)));
+
+    }, [id, setPeriodFormValues, get])
+
     return (
         <Box className="Modal">
             <Formik
-                initialValues={{... period}}
-                onSubmit={(values) => {
-                    console.log(values);
-                }}
+                enableReinitialize
+                initialValues={{...periodFormValues, errors: null}}
+                onSubmit={(values, {setErrors}) => handleFormSubmit(values, setErrors)}
                 validationSchema={Yup.object().shape({
                     name: Yup.string()
                         .required("Vui lòng điền đủ thông tin"),
@@ -65,7 +62,7 @@ function PeriodModal({period}:Props) {
                         .required("Vui lòng điền đủ thông tin"),
                 })}
             >
-                {({handleChange,dirty,isValid, isSubmitting}) => (
+                {({dirty, isValid, isSubmitting, errors}) => (
                     <Form className="modalContent">
                         <Grid container style={{marginBottom: "20px"}} spacing={2}>
                             <Grid xs={8}>
@@ -75,6 +72,8 @@ function PeriodModal({period}:Props) {
                                     label="Tên đồ án"
                                     sx={{border: "none", "& fieldset": {border: "none"}}}
                                     inputProps={{style: {fontSize: "1.25rem", fontWeight: "500", lineHeight: "1.6"}}}
+                                    error={dirty && Boolean(errors.name)}
+                                    helperText={dirty && errors.name}
                                 />
                             </Grid>
                             <Grid xs={4}>
@@ -83,10 +82,10 @@ function PeriodModal({period}:Props) {
                                     color="inherit"
                                     variant="outlined"
                                     className="button"
-                                    disabled={!dirty ||!isValid || isSubmitting}
+                                    disabled={!dirty || !isValid || isSubmitting}
                                     loading={isSubmitting}
                                 >
-                                    Tạo
+                                    {id ? 'Cập nhật' : 'Tạo'}
                                 </LoadingButton>
                                 <Button
                                     color="inherit"
@@ -105,8 +104,14 @@ function PeriodModal({period}:Props) {
                                     <Field
                                         component={DatePicker}
                                         name="startDate"
-                                        slotProps={{textField: {placeholder: ''}}}
-                                        inputFormat="dd/MM/yyyy"
+                                        slotProps={{
+                                            textField: {
+                                                placeholder: '',
+                                                error: dirty && Boolean(errors.name),
+                                                helperText: (dirty && errors.name)
+                                            }
+                                        }}
+                                        format="dd/MM/yyyy"
                                         sx={{
                                             width: "100%",
                                             border: "none",
@@ -121,8 +126,14 @@ function PeriodModal({period}:Props) {
                                     <Field
                                         component={DatePicker}
                                         name="endDate"
-                                        slotProps={{textField: {placeholder: ''}}}
-                                        inputFormat="dd/MM/yyyy"
+                                        slotProps={{
+                                            textField: {
+                                                placeholder: '',
+                                                error: dirty && Boolean(errors.name),
+                                                helperText: (dirty && errors.name)
+                                            }
+                                        }}
+                                        format="dd/MM/yyyy"
                                         sx={{
                                             width: "100%",
                                             border: "none",
@@ -142,8 +153,14 @@ function PeriodModal({period}:Props) {
                                     <Field
                                         component={DatePicker}
                                         name="contactInstructorTime"
-                                        slotProps={{textField: {placeholder: ''}}}
-                                        inputFormat="dd/MM/yyyy"
+                                        slotProps={{
+                                            textField: {
+                                                placeholder: '',
+                                                error: dirty && Boolean(errors.name),
+                                                helperText: (dirty && errors.name)
+                                            }
+                                        }}
+                                        format="dd/MM/yyyy"
                                         sx={{
                                             width: "100%",
                                             border: "none",
@@ -160,8 +177,14 @@ function PeriodModal({period}:Props) {
                                     <Field
                                         component={DatePicker}
                                         name="registerTopicTime"
-                                        slotProps={{textField: {placeholder: ''}}}
-                                        inputFormat="dd/MM/yyyy"
+                                        slotProps={{
+                                            textField: {
+                                                placeholder: '',
+                                                error: dirty && Boolean(errors.name),
+                                                helperText: (dirty && errors.name)
+                                            }
+                                        }}
+                                        format="dd/MM/yyyy"
                                         sx={{
                                             width: "100%",
                                             border: "none",
@@ -178,8 +201,14 @@ function PeriodModal({period}:Props) {
                                     <Field
                                         component={DatePicker}
                                         name="syllabusSubmissionTime"
-                                        slotProps={{textField: {placeholder: ''}}}
-                                        inputFormat="dd/MM/yyyy"
+                                        slotProps={{
+                                            textField: {
+                                                placeholder: '',
+                                                error: dirty && Boolean(errors.name),
+                                                helperText: (dirty && errors.name)
+                                            }
+                                        }}
+                                        format="dd/MM/yyyy"
                                         sx={{
                                             width: "100%",
                                             border: "none",
@@ -196,8 +225,14 @@ function PeriodModal({period}:Props) {
                                     <Field
                                         component={DatePicker}
                                         name="syllabusReviewTime"
-                                        slotProps={{textField: {placeholder: ''}}}
-                                        inputFormat="dd/MM/yyyy"
+                                        slotProps={{
+                                            textField: {
+                                                placeholder: '',
+                                                error: dirty && Boolean(errors.name),
+                                                helperText: (dirty && errors.name)
+                                            }
+                                        }}
+                                        format="dd/MM/yyyy"
                                         sx={{
                                             width: "100%",
                                             border: "none",
@@ -214,8 +249,14 @@ function PeriodModal({period}:Props) {
                                     <Field
                                         component={DatePicker}
                                         name="graduationProjectTime"
-                                        slotProps={{textField: {placeholder: ''}}}
-                                        inputFormat="dd/MM/yyyy"
+                                        slotProps={{
+                                            textField: {
+                                                placeholder: '',
+                                                error: dirty && Boolean(errors.name),
+                                                helperText: (dirty && errors.name)
+                                            }
+                                        }}
+                                        format="dd/MM/yyyy"
                                         sx={{
                                             width: "100%",
                                             border: "none",
@@ -234,8 +275,14 @@ function PeriodModal({period}:Props) {
                                     <Field
                                         component={DatePicker}
                                         name="protectionTime"
-                                        slotProps={{textField: {placeholder: ''}}}
-                                        inputFormat="dd/MM/yyyy"
+                                        slotProps={{
+                                            textField: {
+                                                placeholder: '',
+                                                error: dirty && Boolean(errors.name),
+                                                helperText: (dirty && errors.name)
+                                            }
+                                        }}
+                                        format="dd/MM/yyyy"
                                         sx={{
                                             width: "100%",
                                             border: "none",

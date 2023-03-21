@@ -43,14 +43,14 @@ public class Approval
 
             if (instructor.Lecturer.Students.Count >= instructor.Lecturer.MaxStudentsNumber)
                 return Result<Unit>.Failure("Giảng viên không thể nhận thêm sinh viên");
-            
+
             instructor.ApprovalStatus = request.Status != 0;
 
             if (request.Status != 0)
                 instructor.Student.Lecturer = instructor.Lecturer;
             else
                 instructor.Student.Lecturer = null;
-            
+
             if (string.IsNullOrEmpty(request.Note))
                 instructor.Note = request.Note;
 
