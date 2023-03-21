@@ -18,14 +18,19 @@ public class UserAccessor : IUserAccessor
         _context = context;
     }
 
+    public string GetUserId()
+    {
+        return _httpContextAccessor.HttpContext!.User.FindFirstValue(ClaimTypes.NameIdentifier);
+    }
+
     public string GetUserName()
     {
-        return _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.Name);
+        return _httpContextAccessor.HttpContext!.User.FindFirstValue(ClaimTypes.Name);
     }
 
     public Role GetUserRole()
     {
-        var r = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.Role);
+        var r = _httpContextAccessor.HttpContext!.User.FindFirstValue(ClaimTypes.Role);
         Enum.TryParse(r, out Role role);
         return role;
     }

@@ -1,5 +1,6 @@
 using Application.Core;
 using Application.Interfaces;
+using Domain;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
@@ -60,6 +61,16 @@ public class Approval
 
             if (!result)
                 return Result<Unit>.Failure("Có lỗi khi chấp nhận giảng viên hướng dẫn");
+
+            var popupNotification = new PopupNotification
+            {
+                Message = $"Yêu cầu giảng viên {instructor.Lecturer.DisplayName} đã được chấp thuận",
+                TargetUser = instructor.Student,
+            };
+
+            _context.PopupNotifications.Add(popupNotification);
+            
+            await _context.SaveChangesAsync(cancellationToken);
 
             return Result<Unit>.Success(Unit.Value);
         }

@@ -20,6 +20,7 @@ public class DataContext : IdentityDbContext<AppUser, AppRole, string>
     public DbSet<GraduationProjectReport> GraduationProjectReports { get; set; }
     public DbSet<Syllabus> Syllabi { get; set; }
     public DbSet<Instructor> Instructors { get; set; }
+    public DbSet<PopupNotification> PopupNotifications { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
