@@ -3,12 +3,12 @@ import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import {Avatar, Box, Typography} from "@mui/material";
 
 import {route} from "../../router/Routers";
-import {Category, LogoSP, ProfileUser} from "../../../assets";
+import {Category, LogoSP, ProfileUser, TaskSquare} from "../../../assets";
 import {useStore} from "../../stores/store";
 import SidebarItem from "./SidebarItem/SidebarItem";
 import "./Sidebar.scss";
 
-function Sidebar2() {
+function FacultySidebar() {
 
     const {commonStore: {sideBarState, openSideBar, closeSideBar}} = useStore();
 
@@ -34,10 +34,11 @@ function Sidebar2() {
             </Box>
             <Box className="side_bar_inner">
                 <SidebarItem title="Trang chủ" to={route.home} icon={Category}/>
-                <SidebarItem title="Giảng viên hướng dẫn" to={route.lecturer} icon={ProfileUser}/>
+                <SidebarItem title="Đợt đồ án" to={route.period} icon={TaskSquare}/>
+                <SidebarItem title="Tài khoản" to={route.empty} icon={ProfileUser}/>
             </Box>
         </Grid>
     )
 }
 
-export default observer(Sidebar2);
+export default observer(FacultySidebar);

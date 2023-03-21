@@ -11,7 +11,7 @@ import {useStore} from "../../stores/store";
 import SidebarItem from "./SidebarItem/SidebarItem";
 import "./Sidebar.scss";
 
-function Sidebar() {
+function StudentSidebar() {
 
     const location = useLocation();
 
@@ -44,9 +44,11 @@ function Sidebar() {
                 <SidebarItem title="Cá nhân" to={route.empty} icon={ProfileUser}/>
                 <SidebarItem title="Quản lý" to={route.empty} icon={Folder}/>
             </Box>
-            <Typography className="tlt">GIẢNG VIÊN</Typography>
-            {(location.pathname === '/lecturer') && (
-                <VerticalTabs/>
+            {(location.pathname === route.lecturer) && (
+                <>
+                    <Typography className="tlt">GIẢNG VIÊN</Typography>
+                    <VerticalTabs/>
+                </>
             )}
             <Box className="confirm">
                 <Box className="inner">
@@ -83,4 +85,4 @@ function Sidebar() {
     )
 }
 
-export default observer(Sidebar);
+export default observer(StudentSidebar);

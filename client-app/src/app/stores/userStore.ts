@@ -15,6 +15,10 @@ export default class UserStore {
     get isLoggedIn() {
         return !!this.user;
     }
+    
+    get getRole(){
+        return this.user!.role;
+    }
 
     login = async (formValues: LoginFormValues) => {
         try {

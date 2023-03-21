@@ -13,6 +13,10 @@ import LecturerList from "../../features/Lecturers/List/LecturerList";
 import AccountManagement from "../../features/AccountManagement/AccountManagement";
 import Instructor from "../../features/Instructor/Instructor";
 import Period from "../../features/GraduationPeriod/Period";
+import IsStudent from "./IsStudent";
+import IsLecturer from "./IsLecturer";
+import IsDepartmentSubject from "./IsDepartmentSubject";
+import IsFaculty from "./IsFaculty";
 
 
 export const route = {
@@ -24,6 +28,7 @@ export const route = {
     empty: 'null',
     instructor: '/instructor',
     period: '/period',
+    notFound: '/not_found'
 };
 
 export const routes: RouteObject[] = [
@@ -32,13 +37,24 @@ export const routes: RouteObject[] = [
         element: <App/>,
         children: [
             {
-                element: <RequireAuth/>, children: [
+                element: <RequireAuth/>,children: [
+                    {element: <IsStudent/>, children: [
+                            {path: 'lecturer', element: <LecturerList/>},
+                        ]
+                    },
+                    {element: <IsLecturer/>, children: [
+                        ]}
+                    ,
+                    {element: <IsDepartmentSubject/>, children: [
+                            {path: 'instructor', element: <Instructor/>},
+                        ]
+                    },
+                    {element: <IsFaculty/>, children: [
+                            {path: 'period', element: <Period/>},
+                            {path: 'account/management', element: <AccountManagement/>},
+                        ]
+                    },
                     {path: '', element: <HomePage/>},
-                    {path: 'lecturer', element: <LecturerList/>},
-                    {path: 'period', element: <Period/>},
-                    {path: 'account/management', element: <AccountManagement/>},
-                    {path: 'instructor', element: <Instructor/>},
-
                 ]
             },
             {
@@ -46,8 +62,6 @@ export const routes: RouteObject[] = [
                     {path: 'login', element: <Login/>},
                     {path: 'account/password_reset', element: <PasswordReset/>},
                     {path: 'account/password_reset/with', element: <PasswordResetToken/>},
-
-
                 ]
             },
             {path: 'not-found', element: <NotFound/>},
