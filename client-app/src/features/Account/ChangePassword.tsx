@@ -34,7 +34,7 @@ function ChangePassword() {
     return (
         <Box className="change_password">
             <Box className="inner">
-                <Box className="close">×</Box>
+                <Box className="close" onClick={closeModal}>×</Box>
                 <Typography variant="h2">Đổi mật khẩu</Typography>
                 <Typography variant="body1">Vì lý do bảo mật, bạn vui lòng nhập lại mật khẩu</Typography>
                 <Formik

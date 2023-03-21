@@ -1,13 +1,15 @@
 import {observer} from "mobx-react-lite";
+import {useState} from 'react';
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
-import {Button, ButtonGroup, Typography} from "@mui/material";
+import {Box, Button, ButtonGroup, Typography} from "@mui/material";
 import Collapse from "@mui/material/Collapse";
 import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
+
 import {LecturerImages} from "../../../assets";
 import {Lecturer} from "../../../app/models/lecturer";
 import {useStore} from "../../../app/stores/store";
@@ -20,14 +22,21 @@ type Props = {
 function LecturerTableRowDetail({value, lecturer}: Props) {
   
     const {instructorStore:{chose}} = useStore();
+
+    const [isActive, setIsActive] = useState(false);
+
+    function handleSubmit() {
+        chose(lecturer.id)
+        setIsActive(current => !current);
+    }
     
     return (
         <TableRow>
-            <TableCell component="th" style={{padding: 0}} colSpan={12}>
+            <TableCell component="th" style={{padding: 0, position: 'relative'}} colSpan={12}>
                 <Collapse in={value} timeout="auto" unmountOnExit>
                     <Grid className="inner_contact">
                         <Grid className="thumb">
-                            <img src={LecturerImages.AvatarLecturer} alt={""}/>
+                            <Box component="img" src={LecturerImages.AvatarLecturer} alt="" />
                         </Grid>
                         <Grid className="list">
                             <List>
@@ -71,23 +80,28 @@ function LecturerTableRowDetail({value, lecturer}: Props) {
                                 </ListItem>
                             </List>
                         </Grid>
-                        <Grid className="contact" onClick={() => window.location.href = `mailto:${lecturer.email}`}>
+                        <Grid className="contact">
                             <ButtonGroup
                                 orientation="vertical"
                                 aria-label="vertical outlined button group"
                                 sx={{width: 'fit-content', background: '#EBF9F1',}}
                             >
-                                <Grid sx={{"&:hover": {backgroundColor: '#D1FBE3'},}}>
-                                    <img className="img_contact_lecturer" src={LecturerImages.ContactLecturer}
-                                         alt={""}/>
-                                    <Button className="contact_guide">
-                                        <Typography className="typo_contact_guide">Liên hệ hướng dẫn</Typography>
-                                    </Button>
-                                </Grid>
-                                <Button className="choose_lecturer" onClick={() => chose(lecturer.id)}>Chọn giảng viên</Button>
+                                <Button className="contact_guide" sx={{"&:hover": {backgroundColor: '#D1FBE3'},}}
+                                onClick={() => window.location.href = `mailto:${lecturer.email}`}
+                                >
+                                    <Box component="img" src={LecturerImages.ContactLecturer} alt="" />
+                                    <Typography variant="body1">Liên hệ hướng dẫn</Typography>
+                                </Button>
+                                <Button className="choose_lecturer" onClick={handleSubmit}>Chọn giảng viên</Button>
                             </ButtonGroup>
                         </Grid>
                     </Grid>
+                    <Box className={isActive ? 'modal open' : 'modal'}>
+                        <Box className="content">
+                            <Typography variant="body1">Chọn giảng viên</Typography>
+                            <Box component="span">thành công</Box>
+                        </Box>
+                    </Box>
                 </Collapse>
             </TableCell>
         </TableRow>
