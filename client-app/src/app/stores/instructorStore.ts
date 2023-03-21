@@ -25,7 +25,7 @@ export default class InstructorStore {
                 await this.loadLists();
             });
     }
-    
+
 
     get instructorsList() {
         return Array.from(this.instructors.values());
@@ -80,16 +80,34 @@ export default class InstructorStore {
         await this.loadLists();
     }
 
-    private setItem = (instructor: Instructor) => {
-        this.instructors.set(instructor.id, instructor);
-    }
-    
     chose = async (id: string) => {
         try {
             await agent.Instructors.chose(id);
-        }
-        catch (e) {
+        } catch (e) {
             console.log(e);
         }
+    }
+
+    approval = async (id: string, status: number, note: string) => {
+        try {
+            await agent.Instructors.approval(id, status, note);
+            runInAction(() => {
+                this.instructors.delete(id);
+            })
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
+    assign = async (studentId: string, lecturerId: string) => {
+        try {
+            await agent.Instructors.assign(studentId, lecturerId);
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
+    private setItem = (instructor: Instructor) => {
+        this.instructors.set(instructor.id, instructor);
     }
 }

@@ -348,6 +348,7 @@ public class Seed
 
             foreach (var user in lecturers)
             {
+                user.MaxStudentsNumber = new Random().Next(4, 10);
                 await userManager.CreateAsync(user, "Pa$$w0rd");
                 await userManager.AddToRoleAsync(user, user.Role.ToString());
             }

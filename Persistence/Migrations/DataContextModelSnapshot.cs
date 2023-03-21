@@ -260,6 +260,9 @@ namespace Persistence.Migrations
                     b.Property<string>("LecturerId")
                         .HasColumnType("text");
 
+                    b.Property<string>("Note")
+                        .HasColumnType("text");
+
                     b.Property<string>("StudentId")
                         .HasColumnType("text");
 

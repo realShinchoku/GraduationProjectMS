@@ -2,27 +2,35 @@ import {AppBar, Box, IconButton, Tab, Tabs, TextField} from "@mui/material";
 import {useTheme} from '@mui/material/styles';
 import {SearchOutlined} from "@mui/icons-material";
 import React, {useState} from "react";
-
-import StudentManagementTableRegistered from "./StudentManagementTableRegistered";
-import StudentManagementTableUnregister from "./StudentManagementTableUnregister";
 import {TabContext, TabPanel} from "@mui/lab";
 import {useStore} from "../../app/stores/store";
 import {observer} from "mobx-react-lite";
+import InstructorApprovalTable from "./InstructorApprovalTable";
+import InstructorAssginTable from "./InstructorAssginTable";
 
 interface Props {
     periodId: string
 }
 
-function StudentTableRow({periodId}: Props) {
+function InstructorTableRow({periodId}: Props) {
     const theme = useTheme();
     const [value, setValue] = React.useState('0');
     const [keyword, setKeyword] = useState<string>('');
 
-    const {periodStore: {instructorStores}} = useStore();
+    const {periodStore: {instructorStores, studentStores}} = useStore();
     const instructorStore = instructorStores.get(periodId)!;
+    const studentStore = studentStores.get(periodId)!;
 
-    const handleChange = (event: unknown, newValue: string) => {
+    const handleChange = async (event: unknown, newValue: string) => {
         setValue(newValue);
+        setKeyword('');
+        if (newValue === '0') {
+            instructorStore.removePredicate(keyword);
+            await instructorStore.loadLists()
+        } else if (newValue === '1') {
+            studentStore.removePredicate(keyword);
+            await studentStore.loadLists();
+        }
     };
 
     return (
@@ -56,7 +64,9 @@ function StudentTableRow({periodId}: Props) {
                                 startAdornment: (
                                     <IconButton onClick={() => {
                                         if (value === '0')
-                                            instructorStore.setPredicate('Keyword', keyword)
+                                            instructorStore.setPredicate('Keyword', keyword);
+                                        else if (value === '1')
+                                            studentStore.setPredicate('Keyword', keyword);
                                     }}>
                                         <SearchOutlined/>
                                     </IconButton>
@@ -68,15 +78,17 @@ function StudentTableRow({periodId}: Props) {
                                 if (e.key === 'Enter')
                                     if (value === '0')
                                         instructorStore.setPredicate('Keyword', keyword)
+                                    else if (value === '1')
+                                        studentStore.setPredicate('Keyword', keyword);
                             }}
-                            disabled={instructorStore.loading}
+                            disabled={instructorStore.loading || studentStore.loading}
                         />
                     </Box>
                     <TabPanel value={'0'} dir={theme.direction}>
-                        <StudentManagementTableRegistered periodId={periodId}/>
+                        <InstructorApprovalTable periodId={periodId}/>
                     </TabPanel>
                     <TabPanel value={'1'} dir={theme.direction}>
-                        <StudentManagementTableUnregister/>
+                        <InstructorAssginTable periodId={periodId}/>
                     </TabPanel>
                 </TabContext>
             </Box>
@@ -84,4 +96,4 @@ function StudentTableRow({periodId}: Props) {
     );
 }
 
-export default observer(StudentTableRow);
+export default observer(InstructorTableRow);

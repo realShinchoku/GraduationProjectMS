@@ -24,7 +24,8 @@ public class MappingProfiles : Profile
             .ForMember(d => d.GraduationProjectPeriod, o => o.MapFrom(x => x.GraduationProjectPeriod.Name))
             .ForMember(d => d.GraduationProjectReport, o => o.MapFrom(x => x.GraduationProjectReport.Name))
             .ForMember(d => d.GraduationProject, o => o.MapFrom(x => x.GraduationProject.Name))
-            .ForMember(d => d.Syllabus, o => o.MapFrom(x => x.Syllabus.Name));
+            .ForMember(d => d.Syllabus, o => o.MapFrom(x => x.Syllabus.Name))
+            .ForMember(d => d.Class, o => o.MapFrom(x => x.Class.Name));
         CreateMap<DepartmentSubject, DepartmentSubjectFilterDto>();
         CreateMap<Instructor, InstructorDto>()
             .ForMember(d => d.Class, o => o.MapFrom(x => x.Student.Class.Name))

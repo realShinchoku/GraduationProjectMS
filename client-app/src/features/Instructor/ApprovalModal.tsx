@@ -10,6 +10,9 @@ import {useStore} from '../../app/stores/store';
 import {Form, Formik} from "formik";
 import {LoadingButton} from "@mui/lab";
 import * as Yup from 'yup';
+import {observer} from "mobx-react-lite";
+import InstructorStore from "../../app/stores/instructorStore";
+import SuccessModal from "./SuccessModal";
 
 
 const style = {
@@ -19,19 +22,27 @@ const style = {
     transform: 'translate(-50%, -50%)',
     width: 586,
     height: 414,
-    backgroundColor: 'background.paper',
+    backgroundColor: '#f4f4f4',
     boxShadow: '24',
     p: 4,
     padding: '35px 44px',
 };
 
-export default function BrowsingStatus() {
+interface Props {
+    id: string;
+    instructorStore: InstructorStore;
+}
+
+function ApprovalModal({id, instructorStore}: Props) {
     const {modalStore} = useStore();
+
+    const {approval} = instructorStore;
 
     return (
         <Formik
-            initialValues={{picker: '', note: ''}}
-            onSubmit={(values) => console.log(values)}
+            initialValues={{picker: -1, note: ''}}
+            onSubmit={(values) => approval(id, values.picker, values.note).then(() => modalStore.openModal(
+                <SuccessModal/>))}
             validationSchema={Yup.object().shape({
                 picker: Yup.boolean().required('Vui lòng chọn trạng thái duyệt'),
                 note: Yup.string().required('Vui lòng viết ghi chú'),
@@ -49,9 +60,9 @@ export default function BrowsingStatus() {
                             sx={{marginLeft: '75px'}}
                         >
                             <FormControlLabel className='chose' name={'picker'} sx={{"& span": {fontSize: '24px'}}}
-                                              value={true} control={<Radio/>} label="Đồng ý"/>
+                                              value={1} control={<Radio/>} label="Đồng ý"/>
                             <FormControlLabel className='chose' name={'picker'} sx={{"& span": {fontSize: '24px'}}}
-                                              value={false} control={<Radio/>} label="Không đồng ý"/>
+                                              value={0} control={<Radio/>} label="Không đồng ý"/>
                         </RadioGroup>
                         <FormHelperText error={dirty && !!errors.picker}>{errors.picker}</FormHelperText>
                     </FormControl>
@@ -98,3 +109,5 @@ export default function BrowsingStatus() {
         </Formik>
     );
 }
+
+export default observer(ApprovalModal);

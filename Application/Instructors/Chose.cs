@@ -35,7 +35,7 @@ public class Chose
 
             var instructor =
                 await _context.Instructors.Include(s => s.Student)
-                    .FirstOrDefaultAsync(x => x.Student.StudentId == student.Id, cancellationToken);
+                    .FirstOrDefaultAsync(x => x.Student.Id == student.Id, cancellationToken);
 
             if (instructor != null || student.Lecturer != null)
                 return Result<Unit>.Failure("Bạn đã có giảng viên hướng dẫn");

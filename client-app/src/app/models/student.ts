@@ -15,4 +15,5 @@ export interface Student {
     lecturer: string;
     departmentSubjects: string;
     faculty: string;
+    class: string;
 }

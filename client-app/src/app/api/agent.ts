@@ -99,7 +99,7 @@ const Lecturers = {
 }
 
 const Students = {
-    list: () => requests.get<Student[]>('/student'),
+    list: (params: URLSearchParams) => requests.list<Student[]>('/student', {params}),
     confirmLecturer: () => requests.post<void>('/student/lecturer/confirm', {}),
 }
 
@@ -116,7 +116,11 @@ const DepartmentSubjects = {
 const Instructors = {
     list: (params: URLSearchParams, periodId: string) => requests.list<Instructor[]>(`/instructor?periodId=${periodId}`, {params}),
     chose: (id: string) => requests.post(`/instructor/chose/${id}`, {}),
-    approval: (id: string) => requests.post(`/instructor/approval/${id}`, {}),
+    approval: (instructorId: string, status: number, note: string) => requests.post('/instructor/approval', {
+        instructorId,
+        status,
+        note
+    }),
     assign: (studentId: string, lecturerId: string) => requests.post(`/instructor/assign`, {studentId, lecturerId}),
 }
 

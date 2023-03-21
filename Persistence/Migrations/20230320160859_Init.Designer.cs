@@ -12,7 +12,7 @@ using Persistence;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230320104635_Init")]
+    [Migration("20230320160859_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -261,6 +261,9 @@ namespace Persistence.Migrations
                         .HasColumnType("boolean");
 
                     b.Property<string>("LecturerId")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Note")
                         .HasColumnType("text");
 
                     b.Property<string>("StudentId")

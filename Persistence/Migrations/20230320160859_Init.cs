@@ -325,7 +325,8 @@ namespace Persistence.Migrations
                     DepartmentSubjectId = table.Column<string>(type: "text", nullable: true),
                     IsApproval = table.Column<bool>(type: "boolean", nullable: false),
                     ApprovalStatus = table.Column<bool>(type: "boolean", nullable: true),
-                    CreatedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                    CreatedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    Note = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
