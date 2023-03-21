@@ -1,8 +1,7 @@
 import {Box, Card, CardContent, Grid, Typography} from "@mui/material";
-
-import StudentTableRow from "./StudentTableRow";
 import {observer} from "mobx-react-lite";
 import {Period} from "../../app/models/period";
+import InstructorTableRow from "./InstructorTableRow";
 
 interface Props {
     period: Period;
@@ -26,7 +25,7 @@ function InstructorList({period}: Props) {
                     </Grid>
                 </Grid>
             </Box>
-            <StudentTableRow periodId={period.id}/>
+            <InstructorTableRow periodId={period.id}/>
         </Card>
 
     );

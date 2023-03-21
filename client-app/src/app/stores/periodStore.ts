@@ -1,8 +1,9 @@
-﻿import {makeAutoObservable, reaction, runInAction} from "mobx";
+import {makeAutoObservable, reaction, runInAction} from "mobx";
 import {Pagination, PagingParams} from "../models/pagination";
 import agent from "../api/agent";
-import {Period} from "../models/period";
+import {Period, PeriodFormValues} from "../models/period";
 import InstructorStore from "./instructorStore";
+import StudentStore from "./studentStore";
 
 export default class PeriodStore {
     periods = new Map<string, Period>();
@@ -11,6 +12,8 @@ export default class PeriodStore {
     loading: boolean = true;
     predicate = new Map();
     instructorStores = new Map<string, InstructorStore>();
+    studentStores = new Map<string, StudentStore>();
+    isInstructor = false;
 
     constructor() {
         makeAutoObservable(this);
@@ -80,8 +83,64 @@ export default class PeriodStore {
         await this.instructorStores.get(periodId)!.setPeriodId(periodId);
     }
 
+    setStudentStore = async (periodId: string) => {
+        this.studentStores.set(periodId, new StudentStore());
+        await this.studentStores.get(periodId)!.setPeriodId(periodId);
+    }
+
+    setInstructorStatus = () => this.isInstructor = true;
+
+    create = async (period: PeriodFormValues) => {
+        try {
+            await agent.Periods.create(period)
+            const newPeriod = new Period(period);
+            await this.setItem(newPeriod);
+        } catch (e) {
+            console.log(e);
+        }
+    }
+    edit = async (period: PeriodFormValues) => {
+        try {
+            await agent.Periods.edit(period)
+            const editPeriod = new Period(period);
+            await this.setItem(editPeriod);
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
+    get = async (id: string) => {
+        let item = this.getItem(id);
+        if (item)
+            return item;
+        else {
+            try {
+                item = await agent.Periods.single(id);
+                await this.setItem(item);
+                return item;
+            } catch (e) {
+                console.log(e);
+            }
+        }
+    }
+
     private setItem = async (period: Period) => {
+        period.startDate = new Date(period.startDate);
+        period.endDate = new Date(period.endDate);
+        period.contactInstructorTime = new Date(period.contactInstructorTime);
+        period.registerTopicTime = new Date(period.registerTopicTime);
+        period.syllabusSubmissionTime = new Date(period.syllabusSubmissionTime);
+        period.syllabusReviewTime = new Date(period.syllabusReviewTime);
+        period.graduationProjectTime = new Date(period.graduationProjectTime);
+        period.protectionTime = new Date(period.protectionTime);
         this.periods.set(period.id, period);
-        await this.setInstructorStore(period.id)
+        if (this.isInstructor) {
+            await this.setInstructorStore(period.id);
+            await this.setStudentStore(period.id);
+        }
+    }
+
+    private getItem = (id: string) => {
+        return this.periods.get(id);
     }
 }

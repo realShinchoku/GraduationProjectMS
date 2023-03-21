@@ -223,6 +223,8 @@ public class Seed
                 new()
                 {
                     Name = "Đồ án 1",
+                    StartDate = DateTime.UtcNow,
+                    EndDate = DateTime.UtcNow.AddDays(43),
                     ContactInstructorTime = DateTime.UtcNow,
                     RegisterTopicTime = DateTime.UtcNow.AddDays(2),
                     SyllabusSubmissionTime = DateTime.UtcNow.AddDays(7),
@@ -234,6 +236,8 @@ public class Seed
                 new()
                 {
                     Name = "Đồ án 2",
+                    StartDate = DateTime.UtcNow,
+                    EndDate = DateTime.UtcNow.AddDays(43),
                     ContactInstructorTime = DateTime.UtcNow,
                     RegisterTopicTime = DateTime.UtcNow.AddDays(2),
                     SyllabusSubmissionTime = DateTime.UtcNow.AddDays(7),
@@ -348,6 +352,7 @@ public class Seed
 
             foreach (var user in lecturers)
             {
+                user.MaxStudentsNumber = new Random().Next(4, 10);
                 await userManager.CreateAsync(user, "Pa$$w0rd");
                 await userManager.AddToRoleAsync(user, user.Role.ToString());
             }

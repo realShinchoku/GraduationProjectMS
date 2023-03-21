@@ -1,14 +1,24 @@
 import {Box, Button, Card, CardContent, Divider, Grid, Typography} from "@mui/material";
 import React from "react";
-import GraduationProjectPeriodsGrid from "./GraduationGrid";
+import PeriodItemDetail from "./PeriodItemDetail";
+import {Period} from "../../app/models/period";
+import {format} from "date-fns";
+import PeriodModal from "./PeriodModal";
+import {useStore} from "../../app/stores/store";
 
-export default function AccountTableList() {
+interface Props {
+    period: Period;
+}
+
+export default function PeriodListItem({period}: Props) {
+
+    const {modalStore: {openModal}} = useStore();
 
     const [detail, setDetail] = React.useState(false);
     return (
         <React.Fragment>
-            <Card sx={{background: '#F7F9FB', borderRadius: '16px'}} className="account_table_list">
-                <Typography variant="h6" className="name_table">Đồ Án Khoá K61 Đợt 1</Typography>
+            <Card sx={{background: '#F7F9FB', borderRadius: '16px', boxShadow: 'none'}} className="account_table_list">
+                <Typography variant="h6" className="name_table">{period.name}</Typography>
                 <Box className="account_list">
                     <Grid container>
                         <Grid sx={{marginTop: '15px'}} item xs>
@@ -17,7 +27,7 @@ export default function AccountTableList() {
                                     Số đề tài
                                 </Typography>
                                 <Typography className="text_bold">
-                                    948
+                                    {period.projectsCount}
                                 </Typography>
                             </CardContent>
                         </Grid>
@@ -28,7 +38,7 @@ export default function AccountTableList() {
                                     Ngày bắt đầu
                                 </Typography>
                                 <Typography className="text_bold">
-                                    29 Th4,2022
+                                    {format(new Date(period.startDate), "dd 'Th'M',' yyyy")}
                                 </Typography>
                             </CardContent>
                         </Grid>
@@ -39,7 +49,7 @@ export default function AccountTableList() {
                                     Ngày kết thúc
                                 </Typography>
                                 <Typography className="text_bold">
-                                    29 Th7,2022
+                                    {format(new Date(period.endDate), "dd 'Th'M',' yyyy")}
                                 </Typography>
                             </CardContent>
                         </Grid>
@@ -55,14 +65,12 @@ export default function AccountTableList() {
                             <Button
                                 color="inherit" variant="outlined" className="button_"
                                 onClick={() => setDetail(false)}>Ẩn</Button>
-                            <Button color="inherit" variant="outlined" className="button_">Cập nhật</Button>
+                            <Button color="inherit" variant="outlined" className="button_"
+                                    onClick={() => openModal(<PeriodModal id={period.id}/>)}>Cập nhật</Button>
                         </Box>}
                 </Box>
-                <Box>
-                </Box>
-                {detail && <GraduationProjectPeriodsGrid/>}
+                {detail && <PeriodItemDetail period={period}/>}
             </Card>
-
         </React.Fragment>
     );
 }

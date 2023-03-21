@@ -1,8 +1,14 @@
 import {Box, Typography} from '@mui/material';
-import "./Graduation.scss"
+import "./Period.scss"
 import Grid from '@mui/material/Unstable_Grid2';
+import {Period} from "../../app/models/period";
+import {format} from "date-fns";
 
-export default function GraduationProjectPeriodsGrid() {
+interface Props {
+    period: Period;
+}
+
+export default function PeriodItemDetail({period}: Props) {
     return (
         <Box className="graduation_Grid">
             <Grid container spacing={3}>
@@ -13,7 +19,7 @@ export default function GraduationProjectPeriodsGrid() {
                                 Sinh Viên
                             </Typography>
                             <Typography className="text2">
-                                3,781
+                                {period.studentsCount}
                             </Typography>
                         </Box>
 
@@ -24,7 +30,7 @@ export default function GraduationProjectPeriodsGrid() {
                                 Đề Cương
                             </Typography>
                             <Typography className="text2">
-                                3,219
+                                {period.syllabiCount}
                             </Typography>
                         </Box>
                     </Grid>
@@ -34,7 +40,7 @@ export default function GraduationProjectPeriodsGrid() {
                                 Giảng viên hướng dẫn
                             </Typography>
                             <Typography className="text2">
-                                695
+                                {period.lecturersCount}
                             </Typography>
                         </Box>
                     </Grid>
@@ -44,7 +50,7 @@ export default function GraduationProjectPeriodsGrid() {
                                 Lớp quản lí
                             </Typography>
                             <Typography className="text2">
-                                30
+                                {period.classesCount}
                             </Typography>
                         </Box>
                     </Grid>
@@ -57,7 +63,7 @@ export default function GraduationProjectPeriodsGrid() {
                                 Thời Gian Liên Hệ Giảng Viên
                             </Typography>
                             <Typography className="text2">
-                                29 Th2,2022
+                                {format(new Date(period.contactInstructorTime), "dd 'Th'M',' yyyy")}
                             </Typography>
                         </Box>
                     </Grid>
@@ -67,7 +73,7 @@ export default function GraduationProjectPeriodsGrid() {
                                 Thời Gian Đăng Ký Đề Tài
                             </Typography>
                             <Typography className="text2">
-                                29 Th2,2022
+                                {format(new Date(period.registerTopicTime), "dd 'Th'M',' yyyy")}
                             </Typography>
                         </Box>
                     </Grid>
@@ -77,7 +83,7 @@ export default function GraduationProjectPeriodsGrid() {
                                 Thời Gian Nộp Đề Cương
                             </Typography>
                             <Typography className="text2">
-                                29 Th2,2022
+                                {format(new Date(period.syllabusSubmissionTime), "dd 'Th'M',' yyyy")}
                             </Typography>
                         </Box>
                     </Grid>
@@ -87,7 +93,7 @@ export default function GraduationProjectPeriodsGrid() {
                                 Thời Gian Duyệt Đề cương
                             </Typography>
                             <Typography className="text2">
-                                29 Th2,2022
+                                {format(new Date(period.syllabusReviewTime), "dd 'Th'M',' yyyy")}
                             </Typography>
                         </Box>
                     </Grid>
@@ -97,7 +103,7 @@ export default function GraduationProjectPeriodsGrid() {
                                 Thời Gian Làm Đồ Án
                             </Typography>
                             <Typography className="text2">
-                                29 Th2,2022
+                                {format(new Date(period.graduationProjectTime), "dd 'Th'M',' yyyy")}
                             </Typography>
                         </Box>
                     </Grid>
@@ -107,7 +113,7 @@ export default function GraduationProjectPeriodsGrid() {
                                 Thời Gian Bảo Vệ
                             </Typography>
                             <Typography className="text2">
-                                29 Th2,2022
+                                {format(new Date(period.protectionTime), "dd 'Th'M',' yyyy")}
                             </Typography>
                         </Box>
                     </Grid>

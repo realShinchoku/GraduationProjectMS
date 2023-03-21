@@ -12,13 +12,13 @@ const style = {
     left: '50%',
     transform: 'translate(-50%, -50%)',
     width: 400,
-    bgColor: 'background.paper',
+    backgroundColor: '#f4f4f4',
     boxShadow: 24,
     p: 4,
     borderRadius: 8,
 };
 
-export default function UpdateSuccess() {
+export default function SuccessModal() {
     const {modalStore} = useStore();
     return (
         <div>

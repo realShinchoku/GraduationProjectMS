@@ -1,11 +1,10 @@
 import {makeAutoObservable, reaction, runInAction} from "mobx";
-import {Instructor} from "../models/instructor";
+import {Student} from "../models/student";
 import {Pagination, PagingParams} from "../models/pagination";
 import agent from "../api/agent";
 
-export default class InstructorStore {
-    periodId: string | null = null;
-    instructors = new Map<string, Instructor>();
+export default class StudentStore {
+    students = new Map<string, Student>();
     pagingParams = new PagingParams();
     pagination: Pagination | null = null;
     loading: boolean = true;
@@ -26,9 +25,8 @@ export default class InstructorStore {
             });
     }
 
-
-    get instructorsList() {
-        return Array.from(this.instructors.values());
+    get studentsList() {
+        return Array.from(this.students.values());
     }
 
     get axiosParams() {
@@ -42,10 +40,10 @@ export default class InstructorStore {
     loadLists = async () => {
         this.loading = true;
         try {
-            runInAction(() => this.instructors.clear());
-            const result = await agent.Instructors.list(this.axiosParams, this.periodId!);
-            result.data.forEach(instructor => {
-                this.setItem(instructor);
+            runInAction(() => this.students.clear());
+            const result = await agent.Students.list(this.axiosParams);
+            result.data.forEach(student => {
+                this.setItem(student);
             });
             this.setPagination(result.pagination);
         } catch (err) {
@@ -57,7 +55,7 @@ export default class InstructorStore {
 
     setPagination = (pagination: Pagination) => this.pagination = pagination;
     setPagingParams = (pagingParams: PagingParams) => this.pagingParams = pagingParams;
-    setPredicate = (predicate: string, value: string | number) => {
+    setPredicate = (predicate: string, value: string | boolean) => {
         if (this.predicate.get(predicate) !== undefined)
             this.removePredicate(predicate);
 
@@ -76,38 +74,12 @@ export default class InstructorStore {
     }
 
     setPeriodId = async (id: string) => {
-        this.periodId = id;
+        this.setPredicate('hasLecturer', false);
+        this.setPredicate('periodId', id);
         await this.loadLists();
     }
 
-    chose = async (id: string) => {
-        try {
-            await agent.Instructors.chose(id);
-        } catch (e) {
-            console.log(e);
-        }
-    }
-
-    approval = async (id: string, status: number, note: string) => {
-        try {
-            await agent.Instructors.approval(id, status, note);
-            runInAction(() => {
-                this.instructors.delete(id);
-            })
-        } catch (e) {
-            console.log(e);
-        }
-    }
-
-    assign = async (studentId: string, lecturerId: string) => {
-        try {
-            await agent.Instructors.assign(studentId, lecturerId);
-        } catch (e) {
-            console.log(e);
-        }
-    }
-
-    private setItem = (instructor: Instructor) => {
-        this.instructors.set(instructor.id, instructor);
+    private setItem = (student: Student) => {
+        this.students.set(student.id, student);
     }
 }

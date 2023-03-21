@@ -11,7 +11,8 @@ public class Approval
     public class Command : IRequest<Result<Unit>>
     {
         public Guid InstructorId { get; set; }
-        public bool Status { get; set; }
+        public int Status { get; set; }
+        public string Note { get; set; }
     }
 
     public class Handler : IRequestHandler<Command, Result<Unit>>
@@ -43,9 +44,17 @@ public class Approval
             if (instructor.Lecturer.Students.Count >= instructor.Lecturer.MaxStudentsNumber)
                 return Result<Unit>.Failure("Giảng viên không thể nhận thêm sinh viên");
 
-            instructor.Student.Lecturer = instructor.Lecturer;
+            instructor.ApprovalStatus = request.Status != 0;
 
-            instructor.ApprovalStatus = request.Status;
+            if (request.Status != 0)
+                instructor.Student.Lecturer = instructor.Lecturer;
+            else
+                instructor.Student.Lecturer = null;
+
+            if (string.IsNullOrEmpty(request.Note))
+                instructor.Note = request.Note;
+
+            instructor.IsApproval = true;
 
             var result = await _context.SaveChangesAsync(cancellationToken) > 0;
 

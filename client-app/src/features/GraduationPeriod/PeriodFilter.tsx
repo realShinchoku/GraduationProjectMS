@@ -4,30 +4,18 @@ import {IconButton, TextField} from "@mui/material";
 import {SearchOutlined} from "@mui/icons-material";
 import Button from "@mui/material/Button";
 import AddIcon from '@mui/icons-material/Add';
-import AutoComplete from "../../app/common/AutoComplete/AutoComplete";
-import GraduationModal from "./GraduationModal";
+import PeriodModal from "./PeriodModal";
 import {useStore} from "../../app/stores/store";
-import React from "react";
+import React, {useState} from "react";
 
-function GraduationProjectPeriodsListFilter() {
-    const {modalStore} = useStore();
-    const complete1 = [
-        {label: 'Khóa 1'},
-        {label: 'Khóa 2'},
-        {label: 'Khóa 3'},
-    ];
-    const complete3 = [
-        {label: 'Bo mon 1'},
-        {label: 'Bo mon 2'},
-        {label: 'Bo mon 3'},
-    ];
+function PeriodFilter() {
+    const {modalStore, periodStore: {setPredicate, loading}} = useStore();
+    const [keyword, setKeyword] = useState('');
+
+
     return (
         <React.Fragment>
             <Box className="btn">
-                <Box className="btn_item">
-                    <AutoComplete options={complete1} label={"Khóa"}/>
-                    <AutoComplete options={complete3} label={"Bộ môn"}/>
-                </Box>
                 <Box className="search">
                     <TextField
                         className="search_"
@@ -36,21 +24,27 @@ function GraduationProjectPeriodsListFilter() {
                         placeholder="Tìm đợt đồ án..."
                         InputProps={{
                             startAdornment: (
-                                <IconButton>
+                                <IconButton onClick={() => setPredicate('Keyword', keyword)}>
                                     <SearchOutlined/>
                                 </IconButton>
                             ),
                         }}
+                        value={keyword}
+                        onChange={(e) => setKeyword(e.target.value)}
+                        onKeyDown={(e) => {
+                            if (e.key === 'Enter')
+                                setPredicate('Keyword', keyword)
+                        }}
+                        disabled={loading}
                     />
                     <Button variant="outlined" startIcon={<AddIcon/>}
-                            onClick={() => modalStore.openModal(<GraduationModal/>)}>
+                            onClick={() => modalStore.openModal(<PeriodModal/>)}>
                         Thêm mới
                     </Button>
-
                 </Box>
             </Box>
         </React.Fragment>
     )
 }
 
-export default observer(GraduationProjectPeriodsListFilter);
+export default observer(PeriodFilter);

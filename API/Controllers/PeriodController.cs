@@ -1,4 +1,3 @@
-using Application.Core;
 using Application.GraduationProjectPeriods;
 using Domain;
 using Microsoft.AspNetCore.Authorization;
@@ -19,7 +18,7 @@ public class PeriodController : BaseApiController
     }
 
     [HttpGet]
-    public async Task<IActionResult> List([FromQuery] PagingParams pagingParams)
+    public async Task<IActionResult> List([FromQuery] List.PeriodParams pagingParams)
     {
         return HandlePageResult(await Mediator.Send(new List.Query { Params = pagingParams }));
     }
@@ -28,5 +27,11 @@ public class PeriodController : BaseApiController
     public async Task<IActionResult> Single(Guid id)
     {
         return HandleResult(await Mediator.Send(new Single.Query { Id = id }));
+    }
+
+    [HttpPut]
+    public async Task<IActionResult> Edit(GraduationProjectPeriod period)
+    {
+        return HandleResult(await Mediator.Send(new Edit.Command { GraduationProjectPeriod = period }));
     }
 }

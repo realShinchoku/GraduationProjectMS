@@ -7,7 +7,7 @@ import {Lecturer} from "../models/lecturer";
 import {Student} from "../models/student";
 import {DepartmentSubjectFilterItem} from "../models/departmentSubject";
 import {Instructor} from "../models/instructor";
-import {Period} from "../models/period";
+import {Period, PeriodFormValues} from "../models/period";
 
 const sleep = (delay: number) => {
     return new Promise((resolve) => {
@@ -99,12 +99,13 @@ const Lecturers = {
 }
 
 const Students = {
-    list: () => requests.get<Student[]>('/student'),
+    list: (params: URLSearchParams) => requests.list<Student[]>('/student', {params}),
     confirmLecturer: () => requests.post<void>('/student/lecturer/confirm', {}),
 }
 
 const Periods = {
-    create: (period: Period) => requests.post<void>('/period', {period}),
+    create: (period: PeriodFormValues) => requests.post<void>('/period', period),
+    edit: (period: PeriodFormValues) => requests.put<void>('/period', period),
     list: (params: URLSearchParams) => requests.list<Period[]>('/period', {params}),
     single: (id: string) => requests.get<Period>(`/period/${id}`),
 }
@@ -116,7 +117,11 @@ const DepartmentSubjects = {
 const Instructors = {
     list: (params: URLSearchParams, periodId: string) => requests.list<Instructor[]>(`/instructor?periodId=${periodId}`, {params}),
     chose: (id: string) => requests.post(`/instructor/chose/${id}`, {}),
-    approval: (id: string) => requests.post(`/instructor/approval/${id}`, {}),
+    approval: (instructorId: string, status: number, note: string) => requests.post('/instructor/approval', {
+        instructorId,
+        status,
+        note
+    }),
     assign: (studentId: string, lecturerId: string) => requests.post(`/instructor/assign`, {studentId, lecturerId}),
 }
 

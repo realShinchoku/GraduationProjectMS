@@ -7,6 +7,7 @@ namespace API.Controllers;
 [Authorize]
 public class InstructorController : BaseApiController
 {
+    [Authorize(Policy = "IsDepartmentSubjects")]
     [HttpGet]
     public async Task<IActionResult> List([FromQuery] List.InstructorParams pagingParams)
     {
@@ -21,10 +22,10 @@ public class InstructorController : BaseApiController
     }
 
     [Authorize(Policy = "IsDepartmentSubjects")]
-    [HttpPost("approval/{id}")]
-    public async Task<IActionResult> ApprovalLecturer(Guid id, [FromBody] bool status)
+    [HttpPost("approval")]
+    public async Task<IActionResult> ApprovalLecturer(Approval.Command command)
     {
-        return HandleResult(await Mediator.Send(new Approval.Command { InstructorId = id, Status = status }));
+        return HandleResult(await Mediator.Send(command));
     }
 
     [Authorize(Policy = "IsStudent")]

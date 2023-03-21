@@ -7,10 +7,13 @@ import {useStore} from "../../app/stores/store";
 import {useEffect} from "react";
 
 function Instructor() {
-    const {periodStore: {loadLists, periods, periodsList}} = useStore();
+    const {periodStore: {loadLists, periods, periodsList, setInstructorStatus}} = useStore();
     useEffect(() => {
-        if (periods.size <= 0) loadLists();
-    }, [loadLists, periods.size]);
+        if (periods.size <= 0) {
+            setInstructorStatus();
+            loadLists();
+        }
+    }, [loadLists, periods.size, setInstructorStatus]);
     return (
         <Box className={`instructor`}>
             <Box className="inner">

@@ -85,18 +85,17 @@
     }
 
     .name_table {
-      padding: 16px 16px 0px 16px;
+      padding: 16px 16px 0 16px;
 
     }
 
     .button_account_management {
       display: flex;
-      margin: auto;
       white-space: nowrap;
-      margin-right: 5px;
+      margin: auto 5px auto auto;
 
       .button_ {
-        margin: 0px 10px;
+        margin: 0 10px;
         border-radius: 10px;
         text-transform: capitalize;
       }
@@ -149,7 +148,7 @@
     }
 
     .text {
-      font-family: 'Inter';
+      font-family: 'Inter', sans-serif;
       font-style: normal;
       font-weight: 600;
       font-size: 14px;
@@ -158,7 +157,7 @@
     }
 
     .text2 {
-      font-family: 'Inter';
+      font-family: 'Inter', sans-serif;
       font-style: normal;
       font-weight: 600;
       font-size: 32px;

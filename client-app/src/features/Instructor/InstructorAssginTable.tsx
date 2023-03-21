@@ -8,28 +8,27 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
+
 import {Button} from '@mui/material';
-import BrowsingStatus from './BrowsingStatus';
 import {useStore} from '../../app/stores/store';
-import {observer} from "mobx-react-lite";
-import {format} from "date-fns";
-import LoadingCircular from "../../app/layout/LoadingCircular";
 import {PagingParams} from "../../app/models/pagination";
+import LoadingCircular from "../../app/layout/LoadingCircular";
+import {observer} from "mobx-react-lite";
+import AssignModal from "./AssignModal";
 
 interface Props {
     periodId: string;
 }
 
-function StudentManagementTable({periodId}: Props) {
-
-    const {modalStore, periodStore: {instructorStores}} = useStore();
-    const instructorStore = instructorStores.get(periodId);
-    const {loadLists, instructors, instructorsList, loading, pagination, setPagingParams} = instructorStore!;
+function InstructorAssginTable({periodId}: Props) {
+    const {modalStore: {openModal}, periodStore: {studentStores}} = useStore();
+    const studentStore = studentStores.get(periodId);
+    const {loadLists, students, studentsList, loading, pagination, setPagingParams} = studentStore!;
 
     useEffect(() => {
-        if (instructors.size <= 0)
+        if (students.size <= 0)
             loadLists();
-    }, [loadLists, instructors.size])
+    }, [loadLists, students.size]);
 
     const handleChangePage = (event: unknown, newPage: number) => {
         setPagingParams(new PagingParams(newPage, pagination!.itemsPerPage));
@@ -52,24 +51,24 @@ function StudentManagementTable({periodId}: Props) {
                             <TableCell className='color_background' align="left">Tên Sinh Viên</TableCell>
                             <TableCell className='color_background' align="left">Lớp</TableCell>
                             <TableCell className='color_background' align="left">Khoa</TableCell>
-                            <TableCell className='color_background' align="left">Ngày Đăng Ký</TableCell>
-                            <TableCell className='color_background' align="left">Mã Giáo Viên</TableCell>
-                            <TableCell className='color_background' align="left">Tên Giáo Viên</TableCell>
-                            <TableCell className='color_background' align="left">Trạng Thái</TableCell>
-                            <TableCell className='color_background' align="left">Trạng Thái</TableCell>
+                            <TableCell className='color_background' align="left">Email</TableCell>
+                            <TableCell className='color_background' align="left"></TableCell>
+
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {instructorsList.map((row) => (
-                            <TableRow key={row.id} sx={{'&:last-child td, &:last-child th': {border: 0}}}>
-                                <TableCell component="th" scope="row">{row.studentId}</TableCell>
-                                <TableCell align="left">{row.student}</TableCell>
+                        {studentsList.map(row => (
+                            <TableRow
+                                key={row.id}
+                                sx={{'&:last-child td, &:last-child th': {border: 0}}}
+                            >
+                                <TableCell component="th" scope="row">
+                                    {row.studentId}
+                                </TableCell>
+                                <TableCell align="left">{row.displayName}</TableCell>
                                 <TableCell align="left">{row.class}</TableCell>
                                 <TableCell align="left">{row.faculty}</TableCell>
-                                <TableCell align="left">{format(new Date(row.createdDate!), 'dd/MM/yyyy')}</TableCell>
-                                <TableCell align="left">{row.lecturer}</TableCell>
-                                <TableCell align="left">{row.lecturer}</TableCell>
-                                <TableCell align="left">{row.approvalStatus}</TableCell>
+                                <TableCell align="left">{row.email}</TableCell>
                                 <TableCell align="left">
                                     <Button sx={{
                                         background: '#3690E3',
@@ -78,9 +77,10 @@ function StudentManagementTable({periodId}: Props) {
                                         borderRadius: '8px',
                                         boxShadow: 'none',
                                         width: '95px',
+                                        whiteSpace: 'nowrap',
                                         textTransform: 'capitalize'
-                                    }} variant="contained"
-                                            onClick={() => modalStore.openModal(<BrowsingStatus/>)}>Duyệt</Button>
+                                    }} variant="contained" onClick={() => openModal(<AssignModal studentId={row.id}/>)}>Phân
+                                        Công</Button>
                                 </TableCell>
                             </TableRow>
                         ))}
@@ -100,4 +100,4 @@ function StudentManagementTable({periodId}: Props) {
     );
 }
 
-export default observer(StudentManagementTable);
+export default observer(InstructorAssginTable)

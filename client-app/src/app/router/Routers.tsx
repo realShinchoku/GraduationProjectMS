@@ -10,9 +10,9 @@ import RequireNonAuth from "./RequireNonAuth";
 import Login from "../../features/Account/Login";
 import HomePage from "../../features/Homepage/HomePage";
 import LecturerList from "../../features/Lecturers/List/LecturerList";
-import GraduationList from "../../features/Graduation/GraduationList";
 import AccountManagement from "../../features/AccountManagement/AccountManagement";
 import Instructor from "../../features/Instructor/Instructor";
+import Period from "../../features/GraduationPeriod/Period";
 
 
 export const route = {
@@ -21,7 +21,9 @@ export const route = {
     resetPassword: '/account/password_reset',
     confirmResetPassword: '/account/password_reset/with',
     lecturer: '/lecturer',
-    empty: 'null'
+    empty: 'null',
+    instructor: '/instructor',
+    period: '/period',
 };
 
 export const routes: RouteObject[] = [
@@ -33,7 +35,7 @@ export const routes: RouteObject[] = [
                 element: <RequireAuth/>, children: [
                     {path: '', element: <HomePage/>},
                     {path: 'lecturer', element: <LecturerList/>},
-                    {path: 'graduation', element: <GraduationList/>},
+                    {path: 'period', element: <Period/>},
                     {path: 'account/management', element: <AccountManagement/>},
                     {path: 'instructor', element: <Instructor/>},
 

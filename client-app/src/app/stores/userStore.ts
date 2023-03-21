@@ -23,10 +23,10 @@ export default class UserStore {
             runInAction(() => {
                 this.user = user;
             });
-            if(router.state.location.state)
-                await  router.navigate(router.state.location.state.from.pathname);
-            else 
-                await router.navigate( route.home);
+            if (router.state.location.state)
+                await router.navigate(router.state.location.state.from.pathname);
+            else
+                await router.navigate(route.home);
         } catch (err: any) {
             const error = {email: null, password: null}
             if (err.response.data.email)

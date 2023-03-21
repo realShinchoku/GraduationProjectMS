@@ -10,4 +10,5 @@ public class Instructor
     public bool IsApproval { get; set; }
     public bool? ApprovalStatus { get; set; }
     public DateTime CreatedDate { get; set; } = DateTime.UtcNow;
+    public string Note { get; set; }
 }
