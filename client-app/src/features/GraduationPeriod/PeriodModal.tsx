@@ -1,20 +1,22 @@
-import {Box, Button, TextField, Typography} from "@mui/material";
+import {Box, Button, Typography} from "@mui/material";
 import "./Period.scss";
 import Grid from "@mui/material/Unstable_Grid2";
 import {useStore} from "../../app/stores/store";
-import {Form, Formik} from "formik";
+import {Field, Form, Formik} from "formik";
 import {v4 as uuid} from 'uuid';
-import {DatePickerField} from "../../app/common/DatePickerField";
 import * as Yup from 'yup';
 import {LoadingButton} from "@mui/lab";
 import {Period, PeriodFormValues} from "../../app/models/period";
 import {useEffect, useState} from "react";
+import {TextField} from "formik-mui";
+import {DatePicker} from "formik-mui-x-date-pickers";
+import {observer} from "mobx-react-lite";
 
 interface Props {
     period?: Period;
 }
 
-export default function PeriodModal({period}:Props) {
+function PeriodModal({period}:Props) {
     
     const {modalStore, periodStore:{}} = useStore();
 
@@ -67,11 +69,10 @@ export default function PeriodModal({period}:Props) {
                     <Form className="modalContent">
                         <Grid container style={{marginBottom: "20px"}} spacing={2}>
                             <Grid xs={8}>
-                                <TextField
-                                    fullWidth
-                                    label="Tên đồ án"
+                                <Field
+                                    component={TextField}
                                     name="name"
-                                    onChange={handleChange}
+                                    label="Tên đồ án"
                                     sx={{border: "none", "& fieldset": {border: "none"}}}
                                     inputProps={{style: {fontSize: "1.25rem", fontWeight: "500", lineHeight: "1.6"}}}
                                 />
@@ -101,28 +102,32 @@ export default function PeriodModal({period}:Props) {
                                     <Typography variant="h6" sx={{paddingLeft: "14px"}}>
                                         Ngày bắt đầu
                                     </Typography>
-                                    <DatePickerField
-                                        name={'startDate'}
+                                    <Field
+                                        component={DatePicker}
+                                        name="startDate"
+                                        slotProps={{textField: {placeholder: ''}}}
+                                        inputFormat="dd/MM/yyyy"
                                         sx={{
                                             width: "100%",
                                             border: "none",
                                             "& fieldset": {border: "none"},
                                         }}
-                                        slotProps={{textField: {placeholder: ''}}}
                                     />
                                 </Grid>
                                 <Grid md={3}>
                                     <Typography variant="h6" sx={{paddingLeft: "14px"}}>
                                         Ngày kết thúc
                                     </Typography>
-                                    <DatePickerField
-                                        name={'endDate'}
+                                    <Field
+                                        component={DatePicker}
+                                        name="endDate"
+                                        slotProps={{textField: {placeholder: ''}}}
+                                        inputFormat="dd/MM/yyyy"
                                         sx={{
                                             width: "100%",
                                             border: "none",
                                             "& fieldset": {border: "none"},
                                         }}
-                                        slotProps={{textField: {placeholder: ''}}}
                                     />
                                 </Grid>
                             </Grid>
@@ -134,14 +139,16 @@ export default function PeriodModal({period}:Props) {
                                     <Typography variant="body2" sx={{paddingLeft: "14px"}}>
                                         Thời Gian Liên Hệ Giảng Viên
                                     </Typography>
-                                    <DatePickerField
-                                        name={'contactInstructorTime'}
+                                    <Field
+                                        component={DatePicker}
+                                        name="contactInstructorTime"
+                                        slotProps={{textField: {placeholder: ''}}}
+                                        inputFormat="dd/MM/yyyy"
                                         sx={{
                                             width: "100%",
                                             border: "none",
                                             "& fieldset": {border: "none"},
                                         }}
-                                        slotProps={{textField: {placeholder: ''}}}
                                     />
                                 </Box>
                             </Grid>
@@ -150,14 +157,16 @@ export default function PeriodModal({period}:Props) {
                                     <Typography variant="body2" sx={{paddingLeft: "14px"}}>
                                         Thời Gian Đăng Ký Đề Tài
                                     </Typography>
-                                    <DatePickerField
-                                        name={'registerTopicTime'}
+                                    <Field
+                                        component={DatePicker}
+                                        name="registerTopicTime"
+                                        slotProps={{textField: {placeholder: ''}}}
+                                        inputFormat="dd/MM/yyyy"
                                         sx={{
                                             width: "100%",
                                             border: "none",
                                             "& fieldset": {border: "none"},
                                         }}
-                                        slotProps={{textField: {placeholder: ''}}}
                                     />
                                 </Box>
                             </Grid>
@@ -166,14 +175,16 @@ export default function PeriodModal({period}:Props) {
                                     <Typography variant="body2" sx={{paddingLeft: "14px"}}>
                                         Thời Gian Nộp Đề Cương
                                     </Typography>
-                                     <DatePickerField
-                                        name={'syllabusSubmissionTime'}
+                                    <Field
+                                        component={DatePicker}
+                                        name="syllabusSubmissionTime"
+                                        slotProps={{textField: {placeholder: ''}}}
+                                        inputFormat="dd/MM/yyyy"
                                         sx={{
                                             width: "100%",
                                             border: "none",
                                             "& fieldset": {border: "none"},
                                         }}
-                                        slotProps={{textField: {placeholder: ''}}}
                                     />
                                 </Box>
                             </Grid>
@@ -182,14 +193,16 @@ export default function PeriodModal({period}:Props) {
                                     <Typography variant="body2" sx={{paddingLeft: "14px"}}>
                                         Thời Gian Duyệt Đề cương
                                     </Typography>
-                                     <DatePickerField
-                                        name={'syllabusReviewTime'}
+                                    <Field
+                                        component={DatePicker}
+                                        name="syllabusReviewTime"
+                                        slotProps={{textField: {placeholder: ''}}}
+                                        inputFormat="dd/MM/yyyy"
                                         sx={{
                                             width: "100%",
                                             border: "none",
                                             "& fieldset": {border: "none"},
                                         }}
-                                        slotProps={{textField: {placeholder: ''}}}
                                     />
                                 </Box>
                             </Grid>
@@ -198,14 +211,16 @@ export default function PeriodModal({period}:Props) {
                                     <Typography variant="body2" sx={{paddingLeft: "14px"}}>
                                         Thời Gian Làm Đồ Án
                                     </Typography>
-                                     <DatePickerField
-                                        name={'graduationProjectTime'}
+                                    <Field
+                                        component={DatePicker}
+                                        name="graduationProjectTime"
+                                        slotProps={{textField: {placeholder: ''}}}
+                                        inputFormat="dd/MM/yyyy"
                                         sx={{
                                             width: "100%",
                                             border: "none",
                                             "& fieldset": {border: "none"},
                                         }}
-                                        slotProps={{textField: {placeholder: ''}}}
                                     />
                                 </Box>
                             </Grid>
@@ -216,14 +231,16 @@ export default function PeriodModal({period}:Props) {
                                             Thời Gian Bảo Vệ
                                         </Typography>
                                     </Box>
-                                     <DatePickerField
-                                        name={'protectionTime'}
+                                    <Field
+                                        component={DatePicker}
+                                        name="protectionTime"
+                                        slotProps={{textField: {placeholder: ''}}}
+                                        inputFormat="dd/MM/yyyy"
                                         sx={{
                                             width: "100%",
                                             border: "none",
                                             "& fieldset": {border: "none"},
                                         }}
-                                        slotProps={{textField: {placeholder: ''}}}
                                     />
                                 </Box>
                             </Grid>
@@ -234,3 +251,5 @@ export default function PeriodModal({period}:Props) {
         </Box>
     );
 }
+
+export default observer(PeriodModal)
