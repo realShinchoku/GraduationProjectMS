@@ -7,14 +7,23 @@ import {Category, LogoSP, ProfileUser} from "../../../assets";
 import {useStore} from "../../stores/store";
 import SidebarItem from "./SidebarItem/SidebarItem";
 import "./Sidebar.scss";
+import {useEffect} from "react";
 
 function DepartmentSubjectSidebar() {
 
-    const {commonStore: {sideBarState, openSideBar, closeSideBar}} = useStore();
+    const {
+        commonStore: {sideBarState, openSideBar, closeSideBar},
+        popupNotificationStore: {createHubConnection, isConnected}
+    } = useStore();
 
     const handleClick = () => {
         sideBarState ? closeSideBar() : openSideBar();
     };
+
+    useEffect(() => {
+        if(!isConnected)
+            createHubConnection();
+    }, [createHubConnection, isConnected])
 
     return (
         <Grid sx={{background: '#FFFFFF'}} className={`side_bar ${sideBarState}`}>
