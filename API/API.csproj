@@ -7,20 +7,20 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.1"/>
-        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.2"/>
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.1" />
+        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.2" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.1">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
-        <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="7.0.2"/>
-        <PackageReference Include="NWebsec.AspNetCore.Middleware" Version="3.0.0"/>
-        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0"/>
+        <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="7.0.2" />
+        <PackageReference Include="NWebsec.AspNetCore.Middleware" Version="3.0.0" />
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Application\Application.csproj"/>
-        <ProjectReference Include="..\Infrastructure\Infrastructure.csproj"/>
+        <ProjectReference Include="..\Application\Application.csproj" />
+        <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
     </ItemGroup>
 
     <ItemGroup>
@@ -48,59 +48,98 @@
     </ItemGroup>
 
     <ItemGroup>
-        <_ContentIncludedByDefault Remove="wwwroot\assets\categoryImages\culture.jpg"/>
-        <_ContentIncludedByDefault Remove="wwwroot\assets\categoryImages\drinks.jpg"/>
-        <_ContentIncludedByDefault Remove="wwwroot\assets\categoryImages\film.jpg"/>
-        <_ContentIncludedByDefault Remove="wwwroot\assets\categoryImages\food.jpg"/>
-        <_ContentIncludedByDefault Remove="wwwroot\assets\categoryImages\music.jpg"/>
-        <_ContentIncludedByDefault Remove="wwwroot\assets\categoryImages\travel.jpg"/>
-        <_ContentIncludedByDefault Remove="wwwroot\assets\logo.png"/>
-        <_ContentIncludedByDefault Remove="wwwroot\assets\placeholder.png"/>
-        <_ContentIncludedByDefault Remove="wwwroot\assets\user.png"/>
-        <_ContentIncludedByDefault Remove="wwwroot\static\css\main.361ab008.css"/>
-        <_ContentIncludedByDefault Remove="wwwroot\static\css\main.361ab008.css.map"/>
-        <_ContentIncludedByDefault Remove="wwwroot\static\js\787.627756db.chunk.js"/>
-        <_ContentIncludedByDefault Remove="wwwroot\static\js\787.627756db.chunk.js.map"/>
-        <_ContentIncludedByDefault Remove="wwwroot\static\js\main.4f1ee821.js"/>
-        <_ContentIncludedByDefault Remove="wwwroot\static\js\main.4f1ee821.js.LICENSE.txt"/>
-        <_ContentIncludedByDefault Remove="wwwroot\static\js\main.4f1ee821.js.map"/>
-        <_ContentIncludedByDefault Remove="wwwroot\static\media\Logo.9b50ee347662c6d5ea8b.png"/>
-        <_ContentIncludedByDefault Remove="wwwroot\static\media\roboto-all-300-normal.168d6383e73339293ac3.woff"/>
-        <_ContentIncludedByDefault Remove="wwwroot\static\media\roboto-all-400-normal.c5d001fa922fa66a147f.woff"/>
-        <_ContentIncludedByDefault Remove="wwwroot\static\media\roboto-all-500-normal.0ab669b7a0d19b178f57.woff"/>
-        <_ContentIncludedByDefault Remove="wwwroot\static\media\roboto-all-700-normal.a457fde362a540fcadff.woff"/>
-        <_ContentIncludedByDefault Remove="wwwroot\static\media\roboto-cyrillic-300-normal.1431d1cef06ad04f5458.woff2"/>
-        <_ContentIncludedByDefault Remove="wwwroot\static\media\roboto-cyrillic-400-normal.71a33b6b50457b2c903a.woff2"/>
-        <_ContentIncludedByDefault Remove="wwwroot\static\media\roboto-cyrillic-500-normal.cad7d3d9cb265e334e58.woff2"/>
-        <_ContentIncludedByDefault Remove="wwwroot\static\media\roboto-cyrillic-700-normal.d010f1f324e111a22e53.woff2"/>
-        <_ContentIncludedByDefault Remove="wwwroot\static\media\roboto-cyrillic-ext-300-normal.4777461b144e55145268.woff2"/>
-        <_ContentIncludedByDefault Remove="wwwroot\static\media\roboto-cyrillic-ext-400-normal.804378952da8a10faae2.woff2"/>
-        <_ContentIncludedByDefault Remove="wwwroot\static\media\roboto-cyrillic-ext-500-normal.62ced72e5832f02c2796.woff2"/>
-        <_ContentIncludedByDefault Remove="wwwroot\static\media\roboto-cyrillic-ext-700-normal.be4d02458ce53887dc37.woff2"/>
-        <_ContentIncludedByDefault Remove="wwwroot\static\media\roboto-greek-300-normal.db2632771401f61463fe.woff2"/>
-        <_ContentIncludedByDefault Remove="wwwroot\static\media\roboto-greek-400-normal.c35e4c3958e209d17b31.woff2"/>
-        <_ContentIncludedByDefault Remove="wwwroot\static\media\roboto-greek-500-normal.9ac81fefbe6c319ea40b.woff2"/>
-        <_ContentIncludedByDefault Remove="wwwroot\static\media\roboto-greek-700-normal.50e795c1345353b0e996.woff2"/>
-        <_ContentIncludedByDefault Remove="wwwroot\static\media\roboto-greek-ext-300-normal.35b9d6be04b95f0f0530.woff2"/>
-        <_ContentIncludedByDefault Remove="wwwroot\static\media\roboto-greek-ext-400-normal.169619821ea93019d1bb.woff2"/>
-        <_ContentIncludedByDefault Remove="wwwroot\static\media\roboto-greek-ext-500-normal.6fb9cffb1d3e72bf9293.woff2"/>
-        <_ContentIncludedByDefault Remove="wwwroot\static\media\roboto-greek-ext-700-normal.bd9854c751441ccc1a70.woff2"/>
-        <_ContentIncludedByDefault Remove="wwwroot\static\media\roboto-latin-300-normal.c48fb6765a9fcb00b330.woff2"/>
-        <_ContentIncludedByDefault Remove="wwwroot\static\media\roboto-latin-400-normal.b009a76ad6afe4ebd301.woff2"/>
-        <_ContentIncludedByDefault Remove="wwwroot\static\media\roboto-latin-500-normal.f25d774ecfe0996f8eb5.woff2"/>
-        <_ContentIncludedByDefault Remove="wwwroot\static\media\roboto-latin-700-normal.227c93190fe7f82de3f8.woff2"/>
-        <_ContentIncludedByDefault Remove="wwwroot\static\media\roboto-latin-ext-300-normal.dc7dcec8e3f654e0ed63.woff2"/>
-        <_ContentIncludedByDefault Remove="wwwroot\static\media\roboto-latin-ext-400-normal.861b791f9de857a6e7bc.woff2"/>
-        <_ContentIncludedByDefault Remove="wwwroot\static\media\roboto-latin-ext-500-normal.9165081d10e1ba601384.woff2"/>
-        <_ContentIncludedByDefault Remove="wwwroot\static\media\roboto-latin-ext-700-normal.ed67ad54b1a8f5d21150.woff2"/>
-        <_ContentIncludedByDefault Remove="wwwroot\static\media\roboto-vietnamese-300-normal.32fc45a3d1e8ea11fabc.woff2"/>
-        <_ContentIncludedByDefault Remove="wwwroot\static\media\roboto-vietnamese-400-normal.3230f9b040f3c630e0c3.woff2"/>
-        <_ContentIncludedByDefault Remove="wwwroot\static\media\roboto-vietnamese-500-normal.d8642a3d1d4ef6179644.woff2"/>
-        <_ContentIncludedByDefault Remove="wwwroot\static\media\roboto-vietnamese-700-normal.3425a701027d0699e369.woff2"/>
+        <_ContentIncludedByDefault Remove="wwwroot\assets\categoryImages\culture.jpg" />
+        <_ContentIncludedByDefault Remove="wwwroot\assets\categoryImages\drinks.jpg" />
+        <_ContentIncludedByDefault Remove="wwwroot\assets\categoryImages\film.jpg" />
+        <_ContentIncludedByDefault Remove="wwwroot\assets\categoryImages\food.jpg" />
+        <_ContentIncludedByDefault Remove="wwwroot\assets\categoryImages\music.jpg" />
+        <_ContentIncludedByDefault Remove="wwwroot\assets\categoryImages\travel.jpg" />
+        <_ContentIncludedByDefault Remove="wwwroot\assets\logo.png" />
+        <_ContentIncludedByDefault Remove="wwwroot\assets\placeholder.png" />
+        <_ContentIncludedByDefault Remove="wwwroot\assets\user.png" />
+        <_ContentIncludedByDefault Remove="wwwroot\static\css\main.361ab008.css" />
+        <_ContentIncludedByDefault Remove="wwwroot\static\css\main.361ab008.css.map" />
+        <_ContentIncludedByDefault Remove="wwwroot\static\js\787.627756db.chunk.js" />
+        <_ContentIncludedByDefault Remove="wwwroot\static\js\787.627756db.chunk.js.map" />
+        <_ContentIncludedByDefault Remove="wwwroot\static\js\main.4f1ee821.js" />
+        <_ContentIncludedByDefault Remove="wwwroot\static\js\main.4f1ee821.js.LICENSE.txt" />
+        <_ContentIncludedByDefault Remove="wwwroot\static\js\main.4f1ee821.js.map" />
+        <_ContentIncludedByDefault Remove="wwwroot\static\media\Logo.9b50ee347662c6d5ea8b.png" />
+        <_ContentIncludedByDefault Remove="wwwroot\static\media\roboto-all-300-normal.168d6383e73339293ac3.woff" />
+        <_ContentIncludedByDefault Remove="wwwroot\static\media\roboto-all-400-normal.c5d001fa922fa66a147f.woff" />
+        <_ContentIncludedByDefault Remove="wwwroot\static\media\roboto-all-500-normal.0ab669b7a0d19b178f57.woff" />
+        <_ContentIncludedByDefault Remove="wwwroot\static\media\roboto-all-700-normal.a457fde362a540fcadff.woff" />
+        <_ContentIncludedByDefault Remove="wwwroot\static\media\roboto-cyrillic-300-normal.1431d1cef06ad04f5458.woff2" />
+        <_ContentIncludedByDefault Remove="wwwroot\static\media\roboto-cyrillic-400-normal.71a33b6b50457b2c903a.woff2" />
+        <_ContentIncludedByDefault Remove="wwwroot\static\media\roboto-cyrillic-500-normal.cad7d3d9cb265e334e58.woff2" />
+        <_ContentIncludedByDefault Remove="wwwroot\static\media\roboto-cyrillic-700-normal.d010f1f324e111a22e53.woff2" />
+        <_ContentIncludedByDefault Remove="wwwroot\static\media\roboto-cyrillic-ext-300-normal.4777461b144e55145268.woff2" />
+        <_ContentIncludedByDefault Remove="wwwroot\static\media\roboto-cyrillic-ext-400-normal.804378952da8a10faae2.woff2" />
+        <_ContentIncludedByDefault Remove="wwwroot\static\media\roboto-cyrillic-ext-500-normal.62ced72e5832f02c2796.woff2" />
+        <_ContentIncludedByDefault Remove="wwwroot\static\media\roboto-cyrillic-ext-700-normal.be4d02458ce53887dc37.woff2" />
+        <_ContentIncludedByDefault Remove="wwwroot\static\media\roboto-greek-300-normal.db2632771401f61463fe.woff2" />
+        <_ContentIncludedByDefault Remove="wwwroot\static\media\roboto-greek-400-normal.c35e4c3958e209d17b31.woff2" />
+        <_ContentIncludedByDefault Remove="wwwroot\static\media\roboto-greek-500-normal.9ac81fefbe6c319ea40b.woff2" />
+        <_ContentIncludedByDefault Remove="wwwroot\static\media\roboto-greek-700-normal.50e795c1345353b0e996.woff2" />
+        <_ContentIncludedByDefault Remove="wwwroot\static\media\roboto-greek-ext-300-normal.35b9d6be04b95f0f0530.woff2" />
+        <_ContentIncludedByDefault Remove="wwwroot\static\media\roboto-greek-ext-400-normal.169619821ea93019d1bb.woff2" />
+        <_ContentIncludedByDefault Remove="wwwroot\static\media\roboto-greek-ext-500-normal.6fb9cffb1d3e72bf9293.woff2" />
+        <_ContentIncludedByDefault Remove="wwwroot\static\media\roboto-greek-ext-700-normal.bd9854c751441ccc1a70.woff2" />
+        <_ContentIncludedByDefault Remove="wwwroot\static\media\roboto-latin-300-normal.c48fb6765a9fcb00b330.woff2" />
+        <_ContentIncludedByDefault Remove="wwwroot\static\media\roboto-latin-400-normal.b009a76ad6afe4ebd301.woff2" />
+        <_ContentIncludedByDefault Remove="wwwroot\static\media\roboto-latin-500-normal.f25d774ecfe0996f8eb5.woff2" />
+        <_ContentIncludedByDefault Remove="wwwroot\static\media\roboto-latin-700-normal.227c93190fe7f82de3f8.woff2" />
+        <_ContentIncludedByDefault Remove="wwwroot\static\media\roboto-latin-ext-300-normal.dc7dcec8e3f654e0ed63.woff2" />
+        <_ContentIncludedByDefault Remove="wwwroot\static\media\roboto-latin-ext-400-normal.861b791f9de857a6e7bc.woff2" />
+        <_ContentIncludedByDefault Remove="wwwroot\static\media\roboto-latin-ext-500-normal.9165081d10e1ba601384.woff2" />
+        <_ContentIncludedByDefault Remove="wwwroot\static\media\roboto-latin-ext-700-normal.ed67ad54b1a8f5d21150.woff2" />
+        <_ContentIncludedByDefault Remove="wwwroot\static\media\roboto-vietnamese-300-normal.32fc45a3d1e8ea11fabc.woff2" />
+        <_ContentIncludedByDefault Remove="wwwroot\static\media\roboto-vietnamese-400-normal.3230f9b040f3c630e0c3.woff2" />
+        <_ContentIncludedByDefault Remove="wwwroot\static\media\roboto-vietnamese-500-normal.d8642a3d1d4ef6179644.woff2" />
+        <_ContentIncludedByDefault Remove="wwwroot\static\media\roboto-vietnamese-700-normal.3425a701027d0699e369.woff2" />
+        <_ContentIncludedByDefault Remove="wwwroot\static\css\main.9e66fed6.css" />
+        <_ContentIncludedByDefault Remove="wwwroot\static\css\main.9e66fed6.css.map" />
+        <_ContentIncludedByDefault Remove="wwwroot\static\js\main.ef9bd585.js" />
+        <_ContentIncludedByDefault Remove="wwwroot\static\js\main.ef9bd585.js.LICENSE.txt" />
+        <_ContentIncludedByDefault Remove="wwwroot\static\js\main.ef9bd585.js.map" />
+        <_ContentIncludedByDefault Remove="wwwroot\static\media\Avatar_.3aaf9e6a61bf308eef35.jpeg" />
+        <_ContentIncludedByDefault Remove="wwwroot\static\media\inter-all-400-normal.8c804432e8c67741aac0.woff" />
+        <_ContentIncludedByDefault Remove="wwwroot\static\media\inter-all-500-normal.83e7a0ab5dc3177d4723.woff" />
+        <_ContentIncludedByDefault Remove="wwwroot\static\media\inter-all-600-normal.d8872b2170f87e73c798.woff" />
+        <_ContentIncludedByDefault Remove="wwwroot\static\media\inter-all-700-normal.4caa68a0cd07682d7af5.woff" />
+        <_ContentIncludedByDefault Remove="wwwroot\static\media\inter-cyrillic-400-normal.8684fef6e6411779f0b0.woff2" />
+        <_ContentIncludedByDefault Remove="wwwroot\static\media\inter-cyrillic-500-normal.737dedc32b59205a84d9.woff2" />
+        <_ContentIncludedByDefault Remove="wwwroot\static\media\inter-cyrillic-600-normal.f17ec551fa8990736da1.woff2" />
+        <_ContentIncludedByDefault Remove="wwwroot\static\media\inter-cyrillic-700-normal.fce0dd826e17f3fa0ff1.woff2" />
+        <_ContentIncludedByDefault Remove="wwwroot\static\media\inter-cyrillic-ext-400-normal.fcc125c4fef4b94c8b13.woff2" />
+        <_ContentIncludedByDefault Remove="wwwroot\static\media\inter-cyrillic-ext-500-normal.a93857ed8d0b316d3572.woff2" />
+        <_ContentIncludedByDefault Remove="wwwroot\static\media\inter-cyrillic-ext-600-normal.c1791ace2adbca4163ca.woff2" />
+        <_ContentIncludedByDefault Remove="wwwroot\static\media\inter-cyrillic-ext-700-normal.177b82cdf603287fdd19.woff2" />
+        <_ContentIncludedByDefault Remove="wwwroot\static\media\inter-greek-400-normal.0278a49f9007106a0bf4.woff2" />
+        <_ContentIncludedByDefault Remove="wwwroot\static\media\inter-greek-500-normal.4403838c26aa2155eb84.woff2" />
+        <_ContentIncludedByDefault Remove="wwwroot\static\media\inter-greek-600-normal.c2ba769d6f2c3a8b76fc.woff2" />
+        <_ContentIncludedByDefault Remove="wwwroot\static\media\inter-greek-700-normal.d36e38b13429f45c7973.woff2" />
+        <_ContentIncludedByDefault Remove="wwwroot\static\media\inter-greek-ext-400-normal.3f642a92b6e57b3a4b84.woff2" />
+        <_ContentIncludedByDefault Remove="wwwroot\static\media\inter-greek-ext-500-normal.80f07073e922d2bc65df.woff2" />
+        <_ContentIncludedByDefault Remove="wwwroot\static\media\inter-greek-ext-600-normal.66b622a25da168cc60ec.woff2" />
+        <_ContentIncludedByDefault Remove="wwwroot\static\media\inter-greek-ext-700-normal.25e184a638be1a4d9798.woff2" />
+        <_ContentIncludedByDefault Remove="wwwroot\static\media\inter-latin-400-normal.be7cb18dc7caf47cf7e9.woff2" />
+        <_ContentIncludedByDefault Remove="wwwroot\static\media\inter-latin-500-normal.c72c72b70c82b1f4bacf.woff2" />
+        <_ContentIncludedByDefault Remove="wwwroot\static\media\inter-latin-600-normal.8f1e0300e8d26fa8919d.woff2" />
+        <_ContentIncludedByDefault Remove="wwwroot\static\media\inter-latin-700-normal.54321e26b8bf4739a16d.woff2" />
+        <_ContentIncludedByDefault Remove="wwwroot\static\media\inter-latin-ext-400-normal.3a7a76525d98d25962eb.woff2" />
+        <_ContentIncludedByDefault Remove="wwwroot\static\media\inter-latin-ext-500-normal.cd2491c30c7f25218ecd.woff2" />
+        <_ContentIncludedByDefault Remove="wwwroot\static\media\inter-latin-ext-600-normal.3cd8400fefcd41fe460c.woff2" />
+        <_ContentIncludedByDefault Remove="wwwroot\static\media\inter-latin-ext-700-normal.8e5621b2012f373fe96e.woff2" />
+        <_ContentIncludedByDefault Remove="wwwroot\static\media\inter-vietnamese-400-normal.789afb71d327988e2fc8.woff2" />
+        <_ContentIncludedByDefault Remove="wwwroot\static\media\inter-vietnamese-500-normal.af96698e6248b5be6d91.woff2" />
+        <_ContentIncludedByDefault Remove="wwwroot\static\media\inter-vietnamese-600-normal.fe7c406ffbd129b7aa88.woff2" />
+        <_ContentIncludedByDefault Remove="wwwroot\static\media\inter-vietnamese-700-normal.3d836ea0c2480ab12b4b.woff2" />
+        <_ContentIncludedByDefault Remove="wwwroot\static\media\LogoSP.37c44f51ca790edd73ef.png" />
     </ItemGroup>
 
     <ItemGroup>
-        <Folder Include="wwwroot"/>
+        <Folder Include="wwwroot" />
     </ItemGroup>
 
 </Project>
