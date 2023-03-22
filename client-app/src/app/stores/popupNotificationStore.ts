@@ -6,8 +6,9 @@ import {store} from "./store";
 export default class PopupNotificationStore {
     popupNotification: PopupNotification | null = null;
     hubConnection: HubConnection | null = null;
-    connectionStatus: boolean = false;
-
+    
+    isConnected: boolean = false;
+    
     constructor() {
         makeAutoObservable(this);
     }
@@ -20,8 +21,8 @@ export default class PopupNotificationStore {
             .withAutomaticReconnect()
             .configureLogging(LogLevel.Information)
             .build();
-        
-        this.hubConnection.start().then(this.setConnectionStatus).catch(error => console.log('Error establishing the connection', error));
+
+        this.hubConnection.start().then(this.setIsConnected).catch(error => console.log('Error establishing the connection', error));
 
         this.hubConnection.on('GetPopup', (popupNotification: PopupNotification) =>
             runInAction(() => {
@@ -35,10 +36,16 @@ export default class PopupNotificationStore {
                     this.popupNotification = null;
             })
         );
+
+        this.hubConnection.on('ReceivePopupNotification', async () => {
+            await runInAction(async () => {
+                await this.getPopup();
+            })
+        })
     }
 
     stopHubConnection = () => {
-        this.hubConnection?.stop().then(this.setConnectionStatus).catch(error => console.log('Error stopping connection', error));
+        this.hubConnection?.stop().then(this.setIsConnected).catch(error => console.log('Error stopping connection', error));
     }
 
     clear = () => {
@@ -53,6 +60,21 @@ export default class PopupNotificationStore {
             console.log(e)
         }
     }
+    getPopup = async () => {
+        try {
+            await this.hubConnection?.invoke("GetPopupNotificationAsync")
+        } catch (e) {
+            console.log(e)
+        }
+    }
 
-    setConnectionStatus = () => this.connectionStatus = !this.connectionStatus;
+    sendPopup = async () => {
+        try {
+            await this.hubConnection?.invoke("SendPopupNotificationAsync")
+        } catch (e) {
+            console.log(e)
+        }
+    }
+    
+    setIsConnected = () => this.isConnected = !this.isConnected;
 }

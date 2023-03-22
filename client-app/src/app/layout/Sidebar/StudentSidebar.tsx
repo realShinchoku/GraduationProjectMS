@@ -18,7 +18,7 @@ function StudentSidebar() {
 
     const {
         commonStore: {sideBarState, openSideBar, closeSideBar},
-        popupNotificationStore: {createHubConnection, connectionStatus, maskAsRead, popupNotification}
+        popupNotificationStore: {createHubConnection, maskAsRead, popupNotification, isConnected}
     } = useStore();
 
     const handleClick = () => {
@@ -26,9 +26,9 @@ function StudentSidebar() {
     };
 
     useEffect(() => {
-        if (!connectionStatus)
+        if(!isConnected)
             createHubConnection();
-    }, [createHubConnection, connectionStatus])
+    }, [createHubConnection, isConnected])
 
     return (
         <Grid sx={{background: '#FFFFFF'}} className={`side_bar ${sideBarState}`}>

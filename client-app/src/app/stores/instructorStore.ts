@@ -2,6 +2,7 @@ import {makeAutoObservable, reaction, runInAction} from "mobx";
 import {Instructor} from "../models/instructor";
 import {Pagination, PagingParams} from "../models/pagination";
 import agent from "../api/agent";
+import {store} from "./store";
 
 export default class InstructorStore {
     periodId: string | null = null;
@@ -94,6 +95,9 @@ export default class InstructorStore {
             runInAction(() => {
                 this.instructors.delete(id);
             })
+            await runInAction(async () => {
+                await store.popupNotificationStore.sendPopup();
+            });
         } catch (e) {
             console.log(e);
         }
@@ -102,6 +106,9 @@ export default class InstructorStore {
     assign = async (studentId: string, lecturerId: string) => {
         try {
             await agent.Instructors.assign(studentId, lecturerId);
+            await runInAction(async () => {
+                await store.popupNotificationStore.sendPopup();
+            });
         } catch (e) {
             console.log(e);
         }
