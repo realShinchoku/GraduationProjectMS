@@ -10,16 +10,25 @@ import VerticalTabs from "./Tab";
 import {useStore} from "../../stores/store";
 import SidebarItem from "./SidebarItem/SidebarItem";
 import "./Sidebar.scss";
+import {useEffect} from "react";
 
 function StudentSidebar() {
 
     const location = useLocation();
 
-    const {commonStore: {sideBarState, openSideBar, closeSideBar}} = useStore();
+    const {
+        commonStore: {sideBarState, openSideBar, closeSideBar},
+        popupNotificationStore: {createHubConnection, connectionStatus, maskAsRead, popupNotification}
+    } = useStore();
 
     const handleClick = () => {
         sideBarState ? closeSideBar() : openSideBar();
     };
+
+    useEffect(() => {
+        if (!connectionStatus)
+            createHubConnection();
+    }, [createHubConnection, connectionStatus])
 
     return (
         <Grid sx={{background: '#FFFFFF'}} className={`side_bar ${sideBarState}`}>
@@ -50,14 +59,13 @@ function StudentSidebar() {
                     <VerticalTabs/>
                 </>
             )}
-            <Box className="confirm">
+            {popupNotification && <Box className="confirm">
                 <Box className="inner">
                     <Box className="thumb"/>
                     <Box className="thumb_"/>
                     <Box className="txt">
                         <Typography variant="h3">Thông báo xác nhận</Typography>
-                        <Typography variant="body1">Giảng viên Nguyễn Thị Phương Thảo đã chấp nhận yêu cầu hướng dẫn của
-                            bạn.</Typography>
+                        <Typography variant="body1">{popupNotification.message}</Typography>
                         <Button
                             style={{
                                 backgroundColor: "#fff",
@@ -65,6 +73,7 @@ function StudentSidebar() {
                                 boxShadow: "unset"
                             }}
                             variant="contained"
+                            onClick={maskAsRead}
                         >
                             OK
                         </Button>
@@ -80,7 +89,7 @@ function StudentSidebar() {
                         </Button>
                     </Box>
                 </Box>
-            </Box>
+            </Box>}
         </Grid>
     )
 }

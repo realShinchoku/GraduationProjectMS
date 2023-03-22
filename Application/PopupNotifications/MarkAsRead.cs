@@ -11,7 +11,7 @@ public class MarkAsRead
     {
         public Guid Id { get; set; }
     }
-    
+
     public class Handler : IRequestHandler<Command, Result<Unit>>
     {
         private readonly DataContext _context;
@@ -20,9 +20,11 @@ public class MarkAsRead
         {
             _context = context;
         }
+
         public async Task<Result<Unit>> Handle(Command request, CancellationToken cancellationToken)
         {
-            var popupNotification = await _context.PopupNotifications.FirstOrDefaultAsync(x => x.Id == request.Id, cancellationToken);
+            var popupNotification =
+                await _context.PopupNotifications.FirstOrDefaultAsync(x => x.Id == request.Id, cancellationToken);
             if (popupNotification == null)
                 return null;
             popupNotification.IsRead = true;

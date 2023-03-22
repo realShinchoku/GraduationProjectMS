@@ -80,17 +80,17 @@ public class Assign
             var result = await _context.SaveChangesAsync(cancellationToken) > 0;
 
             if (!result) return Result<Unit>.Failure("Có lỗi khi chọn giảng viên hướng dẫn");
-            
+
             var popupNotification = new PopupNotification
             {
                 Message = $"Bạn đã được phân giảng viên {instructor.Lecturer.DisplayName} làm giảng viên hướng dẫn",
-                TargetUser = student,
+                TargetUser = student
             };
 
             _context.PopupNotifications.Add(popupNotification);
-            
+
             await _context.SaveChangesAsync(cancellationToken);
-            
+
             return Result<Unit>.Success(Unit.Value);
         }
     }

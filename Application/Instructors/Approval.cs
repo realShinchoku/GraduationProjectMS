@@ -65,11 +65,11 @@ public class Approval
             var popupNotification = new PopupNotification
             {
                 Message = $"Yêu cầu giảng viên {instructor.Lecturer.DisplayName} đã được chấp thuận",
-                TargetUser = instructor.Student,
+                TargetUser = instructor.Student
             };
 
             _context.PopupNotifications.Add(popupNotification);
-            
+
             await _context.SaveChangesAsync(cancellationToken);
 
             return Result<Unit>.Success(Unit.Value);

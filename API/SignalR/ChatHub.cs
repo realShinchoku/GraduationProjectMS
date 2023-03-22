@@ -15,19 +15,16 @@ public class ChatHub : Hub
         _mediator = mediator;
         _userAccessor = userAccessor;
     }
-    
+
     public async Task MaskAsRead(MarkAsRead.Command command)
     {
         var result = await _mediator.Send(command);
-        if(result == null)
-            await Clients.Caller.SendAsync("ReceiveMaskAsRead", null);
-        else
-            await Clients.Caller.SendAsync("ReceiveMaskAsRead", result.Value);
+        await Clients.Caller.SendAsync("ReceiveMaskAsRead", result?.Value);
     }
 
     public override async Task OnConnectedAsync()
     {
-        var result = await _mediator.Send(new Get.Query { Id = _userAccessor.GetUserId()});
-        await Clients.Caller.SendAsync("LoadComments", result.Value);
+        var result = await _mediator.Send(new Get.Query { Id = _userAccessor.GetUserId() });
+        await Clients.Caller.SendAsync("GetPopup", result?.Value);
     }
 }

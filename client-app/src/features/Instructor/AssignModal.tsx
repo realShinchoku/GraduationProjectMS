@@ -21,12 +21,14 @@ import {PagingParams} from "../../app/models/pagination";
 import {observer} from "mobx-react-lite";
 import LoadingCircular from "../../app/layout/LoadingCircular";
 import SuccessModal from "./SuccessModal";
+import StudentStore from "../../app/stores/studentStore";
 
 interface Props {
     studentId: string;
+    studentStore: StudentStore;
 }
 
-function AssignModal({studentId}: Props) {
+function AssignModal({studentId, studentStore}: Props) {
 
     const {
         modalStore,
@@ -122,14 +124,18 @@ function AssignModal({studentId}: Props) {
                             onRowsPerPageChange={handleChangeRowsPerPage}
                         />
                     </Paper>
-                    <Button sx={{
-                        display: 'flex',
-                        fontSize: '24px',
-                        textTransform: 'capitalize',
-                        padding: '0px 40px',
-                        margin: 'auto'
-                    }} variant="contained" onClick={() => assign(studentId, lecturerId).then(() => modalStore.openModal(
-                        <SuccessModal/>))}>Lưu</Button>
+                    <Button
+                        sx={{
+                            display: 'flex',
+                            fontSize: '24px',
+                            textTransform: 'capitalize',
+                            padding: '0px 40px',
+                            margin: 'auto'
+                        }}
+                        variant="contained"
+                        onClick={() => assign(studentId, lecturerId).then(() => studentStore.removeItem(studentId)).then(() => modalStore.openModal(
+                            <SuccessModal/>))}
+                    >Lưu</Button>
                 </>
             }
         </Box>

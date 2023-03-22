@@ -1,4 +1,4 @@
-﻿import {Navigate, Outlet} from "react-router-dom";
+import {Navigate, Outlet} from "react-router-dom";
 import {useStore} from "../stores/store";
 import {Role} from "../models/user";
 import {route} from "./Routers";

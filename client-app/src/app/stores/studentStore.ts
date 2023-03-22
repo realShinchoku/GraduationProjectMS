@@ -79,6 +79,10 @@ export default class StudentStore {
         await this.loadLists();
     }
 
+    removeItem = (id: string) => {
+        this.students.delete(id);
+    }
+
     private setItem = (student: Student) => {
         this.students.set(student.id, student);
     }

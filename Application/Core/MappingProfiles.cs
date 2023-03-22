@@ -2,6 +2,7 @@
 using Application.GraduationProjectPeriods.DTOs;
 using Application.Instructors.DTOs;
 using Application.Lecturers.DTOs;
+using Application.PopupNotifications.DTOs;
 using Application.Students.DTOs;
 using AutoMapper;
 using Domain;
@@ -40,5 +41,6 @@ public class MappingProfiles : Profile
             .ForMember(d => d.ProjectsCount, o => o.MapFrom(x => x.Projects.Count))
             .ForMember(d => d.LecturersCount, o => o.MapFrom(x => x.Faculty.Lecturers.Count));
         CreateMap<GraduationProjectPeriod, GraduationProjectPeriod>();
+        CreateMap<PopupNotification, PopupNotificationDto>();
     }
 }

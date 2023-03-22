@@ -22,8 +22,8 @@ interface Props {
 
 function InstructorAssginTable({periodId}: Props) {
     const {modalStore: {openModal}, periodStore: {studentStores}} = useStore();
-    const studentStore = studentStores.get(periodId);
-    const {loadLists, students, studentsList, loading, pagination, setPagingParams} = studentStore!;
+    const studentStore = studentStores.get(periodId)!;
+    const {loadLists, students, studentsList, loading, pagination, setPagingParams} = studentStore;
 
     useEffect(() => {
         if (students.size <= 0)
@@ -79,7 +79,9 @@ function InstructorAssginTable({periodId}: Props) {
                                         width: '95px',
                                         whiteSpace: 'nowrap',
                                         textTransform: 'capitalize'
-                                    }} variant="contained" onClick={() => openModal(<AssignModal studentId={row.id}/>)}>Phân
+                                    }} variant="contained"
+                                            onClick={() => openModal(<AssignModal studentStore={studentStore}
+                                                                                  studentId={row.id}/>)}>Phân
                                         Công</Button>
                                 </TableCell>
                             </TableRow>
