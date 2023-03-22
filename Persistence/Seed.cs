@@ -1,4 +1,4 @@
-﻿using Domain;
+using Domain;
 using Microsoft.AspNetCore.Identity;
 
 namespace Persistence;
@@ -19,8 +19,8 @@ public class Seed
                 },
                 new()
                 {
-                    RoleId = Role.DepartmentSubjects,
-                    Name = Role.DepartmentSubjects.ToString()
+                    RoleId = Role.DepartmentSubject,
+                    Name = Role.DepartmentSubject.ToString()
                 },
                 new()
                 {
@@ -62,7 +62,7 @@ public class Seed
                     DisplayName = "Bộ môn 1",
                     UserName = "bm1",
                     Email = "bm1@test.com",
-                    Role = Role.DepartmentSubjects,
+                    Role = Role.DepartmentSubject,
                     Faculty = faculties[0]
                 },
                 new()
@@ -70,7 +70,7 @@ public class Seed
                     DisplayName = "Bộ môn 2",
                     UserName = "bm2",
                     Email = "bm2@test.com",
-                    Role = Role.DepartmentSubjects,
+                    Role = Role.DepartmentSubject,
                     Faculty = faculties[0]
                 },
                 new()
@@ -78,7 +78,7 @@ public class Seed
                     DisplayName = "Bộ môn 3",
                     UserName = "bm3",
                     Email = "bm3@test.com",
-                    Role = Role.DepartmentSubjects,
+                    Role = Role.DepartmentSubject,
                     Faculty = faculties[0]
                 },
                 new()
@@ -86,7 +86,7 @@ public class Seed
                     DisplayName = "Bộ môn 4",
                     UserName = "bm4",
                     Email = "bm4@test.com",
-                    Role = Role.DepartmentSubjects,
+                    Role = Role.DepartmentSubject,
                     Faculty = faculties[1]
                 },
                 new()
@@ -94,7 +94,7 @@ public class Seed
                     DisplayName = "Bộ môn 5",
                     UserName = "bm5",
                     Email = "bm5@test.com",
-                    Role = Role.DepartmentSubjects,
+                    Role = Role.DepartmentSubject,
                     Faculty = faculties[1]
                 },
                 new()
@@ -102,7 +102,7 @@ public class Seed
                     DisplayName = "Bộ môn 6",
                     UserName = "bm6",
                     Email = "bm6@test.com",
-                    Role = Role.DepartmentSubjects,
+                    Role = Role.DepartmentSubject,
                     Faculty = faculties[1]
                 }
             };
@@ -218,6 +218,37 @@ public class Seed
                     Faculty = departmentSubjects[5].Faculty
                 }
             };
+            var periods = new List<GraduationProjectPeriod>
+            {
+                new()
+                {
+                    Name = "Đồ án 1",
+                    StartDate = DateTime.UtcNow,
+                    EndDate = DateTime.UtcNow.AddDays(43),
+                    ContactInstructorTime = DateTime.UtcNow,
+                    RegisterTopicTime = DateTime.UtcNow.AddDays(2),
+                    SyllabusSubmissionTime = DateTime.UtcNow.AddDays(7),
+                    SyllabusReviewTime = DateTime.UtcNow.AddDays(14),
+                    GraduationProjectTime = DateTime.UtcNow.AddDays(32),
+                    ProtectionTime = DateTime.UtcNow.AddDays(42),
+                    Faculty = faculties[0]
+                },
+                new()
+                {
+                    Name = "Đồ án 2",
+                    StartDate = DateTime.UtcNow,
+                    EndDate = DateTime.UtcNow.AddDays(43),
+                    ContactInstructorTime = DateTime.UtcNow,
+                    RegisterTopicTime = DateTime.UtcNow.AddDays(2),
+                    SyllabusSubmissionTime = DateTime.UtcNow.AddDays(7),
+                    SyllabusReviewTime = DateTime.UtcNow.AddDays(14),
+                    GraduationProjectTime = DateTime.UtcNow.AddDays(32),
+                    ProtectionTime = DateTime.UtcNow.AddDays(42),
+                    Faculty = faculties[1]
+                }
+            };
+
+
             var students = new List<Student>
             {
                 new()
@@ -287,30 +318,25 @@ public class Seed
                 {
                     DisplayName = "Sinh viên 8",
                     UserName = "sv8",
-                    Email = "sv8@test.com"
+                    Email = "sv8@test.com",
+                    Faculty = faculties[0]
                 },
                 new()
                 {
                     DisplayName = "Sinh viên 9",
                     UserName = "sv9",
-                    Email = "sv9@test.com"
+                    Email = "sv9@test.com",
+                    Faculty = faculties[0]
                 },
                 new()
                 {
                     DisplayName = "Sinh viên 10",
                     UserName = "sv10",
-                    Email = "sv10@test.com"
-                },
-                new()
-                {
-                    DisplayName = "1951060778",
-                    UserName = "1951060778",
-                    Email = "1951060778@e.tlu.edu.vn",
-                    Lecturer = lecturers[1],
-                    DepartmentSubject = lecturers[1].DepartmentSubject,
-                    Faculty = lecturers[1].Faculty
-                },
+                    Email = "sv10@test.com",
+                    Faculty = faculties[0]
+                }
             };
+
 
             foreach (var user in faculties)
             {
@@ -326,12 +352,15 @@ public class Seed
 
             foreach (var user in lecturers)
             {
+                user.MaxStudentsNumber = new Random().Next(4, 10);
                 await userManager.CreateAsync(user, "Pa$$w0rd");
                 await userManager.AddToRoleAsync(user, user.Role.ToString());
             }
 
+
             foreach (var user in students)
             {
+                user.GraduationProjectPeriod = periods[0].Faculty == user.Faculty ? periods[0] : periods[1];
                 await userManager.CreateAsync(user, "Pa$$w0rd");
                 await userManager.AddToRoleAsync(user, user.Role.ToString());
             }

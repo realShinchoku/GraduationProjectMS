@@ -1,4 +1,4 @@
-﻿import {makeAutoObservable, reaction, runInAction} from "mobx";
+import {makeAutoObservable, reaction, runInAction} from "mobx";
 import {Lecturer} from "../models/lecturer";
 import agent from "../api/agent";
 import {Pagination, PagingParams} from "../models/pagination";
@@ -9,14 +9,19 @@ export default class LecturerStore {
     pagingParams = new PagingParams();
     pagination: Pagination | null = null;
     loading: boolean = true;
+    predicate = new Map();
 
     constructor() {
         makeAutoObservable(this);
-        reaction(() => {
-            },
+        reaction(() => this.predicate.values() || this.predicate.keys()
+            ,
             async () => {
-                this.pagingParams = new PagingParams();
-                this.lecturers.clear();
+                this.pagingParams.pageNumber = 0;
+                await this.loadLecturers();
+            });
+
+        reaction(() => this.pagingParams,
+            async () => {
                 await this.loadLecturers();
             });
     }
@@ -29,19 +34,14 @@ export default class LecturerStore {
         const params = new URLSearchParams();
         params.append('pageNumber', this.pagingParams.pageNumber.toString());
         params.append('pageSize', this.pagingParams.pageSize.toString());
-        // this.predicate.forEach((value, key) => {
-        //     if (key === 'startDate') {
-        //         params.append(key, (value as Date).toISOString());
-        //     } else {
-        //         params.append(key, value);
-        //     }
-        // });
+        this.predicate.forEach((value, key) => params.append(key, value));
         return params;
     }
 
     loadLecturers = async () => {
         this.loading = true;
         try {
+            runInAction(() => this.lecturers.clear());
             const result = await agent.Lecturers.list(this.axiosParams);
             result.data.forEach(lecturer => {
                 this.setLecturer(lecturer);
@@ -49,14 +49,40 @@ export default class LecturerStore {
             this.setPagination(result.pagination);
         } catch (err) {
             console.log(err)
-        }
-        finally {
+        } finally {
             runInAction(() => this.loading = false);
         }
     }
     setPagination = (pagination: Pagination) => this.pagination = pagination;
 
+    setPagingParams = (pagingParams: PagingParams) => this.pagingParams = pagingParams;
+    setPredicate = (predicate: string, value: string | number | boolean) => {
+        if (this.predicate.get(predicate) !== undefined)
+            this.removePredicate(predicate);
+
+        if (value === null || value === '')
+            return this.removePredicate(predicate);
+
+        this.predicate.set(predicate, value);
+    }
+    removePredicate = (predicate: string) => {
+        this.predicate.delete(predicate);
+    }
+    resetPredicate = () => {
+        this.predicate.clear();
+    }
     private setLecturer = (lecturer: Lecturer) => {
+        switch (lecturer.instructorStatus) {
+            case 0:
+                lecturer.lecturerStatus = 'Tiếp nhận';
+                break;
+            case 1:
+                lecturer.lecturerStatus = 'Chờ duyệt';
+                break;
+            case 2:
+                lecturer.lecturerStatus = 'Từ chối';
+                break;
+        }
         lecturer.birthday = new Date(lecturer.birthday!)
         this.lecturers.set(lecturer.id, lecturer);
     }

@@ -1,11 +1,12 @@
-﻿export interface Lecturer {
+export interface Lecturer {
     id: string;
     displayName: string;
     email: string;
     birthday?: Date;
     bio: string;
     sex?: boolean;
-    status: number;
+    instructorStatus: number;
+    lecturerStatus: string;
     phoneNumber: string;
     studentCount: number;
     maxStudentsNumber: number;

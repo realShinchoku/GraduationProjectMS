@@ -1,11 +1,12 @@
 import {ServerError} from "../models/serverError";
 import {makeAutoObservable, reaction} from "mobx";
+import Cookies from "js-cookie";
 
 export default class CommonStore {
     error: ServerError | null = null;
-    token: string | null = localStorage.getItem('jwt');
+    token: string | undefined = Cookies.get('jwt');
     appLoaded: boolean = false;
-    isActive: string = '';
+    sideBarState: string = '';
 
     constructor() {
         makeAutoObservable(this);
@@ -13,9 +14,9 @@ export default class CommonStore {
         reaction(() => this.token,
             token => {
                 if (token)
-                    localStorage.setItem('jwt', token);
+                    Cookies.set('jwt', token);
                 else
-                    localStorage.removeItem('jwt');
+                    Cookies.remove('jwt');
             })
     }
 
@@ -23,13 +24,13 @@ export default class CommonStore {
         this.error = err;
     }
 
-    setToken = (token: string | null) => {
+    setToken = (token: string | undefined) => {
         this.token = token;
     }
 
     setAppLoaded = () => this.appLoaded = true;
 
-    openSideBar = () => this.isActive = 'active';
-    closeSideBar = () => this.isActive = '';
+    openSideBar = () => this.sideBarState = 'active';
+    closeSideBar = () => this.sideBarState = '';
 
 }

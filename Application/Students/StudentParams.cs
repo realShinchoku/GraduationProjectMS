@@ -1,8 +1,9 @@
-﻿using Application.Core;
+using Application.Core;
 
 namespace Application.Students;
 
 public class StudentParams : PagingParams
 {
-    public bool IsActive { get; set; }
+    public Guid PeriodId { get; set; }
+    public bool? HasLecturer { get; set; }
 }

@@ -1,0 +1,15 @@
+namespace Infrastructure.Files;
+
+public class GoogleCredentialSettings
+{
+    public string Type { get; set; }
+    public string ProjectId { get; set; }
+    public string PrivateKeyId { get; set; }
+    public string PrivateKey { get; set; }
+    public string ClientEmail { get; set; }
+    public string ClientId { get; set; }
+    public string ClientSecret { get; set; }
+    public string AuthUri { get; set; }
+    public string TokenUri { get; set; }
+    public string BucketName { get; set; }
+}

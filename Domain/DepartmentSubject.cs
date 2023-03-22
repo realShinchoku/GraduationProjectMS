@@ -1,10 +1,10 @@
-﻿namespace Domain;
+namespace Domain;
 
 public class DepartmentSubject : AppUser
 {
     public DepartmentSubject()
     {
-        Role = Role.DepartmentSubjects;
+        Role = Role.DepartmentSubject;
     }
 
     public Faculty Faculty { get; set; }

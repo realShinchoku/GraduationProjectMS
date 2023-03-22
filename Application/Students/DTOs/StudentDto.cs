@@ -1,4 +1,4 @@
-﻿namespace Application.Students.DTOs;
+namespace Application.Students.DTOs;
 
 public class StudentDto
 {
@@ -18,4 +18,5 @@ public class StudentDto
     public string Lecturer { get; set; }
     public string DepartmentSubjects { get; set; }
     public string Faculty { get; set; }
+    public string Class { get; set; }
 }

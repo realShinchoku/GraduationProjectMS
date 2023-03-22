@@ -1,0 +1,463 @@
+@import "../../assets/css/config/variables";
+@import "../../assets/css/mixin/function";
+
+
+.instructor {
+  .inner {
+    padding: 0 25.5px;
+
+    .nav {
+      h3 {
+        font-size: 46px;
+        line-height: 56px;
+        font-family: 'Inter', sans-serif;
+        color: #0D062D;
+        font-weight: 600;
+        padding-top: 41px;
+        padding-left: 22.5px;
+        margin-bottom: 0;
+      }
+
+      .btn {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 3px;
+        @include tablet {
+          display: unset;
+          margin-bottom: 20px;
+        }
+        @include sp {
+          display: unset;
+          margin-bottom: get_sp(20);
+        }
+
+        &_item {
+          display: flex;
+          margin-bottom: 0;
+          @include tablet {
+            margin-bottom: 10px;
+          }
+          @include sp {
+            margin-bottom: 10px;
+          }
+
+          .btn_complete {
+            border: 1px solid #787486;
+            border-radius: 6px;
+          }
+        }
+
+        .search {
+          display: flex;
+          @include tablet {
+            margin-bottom: 10px;
+          }
+
+          .search_ {
+            width: 160px;
+            @include pc {
+              width: get_pc(417);
+            }
+            @include tablet {
+              width: get_tablet(417);
+            }
+            @include sp {
+              width: get_sp(417);
+            }
+          }
+
+          button {
+            background-color: #FFFFFF;
+            border-color: #787486;
+            color: #787486;
+            margin-left: 10px;
+            padding: 3.5px 15px;
+          }
+        }
+      }
+    }
+
+    &_contact {
+      display: flex;
+      padding: 20px;
+      justify-content: space-around;
+      @include tablet {
+        display: block;
+      }
+      @include sp {
+        display: block;
+      }
+
+      .thumb {
+        width: 200px;
+        height: 200px;
+        object-fit: cover;
+        @include tablet {
+          margin: 0 auto 20px;
+        }
+        @include sp {
+          margin: 0 auto 20px;
+        }
+
+        img {
+          width: 100%;
+          height: 100%;
+        }
+      }
+
+      .list {
+        width: 60%;
+        justify-content: space-around;
+        @include tablet {
+          margin: 0 auto;
+          width: 100%;
+        }
+        @include sp {
+          margin: 0 auto;
+          width: 100%;
+        }
+
+        ul {
+          display: flex;
+          padding: 0;
+          @include sp {
+            display: block;
+          }
+
+          a {
+            color: #787486;
+
+            svg {
+              width: 8px;
+              height: 8px;
+              margin-right: 8px;
+            }
+          }
+        }
+      }
+
+      .contact {
+        padding: 50px 10px;
+        width: 10%;
+        display: initial;
+        text-align: center;
+        @include tablet {
+          display: block;
+          width: unset;
+        }
+        @include sp {
+          display: block;
+          width: unset;
+        }
+
+        svg {
+          margin-bottom: 10px;
+        }
+      }
+    }
+  }
+}
+
+
+//css Account Management 
+
+.account_table_list {
+  margin-top: 20px;
+
+  .account_list {
+    display: flex;
+    white-space: nowrap;
+    @include tablet {
+      min-width: max-content;
+    }
+    @include sp {
+      display: block;
+      width: unset;
+    }
+  }
+
+  .select_user {
+    margin-left: 30px;
+    width: auto;
+    @include tablet {
+      width: 300px;
+    }
+  }
+
+  .tab_account {
+    text-transform: capitalize;
+    white-space: nowrap;
+    @include tablet {
+      white-space: nowrap;
+
+    }
+  }
+
+  .name_table {
+    padding: 16px 16px 0 16px;
+    margin-top: 8px;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .button_account_management {
+    display: flex;
+    white-space: nowrap;
+    border-bottom: none;
+    margin: auto 5px 20px auto;
+    font-family: 'Inter', sans-serif;
+    @include tablet {
+      margin-bottom: 15px;
+      margin-right: unset;
+    }
+  }
+
+  .button_ {
+    margin: 0 10px;
+    border-radius: 10px;
+    text-transform: capitalize;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .text_bold {
+    font-weight: bold;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .font_family {
+    font-family: 'Inter', sans-serif;
+  }
+
+  .center_text {
+    display: grid;
+    justify-content: center;
+  }
+
+  .detail_account {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .search_account {
+    width: 160px;
+    margin-top: 10px;
+    margin-right: 15px;
+  }
+
+  .color_background {
+    color: #b6b6b6;
+    white-space: nowrap;
+  }
+}
+
+// Add account
+
+.add_account {
+  background-color: rgba(0, 0, 0, 0.2);
+  position: fixed;
+  margin: auto;
+  right: 0;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 1051;
+
+  .modal_add_account {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 1052;
+  }
+
+  .modal_body {
+    width: 855px;
+    height: 523px;
+    margin: auto;
+    position: absolute;
+    background: gainsboro;
+    right: 0;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 1053;
+    @include tablet {
+      width: 500px;
+      height: 320px;
+    }
+  }
+
+  .select_user {
+    box-shadow: 1px 0 0 0 rgb(0 0 0 / 20%);
+    height: 457px;
+    background: #fff;
+    width: unset;
+    margin-left: unset;
+    @include tablet {
+      width: 100px;
+      margin-left: unset;
+      height: 285px;
+    }
+  }
+
+  .select_user_ {
+    width: 150px;
+    white-space: nowrap;
+    @include tablet {
+      width: 100px;
+    }
+  }
+
+  .title_account {
+    box-shadow: 0 6px 4px 0 rgb(0 0 0 / 20%);
+  }
+
+  .title_account_ {
+    height: 50px;
+    background: #424242;
+    color: #e4e3e3;
+    padding-top: 15px;
+    padding-left: 40px;
+    margin: auto;
+    @include tablet {
+      height: 25px;
+      padding-top: 5px;
+      padding-bottom: 5px;
+      padding-left: 10px;
+      font-size: larger;
+    }
+  }
+
+  .top_dropzone {
+    flex-grow: 1;
+    display: flex;
+    justify-content: space-between;
+    margin: 15px 40px 10px 15px;
+    @include tablet {
+      margin: 5px 10px 5px 5px;
+    }
+
+    .title_top_dropzone {
+      margin-top: 10px;
+      @include tablet {
+        margin-top: unset;
+        padding-top: 5px;
+        font-size: larger;
+      }
+    }
+  }
+
+  .button_up_file {
+    padding: 5px 35px;
+    text-transform: capitalize;
+    @include tablet {
+      padding: 0;
+
+    }
+  }
+
+  // .container_dropzone {
+  //   height: 300px;
+  //   align-items: center;
+  //   display: flex;
+  //   justify-content: center;
+  //   background: #ffffff;
+  //   border-radius: 15px;
+  //   margin: 20px;
+  //   @include tablet {
+  //     height: 120px;
+  //     margin: 10px 20px 10px 10px;
+  //     place-items: end;
+  //   }
+  // }
+
+  .icon_dropzone {
+    font-size: 70px;
+    margin: auto;
+    display: flex;
+    @include tablet {
+      font-size: 40px;
+    }
+  }
+
+  .typo_notification {
+    margin-top: 20px;
+    @include tablet {
+      margin-top: 5px;
+      font-size: small;
+    }
+  }
+
+  .button_exit {
+    @include tablet {
+      margin-left: 100px;
+      margin-bottom: 10px;
+    }
+  }
+
+  .button_exit_dropzone {
+    background-color: #333;
+    border-radius: unset;
+    @include tablet {
+      font-size: x-small;
+    }
+  }
+
+  .button_add_account {
+    color: #6a6969;
+    border-color: #cfcfcf;
+    border-radius: unset;
+    font-family: 'Inter', sans-serif;
+    @include tablet {
+      font-size: x-small;
+    }
+  }
+
+}
+
+#controlled-radio-buttons-group {
+  font-family: 'Inter', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  text-align: center;
+  color: #000000;
+  margin-left: -35px;
+
+}
+
+#modal-modal-description {
+  margin-top: 60px;
+}
+
+.browsing_status_box {
+  border-radius: 15px;
+  border: aliceblue;
+}
+
+.button_browsing_status {
+  white-space: nowrap;
+  text-transform: capitalize;
+}
+
+#modal-modal-title {
+  font-family: 'Inter', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 18px;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.select_choice {
+  font-family: 'Inter', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 29px;
+  text-align: center;
+  color: #000000;
+}
+
+
+

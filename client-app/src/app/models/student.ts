@@ -1,4 +1,4 @@
-﻿export interface Student {
+export interface Student {
     id: string;
     email: string;
     displayName: string;
@@ -15,4 +15,5 @@
     lecturer: string;
     departmentSubjects: string;
     faculty: string;
+    class: string;
 }

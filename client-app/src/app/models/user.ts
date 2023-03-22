@@ -3,6 +3,7 @@ export interface User {
     displayName: string;
     token: string;
     role: Role;
+    email: string;
 }
 
 export interface LoginFormValues {
@@ -16,8 +17,8 @@ export interface PasswordFormValues {
 }
 
 export enum Role {
-    FacultyOffice = <number>0,
-    DepartmentSubjects = <number>1,
-    Lecturer = <number>2,
-    Student = <number>3
+    FacultyOffice = 0 as number,
+    DepartmentSubject = 1 as number,
+    Lecturer = 2 as number,
+    Student = 3 as number
 }

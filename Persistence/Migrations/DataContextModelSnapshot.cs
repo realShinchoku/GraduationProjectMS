@@ -144,6 +144,9 @@ namespace Persistence.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("text");
 
+                    b.Property<Guid?>("GraduationProjectPeriodId")
+                        .HasColumnType("uuid");
+
                     b.Property<string>("Name")
                         .HasColumnType("text");
 
@@ -154,6 +157,8 @@ namespace Persistence.Migrations
                         .HasColumnType("text");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("GraduationProjectPeriodId");
 
                     b.ToTable("GraduationProjects");
                 });
@@ -167,6 +172,12 @@ namespace Persistence.Migrations
                     b.Property<DateTime>("ContactInstructorTime")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("FacultyId")
+                        .HasColumnType("text");
+
                     b.Property<DateTime>("GraduationProjectTime")
                         .HasColumnType("timestamp with time zone");
 
@@ -179,6 +190,9 @@ namespace Persistence.Migrations
                     b.Property<DateTime>("RegisterTopicTime")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("timestamp with time zone");
+
                     b.Property<DateTime>("SyllabusReviewTime")
                         .HasColumnType("timestamp with time zone");
 
@@ -186,6 +200,8 @@ namespace Persistence.Migrations
                         .HasColumnType("timestamp with time zone");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("FacultyId");
 
                     b.ToTable("GraduationProjectPeriods");
                 });
@@ -214,28 +230,70 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.Instructor", b =>
                 {
-                    b.Property<string>("StudentId")
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<bool?>("ApprovalStatus")
+                        .HasColumnType("boolean");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("DepartmentSubjectId")
                         .HasColumnType("text");
 
-                    b.Property<string>("FacultyId")
-                        .HasColumnType("text");
+                    b.Property<Guid?>("GraduationProjectPeriodId")
+                        .HasColumnType("uuid");
+
+                    b.Property<bool>("IsApproval")
+                        .HasColumnType("boolean");
 
                     b.Property<string>("LecturerId")
                         .HasColumnType("text");
 
-                    b.Property<bool>("IsConfirm")
-                        .HasColumnType("boolean");
+                    b.Property<string>("Note")
+                        .HasColumnType("text");
+
+                    b.Property<string>("StudentId")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DepartmentSubjectId");
+
+                    b.HasIndex("GraduationProjectPeriodId");
+
+                    b.HasIndex("LecturerId");
+
+                    b.HasIndex("StudentId");
+
+                    b.ToTable("Instructors");
+                });
+
+            modelBuilder.Entity("Domain.PopupNotification", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<bool>("IsRead")
                         .HasColumnType("boolean");
 
-                    b.HasKey("StudentId", "FacultyId", "LecturerId");
+                    b.Property<string>("Message")
+                        .HasColumnType("text");
 
-                    b.HasIndex("FacultyId");
+                    b.Property<string>("TargetUserId")
+                        .HasColumnType("text");
 
-                    b.HasIndex("LecturerId");
+                    b.HasKey("Id");
 
-                    b.ToTable("Instructors");
+                    b.HasIndex("TargetUserId");
+
+                    b.ToTable("PopupNotifications");
                 });
 
             modelBuilder.Entity("Domain.Syllabus", b =>
@@ -245,6 +303,9 @@ namespace Persistence.Migrations
 
                     b.Property<DateTime>("CreateTime")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("GraduationProjectPeriodId")
+                        .HasColumnType("uuid");
 
                     b.Property<string>("Name")
                         .HasColumnType("text");
@@ -259,6 +320,8 @@ namespace Persistence.Migrations
                         .HasColumnType("text");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("GraduationProjectPeriodId");
 
                     b.ToTable("Syllabi");
                 });
@@ -327,6 +390,9 @@ namespace Persistence.Migrations
                 {
                     b.HasBaseType("Domain.AppUser");
 
+                    b.Property<string>("Class")
+                        .HasColumnType("text");
+
                     b.Property<string>("DepartmentSubjectId")
                         .HasColumnType("text");
 
@@ -371,31 +437,63 @@ namespace Persistence.Migrations
                     b.ToTable("Students", (string)null);
                 });
 
-            modelBuilder.Entity("Domain.Instructor", b =>
+            modelBuilder.Entity("Domain.GraduationProject", b =>
+                {
+                    b.HasOne("Domain.GraduationProjectPeriod", null)
+                        .WithMany("Projects")
+                        .HasForeignKey("GraduationProjectPeriodId");
+                });
+
+            modelBuilder.Entity("Domain.GraduationProjectPeriod", b =>
                 {
                     b.HasOne("Domain.Faculty", "Faculty")
                         .WithMany()
-                        .HasForeignKey("FacultyId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("FacultyId");
+
+                    b.Navigation("Faculty");
+                });
+
+            modelBuilder.Entity("Domain.Instructor", b =>
+                {
+                    b.HasOne("Domain.DepartmentSubject", "DepartmentSubject")
+                        .WithMany()
+                        .HasForeignKey("DepartmentSubjectId");
+
+                    b.HasOne("Domain.GraduationProjectPeriod", "GraduationProjectPeriod")
+                        .WithMany()
+                        .HasForeignKey("GraduationProjectPeriodId");
 
                     b.HasOne("Domain.Lecturer", "Lecturer")
                         .WithMany()
-                        .HasForeignKey("LecturerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("LecturerId");
 
                     b.HasOne("Domain.Student", "Student")
                         .WithMany()
-                        .HasForeignKey("StudentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("StudentId");
 
-                    b.Navigation("Faculty");
+                    b.Navigation("DepartmentSubject");
+
+                    b.Navigation("GraduationProjectPeriod");
 
                     b.Navigation("Lecturer");
 
                     b.Navigation("Student");
+                });
+
+            modelBuilder.Entity("Domain.PopupNotification", b =>
+                {
+                    b.HasOne("Domain.AppUser", "TargetUser")
+                        .WithMany()
+                        .HasForeignKey("TargetUserId");
+
+                    b.Navigation("TargetUser");
+                });
+
+            modelBuilder.Entity("Domain.Syllabus", b =>
+                {
+                    b.HasOne("Domain.GraduationProjectPeriod", null)
+                        .WithMany("Syllabi")
+                        .HasForeignKey("GraduationProjectPeriodId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
@@ -511,7 +609,11 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.GraduationProjectPeriod", b =>
                 {
+                    b.Navigation("Projects");
+
                     b.Navigation("Students");
+
+                    b.Navigation("Syllabi");
                 });
 
             modelBuilder.Entity("Domain.DepartmentSubject", b =>

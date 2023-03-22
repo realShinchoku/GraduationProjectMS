@@ -1,4 +1,4 @@
-﻿using System.ComponentModel;
+using System.ComponentModel;
 using Microsoft.AspNetCore.Identity;
 
 namespace Domain;
@@ -26,7 +26,7 @@ public class AppRole : IdentityRole
 public enum Role
 {
     [Description("Văn phòng khoa")] FacultyOffice = 0,
-    [Description("Bộ môn")] DepartmentSubjects = 1,
+    [Description("Bộ môn")] DepartmentSubject = 1,
     [Description("Giảng viên")] Lecturer = 2,
     [Description("Sinh viên")] Student = 3
 }

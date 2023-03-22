@@ -1,4 +1,4 @@
-﻿using System.Globalization;
+using System.Globalization;
 using System.Text;
 using System.Text.RegularExpressions;
 using Application.Accounts.ClassMap;
@@ -16,7 +16,7 @@ using Persistence;
 
 namespace Application.Accounts;
 
-public partial class Create
+public class Create
 {
     public class Command : IRequest<Result<Unit>>
     {
@@ -38,8 +38,9 @@ public partial class Create
         }
     }
 
-    public partial class Handler : IRequestHandler<Command, Result<Unit>>
+    public class Handler : IRequestHandler<Command, Result<Unit>>
     {
+        private static readonly Regex PasswordRegex = new("^(?=.*[0-9]+.*)(?=.*[a-z]+.*)(?=.*[A-Z]+.*)[!-z]{6,20}");
         private readonly DataContext _context;
         private readonly IEmailSender _emailSender;
         private readonly IUserAccessor _userAccessor;
@@ -121,12 +122,9 @@ public partial class Create
                 for (var i = 0; i < len; ++i) bld.Append(chars[random.Next(chars.Length)]);
 
                 var randomStr = bld.ToString();
-                if (!PasswordRegex().IsMatch(randomStr)) continue;
+                if (!PasswordRegex.IsMatch(randomStr)) continue;
                 return randomStr;
             }
         }
-
-        [GeneratedRegex("^(?=.*[0-9]+.*)(?=.*[a-z]+.*)(?=.*[A-Z]+.*)[!-z]{6,20}")]
-        private static partial Regex PasswordRegex();
     }
 }

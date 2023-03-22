@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
 namespace Application.Core;
 
@@ -27,38 +27,21 @@ public class PageList<T> : List<T>
     public int PageSize { get; set; }
     public int TotalCount { get; set; }
 
-    public static async Task<PageList<T>> CreateAsync(IQueryable<T> source, int pageNumber, int pageSize)
-    {
-        var count = await source.CountAsync();
-
-        var items = await source.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToListAsync();
-        return new PageList<T>(items, count, pageNumber, pageSize);
-    }
-
     public static async Task<PageList<T>> CreateAsync(IQueryable<T> source, int pageNumber, int pageSize,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken = default)
     {
         var count = await source.CountAsync(cancellationToken);
 
-        var items = await source.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToListAsync(cancellationToken);
+        var items = await source.Skip(pageNumber * pageSize).Take(pageSize).ToListAsync(cancellationToken);
         return new PageList<T>(items, count, pageNumber, pageSize);
     }
-
-    public static async Task<PageList<T>> CreateAsync(IQueryable<T> source, PagingParams param)
-    {
-        var count = await source.CountAsync();
-
-        var items = await source.Skip((param.PageNumber - 1) * param.PageSize).Take(param.PageSize).ToListAsync();
-        return new PageList<T>(items, count, param);
-    }
-
 
     public static async Task<PageList<T>> CreateAsync(IQueryable<T> source, PagingParams param,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken = default)
     {
         var count = await source.CountAsync(cancellationToken);
 
-        var items = await source.Skip((param.PageNumber - 1) * param.PageSize).Take(param.PageSize)
+        var items = await source.Skip(param.PageNumber * param.PageSize).Take(param.PageSize)
             .ToListAsync(cancellationToken);
         return new PageList<T>(items, count, param);
     }

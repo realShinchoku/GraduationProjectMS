@@ -1,4 +1,4 @@
-﻿import {observer} from "mobx-react-lite";
+import {observer} from "mobx-react-lite";
 import {Form, Formik} from 'formik';
 import * as Yup from 'yup';
 import {Box, Link, Typography} from "@mui/material";

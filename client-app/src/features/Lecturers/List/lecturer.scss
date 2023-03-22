@@ -41,7 +41,11 @@
           @include sp {
             margin-bottom: 10px;
           }
-          
+
+          .btn_complete {
+            border: 1px solid #787486;
+            border-radius: 6px;
+          }
         }
 
         .search {
@@ -175,6 +179,38 @@
       }
     }
 
+    .modal {
+      display: none;
+
+      &.open {
+        display: block;
+        position: absolute;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        text-align: center;
+
+        .content {
+          padding-top: 100px;
+
+          p {
+            font-size: 32px;
+            font-weight: 400;
+            line-height: 38px;
+            color: #FFFFFF;
+          }
+
+          span {
+            font-size: 32px;
+            font-weight: 800;
+            line-height: 38px;
+            color: #FFFFFF;
+          }
+        }
+      }
+    }
+
     &_contact {
       display: flex;
       padding: 20px;
@@ -204,7 +240,7 @@
       }
 
       .list {
-        width: 60%;
+        width: 50%;
         justify-content: space-around;
         @include tablet {
           margin: 0 auto;
@@ -235,8 +271,7 @@
       }
 
       .contact {
-        padding: 50px 10px;
-        width: 10%;
+        width: 20%;
         display: initial;
         text-align: center;
         @include tablet {
@@ -251,7 +286,40 @@
         svg {
           margin-bottom: 10px;
         }
+
+        .contact_guide {
+          width: 169px;
+          height: 184px;
+          display: block;
+
+          p {
+            text-transform: capitalize;
+          }
+
+        }
+
+
+        .choose_lecturer {
+          font-family: 'Inter', sans-serif;
+          text-align: center;
+          text-transform: capitalize;
+        }
+
+        .choose_lecturer:hover {
+          background-color: #D1FBE3;
+        }
       }
+
+    }
+  }
+
+  .img_contact_lecturer_ {
+    width: inherit;
+  }
+
+  td {
+    span {
+      margin: 0 auto;
     }
   }
 }
