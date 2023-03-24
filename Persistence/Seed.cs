@@ -222,7 +222,8 @@ public class Seed
             {
                 new()
                 {
-                    Name = "Đồ án 1",
+                    Course = 61,
+                    Phase = 1,
                     StartDate = DateTime.UtcNow,
                     EndDate = DateTime.UtcNow.AddDays(43),
                     ContactInstructorTime = DateTime.UtcNow,
@@ -235,7 +236,8 @@ public class Seed
                 },
                 new()
                 {
-                    Name = "Đồ án 2",
+                    Course = 61,
+                    Phase = 2,
                     StartDate = DateTime.UtcNow,
                     EndDate = DateTime.UtcNow.AddDays(43),
                     ContactInstructorTime = DateTime.UtcNow,

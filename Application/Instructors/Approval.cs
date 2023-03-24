@@ -47,10 +47,7 @@ public class Approval
 
             instructor.ApprovalStatus = request.Status != 0;
 
-            if (request.Status != 0)
-                instructor.Student.Lecturer = instructor.Lecturer;
-            else
-                instructor.Student.Lecturer = null;
+            instructor.Student.Lecturer = request.Status != 0 ? instructor.Lecturer : null;
 
             if (string.IsNullOrEmpty(request.Note))
                 instructor.Note = request.Note;
@@ -64,7 +61,7 @@ public class Approval
 
             var popupNotification = new PopupNotification
             {
-                Message = $"Yêu cầu giảng viên {instructor.Lecturer.DisplayName} đã được chấp thuận",
+                Message =  request.Status != 0 ? $"Yêu cầu giảng viên {instructor.Lecturer.DisplayName} đã được chấp thuận." : $"Yêu cầu giảng viên {instructor.Lecturer.DisplayName} không được chấp thuận.",
                 TargetUser = instructor.Student
             };
 

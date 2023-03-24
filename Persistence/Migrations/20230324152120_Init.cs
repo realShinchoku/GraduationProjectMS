@@ -90,6 +90,26 @@ namespace Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "PopupNotifications",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    Message = table.Column<string>(type: "text", nullable: true),
+                    TargetUserId = table.Column<string>(type: "text", nullable: true),
+                    CreatedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    IsRead = table.Column<bool>(type: "boolean", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PopupNotifications", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_PopupNotifications_Users_TargetUserId",
+                        column: x => x.TargetUserId,
+                        principalTable: "Users",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "UserRoles",
                 columns: table => new
                 {
@@ -141,7 +161,8 @@ namespace Persistence.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    Name = table.Column<string>(type: "text", nullable: true),
+                    Course = table.Column<int>(type: "integer", nullable: false),
+                    Phase = table.Column<int>(type: "integer", nullable: false),
                     StartDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     EndDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     ContactInstructorTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
@@ -344,9 +365,19 @@ namespace Persistence.Migrations
                 column: "FacultyId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_GraduationProjectPeriods_Course",
+                table: "GraduationProjectPeriods",
+                column: "Course");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_GraduationProjectPeriods_FacultyId",
                 table: "GraduationProjectPeriods",
                 column: "FacultyId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_GraduationProjectPeriods_Phase",
+                table: "GraduationProjectPeriods",
+                column: "Phase");
 
             migrationBuilder.CreateIndex(
                 name: "IX_GraduationProjects_GraduationProjectPeriodId",
@@ -382,6 +413,11 @@ namespace Persistence.Migrations
                 name: "IX_Lecturers_FacultyId",
                 table: "Lecturers",
                 column: "FacultyId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PopupNotifications_TargetUserId",
+                table: "PopupNotifications",
+                column: "TargetUserId");
 
             migrationBuilder.CreateIndex(
                 name: "RoleNameIndex",
@@ -451,6 +487,9 @@ namespace Persistence.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Instructors");
+
+            migrationBuilder.DropTable(
+                name: "PopupNotifications");
 
             migrationBuilder.DropTable(
                 name: "UserRoles");

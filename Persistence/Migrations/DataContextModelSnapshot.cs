@@ -172,6 +172,9 @@ namespace Persistence.Migrations
                     b.Property<DateTime>("ContactInstructorTime")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<int>("Course")
+                        .HasColumnType("integer");
+
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("timestamp with time zone");
 
@@ -181,8 +184,8 @@ namespace Persistence.Migrations
                     b.Property<DateTime>("GraduationProjectTime")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<string>("Name")
-                        .HasColumnType("text");
+                    b.Property<int>("Phase")
+                        .HasColumnType("integer");
 
                     b.Property<DateTime>("ProtectionTime")
                         .HasColumnType("timestamp with time zone");
@@ -201,7 +204,11 @@ namespace Persistence.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("Course");
+
                     b.HasIndex("FacultyId");
+
+                    b.HasIndex("Phase");
 
                     b.ToTable("GraduationProjectPeriods");
                 });

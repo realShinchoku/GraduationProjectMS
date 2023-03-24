@@ -1,6 +1,8 @@
 export interface Period {
     id: string;
     name: string;
+    course: number;
+    phase: number;
     startDate: Date;
     endDate: Date;
     contactInstructorTime: Date;
@@ -19,12 +21,15 @@ export interface Period {
 export class Period implements Period {
     constructor(init?: PeriodFormValues) {
         Object.assign(this, init);
+        this.name = `Đồ án Khóa K${this.course} Đợt ${this.phase}`
     }
 }
 
 export class PeriodFormValues {
     id?: string = undefined;
     name: string = '';
+    course: number | null = null;
+    phase: number | null = null;
     startDate: Date | null = null;
     endDate: Date | null = null;
     contactInstructorTime: Date | null = null;
@@ -39,10 +44,12 @@ export class PeriodFormValues {
     projectsCount: number = 0;
     lecturersCount: number = 0;
 
-    constructor(period?: PeriodFormValues) {
+    constructor(period?: Period) {
         if (period) {
             this.id = period.id;
             this.name = period.name;
+            this.course = period.course;
+            this.phase = period.phase;
             this.startDate = period.startDate;
             this.endDate = period.endDate;
             this.contactInstructorTime = period.contactInstructorTime;

@@ -1,7 +1,6 @@
 using System.Globalization;
 using System.Text;
 using System.Text.RegularExpressions;
-using Application.Accounts.ClassMap;
 using Application.Core;
 using Application.Interfaces;
 using CsvHelper;
@@ -16,11 +15,10 @@ using Persistence;
 
 namespace Application.Accounts;
 
-public class Create
+public class CreateStudent
 {
     public class Command : IRequest<Result<Unit>>
     {
-        public Role Role { get; set; }
         public IFormFile File { get; set; }
         public bool HasHeader { get; set; }
         public string PeriodId { get; set; }
@@ -32,9 +30,21 @@ public class Create
         {
             RuleFor(x => x.File).NotEmpty();
             RuleFor(x => x.File.ContentType).NotEmpty().Must(x => x.Equals("text/csv"));
-            RuleFor(x => x.Role).NotEmpty().IsInEnum().Must(x => x.Equals(Role.Student) || x.Equals(Role.Lecturer));
             RuleFor(x => x.HasHeader).NotNull();
             RuleFor(x => x.PeriodId).NotEmpty();
+        }
+    }
+
+
+    protected sealed class StudentMap : ClassMap<Student>
+    {
+        public StudentMap()
+        {
+            Map(p => p.StudentId).Index(0);
+            Map(p => p.Email).Index(1);
+            Map(p => p.DisplayName).Index(2);
+            Map(p => p.Birthday).Index(3);
+            Map(p => p.Sex).Index(4);
         }
     }
 
@@ -77,31 +87,34 @@ public class Create
             using (var reader = new StreamReader(request.File.OpenReadStream()))
             using (var csv = new CsvReader(reader, config))
             {
-                dynamic users;
-                if (request.Role == Role.Student)
-                {
-                    csv.Context.RegisterClassMap<StudentMap>();
-                    users = csv.GetRecords<Student>().ToList();
-                }
-                else
-                {
-                    csv.Context.RegisterClassMap<LecturerMap>();
-                    users = csv.GetRecords<Lecturer>().ToList();
-                }
+                csv.Context.RegisterClassMap<StudentMap>();
+                var users = csv.GetRecords<Student>().ToList();
 
                 foreach (var user in users)
                 {
                     user.Faculty = faculty;
-                    user.Role = request.Role;
+                    user.Role = Role.Student;
                     user.UserName = user.Email!.Split("@")[0];
-                    if (request.Role == Role.Student) user.GraduationProjectPeriod = period;
-                    if (user.Birthday != null) user.Birthday = user.Birthday.ToUniversalTime();
+                    user.GraduationProjectPeriod = period;
+                    if (user.Birthday != null) user.Birthday = user.Birthday.Value.ToUniversalTime();
 
                     var password = GeneratePassword();
                     var result = await _userManager.CreateAsync(user, password);
 
-                    if (!result.Succeeded) continue;
-
+                    if (!result.Succeeded)
+                    {
+                        var student = await _context.Students.FirstOrDefaultAsync(x => x.Email == user.Email, cancellationToken);
+                        if (student != null)
+                        {
+                            student.Faculty = faculty;
+                            student.GraduationProjectPeriod = period;
+                            var res = await _context.SaveChangesAsync(cancellationToken) > 0;
+                            if(res)
+                                await _emailSender.SendEmailAsync(user.Email, "Tài khoản của bạn", password);
+                        }
+                        continue;
+                    }
+                    
                     await _userManager.AddToRoleAsync(user, user.Role.ToString());
                     await _emailSender.SendEmailAsync(user.Email, "Tài khoản của bạn", password);
                 }

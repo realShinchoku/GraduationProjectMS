@@ -12,7 +12,7 @@ using Persistence;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230321032758_Init")]
+    [Migration("20230324152120_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -175,6 +175,9 @@ namespace Persistence.Migrations
                     b.Property<DateTime>("ContactInstructorTime")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<int>("Course")
+                        .HasColumnType("integer");
+
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("timestamp with time zone");
 
@@ -184,8 +187,8 @@ namespace Persistence.Migrations
                     b.Property<DateTime>("GraduationProjectTime")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<string>("Name")
-                        .HasColumnType("text");
+                    b.Property<int>("Phase")
+                        .HasColumnType("integer");
 
                     b.Property<DateTime>("ProtectionTime")
                         .HasColumnType("timestamp with time zone");
@@ -204,7 +207,11 @@ namespace Persistence.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("Course");
+
                     b.HasIndex("FacultyId");
+
+                    b.HasIndex("Phase");
 
                     b.ToTable("GraduationProjectPeriods");
                 });
@@ -272,6 +279,31 @@ namespace Persistence.Migrations
                     b.HasIndex("StudentId");
 
                     b.ToTable("Instructors");
+                });
+
+            modelBuilder.Entity("Domain.PopupNotification", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<bool>("IsRead")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("Message")
+                        .HasColumnType("text");
+
+                    b.Property<string>("TargetUserId")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TargetUserId");
+
+                    b.ToTable("PopupNotifications");
                 });
 
             modelBuilder.Entity("Domain.Syllabus", b =>
@@ -456,6 +488,15 @@ namespace Persistence.Migrations
                     b.Navigation("Lecturer");
 
                     b.Navigation("Student");
+                });
+
+            modelBuilder.Entity("Domain.PopupNotification", b =>
+                {
+                    b.HasOne("Domain.AppUser", "TargetUser")
+                        .WithMany()
+                        .HasForeignKey("TargetUserId");
+
+                    b.Navigation("TargetUser");
                 });
 
             modelBuilder.Entity("Domain.Syllabus", b =>

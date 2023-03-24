@@ -19,6 +19,8 @@ public class List
     public class PeriodParams : PagingParams
     {
         public string Keyword { get; set; }
+        public int? Course { get; set; }
+        public int? Phase { get; set; }
     }
 
     public class Handler : IRequestHandler<Query, Result<PageList<GraduationProjectPeriodDto>>>
@@ -45,14 +47,17 @@ public class List
                 .Include(s => s.Syllabi)
                 .Include(f => f.Faculty.Lecturers)
                 .Where(x => x.Faculty == faculty)
-                .ProjectTo<GraduationProjectPeriodDto>(_mapper.ConfigurationProvider)
                 .AsQueryable();
 
             if (!string.IsNullOrEmpty(request.Params.Keyword))
                 query = query.Where(x => x.Name.ToLower().Contains(request.Params.Keyword.ToLower()));
+            if (request.Params.Course != null)
+                query = query.Where(x => x.Course == request.Params.Course);
+            if (request.Params.Phase != null)
+                query = query.Where(x => x.Phase == request.Params.Phase);
 
             return Result<PageList<GraduationProjectPeriodDto>>.Success(
-                await PageList<GraduationProjectPeriodDto>.CreateAsync(query, request.Params, cancellationToken)
+                await PageList<GraduationProjectPeriodDto>.CreateAsync(query.ProjectTo<GraduationProjectPeriodDto>(_mapper.ConfigurationProvider), request.Params, cancellationToken)
             );
         }
     }

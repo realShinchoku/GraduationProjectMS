@@ -39,5 +39,10 @@ public class DataContext : IdentityDbContext<AppUser, AppRole, string>
         builder.Entity<Lecturer>().ToTable("Lecturers");
         builder.Entity<DepartmentSubject>().ToTable("DepartmentSubjects");
         builder.Entity<Faculty>().ToTable("Faculties");
+
+        builder.Entity<GraduationProjectPeriod>()
+            .HasIndex(x => x.Course);
+        builder.Entity<GraduationProjectPeriod>()
+            .HasIndex(x => x.Phase);
     }
 }

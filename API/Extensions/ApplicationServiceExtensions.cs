@@ -75,7 +75,7 @@ public static class ApplicationServiceExtensions
         });
         services.AddMediatR(typeof(List.Handler));
         services.AddAutoMapper(typeof(MappingProfiles).Assembly);
-        services.AddValidatorsFromAssemblyContaining<Create>();
+        services.AddValidatorsFromAssemblyContaining<CreateStudent>();
         services.AddFluentValidationAutoValidation();
         services.AddHttpContextAccessor();
         services.AddScoped<IUserAccessor, UserAccessor>();
