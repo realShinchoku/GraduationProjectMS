@@ -5,10 +5,9 @@ import TableCell from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-
-import SimpleMail from "./SimpleMail";
 import {Lecturer} from "../../../app/models/lecturer";
 import LecturerTableRowDetail from "./LecturerTableRowDetail";
+import {LecturerImages} from "../../../assets";
 
 interface Props {
     lecturer: Lecturer;
@@ -28,13 +27,14 @@ function LecturerTableRow({lecturer}: Props) {
                 <TableCell align="center">{lecturer.education}</TableCell>
                 <TableCell align="center">{lecturer.lecturerStatus}</TableCell>
                 {open ?
-                    <TableCell></TableCell>
+                    <TableCell sx={{borderBottom: 'unset'}}/>
                     :
-                    <TableCell align="center" onClick={() => window.location.href = `mailto:${lecturer.email}`}>
-                        <SimpleMail/>
+                    <TableCell sx={{width: '25px', borderBottom: 'unset'}} align="center"
+                               onClick={() => window.location.href = `mailto:${lecturer.email}`}>
+                        <img className="img_contact_lecturer_" src={LecturerImages.ContactLecturer} alt={""}/>
                     </TableCell>
                 }
-                <TableCell>
+                <TableCell sx={{borderBottom: 'unset'}}>
                     <IconButton
                         aria-label="expand row"
                         size="small"

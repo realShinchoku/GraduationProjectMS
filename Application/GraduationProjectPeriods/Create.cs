@@ -1,7 +1,9 @@
 using Application.Core;
+using Application.Interfaces;
 using Domain;
 using FluentValidation;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Persistence;
 
 namespace Application.GraduationProjectPeriods;
@@ -25,7 +27,8 @@ public class Create
     {
         public CustomValidator()
         {
-            RuleFor(x => x.Name).NotEmpty();
+            RuleFor(x => x.Course).NotEmpty();
+            RuleFor(x => x.Phase).NotEmpty();
             RuleFor(x => x.ProtectionTime).NotEmpty();
             RuleFor(x => x.GraduationProjectTime).NotEmpty();
             RuleFor(x => x.RegisterTopicTime).NotEmpty();
@@ -38,14 +41,28 @@ public class Create
     public class Handler : IRequestHandler<Command, Result<Unit>>
     {
         private readonly DataContext _context;
+        private readonly IUserAccessor _userAccessor;
 
-        public Handler(DataContext context)
+        public Handler(DataContext context, IUserAccessor userAccessor)
         {
             _context = context;
+            _userAccessor = userAccessor;
         }
 
         public async Task<Result<Unit>> Handle(Command request, CancellationToken cancellationToken)
         {
+            var faculty = await _userAccessor.GetFacultyAsync();
+            if (faculty == null)
+                return null;
+
+            var period = await _context.GraduationProjectPeriods.FirstOrDefaultAsync(
+                x => x.Course == request.GraduationProjectPeriod.Course &&
+                     x.Phase == request.GraduationProjectPeriod.Phase && x.Faculty == faculty, cancellationToken);
+            
+            if(period != null)
+                return Result<Unit>.Failure($"Đã tồn tại {period.Name}");
+
+            request.GraduationProjectPeriod.Faculty = faculty;
             _context.GraduationProjectPeriods.Add(request.GraduationProjectPeriod);
             var result = await _context.SaveChangesAsync(cancellationToken) > 0;
 

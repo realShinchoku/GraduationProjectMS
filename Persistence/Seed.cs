@@ -218,6 +218,39 @@ public class Seed
                     Faculty = departmentSubjects[5].Faculty
                 }
             };
+            var periods = new List<GraduationProjectPeriod>
+            {
+                new()
+                {
+                    Course = 61,
+                    Phase = 1,
+                    StartDate = DateTime.UtcNow,
+                    EndDate = DateTime.UtcNow.AddDays(43),
+                    ContactInstructorTime = DateTime.UtcNow,
+                    RegisterTopicTime = DateTime.UtcNow.AddDays(2),
+                    SyllabusSubmissionTime = DateTime.UtcNow.AddDays(7),
+                    SyllabusReviewTime = DateTime.UtcNow.AddDays(14),
+                    GraduationProjectTime = DateTime.UtcNow.AddDays(32),
+                    ProtectionTime = DateTime.UtcNow.AddDays(42),
+                    Faculty = faculties[0]
+                },
+                new()
+                {
+                    Course = 61,
+                    Phase = 2,
+                    StartDate = DateTime.UtcNow,
+                    EndDate = DateTime.UtcNow.AddDays(43),
+                    ContactInstructorTime = DateTime.UtcNow,
+                    RegisterTopicTime = DateTime.UtcNow.AddDays(2),
+                    SyllabusSubmissionTime = DateTime.UtcNow.AddDays(7),
+                    SyllabusReviewTime = DateTime.UtcNow.AddDays(14),
+                    GraduationProjectTime = DateTime.UtcNow.AddDays(32),
+                    ProtectionTime = DateTime.UtcNow.AddDays(42),
+                    Faculty = faculties[1]
+                }
+            };
+
+
             var students = new List<Student>
             {
                 new()
@@ -306,6 +339,7 @@ public class Seed
                 }
             };
 
+
             foreach (var user in faculties)
             {
                 await userManager.CreateAsync(user, "Pa$$w0rd");
@@ -320,12 +354,15 @@ public class Seed
 
             foreach (var user in lecturers)
             {
+                user.MaxStudentsNumber = new Random().Next(4, 10);
                 await userManager.CreateAsync(user, "Pa$$w0rd");
                 await userManager.AddToRoleAsync(user, user.Role.ToString());
             }
 
+
             foreach (var user in students)
             {
+                user.GraduationProjectPeriod = periods[0].Faculty == user.Faculty ? periods[0] : periods[1];
                 await userManager.CreateAsync(user, "Pa$$w0rd");
                 await userManager.AddToRoleAsync(user, user.Role.ToString());
             }

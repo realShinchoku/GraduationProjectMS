@@ -13,14 +13,18 @@ import '@fontsource/inter/500.css';
 import '@fontsource/inter/600.css';
 import '@fontsource/inter/700.css';
 import './assets/css/config/_reset.scss';
+import {LocalizationProvider} from "@mui/x-date-pickers";
+import {AdapterDateFns} from "@mui/x-date-pickers/AdapterDateFns";
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
 );
 root.render(
-    <StoreContext.Provider value={store}>
-        <RouterProvider router={router}/>
-    </StoreContext.Provider>
+    <LocalizationProvider dateAdapter={AdapterDateFns}>
+        <StoreContext.Provider value={store}>
+            <RouterProvider router={router}/>
+        </StoreContext.Provider>
+    </LocalizationProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function

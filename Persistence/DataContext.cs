@@ -20,6 +20,7 @@ public class DataContext : IdentityDbContext<AppUser, AppRole, string>
     public DbSet<GraduationProjectReport> GraduationProjectReports { get; set; }
     public DbSet<Syllabus> Syllabi { get; set; }
     public DbSet<Instructor> Instructors { get; set; }
+    public DbSet<PopupNotification> PopupNotifications { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
@@ -38,5 +39,10 @@ public class DataContext : IdentityDbContext<AppUser, AppRole, string>
         builder.Entity<Lecturer>().ToTable("Lecturers");
         builder.Entity<DepartmentSubject>().ToTable("DepartmentSubjects");
         builder.Entity<Faculty>().ToTable("Faculties");
+
+        builder.Entity<GraduationProjectPeriod>()
+            .HasIndex(x => x.Course);
+        builder.Entity<GraduationProjectPeriod>()
+            .HasIndex(x => x.Phase);
     }
 }

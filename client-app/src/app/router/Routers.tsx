@@ -14,6 +14,11 @@ import DepartmentSubject from "../../features/AccountManagement/DepartmentSubjec
 import AccountLecturers from "../../features/AccountManagement/Lecturers/AccountLecturers";
 import AccountManagement from "../../features/AccountManagement/Student/AccountManagement";
 import Instructor from "../../features/Instructor/Instructor";
+import Period from "../../features/GraduationPeriod/Period";
+import IsStudent from "./IsStudent";
+import IsLecturer from "./IsLecturer";
+import IsDepartmentSubject from "./IsDepartmentSubject";
+import IsFaculty from "./IsFaculty";
 
 
 export const route = {
@@ -29,7 +34,6 @@ export const route = {
     accountStudent: '/account/student',
     accountDepartmentSubject: '/account/departmentSubject',
     accountLecturer: '/account/lecturer',
-
 };
 
 export const routes: RouteObject[] = [
@@ -63,10 +67,6 @@ export const routes: RouteObject[] = [
                         ]
                     },
                     {path: '', element: <HomePage/>},
-                    {path: 'lecturer', element: <LecturerList/>},
-                    {path: 'account/management', element: <AccountManagement/>},
-                    {path: 'student/management', element: <Instructor/>},
-
                 ]
             },
             {
@@ -74,8 +74,6 @@ export const routes: RouteObject[] = [
                     {path: 'login', element: <Login/>},
                     {path: 'account/password_reset', element: <PasswordReset/>},
                     {path: 'account/password_reset/with', element: <PasswordResetToken/>},
-
-
                 ]
             },
             {path: 'not-found', element: <NotFound/>},

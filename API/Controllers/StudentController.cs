@@ -14,13 +14,6 @@ public class StudentController : BaseApiController
     }
 
     [Authorize(Policy = "IsStudent")]
-    [HttpPost("lecturer/{id}")]
-    public async Task<IActionResult> ChoseLecturer(string id)
-    {
-        return HandleResult(await Mediator.Send(new ChoseLecturer.Command { Id = id }));
-    }
-
-    [Authorize(Policy = "IsStudent")]
     [HttpPost("lecturer/confirm")]
     public async Task<IActionResult> ConfirmLecturer()
     {

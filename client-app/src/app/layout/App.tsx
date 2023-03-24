@@ -18,7 +18,7 @@ function App() {
     }, [commonStore, userStore])
 
     if (!commonStore.appLoaded)
-        return <LoadingCircular size={60}/>
+        return <LoadingCircular size={60} width={'100vw'} height={'100vh'}/>
 
     return (
         <>

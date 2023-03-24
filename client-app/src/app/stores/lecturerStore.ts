@@ -56,7 +56,7 @@ export default class LecturerStore {
     setPagination = (pagination: Pagination) => this.pagination = pagination;
 
     setPagingParams = (pagingParams: PagingParams) => this.pagingParams = pagingParams;
-    setPredicate = (predicate: string, value: string | number) => {
+    setPredicate = (predicate: string, value: string | number | boolean) => {
         if (this.predicate.get(predicate) !== undefined)
             this.removePredicate(predicate);
 

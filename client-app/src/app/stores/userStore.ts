@@ -16,6 +16,10 @@ export default class UserStore {
         return !!this.user;
     }
 
+    get getRole() {
+        return this.user!.role;
+    }
+
     login = async (formValues: LoginFormValues) => {
         try {
             const user = await agent.Account.login(formValues);
@@ -23,7 +27,10 @@ export default class UserStore {
             runInAction(() => {
                 this.user = user;
             });
-            await router.navigate(route.home);
+            if (router.state.location.state)
+                await router.navigate(router.state.location.state.from.pathname);
+            else
+                await router.navigate(route.home);
         } catch (err: any) {
             const error = {email: null, password: null}
             if (err.response.data.email)
@@ -38,6 +45,7 @@ export default class UserStore {
     logout = async () => {
         store.commonStore.setToken(undefined);
         this.user = null;
+        store.popupNotificationStore.clear();
         await router.navigate(route.login);
     }
 

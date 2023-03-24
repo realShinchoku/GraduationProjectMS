@@ -3,6 +3,7 @@ using Application.Interfaces;
 using Application.Lecturers.DTOs;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
+using Domain;
 using MediatR;
 using Persistence;
 
@@ -30,7 +31,7 @@ public class List
 
         public async Task<Result<PageList<LecturerDto>>> Handle(Query request, CancellationToken cancellationToken)
         {
-            var faculty = await _userAccessor.Faculty();
+            var faculty = await _userAccessor.GetFacultyAsync();
             if (faculty == null)
                 return null;
 
@@ -51,10 +52,18 @@ public class List
             if (request.Params.DepartmentSubjectId != null)
                 query = query.Where(x => x.DepartmentSubject.Id == request.Params.DepartmentSubjectId);
 
-            var result = query.ProjectTo<LecturerDto>(_mapper.ConfigurationProvider).AsQueryable();
+            if (request.Params.IsDepartmentSubject)
+            {
+                if (_userAccessor.GetUserRole() != Role.DepartmentSubject)
+                    return Result<PageList<LecturerDto>>.Failure("Not a Department Subject");
+
+                query = query.Where(x => x.DepartmentSubject.UserName == _userAccessor.GetUserName());
+            }
+
 
             return Result<PageList<LecturerDto>>.Success(
-                await PageList<LecturerDto>.CreateAsync(result, request.Params, cancellationToken)
+                await PageList<LecturerDto>.CreateAsync(query.ProjectTo<LecturerDto>(_mapper.ConfigurationProvider),
+                    request.Params, cancellationToken)
             );
         }
     }

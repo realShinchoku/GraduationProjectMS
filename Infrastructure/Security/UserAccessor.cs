@@ -18,19 +18,24 @@ public class UserAccessor : IUserAccessor
         _context = context;
     }
 
+    public string GetUserId()
+    {
+        return _httpContextAccessor.HttpContext!.User.FindFirstValue(ClaimTypes.NameIdentifier);
+    }
+
     public string GetUserName()
     {
-        return _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.Name);
+        return _httpContextAccessor.HttpContext!.User.FindFirstValue(ClaimTypes.Name);
     }
 
     public Role GetUserRole()
     {
-        var r = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.Role);
+        var r = _httpContextAccessor.HttpContext!.User.FindFirstValue(ClaimTypes.Role);
         Enum.TryParse(r, out Role role);
         return role;
     }
 
-    public async Task<Faculty> Faculty()
+    public async Task<Faculty> GetFacultyAsync()
     {
         var query = _context.Faculties.AsQueryable();
         query = GetUserRole() switch
@@ -47,7 +52,7 @@ public class UserAccessor : IUserAccessor
         return await query.FirstOrDefaultAsync();
     }
 
-    public async Task<DepartmentSubject> DepartmentSubject()
+    public async Task<DepartmentSubject> GetDepartmentSubjectAsync()
     {
         var query = _context.DepartmentSubjects.AsQueryable();
         query = GetUserRole() switch
@@ -63,7 +68,7 @@ public class UserAccessor : IUserAccessor
         return await query.FirstOrDefaultAsync();
     }
 
-    public async Task<Lecturer> Lecturer()
+    public async Task<Lecturer> GetLecturerAsync()
     {
         var query = _context.Lecturers.AsQueryable();
         query = GetUserRole() switch
@@ -78,7 +83,7 @@ public class UserAccessor : IUserAccessor
         return await query.FirstOrDefaultAsync();
     }
 
-    public async Task<Student> Student()
+    public async Task<Student> GetStudentAsync()
     {
         var query = _context.Students.AsQueryable();
         query = GetUserRole() switch

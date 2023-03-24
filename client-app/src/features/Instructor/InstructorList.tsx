@@ -1,12 +1,16 @@
 import {Box, Card, CardContent, Grid, Typography} from "@mui/material";
-
-import StudentTableRow from "./StudentTableRow";
 import {observer} from "mobx-react-lite";
+import {Period} from "../../app/models/period";
+import InstructorTableRow from "./InstructorTableRow";
 
-function InstructorList() {
+interface Props {
+    period: Period;
+}
+
+function InstructorList({period}: Props) {
     return (
         <Card sx={{background: '#F7F9FB', borderRadius: '16px', boxShadow: 'none'}} className="account_table_list">
-            <Typography variant="h6" className="name_table">Đồ Án Khoá K61 Đợt 1</Typography>
+            <Typography variant="h6" className="name_table">{period.name}</Typography>
             <Box className="account_list">
                 <Grid className="container_account_list" container>
                     <Grid sx={{marginTop: '15px'}} item xs>
@@ -15,13 +19,13 @@ function InstructorList() {
                                 Tổng Số Sinh Viên
                             </Typography>
                             <Typography className="text_bold" gutterBottom component="div">
-                                12,948
+                                {period.studentsCount}
                             </Typography>
                         </CardContent>
                     </Grid>
                 </Grid>
             </Box>
-            <StudentTableRow/>
+            <InstructorTableRow periodId={period.id}/>
         </Card>
 
     );

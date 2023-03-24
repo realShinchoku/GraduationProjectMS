@@ -16,7 +16,7 @@
   }
 
   .inner {
-    font-family: 'Inter';
+    font-family: 'Inter', sans-serif;
     font-style: normal;
     padding: 48px 205px 0 39px;
     max-width: 1330px;
@@ -138,7 +138,6 @@
         }
 
         .lecturer:hover {
-          border: 1px solid $clr-base-font;
 
           .thumb {
             top: -65px;
@@ -232,7 +231,6 @@
           }
 
           .mission:hover {
-            border: 1px solid $clr-base-font;
 
             .thumb {
               top: -26px;
@@ -314,7 +312,6 @@
           }
 
           .individual:hover {
-            border: 1px solid $clr-base-font;
 
             .thumb {
               img {
@@ -400,7 +397,6 @@
       }
 
       .manage:hover {
-        border: 1px solid $clr-base-font;
 
         .thumb {
           top: 120px;

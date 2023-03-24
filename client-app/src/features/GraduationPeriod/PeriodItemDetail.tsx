@@ -14,7 +14,7 @@ export default function PeriodItemDetail({period}: Props) {
             <Grid container spacing={3}>
                 <Grid xs={4} container spacing={3}>
                     <Grid xs={6}>
-                        <Box className="boxLeft" sx={{background: '#E3F5FF',padding: '20px'}}>
+                        <Box className="boxLeft" sx={{background: '#E3F5FF'}}>
                             <Typography variant="body2" className="text">
                                 Sinh Viên
                             </Typography>
