@@ -6,6 +6,7 @@ import Typography from '@mui/material/Typography';
 import {
     Paper,
     Radio,
+    Skeleton,
     Table,
     TableBody,
     TableCell,
@@ -19,7 +20,6 @@ import {useStore} from '../../app/stores/store';
 import CloseIcon from '@mui/icons-material/Close';
 import {PagingParams} from "../../app/models/pagination";
 import {observer} from "mobx-react-lite";
-import LoadingCircular from "../../app/layout/LoadingCircular";
 import SuccessModal from "./SuccessModal";
 import StudentStore from "../../app/stores/studentStore";
 
@@ -81,7 +81,47 @@ function AssignModal({studentId, studentStore}: Props) {
                 startIcon={<CloseIcon sx={{'&:nth-of-type(1)': {fontSize: '30px'}, color: '#333'}}/>}
                 onClick={() => modalStore.closeModal()}/>
             {loading ?
-                <LoadingCircular/>
+                <Paper sx={{width: '100%', overflow: 'hidden', boxShadow: 'none', marginBottom: '40px'}}>
+                    <TableContainer sx={{maxHeight: '290px'}}>
+                        <Table stickyHeader aria-label="sticky table">
+                            <TableHead>
+                                <TableRow>
+                                    <TableCell className='color_background' align="left">STT</TableCell>
+                                    <TableCell className='color_background' align="left">Tên Giáo Viên</TableCell>
+                                    <TableCell className='color_background' align="left">Email</TableCell>
+                                    <TableCell className='color_background' align="left">Chọn</TableCell>
+                                </TableRow>
+                            </TableHead>
+                            <TableBody>
+                                <TableRow
+                                    sx={{'&:last-child td, &:last-child th': {border: 0}}}
+                                >
+                                    <TableCell className='color_background' align="left"><Skeleton animation="wave" width="20%" height={28} /></TableCell>
+                                    <TableCell className='color_background' align="left"><Skeleton animation="wave" width="20%" height={28} /></TableCell>
+                                    <TableCell className='color_background' align="left"><Skeleton animation="wave" width="20%" height={28} /></TableCell>
+                                    <TableCell className='color_background' align="left"><Skeleton animation="wave" width="20%" height={28} /></TableCell>
+                                </TableRow>
+                                <TableRow
+                                    sx={{'&:last-child td, &:last-child th': {border: 0}}}
+                                >
+                                    <TableCell className='color_background' align="left"><Skeleton animation="wave" width="20%" height={28} /></TableCell>
+                                    <TableCell className='color_background' align="left"><Skeleton animation="wave" width="20%" height={28} /></TableCell>
+                                    <TableCell className='color_background' align="left"><Skeleton animation="wave" width="20%" height={28} /></TableCell>
+                                    <TableCell className='color_background' align="left"><Skeleton animation="wave" width="20%" height={28} /></TableCell>
+                                </TableRow>
+                            </TableBody>
+                        </Table>
+                    </TableContainer>
+                    <TablePagination
+                        rowsPerPageOptions={[5, 10, 25]}
+                        component="div"
+                        count={pagination?.totalItems || 0}
+                        rowsPerPage={pagination?.itemsPerPage || 10}
+                        page={pagination?.currentPage || 0}
+                        onPageChange={handleChangePage}
+                        onRowsPerPageChange={handleChangeRowsPerPage}
+                    />
+                </Paper>
                 : <>
                     <Paper sx={{width: '100%', overflow: 'hidden', boxShadow: 'none', marginBottom: '40px'}}>
                         <TableContainer sx={{maxHeight: '290px'}}>

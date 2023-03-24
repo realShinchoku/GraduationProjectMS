@@ -214,3 +214,23 @@
     }
   }
 }
+.period {
+  display: flex;
+  white-space: nowrap;
+  align-items: center;
+  &_skeleton {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    flex-direction: row;
+    box-sizing: border-box;
+  }
+  &_skeleton_ {
+    margin: 0;
+    box-sizing: border-box;
+    flex-direction: row;
+    flex-basis: 0;
+    flex-grow: 1;
+    max-width: 100%;
+  }
+}
