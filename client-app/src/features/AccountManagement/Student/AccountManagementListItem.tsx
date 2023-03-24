@@ -1,15 +1,9 @@
 import {Box, Button, Card, CardContent, Divider, Grid, TableCell, Typography} from "@mui/material";
 import "./AccountManagement.scss"
 import {useState} from "react";
-<<<<<<<< Updated upstream:client-app/src/features/AccountManagement/AccountTableList.tsx
-import AccountTableRow from "./AccountTableRow";
-import AddAccountManagement from "./AddAccountManagement";
-import {useStore} from "../../app/stores/store";
-========
-import {useStore} from "../../../app/stores/store";
-import AccountManagementListItemDetail from "./AccountManagementListItemDetail";
-import AddAccount from "./AddAccount";
->>>>>>>> Stashed changes:client-app/src/features/AccountManagement/Student/AccountManagementListItem.tsx
+import { useStore } from "../../../app/stores/store";
+import AddAccountManagement from "../AddAccountManagement";
+import AccountTableRow from "./AccountManagementListItemDetail";
 
 
 export default function AccountTableList() {
