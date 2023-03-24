@@ -3,19 +3,19 @@ import CommonStore from "./commonStore";
 import UserStore from "./userStore";
 import ModalStore from "./modalStore";
 import LecturerStore from "./lecturerStore";
-import DepartmentSubjectStore from "./departmentSubjectStore";
 import PeriodStore from "./periodStore";
 import InstructorStore from "./instructorStore";
 import StudentStore from "./studentStore";
 import PopupNotificationStore from "./popupNotificationStore";
 import SnackBarStore from "./snackBarStore";
+import FilterItemsStore from "./filterItemsStore";
 
 interface Store {
     commonStore: CommonStore;
     userStore: UserStore;
     modalStore: ModalStore;
     lecturerStore: LecturerStore;
-    departmentSubjectStore: DepartmentSubjectStore;
+    filterItemsStore: FilterItemsStore;
     instructorStore: InstructorStore;
     periodStore: PeriodStore;
     studentStore: StudentStore;
@@ -28,7 +28,7 @@ export const store: Store = {
     userStore: new UserStore(),
     modalStore: new ModalStore(),
     lecturerStore: new LecturerStore(),
-    departmentSubjectStore: new DepartmentSubjectStore(),
+    filterItemsStore: new FilterItemsStore(),
     instructorStore: new InstructorStore(),
     periodStore: new PeriodStore(),
     studentStore: new StudentStore(),

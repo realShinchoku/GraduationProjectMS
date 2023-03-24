@@ -16,14 +16,14 @@ function LecturerListFilter() {
         {id: 2, label: 'Từ Chối'},
     ];
     const {
-        departmentSubjectStore: {getFilterItem, departmentSubjectFilterItems},
+        filterItemsStore: {getDepartmentSubjects, departmentSubjects},
         lecturerStore: {setPredicate, removePredicate, loading, resetPredicate}
     } = useStore();
 
     useEffect(() => {
-        if (departmentSubjectFilterItems.length <= 0)
-            getFilterItem();
-    }, [departmentSubjectFilterItems.length, getFilterItem]);
+        if (departmentSubjects.length <= 0)
+            getDepartmentSubjects();
+    }, [departmentSubjects.length, getDepartmentSubjects]);
     const [keyword, setKeyword] = useState<string>('');
 
     return (
@@ -49,7 +49,7 @@ function LecturerListFilter() {
                 <Autocomplete
                     className="btn_complete"
                     disablePortal
-                    options={departmentSubjectFilterItems}
+                    options={departmentSubjects}
                     getOptionLabel={option => option.displayName}
                     style={{width: 130, marginRight: 10}}
                     renderInput={(params) => <TextField {...params} label={"Bộ môn"}/>}

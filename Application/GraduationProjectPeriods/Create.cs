@@ -63,6 +63,8 @@ public class Create
                 return Result<Unit>.Failure($"Đã tồn tại {period.Name}");
 
             request.GraduationProjectPeriod.Faculty = faculty;
+            request.GraduationProjectPeriod.Name =
+                $"Đồ án Khóa K{request.GraduationProjectPeriod.Course} Đợt {request.GraduationProjectPeriod.Phase}";
             _context.GraduationProjectPeriods.Add(request.GraduationProjectPeriod);
             var result = await _context.SaveChangesAsync(cancellationToken) > 0;
 

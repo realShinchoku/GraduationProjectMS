@@ -10,6 +10,7 @@ import Skeleton from '@mui/material/Skeleton';
 import { TabContext } from "@mui/lab";
 import { SearchOutlined } from "@mui/icons-material";
 import LoadingCircular from "../../app/layout/LoadingCircular";
+import InstructorFilter from "./InstructorFilter";
 
 function Instructor() {
     const {periodStore: {loadLists, periods, periodsList, setInstructorStatus, loading}} = useStore();
@@ -24,6 +25,7 @@ function Instructor() {
             <Box className="inner">
                 <Box className="nav">
                     <Typography variant="h3">Quản Lý Đăng ký Giảng viên hướng dẫn</Typography>
+                    <InstructorFilter/>
                     {loading ?
                     <>
                         <Card sx={{background: '#F7F9FB', borderRadius: '16px', boxShadow: 'none'}} className="account_table_list">

@@ -1,21 +1,21 @@
 ﻿using Application.Core;
-using Application.DepartmentSubjects.DTOs;
 using Application.Interfaces;
+using Application.FilterItems.DTOs;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
 
-namespace Application.DepartmentSubjects;
+namespace Application.FilterItems;
 
-public class ListForFilter
+public class DepartmentSubjects
 {
-    public class Query : IRequest<Result<List<DepartmentSubjectFilterDto>>>
+    public class Query : IRequest<Result<List<DepartmentSubjectDto>>>
     {
     }
 
-    public class Handler : IRequestHandler<Query, Result<List<DepartmentSubjectFilterDto>>>
+    public class Handler : IRequestHandler<Query, Result<List<DepartmentSubjectDto>>>
     {
         private readonly DataContext _context;
         private readonly IMapper _mapper;
@@ -28,15 +28,17 @@ public class ListForFilter
             _mapper = mapper;
         }
 
-        public async Task<Result<List<DepartmentSubjectFilterDto>>> Handle(Query request,
+        public async Task<Result<List<DepartmentSubjectDto>>> Handle(Query request,
             CancellationToken cancellationToken)
         {
             var faculty = await _userAccessor.GetFacultyAsync();
+            if (faculty == null)
+                return null;
             var departmentSubjects = await _context.DepartmentSubjects.Where(x => x.Faculty == faculty)
-                .ProjectTo<DepartmentSubjectFilterDto>(_mapper.ConfigurationProvider).ToListAsync(cancellationToken);
+                .ProjectTo<DepartmentSubjectDto>(_mapper.ConfigurationProvider).ToListAsync(cancellationToken);
             if (departmentSubjects.Count == 0)
                 return null;
-            return Result<List<DepartmentSubjectFilterDto>>.Success(departmentSubjects);
+            return Result<List<DepartmentSubjectDto>>.Success(departmentSubjects);
         }
     }
 }

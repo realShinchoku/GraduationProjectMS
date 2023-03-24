@@ -224,6 +224,7 @@ public class Seed
                 {
                     Course = 61,
                     Phase = 1,
+                    Name = "Đồ án Khóa K61 Đợt 1",
                     StartDate = DateTime.UtcNow,
                     EndDate = DateTime.UtcNow.AddDays(43),
                     ContactInstructorTime = DateTime.UtcNow,
@@ -238,6 +239,7 @@ public class Seed
                 {
                     Course = 61,
                     Phase = 2,
+                    Name = "Đồ án Khóa K61 Đợt 2",
                     StartDate = DateTime.UtcNow,
                     EndDate = DateTime.UtcNow.AddDays(43),
                     ContactInstructorTime = DateTime.UtcNow,

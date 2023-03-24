@@ -17,7 +17,7 @@ function InstructorTableRow({periodId}: Props) {
     const [value, setValue] = React.useState('0');
     const [keyword, setKeyword] = useState<string>('');
 
-    const {periodStore: {instructorStores, studentStores}} = useStore();
+    const {periodStore: {instructorStores, studentStores, loading}} = useStore();
     const instructorStore = instructorStores.get(periodId)!;
     const studentStore = studentStores.get(periodId)!;
 
@@ -32,9 +32,11 @@ function InstructorTableRow({periodId}: Props) {
             await studentStore.loadLists();
         }
     };
+    
+    if(loading)
+        return <></>
 
     return (
-        <Box>
             <Box className="account_table_list">
                 <TabContext value={value}>
                     <Box className="detail_account">
@@ -85,14 +87,13 @@ function InstructorTableRow({periodId}: Props) {
                         />
                     </Box>
                     <TabPanel value={'0'} dir={theme.direction}>
-                        <InstructorApprovalTable periodId={periodId}/>
+                        {value === '0' && <InstructorApprovalTable periodId={periodId}/>}
                     </TabPanel>
                     <TabPanel value={'1'} dir={theme.direction}>
-                        <InstructorAssginTable periodId={periodId}/>
+                        {value === '1' &&<InstructorAssginTable periodId={periodId}/>}
                     </TabPanel>
                 </TabContext>
             </Box>
-        </Box>
     );
 }
 

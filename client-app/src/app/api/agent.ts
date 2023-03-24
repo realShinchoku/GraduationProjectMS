@@ -5,7 +5,7 @@ import {LoginFormValues, PasswordFormValues, User} from "../models/user";
 import {PaginationResult} from "../models/pagination";
 import {Lecturer} from "../models/lecturer";
 import {Student} from "../models/student";
-import {DepartmentSubjectFilterItem} from "../models/departmentSubject";
+import {DepartmentSubjectFilterItem} from "../models/filterItem";
 import {Instructor} from "../models/instructor";
 import {Period, PeriodFormValues} from "../models/period";
 
@@ -111,7 +111,12 @@ const Periods = {
 }
 
 const DepartmentSubjects = {
-    listForFilter: () => requests.get<DepartmentSubjectFilterItem[]>('/departmentSubject/listForFilter')
+}
+
+const FilterItems ={
+    DepartmentSubject: () => requests.get<DepartmentSubjectFilterItem[]>('/filterItems/departmentSubject'),
+    Courses: () => requests.get<number[]>('filterItems/course'),
+    Phases: (params: URLSearchParams) => axios.get<number[]>(`filterItems/phase`, {params}),
 }
 
 const Instructors = {
@@ -132,6 +137,7 @@ const agent = {
     Periods,
     DepartmentSubjects,
     Instructors,
+    FilterItems
 }
 
 export default agent;

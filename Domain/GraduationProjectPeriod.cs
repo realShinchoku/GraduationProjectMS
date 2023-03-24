@@ -3,7 +3,7 @@ namespace Domain;
 public class GraduationProjectPeriod
 {
     public Guid Id { get; set; }
-    public string Name => $"Đồ án Khóa K{Course} Đợt {Phase}";
+    public string Name { get; set; }
     public int Course { get; set; }
     public int Phase { get; set; }
     public DateTime StartDate { get; set; }

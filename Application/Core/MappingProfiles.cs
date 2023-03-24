@@ -1,11 +1,11 @@
-﻿using Application.DepartmentSubjects.DTOs;
-using Application.GraduationProjectPeriods.DTOs;
+﻿using Application.GraduationProjectPeriods.DTOs;
 using Application.Instructors.DTOs;
 using Application.Lecturers.DTOs;
 using Application.PopupNotifications.DTOs;
 using Application.Students.DTOs;
 using AutoMapper;
 using Domain;
+using DepartmentSubjectDto = Application.FilterItems.DTOs.DepartmentSubjectDto;
 
 namespace Application.Core;
 
@@ -27,7 +27,7 @@ public class MappingProfiles : Profile
             .ForMember(d => d.GraduationProject, o => o.MapFrom(x => x.GraduationProject.Name))
             .ForMember(d => d.Syllabus, o => o.MapFrom(x => x.Syllabus.Name))
             .ForMember(d => d.Class, o => o.MapFrom(x => x.Class));
-        CreateMap<DepartmentSubject, DepartmentSubjectFilterDto>();
+        CreateMap<DepartmentSubject, DepartmentSubjectDto>();
         CreateMap<Instructor, InstructorDto>()
             .ForMember(d => d.Class, o => o.MapFrom(x => x.Student.Class))
             .ForMember(d => d.Student, o => o.MapFrom(x => x.Student.DisplayName))
