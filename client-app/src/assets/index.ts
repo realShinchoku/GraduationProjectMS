@@ -17,6 +17,7 @@ import TaskSquare from "./images/TaskSquare.png";
 import Union from "./images/Union.png";
 import LampOn from "./images/LampOn.png";
 import Ellipse from "./images/Ellipse.png";
+import NotFound404 from "./images/404.png";
 
 export {
     Logo,
@@ -36,6 +37,7 @@ export {
     Union,
     LampOn,
     Ellipse,
+    NotFound404,
 };
 
 export const LecturerImages = {

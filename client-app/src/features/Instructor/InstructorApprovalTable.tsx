@@ -8,7 +8,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
-import {Button} from '@mui/material';
+import {Button, Skeleton} from '@mui/material';
 import {useStore} from '../../app/stores/store';
 import {observer} from "mobx-react-lite";
 import {format} from "date-fns";
@@ -40,8 +40,38 @@ function InstructorApprovalTable({periodId}: Props) {
     };
 
     if (loading)
-        return <LoadingCircular/>
-
+        return (
+            <TableContainer>
+                <Table stickyHeader aria-label="sticky table">
+                    <TableHead>
+                        <TableRow>
+                            <TableCell className='color_background' align="left">Mã Sinh viên</TableCell>
+                            <TableCell className='color_background' align="left">Tên Sinh Viên</TableCell>
+                            <TableCell className='color_background' align="left">Lớp</TableCell>
+                            <TableCell className='color_background' align="left">Khoa</TableCell>
+                            <TableCell className='color_background' align="left">Ngày Đăng Ký</TableCell>
+                            <TableCell className='color_background' align="left">Mã Giáo Viên</TableCell>
+                            <TableCell className='color_background' align="left">Tên Giáo Viên</TableCell>
+                            <TableCell className='color_background' align="left">Trạng Thái</TableCell>
+                            <TableCell className='color_background' align="left">Trạng Thái</TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        <TableRow sx={{'&:last-child td, &:last-child th': {border: 0}}}>
+                            <TableCell align="left"><Skeleton animation="wave" width="80%" height={28}/></TableCell>
+                            <TableCell align="left"><Skeleton animation="wave" width="80%" height={28}/></TableCell>
+                            <TableCell align="left"><Skeleton animation="wave" width="80%" height={28}/></TableCell>
+                            <TableCell align="left"><Skeleton animation="wave" width="80%" height={28}/></TableCell>
+                            <TableCell align="left"><Skeleton animation="wave" width="80%" height={28}/></TableCell>
+                            <TableCell align="left"><Skeleton animation="wave" width="80%" height={28}/></TableCell>
+                            <TableCell align="left"><Skeleton animation="wave" width="80%" height={28}/></TableCell>
+                            <TableCell align="left"><Skeleton animation="wave" width="80%" height={28}/></TableCell>
+                            <TableCell align="left"><Skeleton animation="wave" width="80%" height={28}/></TableCell>
+                        </TableRow>
+                    </TableBody>
+                </Table>
+            </TableContainer>
+        )
     return (
         <Paper sx={{width: '100%', overflow: 'hidden', boxShadow: 'none'}}>
             <TableContainer>

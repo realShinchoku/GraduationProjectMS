@@ -8,12 +8,11 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
+import {Button, Skeleton} from '@mui/material';
+import {observer} from "mobx-react-lite";
 
-import {Button} from '@mui/material';
 import {useStore} from '../../app/stores/store';
 import {PagingParams} from "../../app/models/pagination";
-import LoadingCircular from "../../app/layout/LoadingCircular";
-import {observer} from "mobx-react-lite";
 import AssignModal from "./AssignModal";
 
 interface Props {
@@ -39,8 +38,32 @@ function InstructorAssginTable({periodId}: Props) {
     };
 
     if (loading)
-        return <LoadingCircular/>
-
+        return (
+            <TableContainer>
+                <Table stickyHeader aria-label="sticky table">
+                    <TableHead>
+                        <TableRow>
+                            <TableCell className='color_background' align="left">Mã Sinh viên</TableCell>
+                            <TableCell className='color_background' align="left">Tên Sinh Viên</TableCell>
+                            <TableCell className='color_background' align="left">Lớp</TableCell>
+                            <TableCell className='color_background' align="left">Khoa</TableCell>
+                            <TableCell className='color_background' align="left">Email</TableCell>
+                            <TableCell className='color_background' align="left"></TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        <TableRow sx={{'&:last-child td, &:last-child th': {border: 0}}}>
+                            <TableCell align="left"><Skeleton animation="wave" width="50%" height={28}/></TableCell>
+                            <TableCell align="left"><Skeleton animation="wave" width="50%" height={28}/></TableCell>
+                            <TableCell align="left"><Skeleton animation="wave" width="50%" height={28}/></TableCell>
+                            <TableCell align="left"><Skeleton animation="wave" width="50%" height={28}/></TableCell>
+                            <TableCell align="left"><Skeleton animation="wave" width="50%" height={28}/></TableCell>
+                            <TableCell align="left"><Skeleton animation="wave" width="50%" height={28}/></TableCell>
+                        </TableRow>
+                    </TableBody>
+                </Table>
+            </TableContainer>
+        )
     return (
         <Paper sx={{width: '100%', overflow: 'hidden', boxShadow: 'none'}}>
             <TableContainer>
@@ -53,7 +76,6 @@ function InstructorAssginTable({periodId}: Props) {
                             <TableCell className='color_background' align="left">Khoa</TableCell>
                             <TableCell className='color_background' align="left">Email</TableCell>
                             <TableCell className='color_background' align="left"></TableCell>
-
                         </TableRow>
                     </TableHead>
                     <TableBody>
