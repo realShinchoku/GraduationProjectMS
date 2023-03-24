@@ -4,6 +4,7 @@ import ModalContainer from "../common/modal/ModalContainer";
 import {useEffect} from "react";
 import {useStore} from "../stores/store";
 import LoadingCircular from "./LoadingCircular";
+import SnackBarContainer from "../common/snackbar/SnackBarContainer";
 
 function App() {
 
@@ -22,6 +23,7 @@ function App() {
     return (
         <>
             <ScrollRestoration/>
+            <SnackBarContainer/>
             <ModalContainer/>
             <Outlet/>
         </>

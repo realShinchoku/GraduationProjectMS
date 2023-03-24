@@ -1,44 +1,33 @@
 import {observer} from "mobx-react-lite";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import {IconButton, TextField} from "@mui/material";
+import {Button, IconButton, TextField} from "@mui/material";
 import {SearchOutlined} from "@mui/icons-material";
-import Autocomplete from '@mui/material/Autocomplete';
-import AccountTableList from "./AccountTableList";
-import "./AccountManagement.scss"
+import AddIcon from '@mui/icons-material/Add';
+import "./AccountLecturers.scss"
+import AccountLecturersList from "./AccountLecturersList";
+import { useState } from "react";
+import { useStore } from "../../../app/stores/store";
+import AddLecturers from "./AddLecturers";
 
 
-const complete1 = [
-    {label: 'Tiếp nhận'},
-    {label: 'Chờ Duyệt'},
-    {label: 'Từ Chối'},
-];
+function AccountLecturers() {
 
-function AccountManagement() {
-
+    const {modalStore} = useStore();
+    
     return (
-        <Box className={`account_management`}>
+        <Box className={`account_lecturers`}>
             <Box className="inner">
                 <Box className="nav">
                     <Typography variant="h3">Tài khoản</Typography>
                     <Box className="btn">
-                        <Box className="btn_item">
-                            <Autocomplete
-                                className="btn_complete"
-                                disablePortal
-                                id="combo-box-demo"
-                                options={complete1}
-                                style={{width: 130, marginRight: 10}}
-                                renderInput={(params) => <TextField {...params} label="Khoá"/>}
-                            />
-                        </Box>
                         <Box className="search">
                             <TextField
                                 className="search_"
                                 fullWidth
                                 id="standard-bare"
                                 variant="outlined"
-                                placeholder="Tìm đợt đồ án..."
+                                placeholder="Tìm giảng viên"
                                 InputProps={{
                                     startAdornment: (
                                         <IconButton>
@@ -47,10 +36,12 @@ function AccountManagement() {
                                     ),
                                 }}
                             />
+                            <Button color="inherit" variant="outlined" className="button_" endIcon={<AddIcon/>}
+                            onClick={() => modalStore.openModal(<AddLecturers/>)}>Thêm mới</Button>
                         </Box>
                     </Box>
                     <Box>
-                        <AccountTableList/>
+                        {<AccountLecturersList/>}
                     </Box>
                 </Box>
             </Box>
@@ -58,4 +49,4 @@ function AccountManagement() {
     )
 }
 
-export default observer(AccountManagement);
+export default observer(AccountLecturers);
