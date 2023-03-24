@@ -2,8 +2,8 @@ import {Box, Button, Card, CardContent, Divider, Grid, TableCell, Typography} fr
 import "./AccountManagement.scss"
 import {useState} from "react";
 import { useStore } from "../../../app/stores/store";
-import AddAccountManagement from "../AddAccountManagement";
 import AccountTableRow from "./AccountManagementListItemDetail";
+import AddAccount from "./AddAccount";
 
 
 export default function AccountTableList() {
@@ -64,8 +64,8 @@ export default function AccountTableList() {
                     <Button color="inherit" variant="outlined" className="button_"
                             onClick={() => setDetail(prev => !prev)}>{detail ? "Thu Gọn" : "Chi Tiết"}</Button>
                     <Button color="inherit" variant="outlined" className="button_"
-                            onClick={() => modalStore.openModal(<AddAccountManagement/>)}>Thêm</Button>
-                </TableCell>
+                            onClick={() => modalStore.openModal(<AddAccount/>)}>Thêm</Button>
+                </TableCell>    
             </Box>
             {detail && <AccountTableRow/>}
         </Card>

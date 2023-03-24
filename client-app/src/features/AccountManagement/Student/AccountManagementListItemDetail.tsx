@@ -3,7 +3,7 @@ import {useTheme} from '@mui/material/styles';
 import {SearchOutlined} from "@mui/icons-material";
 import React from "react";
 import "./AccountManagement.scss"
-import AccountManagementTable from "./AccountManagementTable";
+import AccountManagementTable from "./AccountManagementListItemStudentTable";
 
 interface TabPanelProps {
     children?: React.ReactNode;
