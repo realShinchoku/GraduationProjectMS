@@ -13,6 +13,11 @@ const complete1 = [
     {label: 'Chờ Duyệt'},
     {label: 'Từ Chối'},
 ];
+const complete2 = [
+    {label: 'Tiếp nhận'},
+    {label: 'Chờ Duyệt'},
+    {label: 'Từ Chối'},
+];
 
 function AccountManagement() {
 
@@ -22,6 +27,7 @@ function AccountManagement() {
                 <Box className="nav">
                     <Typography variant="h3">Tài khoản</Typography>
                     <Box className="btn">
+                        <Box className="btn">
                         <Box className="btn_item">
                             <Autocomplete
                                 className="btn_complete"
@@ -31,6 +37,17 @@ function AccountManagement() {
                                 style={{width: 130, marginRight: 10}}
                                 renderInput={(params) => <TextField {...params} label="Khoá"/>}
                             />
+                        </Box>
+                        <Box className="btn_item">
+                            <Autocomplete
+                                className="btn_complete"
+                                disablePortal
+                                id="combo-box-demo"
+                                options={complete2}
+                                style={{width: 130, marginRight: 10}}
+                                renderInput={(params) => <TextField {...params} label="Bộ Môn"/>}
+                            />
+                        </Box>
                         </Box>
                         <Box className="search">
                             <TextField

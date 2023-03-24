@@ -10,7 +10,9 @@ import RequireNonAuth from "./RequireNonAuth";
 import Login from "../../features/Account/Login";
 import HomePage from "../../features/Homepage/HomePage";
 import LecturerList from "../../features/Lecturers/List/LecturerList";
-import AccountManagement from "../../features/AccountManagement/AccountManagement";
+import DepartmentSubject from "../../features/AccountManagement/DepartmentSubject/DepartmentSubject";
+import AccountLecturers from "../../features/AccountManagement/Lecturers/AccountLecturers";
+import AccountManagement from "../../features/AccountManagement/Student/AccountManagement";
 import Instructor from "../../features/Instructor/Instructor";
 import Period from "../../features/GraduationPeriod/Period";
 import IsStudent from "./IsStudent";
@@ -28,7 +30,10 @@ export const route = {
     empty: 'null',
     instructor: '/instructor',
     period: '/period',
-    notFound: '/not_found'
+    notFound: '/not_found',
+    accountStudent: '/account/student',
+    accountDepartmentSubject: '/account/departmentSubject',
+    accountLecturer: '/account/lecturer',
 };
 
 export const routes: RouteObject[] = [
@@ -55,7 +60,10 @@ export const routes: RouteObject[] = [
                     {
                         element: <IsFaculty/>, children: [
                             {path: 'period', element: <Period/>},
-                            {path: 'account/management', element: <AccountManagement/>},
+                            {path: 'account/student', element: <AccountManagement/>},
+                            {path: 'account/departmentSubject', element: <DepartmentSubject/>},
+                            {path: 'account/lecturer', element: <AccountLecturers/>},
+
                         ]
                     },
                     {path: '', element: <HomePage/>},
@@ -72,6 +80,8 @@ export const routes: RouteObject[] = [
             {path: 'server-error', element: <ServerError/>},
             {path: 'test', element: <Test/>},
             {path: '*', element: <Navigate replace to={'/not-found'}/>},
+            {path: 'accountmanagement', element: <AccountManagement/>},
+
         ],
     }
 ]
