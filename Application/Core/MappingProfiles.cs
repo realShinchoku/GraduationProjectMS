@@ -40,7 +40,6 @@ public class MappingProfiles : Profile
             .ForMember(d => d.ClassesCount, o => o.MapFrom(x => x.Students.GroupBy(s => s.Class).Count()))
             .ForMember(d => d.ProjectsCount, o => o.MapFrom(x => x.Projects.Count))
             .ForMember(d => d.LecturersCount, o => o.MapFrom(x => x.Faculty.Lecturers.Count));
-        CreateMap<GraduationProjectPeriod, GraduationProjectPeriod>();
         CreateMap<PopupNotification, PopupNotificationDto>();
     }
 }

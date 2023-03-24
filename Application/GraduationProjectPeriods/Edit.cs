@@ -28,7 +28,8 @@ public class Edit
         public CustomValidator()
         {
             RuleFor(x => x.Id).NotEmpty();
-            RuleFor(x => x.Name).NotEmpty();
+            RuleFor(x => x.Course).NotEmpty();
+            RuleFor(x => x.Phase).NotEmpty();
             RuleFor(x => x.ProtectionTime).NotEmpty();
             RuleFor(x => x.GraduationProjectTime).NotEmpty();
             RuleFor(x => x.RegisterTopicTime).NotEmpty();

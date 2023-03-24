@@ -56,11 +56,26 @@ public class AccountController : BaseApiController
     }
 
     [Authorize(Policy = "IsFacultyOffice")]
-    [HttpPost("create")]
-    public async Task<ActionResult<UserDto>> Create([FromForm] Create.Command command)
+    [HttpPost("student")]
+    public async Task<ActionResult<UserDto>> CreateStudent([FromForm] CreateStudent.Command command)
     {
         return HandleResult(await Mediator.Send(command));
     }
+    
+    [Authorize(Policy = "IsFacultyOffice")]
+    [HttpPost("lecture")]
+    public async Task<ActionResult<UserDto>> CreateLecture([FromForm] CreateStudent.Command command)
+    {
+        return HandleResult(await Mediator.Send(command));
+    }
+
+    [Authorize(Policy = "IsFacultyOffice")]
+    [HttpPost("departmentSubject")]
+    public async Task<ActionResult<UserDto>> CreateDepartmentSubject([FromForm] CreateStudent.Command command)
+    {
+        return HandleResult(await Mediator.Send(command));
+    }
+
 
     [Authorize]
     [HttpPut("changePassword")]

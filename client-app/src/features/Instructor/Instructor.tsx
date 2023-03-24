@@ -9,6 +9,7 @@ import { AppBar, Card, CardContent, Grid, IconButton, Tab, Tabs, TextField } fro
 import Skeleton from '@mui/material/Skeleton';
 import { TabContext } from "@mui/lab";
 import { SearchOutlined } from "@mui/icons-material";
+import LoadingCircular from "../../app/layout/LoadingCircular";
 
 function Instructor() {
     const {periodStore: {loadLists, periods, periodsList, setInstructorStatus, loading}} = useStore();
@@ -24,7 +25,7 @@ function Instructor() {
                 <Box className="nav">
                     <Typography variant="h3">Quản Lý Đăng ký Giảng viên hướng dẫn</Typography>
                     {loading ?
-                    <Box>
+                    <>
                         <Card sx={{background: '#F7F9FB', borderRadius: '16px', boxShadow: 'none'}} className="account_table_list">
                             <Skeleton animation="wave" sx={{marginTop: '24px', marginLeft: '16px'}} height={35} width="20%" />
                             <Box className="account_list">
@@ -68,7 +69,6 @@ function Instructor() {
                                 </Box>
                             </Box>
                         </Card>
-                        
                         <Card sx={{background: '#F7F9FB', borderRadius: '16px', boxShadow: 'none'}} className="account_table_list">
                             <Skeleton animation="wave" sx={{marginTop: '24px', marginLeft: '16px'}} height={35} width="20%" />
                             <Box className="account_list">
@@ -112,7 +112,7 @@ function Instructor() {
                                 </Box>
                             </Box>
                         </Card>
-                    </Box>
+                    </>
                     :
                     <>
                         {periodsList.map(period =>
