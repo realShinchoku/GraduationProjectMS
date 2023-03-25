@@ -5,8 +5,12 @@ import {useStore} from "../../../app/stores/store";
 import {useState} from "react";
 import DescriptionOutlinedIcon from '@mui/icons-material/DescriptionOutlined';
 import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined';
+import {observer} from "mobx-react-lite";
 
-function AddAccount() {
+interface Props {
+    periodId: string;
+}
+function AddStudentModal({periodId}:Props) {
 
     const [file, setFile] = useState<any>();
     const {getRootProps, getInputProps, acceptedFiles, isDragActive} = useDropzone({
@@ -19,36 +23,22 @@ function AddAccount() {
         },
     });
 
-    const {modalStore} = useStore();
+    const {modalStore, studentStore} = useStore();
     return (
         <Grid className='add_account'>
             <Grid className="modal_body">
                 <Box className="title_account">
                     <Typography className="title_account_" variant="h5" gutterBottom>
-                        Thêm Tài Khoản
+                        Thêm Tài Khoản Sinh Viên
                     </Typography>
                 </Box>
                 <Box display="grid" gridTemplateColumns="repeat(12, 1fr)" gap={1}>
-                    <Box className="select_user">
-                        <Box marginTop={'50%'} gridColumn="span 2">
-                            <Box className="select_user_" sx={{display: 'flex', '& > *': {m: 1,}}}>
-                                <ButtonGroup sx={{margin: 'auto', borderRadius: 'unset'}} fullWidth
-                                             orientation="vertical" aria-label="vertical outlined button group"
-                                             variant="outlined">
-                                    <Button className="button_add_account" key="one">Sinh Viên</Button>
-                                    <Button className="button_add_account" key="two">Giảng Viên</Button>
-                                    <Button className="button_add_account" key="three">Bộ Môn</Button>
-                                </ButtonGroup>
-                            </Box>
-                        </Box>
-                    </Box>
                     <Box sx={{height: 'fit-content',}} gridColumn="span 11">
                         <Box className="top_dropzone">
                             <Typography className="title_top_dropzone" variant="h6" color="inherit" component="div">
                                 Tải File lên
                             </Typography>
-                            <Button className="button_up_file" variant="contained" onClick={() => console.log(file)}>Tải
-                                lên</Button>
+                            <Button className="button_up_file" variant="contained" onClick={() => studentStore.create(file,periodId)}>Tải lên</Button>
                         </Box>
                         <Box {...getRootProps({className: 'container_dropzone'})}>
                             {!(isDragActive || file) &&
@@ -56,8 +46,7 @@ function AddAccount() {
                                     <UploadFileIcon className='icon_dropzone_'/>
                                     <Box className="icon_dropzone">
                                         <Typography className='typo_dropzone'>Kéo thả file vào đây để nhập thông tin.
-                                            Định
-                                            dạng hỗ trợ .csv</Typography>
+                                            Định dạng hỗ trợ .csv</Typography>
                                     </Box>
                                 </>
                             }
@@ -93,4 +82,4 @@ function AddAccount() {
     );
 }
 
-export default AddAccount;
+export default observer(AddStudentModal);

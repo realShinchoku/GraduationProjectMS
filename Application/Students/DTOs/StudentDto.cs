@@ -19,4 +19,5 @@ public class StudentDto
     public string DepartmentSubjects { get; set; }
     public string Faculty { get; set; }
     public string Class { get; set; }
+    public DateTime CreatedDate { get; set; }
 }

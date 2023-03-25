@@ -92,6 +92,15 @@ const Account = {
         token
     }),
     changePassword: (values: PasswordFormValues) => requests.put<void>('/account/changePassword', values),
+    createStudent: (file: any, periodId: string)  => {
+        let formData = new FormData();
+        formData.append('File', file);
+        formData.append('HasHeader', 'true');
+        formData.append('PeriodId', periodId);
+        return axios.post<void>('/account/student', formData, {
+            headers: {'Content-Type': 'application/form-data'}
+        })
+    }
 }
 
 const Lecturers = {

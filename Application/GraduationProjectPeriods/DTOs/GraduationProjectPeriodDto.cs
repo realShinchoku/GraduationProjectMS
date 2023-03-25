@@ -19,4 +19,5 @@ public class GraduationProjectPeriodDto
     public int ClassesCount { get; set; }
     public int ProjectsCount { get; set; }
     public int LecturersCount { get; set; }
+    public string Faculty { get; set; }
 }

@@ -12,13 +12,13 @@ import HomePage from "../../features/Homepage/HomePage";
 import LecturerList from "../../features/Lecturers/List/LecturerList";
 import DepartmentSubject from "../../features/AccountManagement/DepartmentSubject/DepartmentSubject";
 import AccountLecturers from "../../features/AccountManagement/Lecturers/AccountLecturers";
-import AccountManagement from "../../features/AccountManagement/Student/AccountManagement";
 import Instructor from "../../features/Instructor/Instructor";
 import Period from "../../features/GraduationPeriod/Period";
 import IsStudent from "./IsStudent";
 import IsLecturer from "./IsLecturer";
 import IsDepartmentSubject from "./IsDepartmentSubject";
 import IsFaculty from "./IsFaculty";
+import AccountStudent from "../../features/AccountManagement/Student/AccountStudent";
 
 
 export const route = {
@@ -60,7 +60,7 @@ export const routes: RouteObject[] = [
                     {
                         element: <IsFaculty/>, children: [
                             {path: 'period', element: <Period/>},
-                            {path: 'account/student', element: <AccountManagement/>},
+                            {path: 'account/student', element: <AccountStudent/>},
                             {path: 'account/departmentSubject', element: <DepartmentSubject/>},
                             {path: 'account/lecturer', element: <AccountLecturers/>},
 
@@ -80,8 +80,6 @@ export const routes: RouteObject[] = [
             {path: 'server-error', element: <ServerError/>},
             {path: 'test', element: <Test/>},
             {path: '*', element: <Navigate replace to={'/not-found'}/>},
-            {path: 'accountmanagement', element: <AccountManagement/>},
-
         ],
     }
 ]

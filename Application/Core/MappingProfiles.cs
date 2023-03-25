@@ -39,7 +39,8 @@ public class MappingProfiles : Profile
             .ForMember(d => d.SyllabiCount, o => o.MapFrom(x => x.Syllabi.Count))
             .ForMember(d => d.ClassesCount, o => o.MapFrom(x => x.Students.GroupBy(s => s.Class).Count()))
             .ForMember(d => d.ProjectsCount, o => o.MapFrom(x => x.Projects.Count))
-            .ForMember(d => d.LecturersCount, o => o.MapFrom(x => x.Faculty.Lecturers.Count));
+            .ForMember(d => d.LecturersCount, o => o.MapFrom(x => x.Faculty.Lecturers.Count))
+            .ForMember(d => d.Faculty, o => o.MapFrom(x => x.Faculty.DisplayName));
         CreateMap<PopupNotification, PopupNotificationDto>();
     }
 }

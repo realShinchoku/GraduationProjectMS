@@ -14,6 +14,7 @@ export default class PeriodStore {
     instructorStores = new Map<string, InstructorStore>();
     studentStores = new Map<string, StudentStore>();
     isInstructor = false;
+    isAccount = false;
 
     constructor() {
         makeAutoObservable(this);
@@ -85,10 +86,11 @@ export default class PeriodStore {
 
     setStudentStore = async (periodId: string) => {
         this.studentStores.set(periodId, new StudentStore());
-        await this.studentStores.get(periodId)!.setPeriodId(periodId);
+        await this.studentStores.get(periodId)!.setPeriodId(periodId, this.isInstructor);
     }
 
     setInstructorStatus = () => this.isInstructor = true;
+    setAccountStatus = () => this.isAccount = true;
 
     create = async (period: PeriodFormValues) => {
         try {
@@ -136,6 +138,9 @@ export default class PeriodStore {
         this.periods.set(period.id, period);
         if (this.isInstructor) {
             await this.setInstructorStore(period.id);
+            await this.setStudentStore(period.id);
+        }
+        if(this.isAccount){
             await this.setStudentStore(period.id);
         }
     }

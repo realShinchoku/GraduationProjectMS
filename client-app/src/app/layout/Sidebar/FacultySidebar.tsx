@@ -35,7 +35,7 @@ function FacultySidebar() {
             <Box className="side_bar_inner">
                 <SidebarItem title="Trang chủ" to={route.home} icon={Category}/>
                 <SidebarItem title="Đợt đồ án" to={route.period} icon={TaskSquare}/>
-                <SidebarItem title="Tài khoản" to={route.empty} icon={ProfileUser}/>
+                <SidebarItem title="Tài khoản" to={route.accountStudent} icon={ProfileUser}/>
             </Box>
         </Grid>
     )

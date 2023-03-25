@@ -2,6 +2,7 @@ import {makeAutoObservable, reaction, runInAction} from "mobx";
 import {Student} from "../models/student";
 import {Pagination, PagingParams} from "../models/pagination";
 import agent from "../api/agent";
+import {store} from "./store";
 
 export default class StudentStore {
     students = new Map<string, Student>();
@@ -73,10 +74,22 @@ export default class StudentStore {
         this.predicate.clear();
     }
 
-    setPeriodId = async (id: string) => {
-        this.setPredicate('hasLecturer', false);
+    setPeriodId = async (id: string, isInstructor: boolean) => {
+        if(isInstructor)
+            this.setPredicate('hasLecturer', false);
         this.setPredicate('periodId', id);
         await this.loadLists();
+    }
+    
+    create = async (file: any, periodId: string) =>{
+        try {
+            await agent.Account.createStudent(file, periodId);
+            store.modalStore.closeModal();
+            store.snackBarStore.success("Tạo tài khoản thành công");
+        }
+        catch (e) {
+            console.log(e);
+        }
     }
 
     removeItem = (id: string) => {

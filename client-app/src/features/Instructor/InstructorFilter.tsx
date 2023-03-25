@@ -10,7 +10,7 @@ import {useStore} from "../../app/stores/store";
 
 function InstructorFilter() {
     
-    const {periodStore:{setPredicate, removePredicate, loading, resetPredicate}, filterItemsStore:{setCourse,courses,getCourses,phases,getPhases}} = useStore();
+    const {periodStore:{setPredicate, removePredicate, loading}, filterItemsStore:{setCourse,courses,getCourses,phases,getPhases}} = useStore();
     
     const [keyword, setKeyword] = useState('');
 
