@@ -260,6 +260,7 @@ public class Seed
                     DisplayName = "Sinh viên 1",
                     UserName = "sv1",
                     Email = "sv1@test.com",
+                    StudentId = "sv1",
                     Lecturer = lecturers[0],
                     DepartmentSubject = lecturers[0].DepartmentSubject,
                     Faculty = lecturers[0].Faculty
@@ -268,6 +269,7 @@ public class Seed
                 {
                     DisplayName = "Sinh viên 2",
                     UserName = "sv2",
+                    StudentId = "sv2",
                     Email = "sv2@test.com",
                     Lecturer = lecturers[0],
                     DepartmentSubject = lecturers[0].DepartmentSubject,
@@ -277,6 +279,7 @@ public class Seed
                 {
                     DisplayName = "Sinh viên 3",
                     UserName = "sv3",
+                    StudentId = "sv3",
                     Email = "sv3@test.com",
                     Lecturer = lecturers[0],
                     DepartmentSubject = lecturers[0].DepartmentSubject,
@@ -286,6 +289,7 @@ public class Seed
                 {
                     DisplayName = "Sinh viên 4",
                     UserName = "sv4",
+                    StudentId = "sv4",
                     Email = "sv4@test.com",
                     Lecturer = lecturers[1],
                     DepartmentSubject = lecturers[1].DepartmentSubject,
@@ -295,6 +299,7 @@ public class Seed
                 {
                     DisplayName = "Sinh viên 5",
                     UserName = "sv5",
+                    StudentId = "sv5",
                     Email = "sv5@test.com",
                     Lecturer = lecturers[1],
                     DepartmentSubject = lecturers[1].DepartmentSubject,
@@ -304,6 +309,7 @@ public class Seed
                 {
                     DisplayName = "Sinh viên 6",
                     UserName = "sv6",
+                    StudentId = "sv6",
                     Email = "sv6@test.com",
                     Lecturer = lecturers[1],
                     DepartmentSubject = lecturers[1].DepartmentSubject,
@@ -313,6 +319,7 @@ public class Seed
                 {
                     DisplayName = "Sinh viên 7",
                     UserName = "sv7",
+                    StudentId = "sv7",
                     Email = "sv7@test.com",
                     Lecturer = lecturers[1],
                     DepartmentSubject = lecturers[1].DepartmentSubject,
@@ -322,6 +329,7 @@ public class Seed
                 {
                     DisplayName = "Sinh viên 8",
                     UserName = "sv8",
+                    StudentId = "sv8",
                     Email = "sv8@test.com",
                     Faculty = faculties[0]
                 },
@@ -329,6 +337,7 @@ public class Seed
                 {
                     DisplayName = "Sinh viên 9",
                     UserName = "sv9",
+                    StudentId = "sv9",
                     Email = "sv9@test.com",
                     Faculty = faculties[0]
                 },
@@ -336,6 +345,7 @@ public class Seed
                 {
                     DisplayName = "Sinh viên 10",
                     UserName = "sv10",
+                    StudentId = "sv10",
                     Email = "sv10@test.com",
                     Faculty = faculties[0]
                 }
