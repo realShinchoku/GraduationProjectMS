@@ -92,7 +92,7 @@ const Account = {
         token
     }),
     changePassword: (values: PasswordFormValues) => requests.put<void>('/account/changePassword', values),
-    createStudent: (file: any, periodId: string)  => {
+    createStudent: (file: any, periodId: string) => {
         let formData = new FormData();
         formData.append('File', file);
         formData.append('HasHeader', 'true');
@@ -101,8 +101,19 @@ const Account = {
             headers: {'Content-Type': 'application/form-data'}
         })
     },
-    createLecturer: (email: string, displayName: string, education: string, phoneNumber: string, departmentSubjectId: string) => requests.post<void>('/account/lecturer', {email, displayName, education, phoneNumber, departmentSubjectId}),
-    createDepartmentSubject: (email: string, displayName: string, username: string, phoneNumber: string) => requests.post<void>('/account/departmentSubject', {email, displayName, username, phoneNumber})
+    createLecturer: (email: string, displayName: string, education: string, phoneNumber: string, departmentSubjectId: string) => requests.post<void>('/account/lecturer', {
+        email,
+        displayName,
+        education,
+        phoneNumber,
+        departmentSubjectId
+    }),
+    createDepartmentSubject: (email: string, displayName: string, username: string, phoneNumber: string) => requests.post<void>('/account/departmentSubject', {
+        email,
+        displayName,
+        username,
+        phoneNumber
+    })
 }
 
 const Lecturers = {
@@ -121,10 +132,9 @@ const Periods = {
     single: (id: string) => requests.get<Period>(`/period/${id}`),
 }
 
-const DepartmentSubjects = {
-}
+const DepartmentSubjects = {}
 
-const FilterItems ={
+const FilterItems = {
     DepartmentSubject: () => requests.get<DepartmentSubjectFilterItem[]>('/filterItems/departmentSubject'),
     Courses: () => requests.get<number[]>('filterItems/course'),
     Phases: (params: URLSearchParams) => axios.get<number[]>(`filterItems/phase`, {params}),

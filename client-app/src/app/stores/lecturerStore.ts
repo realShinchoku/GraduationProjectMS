@@ -72,6 +72,18 @@ export default class LecturerStore {
     resetPredicate = () => {
         this.predicate.clear();
     }
+
+    create = async (email: string, displayName: string, education: string, phoneNumber: string, departmentSubjectId: string) => {
+        try {
+            await agent.Account.createLecturer(email, displayName, education, phoneNumber, departmentSubjectId);
+            this.loadLecturers();
+            store.modalStore.closeModal();
+            store.snackBarStore.success("Tạo thành công");
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
     private setLecturer = (lecturer: Lecturer) => {
         switch (lecturer.instructorStatus) {
             case 0:
@@ -86,17 +98,5 @@ export default class LecturerStore {
         }
         lecturer.birthday = new Date(lecturer.birthday!)
         this.lecturers.set(lecturer.id, lecturer);
-    }
-    
-    create = async (email: string, displayName: string, education: string, phoneNumber: string, departmentSubjectId: string) =>{
-        try {
-            await agent.Account.createLecturer(email, displayName, education, phoneNumber, departmentSubjectId);
-            this.loadLecturers();
-            store.modalStore.closeModal();
-            store.snackBarStore.success("Tạo thành công");
-        }
-        catch (e) {
-            console.log(e);
-        }
     }
 }

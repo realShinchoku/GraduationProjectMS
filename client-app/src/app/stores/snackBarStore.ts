@@ -1,4 +1,4 @@
-import { AlertColor } from "@mui/material";
+import {AlertColor} from "@mui/material";
 import {makeAutoObservable} from "mobx";
 
 interface SnackBar {
@@ -17,22 +17,23 @@ export default class SnackBarStore {
     constructor() {
         makeAutoObservable(this);
     }
-    success = (message:string) => {
+
+    success = (message: string) => {
         this.snackBar.message = message;
         this.snackBar.open = true;
         this.snackBar.severity = 'success';
     }
-    warning = (message:string) => {
+    warning = (message: string) => {
         this.snackBar.message = message;
         this.snackBar.open = true;
         this.snackBar.severity = 'warning';
     }
-    info = (message:string) => {
+    info = (message: string) => {
         this.snackBar.message = message;
         this.snackBar.open = true;
         this.snackBar.severity = 'info';
     }
-    error = (message:string) => {
+    error = (message: string) => {
         this.snackBar.message = message;
         this.snackBar.open = true;
         this.snackBar.severity = 'error';

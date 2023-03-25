@@ -6,9 +6,9 @@ import {store} from "./store";
 export default class PopupNotificationStore {
     popupNotification: PopupNotification | null = null;
     hubConnection: HubConnection | null = null;
-    
+
     isConnected: boolean = false;
-    
+
     constructor() {
         makeAutoObservable(this);
     }
@@ -75,6 +75,6 @@ export default class PopupNotificationStore {
             console.log(e)
         }
     }
-    
+
     setIsConnected = () => this.isConnected = !this.isConnected;
 }

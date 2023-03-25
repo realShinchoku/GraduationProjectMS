@@ -32,68 +32,68 @@ function InstructorTableRow({periodId}: Props) {
             await studentStore.loadLists();
         }
     };
-    
-    if(loading)
+
+    if (loading)
         return <></>
 
     return (
-            <Box className="account_table_list">
-                <TabContext value={value}>
-                    <Box className="detail_account">
-                        <Box className="select_user">
-                            <AppBar sx={{background: '#fffefe', boxShadow: 'none'}} position="static" color="default">
-                                <Tabs className="tab_account"
-                                      value={value}
-                                      onChange={handleChange}
-                                      indicatorColor="primary"
-                                      textColor="inherit"
-                                      variant="fullWidth"
-                                      aria-label="action tabs example"
-                                >
-                                    <Tab className="tab_account" label="Đã Đăng Ký" value={'0'}/>
-                                    <Tab className="tab_account" label="Chưa đăng Ký" value={'1'}/>
-                                </Tabs>
-                            </AppBar>
-                        </Box>
-                        <TextField
-                            className="search_account"
-                            fullWidth
-                            size="small"
-                            id="standard-bare"
-                            variant="outlined"
-                            placeholder="Tìm kiếm..."
-                            InputProps={{
-                                startAdornment: (
-                                    <IconButton onClick={() => {
-                                        if (value === '0')
-                                            instructorStore.setPredicate('Keyword', keyword);
-                                        else if (value === '1')
-                                            studentStore.setPredicate('Keyword', keyword);
-                                    }}>
-                                        <SearchOutlined/>
-                                    </IconButton>
-                                ),
-                            }}
-                            value={keyword}
-                            onChange={(e) => setKeyword(e.target.value)}
-                            onKeyDown={(e) => {
-                                if (e.key === 'Enter')
+        <Box className="account_table_list">
+            <TabContext value={value}>
+                <Box className="detail_account">
+                    <Box className="select_user">
+                        <AppBar sx={{background: '#fffefe', boxShadow: 'none'}} position="static" color="default">
+                            <Tabs className="tab_account"
+                                  value={value}
+                                  onChange={handleChange}
+                                  indicatorColor="primary"
+                                  textColor="inherit"
+                                  variant="fullWidth"
+                                  aria-label="action tabs example"
+                            >
+                                <Tab className="tab_account" label="Đã Đăng Ký" value={'0'}/>
+                                <Tab className="tab_account" label="Chưa đăng Ký" value={'1'}/>
+                            </Tabs>
+                        </AppBar>
+                    </Box>
+                    <TextField
+                        className="search_account"
+                        fullWidth
+                        size="small"
+                        id="standard-bare"
+                        variant="outlined"
+                        placeholder="Tìm kiếm..."
+                        InputProps={{
+                            startAdornment: (
+                                <IconButton onClick={() => {
                                     if (value === '0')
-                                        instructorStore.setPredicate('Keyword', keyword)
+                                        instructorStore.setPredicate('Keyword', keyword);
                                     else if (value === '1')
                                         studentStore.setPredicate('Keyword', keyword);
-                            }}
-                            disabled={instructorStore.loading || studentStore.loading}
-                        />
-                    </Box>
-                    <TabPanel value={'0'} dir={theme.direction}>
-                        {value === '0' && <InstructorApprovalTable periodId={periodId}/>}
-                    </TabPanel>
-                    <TabPanel value={'1'} dir={theme.direction}>
-                        {value === '1' &&<InstructorAssginTable periodId={periodId}/>}
-                    </TabPanel>
-                </TabContext>
-            </Box>
+                                }}>
+                                    <SearchOutlined/>
+                                </IconButton>
+                            ),
+                        }}
+                        value={keyword}
+                        onChange={(e) => setKeyword(e.target.value)}
+                        onKeyDown={(e) => {
+                            if (e.key === 'Enter')
+                                if (value === '0')
+                                    instructorStore.setPredicate('Keyword', keyword)
+                                else if (value === '1')
+                                    studentStore.setPredicate('Keyword', keyword);
+                        }}
+                        disabled={instructorStore.loading || studentStore.loading}
+                    />
+                </Box>
+                <TabPanel value={'0'} dir={theme.direction}>
+                    {value === '0' && <InstructorApprovalTable periodId={periodId}/>}
+                </TabPanel>
+                <TabPanel value={'1'} dir={theme.direction}>
+                    {value === '1' && <InstructorAssginTable periodId={periodId}/>}
+                </TabPanel>
+            </TabContext>
+        </Box>
     );
 }
 

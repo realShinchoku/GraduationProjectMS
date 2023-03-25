@@ -2,16 +2,17 @@
 import Autocomplete from "@mui/material/Autocomplete";
 import {IconButton, TextField} from "@mui/material";
 import {ExpandMoreSharp, SearchOutlined} from "@mui/icons-material";
-import Button from "@mui/material/Button";
-import ImportExportIcon from "@mui/icons-material/ImportExport";
 import {observer} from "mobx-react-lite";
 import {useEffect, useState} from "react";
 import {useStore} from "../../app/stores/store";
 
 function InstructorFilter() {
-    
-    const {periodStore:{setPredicate, removePredicate, loading}, filterItemsStore:{setCourse,courses,getCourses,phases,getPhases}} = useStore();
-    
+
+    const {
+        periodStore: {setPredicate, removePredicate, loading},
+        filterItemsStore: {setCourse, courses, getCourses, phases, getPhases}
+    } = useStore();
+
     const [keyword, setKeyword] = useState('');
 
     useEffect(() => {
@@ -19,16 +20,16 @@ function InstructorFilter() {
             getCourses();
         if (phases.length <= 0)
             getPhases();
-    }, [courses.length, getCourses,phases.length, getPhases]);
-    
-    return(
-        <Box className="btn" sx={{marginTop:'40px'}}>
+    }, [courses.length, getCourses, phases.length, getPhases]);
+
+    return (
+        <Box className="btn" sx={{marginTop: '40px'}}>
             <Box className="btn_item">
                 <Autocomplete
                     className="btn_complete"
                     disablePortal
                     options={courses}
-                    getOptionLabel={option => "K"+option}
+                    getOptionLabel={option => "K" + option}
                     style={{width: 130, marginRight: 10}}
                     renderInput={(params) => <TextField {...params} label={"Khóa"}/>}
                     onChange={(event, value) => {
@@ -45,7 +46,7 @@ function InstructorFilter() {
                     className="btn_complete"
                     disablePortal
                     options={phases}
-                    getOptionLabel={option => "Đợt "+option}
+                    getOptionLabel={option => "Đợt " + option}
                     style={{width: 130, marginRight: 10}}
                     renderInput={(params) => <TextField {...params} label={"Đợt"}/>}
                     onChange={(event, value) => {

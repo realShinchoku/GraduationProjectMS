@@ -75,19 +75,18 @@ export default class StudentStore {
     }
 
     setPeriodId = async (id: string, isInstructor: boolean) => {
-        if(isInstructor)
+        if (isInstructor)
             this.setPredicate('hasLecturer', false);
         this.setPredicate('periodId', id);
         await this.loadLists();
     }
-    
-    create = async (file: any, periodId: string) =>{
+
+    create = async (file: any, periodId: string) => {
         try {
             await agent.Account.createStudent(file, periodId);
             store.modalStore.closeModal();
             store.snackBarStore.success("Tạo tài khoản thành công");
-        }
-        catch (e) {
+        } catch (e) {
             console.log(e);
         }
     }

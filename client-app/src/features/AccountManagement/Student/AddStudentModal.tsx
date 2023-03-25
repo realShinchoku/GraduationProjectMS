@@ -1,4 +1,4 @@
-import {Box, Button, ButtonGroup, Grid, Typography} from '@mui/material';
+import {Box, Button, Grid, Typography} from '@mui/material';
 import UploadFileIcon from '@mui/icons-material/UploadFile';
 import {useDropzone} from 'react-dropzone';
 import {useStore} from "../../../app/stores/store";
@@ -10,7 +10,8 @@ import {observer} from "mobx-react-lite";
 interface Props {
     periodId: string;
 }
-function AddStudentModal({periodId}:Props) {
+
+function AddStudentModal({periodId}: Props) {
 
     const [file, setFile] = useState<any>();
     const {getRootProps, getInputProps, acceptedFiles, isDragActive} = useDropzone({
@@ -38,7 +39,8 @@ function AddStudentModal({periodId}:Props) {
                             <Typography className="title_top_dropzone" variant="h6" color="inherit" component="div">
                                 Tải File lên
                             </Typography>
-                            <Button className="button_up_file" variant="contained" onClick={() => studentStore.create(file,periodId)}>Tải lên</Button>
+                            <Button className="button_up_file" variant="contained"
+                                    onClick={() => studentStore.create(file, periodId)}>Tải lên</Button>
                         </Box>
                         <Box {...getRootProps({className: 'container_dropzone'})}>
                             {!(isDragActive || file) &&

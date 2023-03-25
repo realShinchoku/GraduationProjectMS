@@ -96,18 +96,34 @@ function AssignModal({studentId, studentStore}: Props) {
                                 <TableRow
                                     sx={{'&:last-child td, &:last-child th': {border: 0}}}
                                 >
-                                    <TableCell className='color_background' align="left"><Skeleton animation="wave" width="20%" height={28} /></TableCell>
-                                    <TableCell className='color_background' align="left"><Skeleton animation="wave" width="20%" height={28} /></TableCell>
-                                    <TableCell className='color_background' align="left"><Skeleton animation="wave" width="20%" height={28} /></TableCell>
-                                    <TableCell className='color_background' align="left"><Skeleton animation="wave" width="20%" height={28} /></TableCell>
+                                    <TableCell className='color_background' align="left"><Skeleton animation="wave"
+                                                                                                   width="20%"
+                                                                                                   height={28}/></TableCell>
+                                    <TableCell className='color_background' align="left"><Skeleton animation="wave"
+                                                                                                   width="20%"
+                                                                                                   height={28}/></TableCell>
+                                    <TableCell className='color_background' align="left"><Skeleton animation="wave"
+                                                                                                   width="20%"
+                                                                                                   height={28}/></TableCell>
+                                    <TableCell className='color_background' align="left"><Skeleton animation="wave"
+                                                                                                   width="20%"
+                                                                                                   height={28}/></TableCell>
                                 </TableRow>
                                 <TableRow
                                     sx={{'&:last-child td, &:last-child th': {border: 0}}}
                                 >
-                                    <TableCell className='color_background' align="left"><Skeleton animation="wave" width="20%" height={28} /></TableCell>
-                                    <TableCell className='color_background' align="left"><Skeleton animation="wave" width="20%" height={28} /></TableCell>
-                                    <TableCell className='color_background' align="left"><Skeleton animation="wave" width="20%" height={28} /></TableCell>
-                                    <TableCell className='color_background' align="left"><Skeleton animation="wave" width="20%" height={28} /></TableCell>
+                                    <TableCell className='color_background' align="left"><Skeleton animation="wave"
+                                                                                                   width="20%"
+                                                                                                   height={28}/></TableCell>
+                                    <TableCell className='color_background' align="left"><Skeleton animation="wave"
+                                                                                                   width="20%"
+                                                                                                   height={28}/></TableCell>
+                                    <TableCell className='color_background' align="left"><Skeleton animation="wave"
+                                                                                                   width="20%"
+                                                                                                   height={28}/></TableCell>
+                                    <TableCell className='color_background' align="left"><Skeleton animation="wave"
+                                                                                                   width="20%"
+                                                                                                   height={28}/></TableCell>
                                 </TableRow>
                             </TableBody>
                         </Table>

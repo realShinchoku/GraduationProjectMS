@@ -12,7 +12,7 @@ export default function PeriodItemDetail({period}: Props) {
     return (
         <Box className="graduation_Grid">
             <Grid container spacing={2}>
-                <Grid xs={4} container >
+                <Grid xs={4} container>
                     <Grid xs={6}>
                         <Box className="boxLeft" sx={{background: '#E3F5FF'}}>
                             <Typography variant="body2" className="text">

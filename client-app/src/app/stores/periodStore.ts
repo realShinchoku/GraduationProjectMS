@@ -140,7 +140,7 @@ export default class PeriodStore {
             await this.setInstructorStore(period.id);
             await this.setStudentStore(period.id);
         }
-        if(this.isAccount){
+        if (this.isAccount) {
             await this.setStudentStore(period.id);
         }
     }

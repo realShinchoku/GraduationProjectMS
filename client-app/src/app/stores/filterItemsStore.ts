@@ -2,14 +2,15 @@
 import {DepartmentSubjectFilterItem} from "../models/filterItem";
 import agent from "../api/agent";
 
-export default class FilterItemsStore{
+export default class FilterItemsStore {
     departmentSubjects: DepartmentSubjectFilterItem[] = [];
     courses: number[] = [];
     selectedCourse: number | null = null;
-    phases:number[] = [];
+    phases: number[] = [];
+
     constructor() {
         makeAutoObservable(this);
-        reaction(() => this.selectedCourse,this.getPhases)
+        reaction(() => this.selectedCourse, this.getPhases)
     }
 
     getDepartmentSubjects = async () => {
@@ -29,11 +30,11 @@ export default class FilterItemsStore{
             console.log(e);
         }
     }
-    
+
     getPhases = async () => {
         try {
             const params = new URLSearchParams();
-            if(this.selectedCourse != null) {
+            if (this.selectedCourse != null) {
                 params.append('course', this.selectedCourse.toString());
             }
             const response = await agent.FilterItems.Phases(params);
@@ -42,6 +43,6 @@ export default class FilterItemsStore{
             console.log(e);
         }
     }
-    
+
     setCourse = (course: number | null) => this.selectedCourse = course;
 }

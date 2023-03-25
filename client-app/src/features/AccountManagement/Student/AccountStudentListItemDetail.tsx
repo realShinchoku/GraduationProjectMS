@@ -1,5 +1,4 @@
-import {AppBar, Box, IconButton, Tab, Tabs, TextField, Typography} from "@mui/material";
-import {useTheme} from '@mui/material/styles';
+import {Box, IconButton, TextField} from "@mui/material";
 import {SearchOutlined} from "@mui/icons-material";
 import React, {useState} from "react";
 import "./AccountManagement.scss";
@@ -10,7 +9,8 @@ import AccountStudentTable from "./AccountStudentTable";
 interface Props {
     periodId: string;
 }
-function AccountStudentListItemDetail({periodId}:Props) {
+
+function AccountStudentListItemDetail({periodId}: Props) {
     const {periodStore: {studentStores, loading}} = useStore();
     const studentStore = studentStores.get(periodId)!;
     const [keyword, setKeyword] = useState<string>('');
@@ -35,7 +35,7 @@ function AccountStudentListItemDetail({periodId}:Props) {
                 onChange={(e) => setKeyword(e.target.value)}
                 onKeyDown={(e) => {
                     if (e.key === 'Enter')
-                            studentStore.setPredicate('Keyword', keyword);
+                        studentStore.setPredicate('Keyword', keyword);
                 }}
                 disabled={studentStore.loading}
             />

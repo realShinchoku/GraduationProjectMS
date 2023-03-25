@@ -16,7 +16,7 @@ export interface Period {
     classesCount: number;
     projectsCount: number;
     lecturersCount: number;
-    faculty:string;
+    faculty: string;
 }
 
 export class Period implements Period {

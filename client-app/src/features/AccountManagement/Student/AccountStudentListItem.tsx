@@ -1,7 +1,7 @@
 import {Box, Button, Card, CardContent, Divider, Grid, TableCell, Typography} from "@mui/material";
 import "./AccountManagement.scss"
 import {useState} from "react";
-import { useStore } from "../../../app/stores/store";
+import {useStore} from "../../../app/stores/store";
 import {observer} from "mobx-react-lite";
 import {Period} from "../../../app/models/period";
 import AccountStudentListItemDetail from "./AccountStudentListItemDetail";
@@ -10,7 +10,8 @@ import AddStudentModal from "./AddStudentModal";
 interface Props {
     period: Period;
 }
-function AccountStudentListItem({period}:Props) {
+
+function AccountStudentListItem({period}: Props) {
     const [detail, setDetail] = useState(false)
     const {modalStore} = useStore();
 
@@ -58,7 +59,7 @@ function AccountStudentListItem({period}:Props) {
                             onClick={() => setDetail(prev => !prev)}>{detail ? "Thu Gọn" : "Chi Tiết"}</Button>
                     <Button color="inherit" variant="outlined" className="button_"
                             onClick={() => modalStore.openModal(<AddStudentModal periodId={period.id}/>)}>Thêm</Button>
-                </TableCell>    
+                </TableCell>
             </Box>
             {detail && <AccountStudentListItemDetail periodId={period.id}/>}
         </Card>

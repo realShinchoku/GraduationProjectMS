@@ -7,7 +7,7 @@ import AddIcon from '@mui/icons-material/Add';
 import "./DepartmentSubject.scss"
 import AccountSubjectList from "./DepartmentSubjectList";
 import AddSubject from "./AddDepartmentSubject";
-import { useStore } from "../../../app/stores/store";
+import {useStore} from "../../../app/stores/store";
 
 
 function AccountSubject() {
@@ -35,7 +35,7 @@ function AccountSubject() {
                                 }}
                             />
                             <Button color="inherit" variant="outlined" className="button_" startIcon={<AddIcon/>}
-                            onClick={() => modalStore.openModal(<AddSubject/>)}>Thêm mới</Button>
+                                    onClick={() => modalStore.openModal(<AddSubject/>)}>Thêm mới</Button>
                         </Box>
                     </Box>
                     <Box>

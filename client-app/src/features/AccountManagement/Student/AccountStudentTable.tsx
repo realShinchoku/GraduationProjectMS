@@ -1,4 +1,5 @@
 import * as React from 'react';
+import {useEffect} from 'react';
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -10,7 +11,6 @@ import TableRow from '@mui/material/TableRow';
 import "./AccountManagement.scss"
 import StudentStore from "../../../app/stores/studentStore";
 import {observer} from "mobx-react-lite";
-import {useEffect} from "react";
 import {PagingParams} from "../../../app/models/pagination";
 import {format} from "date-fns";
 
@@ -18,7 +18,7 @@ interface Props {
     studentStore: StudentStore;
 }
 
-function AccountStudentTable({studentStore}:Props) {
+function AccountStudentTable({studentStore}: Props) {
     const {loadLists, students, studentsList, loading, pagination, setPagingParams} = studentStore;
 
     useEffect(() => {
@@ -56,13 +56,14 @@ function AccountStudentTable({studentStore}:Props) {
                                 sx={{'&:last-child td, &:last-child th': {border: 0}}}
                             >
                                 <TableCell component="th" scope="row">
-                                    {pagination!.itemsPerPage*pagination!.currentPage + index + 1}
+                                    {pagination!.itemsPerPage * pagination!.currentPage + index + 1}
                                 </TableCell>
                                 <TableCell align="left">{row.studentId}</TableCell>
                                 <TableCell align="left">{row.displayName}</TableCell>
                                 <TableCell align="left">{row.class}</TableCell>
                                 <TableCell align="left">{row.faculty}</TableCell>
-                                <TableCell align="left">{format(new Date(row.createdDate), "dd 'Th'M',' yyyy")}</TableCell>
+                                <TableCell
+                                    align="left">{format(new Date(row.createdDate), "dd 'Th'M',' yyyy")}</TableCell>
                                 <TableCell align="left">{row.email}</TableCell>
                             </TableRow>
                         ))}

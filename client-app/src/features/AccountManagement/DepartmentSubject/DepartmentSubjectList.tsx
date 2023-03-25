@@ -20,15 +20,15 @@ function createData(
 }
 
 const rows = [
-    createData(1,'Trí tuệ nhân tạo', 'Tiến sĩ', '03/03/2001', '1951060919@e.tlu.edu.vn', 'CNTT'),
-    createData(1,'Trí tuệ nhân tạo', 'Tiến sĩ','03/03/2001', '1951060919@e.tlu.edu.vn', 'CNTT'),
-    createData(1,'Trí tuệ nhân tạo', 'Tiến sĩ', '03/03/2001', '1951060919@e.tlu.edu.vn', 'CNTT'),
-    createData(1,'Trí tuệ nhân tạo', 'Tiến sĩ', '03/03/2001', '1951060919@e.tlu.edu.vn', 'CNTT'),
-    createData(1,'Trí tuệ nhân tạo', 'Tiến sĩ', '03/03/2001', '1951060919@e.tlu.edu.vn', 'CNTT'),
-    createData(1,'Trí tuệ nhân tạo', 'Tiến sĩ', '03/03/2001', '1951060919@e.tlu.edu.vn', 'CNTT'),
-    createData(1,'Trí tuệ nhân tạo', 'Tiến sĩ', '03/03/2001', '1951060919@e.tlu.edu.vn', 'CNTT'),
-    createData(1,'Trí tuệ nhân tạo', 'Tiến sĩ', '03/03/2001', '1951060919@e.tlu.edu.vn', 'CNTT'),
-    createData(1,'Trí tuệ nhân tạo', 'Tiến sĩ', '03/03/2001', '1951060919@e.tlu.edu.vn', 'CNTT'),
+    createData(1, 'Trí tuệ nhân tạo', 'Tiến sĩ', '03/03/2001', '1951060919@e.tlu.edu.vn', 'CNTT'),
+    createData(1, 'Trí tuệ nhân tạo', 'Tiến sĩ', '03/03/2001', '1951060919@e.tlu.edu.vn', 'CNTT'),
+    createData(1, 'Trí tuệ nhân tạo', 'Tiến sĩ', '03/03/2001', '1951060919@e.tlu.edu.vn', 'CNTT'),
+    createData(1, 'Trí tuệ nhân tạo', 'Tiến sĩ', '03/03/2001', '1951060919@e.tlu.edu.vn', 'CNTT'),
+    createData(1, 'Trí tuệ nhân tạo', 'Tiến sĩ', '03/03/2001', '1951060919@e.tlu.edu.vn', 'CNTT'),
+    createData(1, 'Trí tuệ nhân tạo', 'Tiến sĩ', '03/03/2001', '1951060919@e.tlu.edu.vn', 'CNTT'),
+    createData(1, 'Trí tuệ nhân tạo', 'Tiến sĩ', '03/03/2001', '1951060919@e.tlu.edu.vn', 'CNTT'),
+    createData(1, 'Trí tuệ nhân tạo', 'Tiến sĩ', '03/03/2001', '1951060919@e.tlu.edu.vn', 'CNTT'),
+    createData(1, 'Trí tuệ nhân tạo', 'Tiến sĩ', '03/03/2001', '1951060919@e.tlu.edu.vn', 'CNTT'),
 
 ];
 

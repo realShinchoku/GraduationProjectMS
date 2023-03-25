@@ -3,17 +3,17 @@ import Skeleton from "@mui/material/Skeleton";
 import Box from "@mui/material/Box";
 import {SearchOutlined} from "@mui/icons-material";
 
-export default function InstructorSkeleton(){
-    return(
+export default function InstructorSkeleton() {
+    return (
         <>
             <Card sx={{background: '#F7F9FB', borderRadius: '16px', boxShadow: 'none'}} className="account_table_list">
-                <Skeleton animation="wave" sx={{marginTop: '24px', marginLeft: '16px'}} height={35} width="20%" />
+                <Skeleton animation="wave" sx={{marginTop: '24px', marginLeft: '16px'}} height={35} width="20%"/>
                 <Box className="account_list">
                     <Grid className="container_account_list" container>
                         <Grid sx={{marginTop: '15px'}} item xs>
                             <CardContent>
-                                <Skeleton animation="wave" width="20%" height={28} />
-                                <Skeleton animation="wave" width="10%" height={28} />
+                                <Skeleton animation="wave" width="20%" height={28}/>
+                                <Skeleton animation="wave" width="10%" height={28}/>
                             </CardContent>
                         </Grid>
                     </Grid>
@@ -50,13 +50,13 @@ export default function InstructorSkeleton(){
                 </Box>
             </Card>
             <Card sx={{background: '#F7F9FB', borderRadius: '16px', boxShadow: 'none'}} className="account_table_list">
-                <Skeleton animation="wave" sx={{marginTop: '24px', marginLeft: '16px'}} height={35} width="20%" />
+                <Skeleton animation="wave" sx={{marginTop: '24px', marginLeft: '16px'}} height={35} width="20%"/>
                 <Box className="account_list">
                     <Grid className="container_account_list" container>
                         <Grid sx={{marginTop: '15px'}} item xs>
                             <CardContent>
-                                <Skeleton animation="wave" width="20%" height={28} />
-                                <Skeleton animation="wave" width="10%" height={28} />
+                                <Skeleton animation="wave" width="20%" height={28}/>
+                                <Skeleton animation="wave" width="10%" height={28}/>
                             </CardContent>
                         </Grid>
                     </Grid>
