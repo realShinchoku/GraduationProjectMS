@@ -44,7 +44,7 @@ export class PeriodFormValues {
     classesCount: number = 0;
     projectsCount: number = 0;
     lecturersCount: number = 0;
-    faculty: string = '';
+    faculty: null = null;
 
     constructor(period?: Period) {
         if (period) {
@@ -65,7 +65,7 @@ export class PeriodFormValues {
             this.classesCount = period.classesCount;
             this.projectsCount = period.projectsCount;
             this.lecturersCount = period.lecturersCount;
-            this.faculty = period.faculty;
+            this.faculty = null;
         }
     }
 }
