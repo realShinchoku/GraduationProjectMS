@@ -77,7 +77,7 @@ public class CreateDepartmentSubject
                     Email = request.CreateDepartmentSubjectDto.Email,
                     PhoneNumber = request.CreateDepartmentSubjectDto.PhoneNumber,
                     DisplayName = request.CreateDepartmentSubjectDto.DisplayName,
-                    Faculty = faculty,
+                    Faculty = faculty
                 };
 
                 var result = await _userManager.CreateAsync(user, password);

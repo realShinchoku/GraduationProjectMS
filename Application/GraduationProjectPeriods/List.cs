@@ -58,7 +58,7 @@ public class List
 
             var query2 = query.ProjectTo<GraduationProjectPeriodDto>(_mapper.ConfigurationProvider).AsQueryable();
             ;
-            
+
             return Result<PageList<GraduationProjectPeriodDto>>.Success(
                 await PageList<GraduationProjectPeriodDto>.CreateAsync(query2, request.Params, cancellationToken)
             );

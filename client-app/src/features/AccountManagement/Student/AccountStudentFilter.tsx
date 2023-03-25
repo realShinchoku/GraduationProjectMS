@@ -5,8 +5,12 @@ import {IconButton, TextField} from "@mui/material";
 import {ExpandMoreSharp, SearchOutlined} from "@mui/icons-material";
 import {useStore} from "../../../app/stores/store";
 import {useEffect, useState} from "react";
+
 function AccountStudentFilter() {
-    const {periodStore:{setPredicate, removePredicate, loading}, filterItemsStore:{setCourse,courses,getCourses,phases,getPhases}} = useStore();
+    const {
+        periodStore: {setPredicate, removePredicate, loading},
+        filterItemsStore: {setCourse, courses, getCourses, phases, getPhases}
+    } = useStore();
     const [keyword, setKeyword] = useState('');
 
     useEffect(() => {
@@ -14,9 +18,9 @@ function AccountStudentFilter() {
             getCourses();
         if (phases.length <= 0)
             getPhases();
-    }, [courses.length, getCourses,phases.length, getPhases]);
-    
-    return(
+    }, [courses.length, getCourses, phases.length, getPhases]);
+
+    return (
         <Box className="btn">
             <Box className="btn">
                 <Box className="btn_item">
@@ -25,7 +29,7 @@ function AccountStudentFilter() {
                         disablePortal
                         id="combo-box-demo"
                         options={courses}
-                        getOptionLabel={option => "Đợt "+option}
+                        getOptionLabel={option => "Đợt " + option}
                         style={{width: 130, marginRight: 10}}
                         renderInput={(params) => <TextField {...params} label="Khoá"/>}
                         onChange={(event, value) => {

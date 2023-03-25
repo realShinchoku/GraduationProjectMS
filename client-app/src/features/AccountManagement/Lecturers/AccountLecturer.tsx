@@ -7,18 +7,18 @@ import AddIcon from '@mui/icons-material/Add';
 import "./AccountLecturers.scss"
 import AccountLecturerTable from "./AccountLecturerTable";
 import {useEffect, useState} from "react";
-import { useStore } from "../../../app/stores/store";
+import {useStore} from "../../../app/stores/store";
 import AddLecturer from "./AddLecturer";
 
 
 function AccountLecturer() {
     const {lecturerStore: {lecturers, loadLecturers, setPredicate, loading}, modalStore} = useStore();
-    
+
     useEffect(() => {
         if (lecturers.size <= 0) loadLecturers();
     }, [loadLecturers, lecturers.size]);
     const [keyword, setKeyword] = useState<string>('');
-    
+
     return (
         <Box className={`account_lecturers`}>
             <Box className="inner">
@@ -48,7 +48,7 @@ function AccountLecturer() {
                                 disabled={loading}
                             />
                             <Button color="inherit" variant="outlined" className="button_" endIcon={<AddIcon/>}
-                            onClick={() => modalStore.openModal(<AddLecturer/>)}>Thêm mới</Button>
+                                    onClick={() => modalStore.openModal(<AddLecturer/>)}>Thêm mới</Button>
                         </Box>
                     </Box>
                     <AccountLecturerTable/>

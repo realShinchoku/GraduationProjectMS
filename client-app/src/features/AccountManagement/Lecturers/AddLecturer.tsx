@@ -1,4 +1,5 @@
 import * as React from "react";
+import {useEffect} from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
@@ -8,8 +9,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import {observer} from "mobx-react-lite";
 import {Field, Form, Formik} from "formik";
 import {Autocomplete, AutocompleteRenderInputParams, TextField} from "formik-mui";
-import {Grid, MenuItem, TextField as TF} from "@mui/material";
-import {useEffect} from "react";
+import {Grid, TextField as TF} from "@mui/material";
 import {DepartmentSubjectFilterItem} from "../../../app/models/filterItem";
 
 

@@ -12,7 +12,7 @@ public class Phases
     {
         public int? Course { get; set; }
     }
-    
+
     public class Handler : IRequestHandler<Query, Result<List<int>>>
     {
         private readonly DataContext _context;
@@ -23,6 +23,7 @@ public class Phases
             _context = context;
             _userAccessor = userAccessor;
         }
+
         public async Task<Result<List<int>>> Handle(Query request, CancellationToken cancellationToken)
         {
             var faculty = await _userAccessor.GetFacultyAsync();
@@ -36,7 +37,7 @@ public class Phases
                 query = query.Where(x => x.Course == request.Course);
 
             var courses = await query.Select(x => x.Phase).ToListAsync(cancellationToken);
-            
+
             return Result<List<int>>.Success(courses);
         }
     }

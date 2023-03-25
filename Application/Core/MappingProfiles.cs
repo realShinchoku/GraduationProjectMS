@@ -1,11 +1,11 @@
-﻿using Application.GraduationProjectPeriods.DTOs;
+﻿using Application.FilterItems.DTOs;
+using Application.GraduationProjectPeriods.DTOs;
 using Application.Instructors.DTOs;
 using Application.Lecturers.DTOs;
 using Application.PopupNotifications.DTOs;
 using Application.Students.DTOs;
 using AutoMapper;
 using Domain;
-using DepartmentSubjectDto = Application.FilterItems.DTOs.DepartmentSubjectDto;
 
 namespace Application.Core;
 

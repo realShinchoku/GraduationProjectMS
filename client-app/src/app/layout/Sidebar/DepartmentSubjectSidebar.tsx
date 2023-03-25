@@ -21,7 +21,7 @@ function DepartmentSubjectSidebar() {
     };
 
     useEffect(() => {
-        if(!isConnected)
+        if (!isConnected)
             createHubConnection();
     }, [createHubConnection, isConnected])
 

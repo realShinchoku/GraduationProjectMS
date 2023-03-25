@@ -1,15 +1,11 @@
-using System.Globalization;
 using System.Text;
 using System.Text.RegularExpressions;
 using Application.Accounts.DTOs;
 using Application.Core;
 using Application.Interfaces;
-using CsvHelper;
-using CsvHelper.Configuration;
 using Domain;
 using FluentValidation;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
@@ -77,7 +73,7 @@ public class CreateLecture
                 var lecturer = await _userManager.FindByEmailAsync(request.CreateLectureDto.Email);
                 if (lecturer != null)
                     return Result<Unit>.Failure("Email đã tồn tại");
-                
+
                 var password = GeneratePassword();
                 var user = new Lecturer
                 {

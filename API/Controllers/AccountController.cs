@@ -62,19 +62,21 @@ public class AccountController : BaseApiController
     {
         return HandleResult(await Mediator.Send(command));
     }
-    
+
     [Authorize(Policy = "IsFacultyOffice")]
     [HttpPost("lecturer")]
     public async Task<ActionResult<UserDto>> CreateLecture(CreateLectureDto createLectureDto)
     {
-        return HandleResult(await Mediator.Send(new CreateLecture.Command{CreateLectureDto = createLectureDto}));
+        return HandleResult(await Mediator.Send(new CreateLecture.Command { CreateLectureDto = createLectureDto }));
     }
 
     [Authorize(Policy = "IsFacultyOffice")]
     [HttpPost("departmentSubject")]
-    public async Task<ActionResult<UserDto>> CreateDepartmentSubject(CreateDepartmentSubjectDto createDepartmentSubjectDto)
+    public async Task<ActionResult<UserDto>> CreateDepartmentSubject(
+        CreateDepartmentSubjectDto createDepartmentSubjectDto)
     {
-        return HandleResult(await Mediator.Send(new CreateDepartmentSubject.Command{CreateDepartmentSubjectDto = createDepartmentSubjectDto}));
+        return HandleResult(await Mediator.Send(new CreateDepartmentSubject.Command
+            { CreateDepartmentSubjectDto = createDepartmentSubjectDto }));
     }
 
 

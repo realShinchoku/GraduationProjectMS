@@ -61,7 +61,9 @@ public class Approval
 
             var popupNotification = new PopupNotification
             {
-                Message =  request.Status != 0 ? $"Yêu cầu giảng viên {instructor.Lecturer.DisplayName} đã được chấp thuận." : $"Yêu cầu giảng viên {instructor.Lecturer.DisplayName} không được chấp thuận.",
+                Message = request.Status != 0
+                    ? $"Yêu cầu giảng viên {instructor.Lecturer.DisplayName} đã được chấp thuận."
+                    : $"Yêu cầu giảng viên {instructor.Lecturer.DisplayName} không được chấp thuận.",
                 TargetUser = instructor.Student
             };
 

@@ -103,18 +103,20 @@ public class CreateStudent
 
                     if (!result.Succeeded)
                     {
-                        var student = await _context.Students.FirstOrDefaultAsync(x => x.Email == user.Email, cancellationToken);
+                        var student =
+                            await _context.Students.FirstOrDefaultAsync(x => x.Email == user.Email, cancellationToken);
                         if (student != null)
                         {
                             student.Faculty = faculty;
                             student.GraduationProjectPeriod = period;
                             var res = await _context.SaveChangesAsync(cancellationToken) > 0;
-                            if(res)
+                            if (res)
                                 await _emailSender.SendEmailAsync(user.Email, "Tài khoản của bạn", password);
                         }
+
                         continue;
                     }
-                    
+
                     await _userManager.AddToRoleAsync(user, user.Role.ToString());
                     await _emailSender.SendEmailAsync(user.Email, "Tài khoản của bạn", password);
                 }

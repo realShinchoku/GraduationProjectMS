@@ -12,12 +12,13 @@ public class FilterItemsController : BaseApiController
     {
         return HandleResult(await Mediator.Send(new DepartmentSubjects.Query()));
     }
-    
+
     [HttpGet("phase")]
     public async Task<IActionResult> Phases([FromQuery] int? course)
     {
-        return HandleResult(await Mediator.Send(new Phases.Query{Course = course}));
+        return HandleResult(await Mediator.Send(new Phases.Query { Course = course }));
     }
+
     [HttpGet("course")]
     public async Task<IActionResult> Courses()
     {

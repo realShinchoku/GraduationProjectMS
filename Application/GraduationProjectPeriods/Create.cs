@@ -37,7 +37,7 @@ public class Create
             RuleFor(x => x.SyllabusSubmissionTime).NotEmpty();
         }
     }
-    
+
 
     public class Handler : IRequestHandler<Command, Result<Unit>>
     {
@@ -59,8 +59,8 @@ public class Create
             var period = await _context.GraduationProjectPeriods.FirstOrDefaultAsync(
                 x => x.Course == request.GraduationProjectPeriod.Course &&
                      x.Phase == request.GraduationProjectPeriod.Phase && x.Faculty == faculty, cancellationToken);
-            
-            if(period != null)
+
+            if (period != null)
                 return Result<Unit>.Failure($"Đã tồn tại {period.Name}");
 
             request.GraduationProjectPeriod.Faculty = faculty;

@@ -1,6 +1,6 @@
 ﻿using Application.Core;
-using Application.Interfaces;
 using Application.FilterItems.DTOs;
+using Application.Interfaces;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using MediatR;

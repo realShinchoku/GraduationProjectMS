@@ -17,15 +17,15 @@ function AccountStudent() {
             loadLists();
         }
     }, [loadLists, periods.size, setAccountStatus]);
-    
+
     return (
         <Box className={`account_management`}>
             <Box className="inner">
                 <Box className="nav">
                     <Typography variant="h3">Tài khoản</Typography>
                     <AccountStudentFilter/>
-                    {loading ? 
-                        <></> 
+                    {loading ?
+                        <></>
                         :
                         <>
                             {periodsList.map(period => <AccountStudentListItem key={period.id} period={period}/>)}

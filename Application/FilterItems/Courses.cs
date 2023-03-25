@@ -11,7 +11,7 @@ public class Courses
     public class Query : IRequest<Result<List<int>>>
     {
     }
-    
+
     public class Handler : IRequestHandler<Query, Result<List<int>>>
     {
         private readonly DataContext _context;
@@ -22,6 +22,7 @@ public class Courses
             _context = context;
             _userAccessor = userAccessor;
         }
+
         public async Task<Result<List<int>>> Handle(Query request, CancellationToken cancellationToken)
         {
             var faculty = await _userAccessor.GetFacultyAsync();
