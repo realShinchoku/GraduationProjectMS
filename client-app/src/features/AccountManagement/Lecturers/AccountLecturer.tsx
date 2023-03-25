@@ -5,15 +5,19 @@ import {Button, IconButton, TextField} from "@mui/material";
 import {SearchOutlined} from "@mui/icons-material";
 import AddIcon from '@mui/icons-material/Add';
 import "./AccountLecturers.scss"
-import AccountLecturersList from "./AccountLecturersList";
-import { useState } from "react";
+import AccountLecturerTable from "./AccountLecturerTable";
+import {useEffect, useState} from "react";
 import { useStore } from "../../../app/stores/store";
-import AddLecturers from "./AddLecturers";
+import AddLecturer from "./AddLecturer";
 
 
-function AccountLecturers() {
-
-    const {modalStore} = useStore();
+function AccountLecturer() {
+    const {lecturerStore: {lecturers, loadLecturers, setPredicate, loading}, modalStore} = useStore();
+    
+    useEffect(() => {
+        if (lecturers.size <= 0) loadLecturers();
+    }, [loadLecturers, lecturers.size]);
+    const [keyword, setKeyword] = useState<string>('');
     
     return (
         <Box className={`account_lecturers`}>
@@ -30,23 +34,28 @@ function AccountLecturers() {
                                 placeholder="Tìm giảng viên"
                                 InputProps={{
                                     startAdornment: (
-                                        <IconButton>
+                                        <IconButton onClick={() => setPredicate('Keyword', keyword)}>
                                             <SearchOutlined/>
                                         </IconButton>
                                     ),
                                 }}
+                                value={keyword}
+                                onChange={(e) => setKeyword(e.target.value)}
+                                onKeyDown={(e) => {
+                                    if (e.key === 'Enter')
+                                        setPredicate('Keyword', keyword)
+                                }}
+                                disabled={loading}
                             />
                             <Button color="inherit" variant="outlined" className="button_" endIcon={<AddIcon/>}
-                            onClick={() => modalStore.openModal(<AddLecturers/>)}>Thêm mới</Button>
+                            onClick={() => modalStore.openModal(<AddLecturer/>)}>Thêm mới</Button>
                         </Box>
                     </Box>
-                    <Box>
-                        {<AccountLecturersList/>}
-                    </Box>
+                    <AccountLecturerTable/>
                 </Box>
             </Box>
         </Box>
     )
 }
 
-export default observer(AccountLecturers);
+export default observer(AccountLecturer);

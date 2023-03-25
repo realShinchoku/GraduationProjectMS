@@ -11,7 +11,7 @@ import Login from "../../features/Account/Login";
 import HomePage from "../../features/Homepage/HomePage";
 import LecturerList from "../../features/Lecturers/List/LecturerList";
 import DepartmentSubject from "../../features/AccountManagement/DepartmentSubject/DepartmentSubject";
-import AccountLecturers from "../../features/AccountManagement/Lecturers/AccountLecturers";
+import AccountLecturer from "../../features/AccountManagement/Lecturers/AccountLecturer";
 import Instructor from "../../features/Instructor/Instructor";
 import Period from "../../features/GraduationPeriod/Period";
 import IsStudent from "./IsStudent";
@@ -62,7 +62,7 @@ export const routes: RouteObject[] = [
                             {path: 'period', element: <Period/>},
                             {path: 'account/student', element: <AccountStudent/>},
                             {path: 'account/departmentSubject', element: <DepartmentSubject/>},
-                            {path: 'account/lecturer', element: <AccountLecturers/>},
+                            {path: 'account/lecturer', element: <AccountLecturer/>},
 
                         ]
                     },

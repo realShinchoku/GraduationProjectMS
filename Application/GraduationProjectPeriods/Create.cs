@@ -37,6 +37,7 @@ public class Create
             RuleFor(x => x.SyllabusSubmissionTime).NotEmpty();
         }
     }
+    
 
     public class Handler : IRequestHandler<Command, Result<Unit>>
     {

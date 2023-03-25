@@ -2,6 +2,7 @@ import {makeAutoObservable, reaction, runInAction} from "mobx";
 import {Lecturer} from "../models/lecturer";
 import agent from "../api/agent";
 import {Pagination, PagingParams} from "../models/pagination";
+import {store} from "./store";
 
 export default class LecturerStore {
 
@@ -85,5 +86,17 @@ export default class LecturerStore {
         }
         lecturer.birthday = new Date(lecturer.birthday!)
         this.lecturers.set(lecturer.id, lecturer);
+    }
+    
+    create = async (email: string, displayName: string, education: string, phoneNumber: string, departmentSubjectId: string) =>{
+        try {
+            await agent.Account.createLecturer(email, displayName, education, phoneNumber, departmentSubjectId);
+            this.loadLecturers();
+            store.modalStore.closeModal();
+            store.snackBarStore.success("Tạo thành công");
+        }
+        catch (e) {
+            console.log(e);
+        }
     }
 }

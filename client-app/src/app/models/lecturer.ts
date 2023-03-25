@@ -13,4 +13,5 @@ export interface Lecturer {
     education: string;
     departmentSubjects: string;
     faculty: string;
+    createdDate: Date;
 }

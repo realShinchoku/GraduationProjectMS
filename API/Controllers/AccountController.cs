@@ -3,6 +3,7 @@ using System.Text;
 using API.DTOs;
 using API.Services;
 using Application.Accounts;
+using Application.Accounts.DTOs;
 using Application.Interfaces;
 using Domain;
 using Microsoft.AspNetCore.Authorization;
@@ -63,17 +64,17 @@ public class AccountController : BaseApiController
     }
     
     [Authorize(Policy = "IsFacultyOffice")]
-    [HttpPost("lecture")]
-    public async Task<ActionResult<UserDto>> CreateLecture([FromForm] CreateStudent.Command command)
+    [HttpPost("lecturer")]
+    public async Task<ActionResult<UserDto>> CreateLecture(CreateLectureDto createLectureDto)
     {
-        return HandleResult(await Mediator.Send(command));
+        return HandleResult(await Mediator.Send(new CreateLecture.Command{CreateLectureDto = createLectureDto}));
     }
 
     [Authorize(Policy = "IsFacultyOffice")]
     [HttpPost("departmentSubject")]
-    public async Task<ActionResult<UserDto>> CreateDepartmentSubject([FromForm] CreateStudent.Command command)
+    public async Task<ActionResult<UserDto>> CreateDepartmentSubject(CreateDepartmentSubjectDto createDepartmentSubjectDto)
     {
-        return HandleResult(await Mediator.Send(command));
+        return HandleResult(await Mediator.Send(new CreateDepartmentSubject.Command{CreateDepartmentSubjectDto = createDepartmentSubjectDto}));
     }
 
 

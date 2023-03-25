@@ -1,45 +1,40 @@
-using System.Globalization;
-using System.Text;
+﻿using System.Text;
 using System.Text.RegularExpressions;
 using Application.Accounts.DTOs;
 using Application.Core;
 using Application.Interfaces;
-using CsvHelper;
-using CsvHelper.Configuration;
 using Domain;
 using FluentValidation;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
 
 namespace Application.Accounts;
 
-public class CreateLecture
+public class CreateDepartmentSubject
 {
     public class Command : IRequest<Result<Unit>>
     {
-        public CreateLectureDto CreateLectureDto { get; set; }
+        public CreateDepartmentSubjectDto CreateDepartmentSubjectDto { get; set; }
     }
 
     public class CommandValidator : AbstractValidator<Command>
     {
         public CommandValidator()
         {
-            RuleFor(x => x.CreateLectureDto).SetValidator(new CustomValidator());
+            RuleFor(x => x.CreateDepartmentSubjectDto).SetValidator(new CustomValidator());
         }
     }
 
-    public class CustomValidator : AbstractValidator<CreateLectureDto>
+    public class CustomValidator : AbstractValidator<CreateDepartmentSubjectDto>
     {
         public CustomValidator()
         {
             RuleFor(x => x.Email).EmailAddress().NotEmpty();
             RuleFor(x => x.DisplayName).NotEmpty();
-            RuleFor(x => x.Education).NotEmpty();
             RuleFor(x => x.PhoneNumber).NotEmpty();
-            RuleFor(x => x.DepartmentSubjectId).NotEmpty();
+            RuleFor(x => x.Username).NotEmpty();
         }
 
         public class Handler : IRequestHandler<Command, Result<Unit>>
@@ -69,25 +64,20 @@ public class CreateLecture
 
                 var departmentSubject =
                     await _context.DepartmentSubjects.FirstOrDefaultAsync(
-                        x => x.Id == request.CreateLectureDto.DepartmentSubjectId, cancellationToken);
+                        x => x.UserName == request.CreateDepartmentSubjectDto.Username ||
+                             x.Email == request.CreateDepartmentSubjectDto.Email, cancellationToken);
                 if (departmentSubject == null)
-                    return null;
+                    return Result<Unit>.Failure("Bộ môn đã tồn tại");
 
-
-                var lecturer = await _userManager.FindByEmailAsync(request.CreateLectureDto.Email);
-                if (lecturer != null)
-                    return Result<Unit>.Failure("Email đã tồn tại");
-                
                 var password = GeneratePassword();
-                var user = new Lecturer
+
+                var user = new DepartmentSubject
                 {
-                    UserName = request.CreateLectureDto.Email.Split('@')[0],
-                    Email = request.CreateLectureDto.Email,
-                    PhoneNumber = request.CreateLectureDto.PhoneNumber,
-                    DisplayName = request.CreateLectureDto.DisplayName,
-                    DepartmentSubject = departmentSubject,
+                    UserName = request.CreateDepartmentSubjectDto.Username,
+                    Email = request.CreateDepartmentSubjectDto.Email,
+                    PhoneNumber = request.CreateDepartmentSubjectDto.PhoneNumber,
+                    DisplayName = request.CreateDepartmentSubjectDto.DisplayName,
                     Faculty = faculty,
-                    Education = request.CreateLectureDto.Education
                 };
 
                 var result = await _userManager.CreateAsync(user, password);

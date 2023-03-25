@@ -100,7 +100,9 @@ const Account = {
         return axios.post<void>('/account/student', formData, {
             headers: {'Content-Type': 'application/form-data'}
         })
-    }
+    },
+    createLecturer: (email: string, displayName: string, education: string, phoneNumber: string, departmentSubjectId: string) => requests.post<void>('/account/lecturer', {email, displayName, education, phoneNumber, departmentSubjectId}),
+    createDepartmentSubject: (email: string, displayName: string, username: string, phoneNumber: string) => requests.post<void>('/account/departmentSubject', {email, displayName, username, phoneNumber})
 }
 
 const Lecturers = {
