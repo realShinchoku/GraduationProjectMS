@@ -40,7 +40,6 @@ public class CreateLecture
 
         public class Handler : IRequestHandler<Command, Result<Unit>>
         {
-            private static readonly Regex PasswordRegex = new("^(?=.*[0-9]+.*)(?=.*[a-z]+.*)(?=.*[A-Z]+.*)[!-z]{6,20}");
             private readonly DataContext _context;
             private readonly IEmailSender _emailSender;
             private readonly IUserAccessor _userAccessor;
@@ -74,7 +73,7 @@ public class CreateLecture
                 if (lecturer != null)
                     return Result<Unit>.Failure("Email đã tồn tại");
 
-                var password = GeneratePassword();
+                var password = PasswordGenerator.GeneratePassword();
                 var user = new Lecturer
                 {
                     UserName = request.CreateLectureDto.Email.Split('@')[0],
@@ -96,23 +95,7 @@ public class CreateLecture
 
                 return Result<Unit>.Success(Unit.Value);
             }
-
-            private static string GeneratePassword()
-            {
-                const string chars = "0123456789ABCDEFGHIJKLMNOPQSTUVWXYZabcdefghijklmnpqrstuvwxyz";
-
-                while (true)
-                {
-                    var random = new Random();
-                    var len = random.Next(6, 20);
-                    var bld = new StringBuilder();
-                    for (var i = 0; i < len; ++i) bld.Append(chars[random.Next(chars.Length)]);
-
-                    var randomStr = bld.ToString();
-                    if (!PasswordRegex.IsMatch(randomStr)) continue;
-                    return randomStr;
-                }
-            }
+            
         }
     }
 }

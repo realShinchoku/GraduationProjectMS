@@ -2,6 +2,7 @@ import {makeAutoObservable, reaction, runInAction} from "mobx";
 import {Pagination, PagingParams} from "../models/pagination";
 import agent from "../api/agent";
 import {DepartmentSubject} from "../models/departmentSubject";
+import {store} from "./store";
 
 export default class DepartmentSubjectStore {
     departmentSubjects = new Map<string, DepartmentSubject>();
@@ -75,6 +76,8 @@ export default class DepartmentSubjectStore {
         try {
             await agent.Account.createDepartmentSubject(email, displayName, username, phoneNumber);
             await this.loadItems();
+            store.modalStore.closeModal();
+            store.snackBarStore.success("Tạo thành công");
         } catch (e) {
             console.log(e);
         }

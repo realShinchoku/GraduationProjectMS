@@ -1,10 +1,9 @@
 import {observer} from "mobx-react-lite";
-import {Form, Formik} from 'formik';
+import {Field, Form, Formik} from 'formik';
 import * as Yup from 'yup';
 import {Box, Link, Typography} from "@mui/material";
 import {LoadingButton} from "@mui/lab";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
-import TextField from '@mui/material/TextField';
 import {useStore} from "../../app/stores/store";
 import {route} from "../../app/router/Routers";
 import {useState} from "react";
@@ -12,6 +11,8 @@ import VpnKeyIcon from '@mui/icons-material/VpnKey';
 import MarkEmailReadIcon from "@mui/icons-material/MarkEmailRead";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import './Account.scss';
+import * as React from "react";
+import {TextField} from "formik-mui";
 
 const validationSchema = Yup.object().shape({
     email: Yup.string()
@@ -66,13 +67,13 @@ function PasswordReset() {
                             >
                                 {({handleSubmit, isSubmitting, errors, handleChange, isValid, dirty, touched}) => (
                                     <Form onSubmit={handleSubmit}>
-                                        <TextField
+                                        <Field
+                                            component={TextField}
                                             className="input"
                                             fullWidth
                                             id="email"
                                             name="email"
                                             label="Email"
-                                            onChange={handleChange}
                                             error={(touched.email && Boolean(errors.email)) || Boolean(errors.error)}
                                             helperText={(touched.email && errors.email) || errors.error}
                                         />
