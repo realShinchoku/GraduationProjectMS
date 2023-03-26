@@ -57,10 +57,10 @@ function PeriodModal({id}: Props) {
                 }
                 validationSchema={Yup.object().shape({
                     phase: Yup.number()
-                        .typeError("Nhập số khóa đồ án")
+                        .typeError("Nhập khóa đồ án")
                         .required("Vui lòng điền đủ thông tin"),
                     course: Yup.number()
-                        .typeError("Nhập số đợt đồ án")
+                        .typeError("Nhập đợt đồ án")
                         .required("Vui lòng điền đủ thông tin"),
                     startDate: Yup.date()
                         .typeError("Chọn ngày bắt đầu")

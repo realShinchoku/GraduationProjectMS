@@ -1,10 +1,9 @@
 import {observer} from "mobx-react-lite";
-import {Form, Formik} from 'formik';
+import {Field, Form, Formik} from 'formik';
 import * as Yup from 'yup';
 import {Box, Link, Typography} from "@mui/material";
 import {LoadingButton} from "@mui/lab";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
-import TextField from '@mui/material/TextField';
 import {useStore} from "../../app/stores/store";
 import useQuery from "../../app/util/hooks";
 import VpnKeyIcon from '@mui/icons-material/VpnKey';
@@ -13,6 +12,8 @@ import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import {route} from "../../app/router/Routers";
 import './Account.scss';
+import * as React from "react";
+import {TextField} from "formik-mui";
 
 const validationSchema = Yup.object().shape({
 
@@ -74,25 +75,24 @@ function PasswordResetToken() {
                             >
                                 {({handleSubmit, isSubmitting, errors, handleChange, isValid, touched, dirty}) => (
                                     <Form onSubmit={handleSubmit}>
-                                        <TextField
+                                        <Field
+                                            component={TextField}
                                             className="input"
                                             fullWidth
                                             id="password"
                                             name="password"
                                             label="Mật khẩu mới"
                                             type="password"
-                                            onChange={handleChange}
                                             error={(touched.password && Boolean(errors.password)) || Boolean(errors.error)}
                                             helperText={(touched.password && errors.password) || errors.error}
                                         />
-                                        <TextField
+                                        <Field
                                             className="input"
                                             fullWidth
                                             id="confirmPassword"
                                             name="confirmPassword"
                                             label="Nhập lại mật khẩu mới"
                                             type="password"
-                                            onChange={handleChange}
                                             error={touched.confirmPassword && Boolean(errors.confirmPassword)}
                                             helperText={(touched.confirmPassword && errors.confirmPassword)}
                                         />

@@ -39,7 +39,6 @@ public class CreateDepartmentSubject
 
         public class Handler : IRequestHandler<Command, Result<Unit>>
         {
-            private static readonly Regex PasswordRegex = new("^(?=.*[0-9]+.*)(?=.*[a-z]+.*)(?=.*[A-Z]+.*)[!-z]{6,20}");
             private readonly DataContext _context;
             private readonly IEmailSender _emailSender;
             private readonly IUserAccessor _userAccessor;
@@ -66,10 +65,10 @@ public class CreateDepartmentSubject
                     await _context.DepartmentSubjects.FirstOrDefaultAsync(
                         x => x.UserName == request.CreateDepartmentSubjectDto.Username ||
                              x.Email == request.CreateDepartmentSubjectDto.Email, cancellationToken);
-                if (departmentSubject == null)
-                    return Result<Unit>.Failure("Bộ môn đã tồn tại");
+                if (departmentSubject != null)
+                    return Result<Unit>.Failure("Người dùng đã tồn tại");
 
-                var password = GeneratePassword();
+                var password = PasswordGenerator.GeneratePassword();
 
                 var user = new DepartmentSubject
                 {
@@ -77,7 +76,7 @@ public class CreateDepartmentSubject
                     Email = request.CreateDepartmentSubjectDto.Email,
                     PhoneNumber = request.CreateDepartmentSubjectDto.PhoneNumber,
                     DisplayName = request.CreateDepartmentSubjectDto.DisplayName,
-                    Faculty = faculty
+                    Faculty = faculty,
                 };
 
                 var result = await _userManager.CreateAsync(user, password);
@@ -89,23 +88,6 @@ public class CreateDepartmentSubject
                 await _emailSender.SendEmailAsync(user.Email, "Tài khoản của bạn", password);
 
                 return Result<Unit>.Success(Unit.Value);
-            }
-
-            private static string GeneratePassword()
-            {
-                const string chars = "0123456789ABCDEFGHIJKLMNOPQSTUVWXYZabcdefghijklmnpqrstuvwxyz";
-
-                while (true)
-                {
-                    var random = new Random();
-                    var len = random.Next(6, 20);
-                    var bld = new StringBuilder();
-                    for (var i = 0; i < len; ++i) bld.Append(chars[random.Next(chars.Length)]);
-
-                    var randomStr = bld.ToString();
-                    if (!PasswordRegex.IsMatch(randomStr)) continue;
-                    return randomStr;
-                }
             }
         }
     }
