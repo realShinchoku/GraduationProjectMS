@@ -14,10 +14,10 @@ interface Props {
 
 function InstructorTableRow({periodId}: Props) {
     const theme = useTheme();
-    const [value, setValue] = React.useState('0');
+    const [value, setValue] = useState<string>('0');
     const [keyword, setKeyword] = useState<string>('');
 
-    const {periodStore: {instructorStores, studentStores, loading}} = useStore();
+    const {periodStore: {instructorStores, studentStores}} = useStore();
     const instructorStore = instructorStores.get(periodId)!;
     const studentStore = studentStores.get(periodId)!;
 
@@ -32,9 +32,6 @@ function InstructorTableRow({periodId}: Props) {
             await studentStore.loadLists();
         }
     };
-
-    if (loading)
-        return <></>
 
     return (
         <Box className="account_table_list">
@@ -83,7 +80,6 @@ function InstructorTableRow({periodId}: Props) {
                                 else if (value === '1')
                                     studentStore.setPredicate('Keyword', keyword);
                         }}
-                        disabled={instructorStore.loading || studentStore.loading}
                     />
                 </Box>
                 <TabPanel value={'0'} dir={theme.direction}>

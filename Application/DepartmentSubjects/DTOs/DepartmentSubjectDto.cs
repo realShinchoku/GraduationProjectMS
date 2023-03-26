@@ -6,4 +6,5 @@ public class DepartmentSubjectDto
     public string Username { get; set; }
     public string Email { get; set; }
     public string CreatedDate { get; set; }
+    public string Id { get; set; }
 }

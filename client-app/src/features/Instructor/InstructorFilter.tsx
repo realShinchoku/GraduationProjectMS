@@ -1,4 +1,4 @@
-﻿import Box from "@mui/material/Box";
+import Box from "@mui/material/Box";
 import Autocomplete from "@mui/material/Autocomplete";
 import {IconButton, TextField} from "@mui/material";
 import {ExpandMoreSharp, SearchOutlined} from "@mui/icons-material";

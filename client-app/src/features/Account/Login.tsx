@@ -42,7 +42,7 @@ function Login() {
                             })}
                             validationSchema={validationSchema}
                         >
-                            {({handleSubmit, isSubmitting, errors, handleChange, isValid, dirty}) => (
+                            {({handleSubmit, isSubmitting, errors, handleChange, isValid, dirty, touched}) => (
                                 <Form onSubmit={handleSubmit}>
                                     <TextField
                                         className="input"
@@ -51,8 +51,8 @@ function Login() {
                                         name="email"
                                         label="Tài khoản"
                                         onChange={handleChange}
-                                        error={(dirty && Boolean(errors.email)) || Boolean(errors.error?.email)}
-                                        helperText={(dirty && errors.email) || errors.error?.email}
+                                        error={(touched.email && Boolean(errors.email)) || Boolean(errors.error?.email)}
+                                        helperText={(touched.email && errors.email) || errors.error?.email}
                                     />
                                     <TextField
                                         className="input"
@@ -62,8 +62,8 @@ function Login() {
                                         label="Mật khẩu"
                                         type="password"
                                         onChange={handleChange}
-                                        error={(dirty && Boolean(errors.password)) || Boolean(errors.error?.password)}
-                                        helperText={(dirty && errors.password) || errors.error?.password}
+                                        error={(touched.password && Boolean(errors.password)) || Boolean(errors.error?.password)}
+                                        helperText={(touched.password && errors.password) || errors.error?.password}
                                     />
                                     <LoadingButton
                                         color="primary" variant="contained"

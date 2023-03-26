@@ -10,13 +10,13 @@ import AccountStudentListItem from "./AccountStudentListItem";
 
 function AccountStudent() {
 
-    const {periodStore: {loadLists, periods, periodsList, setAccountStatus, loading}} = useStore();
+    const {periodStore: {loadLists, periods, periodsList, setAccountStatus, loading, isAccount}} = useStore();
     useEffect(() => {
-        if (periods.size <= 0) {
+        if (!isAccount)
             setAccountStatus();
+        if (periods.size <= 0)
             loadLists();
-        }
-    }, [loadLists, periods.size, setAccountStatus]);
+    }, [loadLists, periods.size, setAccountStatus, isAccount]);
 
     return (
         <Box className={`account_management`}>

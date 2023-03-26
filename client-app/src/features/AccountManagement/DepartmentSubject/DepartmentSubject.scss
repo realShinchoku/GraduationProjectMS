@@ -21,9 +21,8 @@
       .btn {
         display: flex;
         align-items: center;
-        justify-content: space-between;
         margin-bottom: 3px;
-        justify-content: end;
+        justify-content: flex-end;
         @include tablet {
           display: unset;
           margin-bottom: 20px;

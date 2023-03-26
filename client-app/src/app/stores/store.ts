@@ -9,6 +9,7 @@ import StudentStore from "./studentStore";
 import PopupNotificationStore from "./popupNotificationStore";
 import SnackBarStore from "./snackBarStore";
 import FilterItemsStore from "./filterItemsStore";
+import DepartmentSubjectStore from "./departmentSubjectStore";
 
 interface Store {
     commonStore: CommonStore;
@@ -21,6 +22,7 @@ interface Store {
     studentStore: StudentStore;
     popupNotificationStore: PopupNotificationStore;
     snackBarStore: SnackBarStore;
+    departmentSubjectStore: DepartmentSubjectStore;
 }
 
 export const store: Store = {
@@ -34,6 +36,7 @@ export const store: Store = {
     studentStore: new StudentStore(),
     popupNotificationStore: new PopupNotificationStore(),
     snackBarStore: new SnackBarStore(),
+    departmentSubjectStore: new DepartmentSubjectStore(),
 }
 
 export const StoreContext = createContext(store);

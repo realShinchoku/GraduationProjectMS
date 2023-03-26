@@ -42,5 +42,6 @@ public class MappingProfiles : Profile
             .ForMember(d => d.LecturersCount, o => o.MapFrom(x => x.Faculty.Lecturers.Count))
             .ForMember(d => d.Faculty, o => o.MapFrom(x => x.Faculty.DisplayName));
         CreateMap<PopupNotification, PopupNotificationDto>();
+        CreateMap<DepartmentSubject, DepartmentSubjects.DTOs.DepartmentSubjectDto>();
     }
 }

@@ -1,4 +1,4 @@
-﻿import {makeAutoObservable, reaction, runInAction} from "mobx";
+import {makeAutoObservable, reaction, runInAction} from "mobx";
 import {DepartmentSubjectFilterItem} from "../models/filterItem";
 import agent from "../api/agent";
 

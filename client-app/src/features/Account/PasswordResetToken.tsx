@@ -72,7 +72,7 @@ function PasswordResetToken() {
                                 })}
                                 validationSchema={validationSchema}
                             >
-                                {({handleSubmit, isSubmitting, errors, handleChange, isValid, dirty}) => (
+                                {({handleSubmit, isSubmitting, errors, handleChange, isValid, touched, dirty}) => (
                                     <Form onSubmit={handleSubmit}>
                                         <TextField
                                             className="input"
@@ -82,8 +82,8 @@ function PasswordResetToken() {
                                             label="Mật khẩu mới"
                                             type="password"
                                             onChange={handleChange}
-                                            error={(dirty && Boolean(errors.password)) || Boolean(errors.error)}
-                                            helperText={(dirty && errors.password) || errors.error}
+                                            error={(touched.password && Boolean(errors.password)) || Boolean(errors.error)}
+                                            helperText={(touched.password && errors.password) || errors.error}
                                         />
                                         <TextField
                                             className="input"
@@ -93,8 +93,8 @@ function PasswordResetToken() {
                                             label="Nhập lại mật khẩu mới"
                                             type="password"
                                             onChange={handleChange}
-                                            error={dirty && Boolean(errors.confirmPassword)}
-                                            helperText={(dirty && errors.confirmPassword)}
+                                            error={touched.confirmPassword && Boolean(errors.confirmPassword)}
+                                            helperText={(touched.confirmPassword && errors.confirmPassword)}
                                         />
                                         <LoadingButton
                                             color="primary" variant="contained"

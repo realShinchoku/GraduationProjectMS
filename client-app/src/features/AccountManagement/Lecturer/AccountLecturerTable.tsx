@@ -13,7 +13,7 @@ import {PagingParams} from "../../../app/models/pagination";
 import {format} from "date-fns";
 
 function AccountLecturerTable() {
-    const {lecturerStore: {lecturersList, setPagingParams, pagination, loading}} = useStore();
+    const {lecturerStore: {lecturersList, setPagingParams, pagination}} = useStore();
 
     const handleChangePage = (event: unknown, newPage: number) => {
         setPagingParams(new PagingParams(newPage, pagination!.itemsPerPage));

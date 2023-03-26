@@ -8,7 +8,6 @@ using Infrastructure.Email;
 using Infrastructure.Files;
 using Infrastructure.Photos;
 using Infrastructure.Security;
-using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
 
@@ -73,7 +72,7 @@ public static class ApplicationServiceExtensions
                         .WithOrigins("http://localhost:3000", "https://localhost:3000");
                 });
         });
-        services.AddMediatR(typeof(List.Handler));
+        services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(List.Handler).Assembly));
         services.AddAutoMapper(typeof(MappingProfiles).Assembly);
         services.AddValidatorsFromAssemblyContaining<CreateStudent>();
         services.AddFluentValidationAutoValidation();

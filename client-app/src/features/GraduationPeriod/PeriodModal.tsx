@@ -17,10 +17,7 @@ interface Props {
 }
 
 function PeriodModal({id}: Props) {
-    const {
-        modalStore,
-        periodStore: {create, edit, get},
-    } = useStore();
+    const {modalStore, periodStore: {create, edit, get}, snackBarStore} = useStore();
     const [periodFormValues, setPeriodFormValues] = useState<PeriodFormValues>(
         new PeriodFormValues()
     );
@@ -30,9 +27,15 @@ function PeriodModal({id}: Props) {
         setErrors: any
     ) {
         if (!periodFormValues.id) {
-            create({...periodFormValues, id: uuid()}).then(modalStore.closeModal);
+            create({...periodFormValues, id: uuid()}).then(() => {
+                modalStore.closeModal();
+                snackBarStore.success('Tạo thành công');
+            });
         } else {
-            edit(periodFormValues).then(modalStore.closeModal);
+            edit(periodFormValues).then(() => {
+                modalStore.closeModal();
+                snackBarStore.success('Cập nhật thành công');
+            });
         }
     }
 
@@ -85,7 +88,7 @@ function PeriodModal({id}: Props) {
                         .required("Vui lòng điền đủ thông tin"),
                 })}
             >
-                {({initialValues, dirty, isValid, isSubmitting, errors}) => (
+                {({touched, dirty, isValid, isSubmitting, errors}) => (
                     <Form className="modalContent">
                         <Grid container spacing={2}>
                             <Grid xs={10} className="contentTop">
@@ -105,8 +108,8 @@ function PeriodModal({id}: Props) {
                                             width: "40px",
                                         },
                                     }}
-                                    error={dirty && Boolean(errors.phase)}
-                                    helperText={dirty && errors.phase}
+                                    error={touched.course && Boolean(errors.course)}
+                                    helperText={touched.course && errors.course}
                                 />
                                 <Typography variant="h6">Đợt</Typography>
                                 <Field
@@ -123,8 +126,8 @@ function PeriodModal({id}: Props) {
                                             padding: "10px",
                                         },
                                     }}
-                                    error={dirty && Boolean(errors.course)}
-                                    helperText={dirty && errors.course}
+                                    error={touched.phase && Boolean(errors.phase)}
+                                    helperText={touched.phase && errors.phase}
                                 />
                             </Grid>
                             <Grid xs={2} className="btn">
@@ -159,8 +162,8 @@ function PeriodModal({id}: Props) {
                                         slotProps={{
                                             textField: {
                                                 placeholder: "",
-                                                error: dirty && Boolean(errors.startDate),
-                                                helperText: dirty && errors.startDate,
+                                                error: touched.startDate && Boolean(errors.startDate),
+                                                helperText: touched.startDate && errors.startDate,
                                             },
                                         }}
                                         format="dd/MM/yyyy"
@@ -182,8 +185,8 @@ function PeriodModal({id}: Props) {
                                         slotProps={{
                                             textField: {
                                                 placeholder: "",
-                                                error: dirty && Boolean(errors.endDate),
-                                                helperText: dirty && errors.endDate,
+                                                error: touched.endDate && Boolean(errors.endDate),
+                                                helperText: touched.endDate && errors.endDate,
                                             },
                                         }}
                                         format="dd/MM/yyyy"
@@ -210,8 +213,8 @@ function PeriodModal({id}: Props) {
                                         slotProps={{
                                             textField: {
                                                 placeholder: "",
-                                                error: dirty && Boolean(errors.contactInstructorTime),
-                                                helperText: dirty && errors.contactInstructorTime,
+                                                error: touched.contactInstructorTime && Boolean(errors.contactInstructorTime),
+                                                helperText: touched.contactInstructorTime && errors.contactInstructorTime,
                                             },
                                         }}
                                         format="dd/MM/yyyy"
@@ -235,8 +238,8 @@ function PeriodModal({id}: Props) {
                                         slotProps={{
                                             textField: {
                                                 placeholder: "",
-                                                error: dirty && Boolean(errors.registerTopicTime),
-                                                helperText: dirty && errors.registerTopicTime,
+                                                error: touched.registerTopicTime && Boolean(errors.registerTopicTime),
+                                                helperText: touched.registerTopicTime && errors.registerTopicTime,
                                             },
                                         }}
                                         format="dd/MM/yyyy"
@@ -260,8 +263,8 @@ function PeriodModal({id}: Props) {
                                         slotProps={{
                                             textField: {
                                                 placeholder: "",
-                                                error: dirty && Boolean(errors.syllabusSubmissionTime),
-                                                helperText: dirty && errors.syllabusSubmissionTime,
+                                                error: touched.syllabusSubmissionTime && Boolean(errors.syllabusSubmissionTime),
+                                                helperText: touched.syllabusSubmissionTime && errors.syllabusSubmissionTime,
                                             },
                                         }}
                                         format="dd/MM/yyyy"
@@ -285,8 +288,8 @@ function PeriodModal({id}: Props) {
                                         slotProps={{
                                             textField: {
                                                 placeholder: "",
-                                                error: dirty && Boolean(errors.syllabusReviewTime),
-                                                helperText: dirty && errors.syllabusReviewTime,
+                                                error: touched.syllabusReviewTime && Boolean(errors.syllabusReviewTime),
+                                                helperText: touched.syllabusReviewTime && errors.syllabusReviewTime,
                                             },
                                         }}
                                         format="dd/MM/yyyy"
@@ -310,8 +313,8 @@ function PeriodModal({id}: Props) {
                                         slotProps={{
                                             textField: {
                                                 placeholder: "",
-                                                error: dirty && Boolean(errors.graduationProjectTime),
-                                                helperText: dirty && errors.graduationProjectTime,
+                                                error: touched.graduationProjectTime && Boolean(errors.graduationProjectTime),
+                                                helperText: touched.graduationProjectTime && errors.graduationProjectTime,
                                             },
                                         }}
                                         format="dd/MM/yyyy"
@@ -337,8 +340,8 @@ function PeriodModal({id}: Props) {
                                         slotProps={{
                                             textField: {
                                                 placeholder: "",
-                                                error: dirty && Boolean(errors.protectionTime),
-                                                helperText: dirty && errors.protectionTime,
+                                                error: touched.protectionTime && Boolean(errors.protectionTime),
+                                                helperText: touched.protectionTime && errors.protectionTime,
                                             },
                                         }}
                                         format="dd/MM/yyyy"

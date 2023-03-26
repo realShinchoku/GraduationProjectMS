@@ -11,7 +11,7 @@ interface Props {
 }
 
 function AccountStudentListItemDetail({periodId}: Props) {
-    const {periodStore: {studentStores, loading}} = useStore();
+    const {periodStore: {studentStores}} = useStore();
     const studentStore = studentStores.get(periodId)!;
     const [keyword, setKeyword] = useState<string>('');
 

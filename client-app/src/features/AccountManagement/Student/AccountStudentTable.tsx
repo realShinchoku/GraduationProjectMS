@@ -19,7 +19,7 @@ interface Props {
 }
 
 function AccountStudentTable({studentStore}: Props) {
-    const {loadLists, students, studentsList, loading, pagination, setPagingParams} = studentStore;
+    const {loadLists, students, studentsList, pagination, setPagingParams} = studentStore;
 
     useEffect(() => {
         if (students.size <= 0)

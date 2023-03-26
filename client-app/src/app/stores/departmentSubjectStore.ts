@@ -1,15 +1,14 @@
 import {makeAutoObservable, reaction, runInAction} from "mobx";
-import {Student} from "../models/student";
 import {Pagination, PagingParams} from "../models/pagination";
 import agent from "../api/agent";
+import {DepartmentSubject} from "../models/departmentSubject";
 
-export default class StudentStore {
-    students = new Map<string, Student>();
+export default class DepartmentSubjectStore {
+    departmentSubjects = new Map<string, DepartmentSubject>();
     pagingParams = new PagingParams();
     pagination: Pagination | null = null;
     loading: boolean = true;
     predicate = new Map();
-    loadingUpload: boolean = false;
 
     constructor() {
         makeAutoObservable(this);
@@ -17,17 +16,17 @@ export default class StudentStore {
             ,
             async () => {
                 this.pagingParams.pageNumber = 0;
-                await this.loadLists();
+                await this.loadItems();
             });
 
         reaction(() => this.pagingParams,
             async () => {
-                await this.loadLists();
+                await this.loadItems();
             });
     }
 
-    get studentsList() {
-        return Array.from(this.students.values());
+    get departmentSubjectsList() {
+        return Array.from(this.departmentSubjects.values());
     }
 
     get axiosParams() {
@@ -38,25 +37,25 @@ export default class StudentStore {
         return params;
     }
 
-    loadLists = async () => {
+    loadItems = async () => {
         this.loading = true;
         try {
-            runInAction(() => this.students.clear());
-            const result = await agent.Students.list(this.axiosParams);
-            result.data.forEach(student => {
-                this.setItem(student);
-            });
+            runInAction(() => this.departmentSubjects.clear());
+            const result = await agent.DepartmentSubjects.list(this.axiosParams);
             this.setPagination(result.pagination);
+            result.data.forEach(departmentSubject => {
+                this.setItem(departmentSubject);
+            });
         } catch (err) {
-            console.log(err);
+            console.log(err)
         } finally {
             runInAction(() => this.loading = false);
         }
     }
-
     setPagination = (pagination: Pagination) => this.pagination = pagination;
+
     setPagingParams = (pagingParams: PagingParams) => this.pagingParams = pagingParams;
-    setPredicate = (predicate: string, value: string | boolean) => {
+    setPredicate = (predicate: string, value: string | number | boolean) => {
         if (this.predicate.get(predicate) !== undefined)
             this.removePredicate(predicate);
 
@@ -65,38 +64,23 @@ export default class StudentStore {
 
         this.predicate.set(predicate, value);
     }
-
     removePredicate = (predicate: string) => {
         this.predicate.delete(predicate);
     }
-
     resetPredicate = () => {
         this.predicate.clear();
     }
 
-    setPeriodId = async (id: string, isInstructor: boolean) => {
-        if (isInstructor)
-            this.setPredicate('hasLecturer', false);
-        this.setPredicate('periodId', id);
-        await this.loadLists();
-    }
-
-    create = async (file: any, periodId: string) => {
-        this.loadingUpload = true;
+    create = async (email: string, displayName: string, username: string, phoneNumber: string) => {
         try {
-            await agent.Account.createStudent(file, periodId);
+            await agent.Account.createDepartmentSubject(email, displayName, username, phoneNumber);
+            await this.loadItems();
         } catch (e) {
             console.log(e);
-        } finally {
-            this.loadingUpload = false;
         }
     }
 
-    removeItem = (id: string) => {
-        this.students.delete(id);
-    }
-
-    private setItem = (student: Student) => {
-        this.students.set(student.id, student);
+    private setItem = (departmentSubject: DepartmentSubject) => {
+        this.departmentSubjects.set(departmentSubject.id, departmentSubject);
     }
 }

@@ -11,7 +11,7 @@ import Login from "../../features/Account/Login";
 import HomePage from "../../features/Homepage/HomePage";
 import LecturerList from "../../features/Lecturers/List/LecturerList";
 import DepartmentSubject from "../../features/AccountManagement/DepartmentSubject/DepartmentSubject";
-import AccountLecturer from "../../features/AccountManagement/Lecturers/AccountLecturer";
+import AccountLecturer from "../../features/AccountManagement/Lecturer/AccountLecturer";
 import Instructor from "../../features/Instructor/Instructor";
 import Period from "../../features/GraduationPeriod/Period";
 import IsStudent from "./IsStudent";

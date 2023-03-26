@@ -1,4 +1,4 @@
-﻿import {observer} from "mobx-react-lite";
+import {observer} from "mobx-react-lite";
 import Box from "@mui/material/Box";
 import Autocomplete from "@mui/material/Autocomplete";
 import {IconButton, TextField} from "@mui/material";

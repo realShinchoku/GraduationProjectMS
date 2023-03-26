@@ -70,7 +70,8 @@ function InstructorApprovalTable({periodId}: Props) {
                     </TableBody>
                 </Table>
             </TableContainer>
-        )
+        );
+
     return (
         <Paper sx={{width: '100%', overflow: 'hidden', boxShadow: 'none'}}>
             <TableContainer>

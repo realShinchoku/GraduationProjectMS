@@ -1,4 +1,4 @@
-﻿import {AppBar, Card, CardContent, Grid, IconButton, Tab, Tabs, TextField} from "@mui/material";
+import {AppBar, Card, CardContent, Grid, IconButton, Tab, Tabs, TextField} from "@mui/material";
 import Skeleton from "@mui/material/Skeleton";
 import Box from "@mui/material/Box";
 import {SearchOutlined} from "@mui/icons-material";

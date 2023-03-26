@@ -11,7 +11,7 @@ import {Field, Form, Formik} from "formik";
 import {Autocomplete, AutocompleteRenderInputParams, TextField} from "formik-mui";
 import {Grid, TextField as TF} from "@mui/material";
 import {DepartmentSubjectFilterItem} from "../../../app/models/filterItem";
-
+import * as Yup from 'yup';
 
 const education = ['Tiến sĩ', 'Thạc sĩ'];
 
@@ -33,6 +33,16 @@ function AddLecturer() {
                 error: null
             }}
             onSubmit={(values) => lecturerStore.create(values.email, values.displayName, values.education, values.phoneNumber, values.departmentSubject.id)}
+            validationSchema={Yup.object().shape({
+                email: Yup.string().required('Hãy điền email'),
+                displayName: Yup.string().required('Hãy điền tên giảng viên'),
+                phoneNumber: Yup.string().required('Hãy điền số điện thoại'),
+                education: Yup.string().required('Hãy chọn học vấn'),
+                departmentSubject: Yup.object().shape({
+                    displayName: Yup.string().required('Hãy chọn bộ môn'),
+                    id: Yup.string().required('Hãy chọn bộ môn'),
+                })
+            })}
         >
             {({initialValues, dirty, errors, isSubmitting, isValid, touched}) =>
                 <Form
@@ -68,8 +78,8 @@ function AddLecturer() {
                                     label="Tên giảng viên"
                                     name="displayName"
                                     fullWidth
-                                    error={initialValues.displayName !== null && dirty && Boolean(errors.displayName)}
-                                    helperText={initialValues.displayName !== null && dirty && errors.displayName}
+                                    error={touched.displayName && Boolean(errors.displayName)}
+                                    helperText={touched.displayName && errors.displayName}
                                 />
                             </Grid>
                             <Grid item xs={6}>
@@ -78,8 +88,8 @@ function AddLecturer() {
                                     label="Email"
                                     name="email"
                                     fullWidth
-                                    error={initialValues.email !== null && dirty && Boolean(errors.email)}
-                                    helperText={initialValues.email !== null && dirty && errors.email}
+                                    error={touched.email && Boolean(errors.email)}
+                                    helperText={touched.email && errors.email}
                                 />
                             </Grid>
                             <Grid item xs={6}>
@@ -93,8 +103,8 @@ function AddLecturer() {
                                         <TF
                                             {...params}
                                             name="departmentSubject"
-                                            error={!!touched.departmentSubject && !!errors.departmentSubject}
-                                            // helperText={errors.bm.displayName}
+                                            error={!!touched.departmentSubject && Boolean(errors.departmentSubject)}
+                                            helperText={!!touched.departmentSubject && Boolean(errors.departmentSubject) && 'Hãy chọn bộ môn'}
                                             label="Bộ môn"
                                             variant="outlined"
                                         />
@@ -107,8 +117,8 @@ function AddLecturer() {
                                     label="Số điện thoại"
                                     name="phoneNumber"
                                     fullWidth
-                                    error={initialValues.phoneNumber !== null && dirty && Boolean(errors.phoneNumber)}
-                                    helperText={initialValues.phoneNumber !== null && dirty && errors.phoneNumber}
+                                    error={touched.phoneNumber && Boolean(errors.phoneNumber)}
+                                    helperText={touched.phoneNumber && errors.phoneNumber}
                                 />
                             </Grid>
                             <Grid item xs={6}>
@@ -121,8 +131,8 @@ function AddLecturer() {
                                         <TF
                                             {...params}
                                             name="education"
-                                            error={!!touched.departmentSubject && !!errors.departmentSubject}
-                                            // helperText={errors.bm.displayName}
+                                            error={!!touched.education && !!errors.education}
+                                            helperText={errors.education}
                                             label="Học vị"
                                             variant="outlined"
                                         />
@@ -149,6 +159,8 @@ function AddLecturer() {
                             }}
                             variant="contained"
                             type={'submit'}
+                            loading={isSubmitting}
+                            disabled={!isValid || !dirty || isSubmitting}
                         >
                             Lưu
                         </LoadingButton>

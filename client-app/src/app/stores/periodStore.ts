@@ -7,7 +7,7 @@ import StudentStore from "./studentStore";
 
 export default class PeriodStore {
     periods = new Map<string, Period>();
-    pagingParams = new PagingParams();
+    pagingParams = new PagingParams(0, 2);
     pagination: Pagination | null = null;
     loading: boolean = true;
     predicate = new Map();
@@ -22,11 +22,13 @@ export default class PeriodStore {
             ,
             async () => {
                 this.pagingParams.pageNumber = 0;
+                this.periods.clear()
                 await this.loadLists();
             });
 
-        reaction(() => this.pagingParams,
+        reaction(() => this.isAccount || this.isInstructor,
             async () => {
+                this.periods.clear()
                 await this.loadLists();
             });
     }
@@ -46,7 +48,6 @@ export default class PeriodStore {
     loadLists = async () => {
         this.loading = true;
         try {
-            runInAction(() => this.periods.clear());
             const result = await agent.Periods.list(this.axiosParams);
             result.data.forEach(period => {
                 this.setItem(period);

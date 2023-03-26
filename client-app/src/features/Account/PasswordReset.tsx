@@ -64,7 +64,7 @@ function PasswordReset() {
                                 })}
                                 validationSchema={validationSchema}
                             >
-                                {({handleSubmit, isSubmitting, errors, handleChange, isValid, dirty}) => (
+                                {({handleSubmit, isSubmitting, errors, handleChange, isValid, dirty, touched}) => (
                                     <Form onSubmit={handleSubmit}>
                                         <TextField
                                             className="input"
@@ -73,8 +73,8 @@ function PasswordReset() {
                                             name="email"
                                             label="Email"
                                             onChange={handleChange}
-                                            error={(dirty && Boolean(errors.email)) || Boolean(errors.error)}
-                                            helperText={(dirty && errors.email) || errors.error}
+                                            error={(touched.email && Boolean(errors.email)) || Boolean(errors.error)}
+                                            helperText={(touched.email && errors.email) || errors.error}
                                         />
                                         <LoadingButton
                                             color="primary" variant="contained"

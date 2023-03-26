@@ -1,11 +1,12 @@
 import {Box, Button, Grid, Typography} from '@mui/material';
 import UploadFileIcon from '@mui/icons-material/UploadFile';
 import {useDropzone} from 'react-dropzone';
-import {useStore} from "../../../app/stores/store";
+import {store, useStore} from "../../../app/stores/store";
 import {useState} from "react";
 import DescriptionOutlinedIcon from '@mui/icons-material/DescriptionOutlined';
 import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined';
 import {observer} from "mobx-react-lite";
+import {LoadingButton} from "@mui/lab";
 
 interface Props {
     periodId: string;
@@ -39,8 +40,20 @@ function AddStudentModal({periodId}: Props) {
                             <Typography className="title_top_dropzone" variant="h6" color="inherit" component="div">
                                 Tải File lên
                             </Typography>
-                            <Button className="button_up_file" variant="contained"
-                                    onClick={() => studentStore.create(file, periodId)}>Tải lên</Button>
+                            <LoadingButton
+                                className="button_up_file"
+                                variant="contained"
+                                disabled={!file}
+                                loading={studentStore.loadingUpload}
+                                onClick={() => {
+                                    studentStore
+                                        .create(file, periodId)
+                                        .then(() => {
+                                            store.modalStore.closeModal();
+                                            store.snackBarStore.success("Tạo tài khoản thành công");
+                                        })
+                                }}
+                            >Tải lên</LoadingButton>
                         </Box>
                         <Box {...getRootProps({className: 'container_dropzone'})}>
                             {!(isDragActive || file) &&

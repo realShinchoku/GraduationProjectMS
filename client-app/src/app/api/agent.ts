@@ -8,6 +8,7 @@ import {Student} from "../models/student";
 import {DepartmentSubjectFilterItem} from "../models/filterItem";
 import {Instructor} from "../models/instructor";
 import {Period, PeriodFormValues} from "../models/period";
+import {DepartmentSubject} from "../models/departmentSubject";
 
 const sleep = (delay: number) => {
     return new Promise((resolve) => {
@@ -132,7 +133,9 @@ const Periods = {
     single: (id: string) => requests.get<Period>(`/period/${id}`),
 }
 
-const DepartmentSubjects = {}
+const DepartmentSubjects = {
+    list: (params: URLSearchParams) => requests.list<DepartmentSubject[]>('/departmentSubject', {params})
+}
 
 const FilterItems = {
     DepartmentSubject: () => requests.get<DepartmentSubjectFilterItem[]>('/filterItems/departmentSubject'),
