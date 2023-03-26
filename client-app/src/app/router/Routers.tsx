@@ -18,6 +18,7 @@ import IsLecturer from "./IsLecturer";
 import IsDepartmentSubject from "./IsDepartmentSubject";
 import IsFaculty from "./IsFaculty";
 import AccountStudent from "../../features/AccountManagement/Student/AccountStudent";
+import StudentTopic from "../../features/StudentTopic/StudentTopic";
 import AccountDepartmentSubject from "../../features/AccountManagement/DepartmentSubject/AccountDepartmentSubject";
 
 
@@ -27,6 +28,7 @@ export const route = {
     resetPassword: '/account/password_reset',
     confirmResetPassword: '/account/password_reset/with',
     lecturer: '/lecturer',
+    topic: '/topic',
     empty: 'null',
     instructor: '/instructor',
     period: '/period',
@@ -46,6 +48,7 @@ export const routes: RouteObject[] = [
                     {
                         element: <IsStudent/>, children: [
                             {path: 'lecturer', element: <LecturerList/>},
+                            {path: 'topic', element: <StudentTopic/>},
                         ]
                     },
                     {
