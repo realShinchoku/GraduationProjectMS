@@ -1,45 +1,23 @@
-import {AlertColor} from "@mui/material";
-import {makeAutoObservable} from "mobx";
 
-interface SnackBar {
-    open: boolean;
-    message: string;
-    severity: AlertColor;
-}
+import {makeAutoObservable} from "mobx";
+import {enqueueSnackbar} from "notistack";
 
 export default class SnackBarStore {
-    snackBar: SnackBar = {
-        open: false,
-        message: '',
-        severity: 'success'
-    }
 
     constructor() {
         makeAutoObservable(this);
     }
 
     success = (message: string) => {
-        this.snackBar.message = message;
-        this.snackBar.open = true;
-        this.snackBar.severity = 'success';
+        enqueueSnackbar(message, {variant: 'success',});
     }
     warning = (message: string) => {
-        this.snackBar.message = message;
-        this.snackBar.open = true;
-        this.snackBar.severity = 'warning';
+        enqueueSnackbar(message, {variant: 'warning',});
     }
     info = (message: string) => {
-        this.snackBar.message = message;
-        this.snackBar.open = true;
-        this.snackBar.severity = 'info';
+        enqueueSnackbar(message, {variant: 'info',});
     }
     error = (message: string) => {
-        this.snackBar.message = message;
-        this.snackBar.open = true;
-        this.snackBar.severity = 'error';
+        enqueueSnackbar(message, {variant: 'error',});
     }
-    close = () => {
-        this.snackBar.open = false;
-    }
-
 }
