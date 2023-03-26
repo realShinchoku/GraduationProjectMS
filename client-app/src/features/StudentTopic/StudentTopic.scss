@@ -1,0 +1,104 @@
+@import "../../assets/css/config/variables";
+@import "../../assets/css/mixin/function";
+
+.student_topic {
+    text-align: center;
+    padding: 56px 135px 0 117px;
+    h2 {
+        font-family: 'Inter';
+        font-style: normal;
+        font-size: 46px;
+        font-weight: 600;
+        line-height: 56px;
+        color: #0D062D;
+        margin-bottom: 70px;
+    }
+    .inner {
+        .tlt {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 17px;
+            h4 {
+                font-size: 32px;
+                font-weight: 700;
+                line-height: 52px;
+            }
+            .button {
+                button {
+                    background-color: #FFFFFF;
+                    color: #787486;
+                    border: 1px solid #787486;
+                    text-transform: none;
+                    font-size: 20px;
+                    line-height: 24px;
+                    font-weight: 500;
+                    padding: 18px 10px;
+                }
+                button + button {
+                    margin-left: 20px;
+                }
+            }
+        }
+        form {
+            border: 3px solid #000000;
+            padding: 56px 33px 40px 33px;
+            .input {
+                margin-bottom: 40px;
+            }
+        }
+    }
+}
+.register_topic {
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    border-radius: 5px;
+    width: 880px;
+    position: relative;
+    transition: all 5s ease-in-out;
+    height: 100%;
+    justify-content: center;
+  
+    .inner {
+        background-color: #fff;
+        border-radius: 4px;
+        padding: 40px;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 14px;
+            transition: all 200ms;
+            font-size: 30px;
+            font-weight: bold;
+            text-decoration: none;
+            color: #333;
+            line-height: unset;
+            cursor: pointer;
+        }
+    
+        h2 {
+            font-size: 40px;
+            color: #0D062D;
+            font-weight: 500;
+            line-height: 56px;
+            margin-bottom: 10px;
+        }
+    
+        p {
+            margin-bottom: 10px;
+        }
+    
+        button {
+            float: right;
+            padding: 10px 30px;
+        }
+    
+        button + button {
+            margin-right: 20px;
+        }
+    }
+}
