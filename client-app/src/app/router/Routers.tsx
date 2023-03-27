@@ -20,6 +20,8 @@ import IsFaculty from "./IsFaculty";
 import AccountStudent from "../../features/AccountManagement/Student/AccountStudent";
 import StudentTopic from "../../features/StudentTopic/StudentTopic";
 import AccountDepartmentSubject from "../../features/AccountManagement/DepartmentSubject/AccountDepartmentSubject";
+import TopicAssignment from "../../features/TopicAssignment/TopicAssignment";
+import TopicAssignmentModal from "../../features/TopicAssignment/TopicAssignmentModal";
 
 
 export const route = {
@@ -83,6 +85,7 @@ export const routes: RouteObject[] = [
             {path: 'server-error', element: <ServerError/>},
             {path: 'test', element: <Test/>},
             {path: '*', element: <Navigate replace to={'/not-found'}/>},
+
         ],
     }
 ]

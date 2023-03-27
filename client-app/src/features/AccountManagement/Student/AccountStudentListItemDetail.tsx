@@ -17,6 +17,7 @@ function AccountStudentListItemDetail({periodId}: Props) {
 
     return (
         <Box className="account_table_list">
+            <Box className="account_table_list_search">
             <TextField
                 className="search_account"
                 fullWidth
@@ -39,6 +40,7 @@ function AccountStudentListItemDetail({periodId}: Props) {
                 }}
                 disabled={studentStore.loading}
             />
+            </Box>
             <AccountStudentTable studentStore={studentStore}/>
         </Box>
     );

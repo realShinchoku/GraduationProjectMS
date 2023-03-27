@@ -1,9 +1,9 @@
 import {observer} from "mobx-react-lite";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
-import {Avatar, Box, Typography} from "@mui/material";
+import {Avatar, Box, Divider, Typography} from "@mui/material";
 
 import {route} from "../../router/Routers";
-import {Category, LogoSP, ProfileUser, TaskSquare} from "../../../assets";
+import {Category, Ellipse, LogoSP, ProfileUser, TaskSquare} from "../../../assets";
 import {useStore} from "../../stores/store";
 import SidebarItem from "./SidebarItem/SidebarItem";
 import "./Sidebar.scss";
@@ -37,6 +37,12 @@ function FacultySidebar() {
                 <SidebarItem title="Đợt đồ án" to={route.period} icon={TaskSquare}/>
                 <SidebarItem title="Tài khoản" to={route.accountStudent} icon={ProfileUser}/>
             </Box>
+            <Divider className="divider_side_bar"/>
+            <Box className="side_bar_inner">
+                <SidebarItem title="Sinh viên" to={route.home} icon={Ellipse}/>
+                <SidebarItem title="Giảng viên" to={route.period} icon={Ellipse}/>
+                <SidebarItem title="Bộ môn" to={route.accountStudent} icon={Ellipse}/>
+            </Box>   
         </Grid>
     )
 }

@@ -34,7 +34,7 @@ function AddStudentModal({periodId}: Props) {
                         Thêm Tài Khoản Sinh Viên
                     </Typography>
                 </Box>
-                <Box display="grid" gridTemplateColumns="repeat(12, 1fr)" gap={1}>
+                <Box display="block" gridTemplateColumns="repeat(12, 1fr)" gap={1}>
                     <Box sx={{height: 'fit-content',}} gridColumn="span 11">
                         <Box className="top_dropzone">
                             <Typography className="title_top_dropzone" variant="h6" color="inherit" component="div">

@@ -27,9 +27,9 @@ function AddDepartmentSubject() {
             onSubmit={(values) => departmentSubjectStore.create(values.email, values.displayName, values.username, values.phoneNumber)}
             validationSchema={Yup.object().shape({
                 email: Yup.string().email("Vui lòng đúng email!").required('Hãy điền email'),
-                displayName: Yup.string().required('Hãy điền tên giảng viên'),
+                displayName: Yup.string().required('Hãy điền tên bộ môn'),
                 phoneNumber: Yup.string().required('Hãy điền số điện thoại'),
-                username: Yup.string().required('Hãy chọn học vấn'),
+                username: Yup.string().required('Hãy điền mã bộ môn'),
             })}
         >
             {({dirty, errors, isSubmitting, isValid, touched}) =>
