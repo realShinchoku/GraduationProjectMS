@@ -13,7 +13,7 @@ public class MappingProfiles : Profile
 {
     public MappingProfiles()
     {
-        CreateMap<GraduationProjectPeriod, GraduationProjectPeriod>();
+        CreateMap<GraduationProjectPeriods.DTOs.CreateDto, GraduationProjectPeriod>();
         CreateMap<Lecturer, LecturerDto>()
             .ForMember(d => d.DepartmentSubjects, o => o.MapFrom(x => x.DepartmentSubject.DisplayName))
             .ForMember(d => d.Faculty, o => o.MapFrom(x => x.Faculty.DisplayName))
@@ -43,5 +43,6 @@ public class MappingProfiles : Profile
             .ForMember(d => d.Faculty, o => o.MapFrom(x => x.Faculty.DisplayName));
         CreateMap<PopupNotification, PopupNotificationDto>();
         CreateMap<DepartmentSubject, DepartmentSubjects.DTOs.DepartmentSubjectDto>();
+        CreateMap<Topics.DTOs.CreateDto, GraduationProject>();
     }
 }

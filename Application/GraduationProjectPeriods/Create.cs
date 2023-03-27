@@ -1,5 +1,7 @@
 using Application.Core;
+using Application.GraduationProjectPeriods.DTOs;
 using Application.Interfaces;
+using AutoMapper;
 using Domain;
 using FluentValidation;
 using MediatR;
@@ -12,20 +14,20 @@ public class Create
 {
     public class Command : IRequest<Result<Unit>>
     {
-        public GraduationProjectPeriod GraduationProjectPeriod { get; set; }
+        public CreateDto GraduationProjectPeriod { get; set; }
     }
 
     public class CommandValidator : AbstractValidator<Command>
     {
         public CommandValidator()
         {
-            RuleFor(x => x.GraduationProjectPeriod).SetValidator(new CustomValidator());
+            RuleFor(x => x.GraduationProjectPeriod).SetValidator(new CustomCreateValidator());
         }
     }
 
-    public class CustomValidator : AbstractValidator<GraduationProjectPeriod>
+    public class CustomCreateValidator : AbstractValidator<CreateDto>
     {
-        public CustomValidator()
+        public CustomCreateValidator()
         {
             RuleFor(x => x.Course).NotEmpty();
             RuleFor(x => x.Phase).NotEmpty();
@@ -43,11 +45,13 @@ public class Create
     {
         private readonly DataContext _context;
         private readonly IUserAccessor _userAccessor;
+        private readonly IMapper _mapper;
 
-        public Handler(DataContext context, IUserAccessor userAccessor)
+        public Handler(DataContext context, IUserAccessor userAccessor, IMapper mapper)
         {
             _context = context;
             _userAccessor = userAccessor;
+            _mapper = mapper;
         }
 
         public async Task<Result<Unit>> Handle(Command request, CancellationToken cancellationToken)
@@ -62,11 +66,11 @@ public class Create
 
             if (period != null)
                 return Result<Unit>.Failure($"Đã tồn tại {period.Name}");
-
-            request.GraduationProjectPeriod.Faculty = faculty;
-            request.GraduationProjectPeriod.Name =
-                $"Đồ án Khóa K{request.GraduationProjectPeriod.Course} Đợt {request.GraduationProjectPeriod.Phase}";
-            _context.GraduationProjectPeriods.Add(request.GraduationProjectPeriod);
+            
+            period = _mapper.Map<GraduationProjectPeriod>(request.GraduationProjectPeriod);
+            period.Faculty = faculty;
+            period.Name = $"Đồ án Khóa K{request.GraduationProjectPeriod.Course} Đợt {request.GraduationProjectPeriod.Phase}";
+            _context.GraduationProjectPeriods.Add(period);
             var result = await _context.SaveChangesAsync(cancellationToken) > 0;
 
             if (!result)
