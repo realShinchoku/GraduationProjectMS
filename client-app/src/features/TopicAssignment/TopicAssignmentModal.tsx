@@ -15,9 +15,6 @@ function TopicAssignmentModal() {
     const { modalStore } = useStore();
     const [value, setValue] = React.useState("female");
 
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setValue(event.target.value);
-    };
     return (
         <Formik
             initialValues={{

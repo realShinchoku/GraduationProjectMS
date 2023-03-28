@@ -55,7 +55,7 @@ function AddLecturer() {
                         transform: "translate(-50%, -50%)",
                         backgroundColor: "#fff",
                         boxShadow: "24",
-                        padding: 4,
+                        padding: "30px",
                         borderRadius: "10px",
                     }}
                 >
@@ -145,7 +145,7 @@ function AddLecturer() {
                     >
                         <Button
                             variant="contained"
-                            sx={{textTransform: "capitalize"}}
+                            sx={{textTransform: "capitalize", marginRight:'20px', width:'90px'}}
                             onClick={modalStore.closeModal}
                         >
                             Thoát
