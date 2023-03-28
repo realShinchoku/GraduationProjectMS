@@ -8,6 +8,8 @@ import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import { Button } from '@mui/material';
+import { useStore } from '../../app/stores/store';
+import TopicAssignmentModal from './TopicAssignmentModal';
 
 function createData(
     studentID: number,
@@ -34,6 +36,7 @@ function TopicAssignmentTable() {
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
+    const {modalStore} = useStore();
     const handleChangePage = (event: unknown, newPage: number) => {
         setPage(newPage);
     };
@@ -67,7 +70,9 @@ function TopicAssignmentTable() {
                                 <TableCell align="left">{row.clasS}</TableCell>
                                 <TableCell align="left">{row.faculty}</TableCell>
                                 <TableCell align="right">{row.status}
-                                <Button variant='contained' className='button_table'>
+                                <Button variant='contained' className='button_table' onClick={() => {
+                            modalStore.openModal(<TopicAssignmentModal/>)
+                        }}>
                                     Giao đề tài
                                 </Button>
                                 </TableCell>
