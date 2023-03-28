@@ -1,7 +1,8 @@
 import {observer} from "mobx-react-lite";
 import {Form} from "react-router-dom";
 import * as Yup from 'yup';
-import {Box, TextField, Typography} from "@mui/material";
+import {Box, Typography} from "@mui/material";
+import {TextField} from "formik-mui";
 import {LoadingButton} from "@mui/lab";
 import {Field, Formik} from "formik";
 
@@ -37,67 +38,68 @@ function ChangePassword() {
                 <Box className="close" onClick={closeModal}>×</Box>
                 <Typography variant="h2">Đổi mật khẩu</Typography>
                 <Typography variant="body1">Vì lý do bảo mật, bạn vui lòng nhập lại mật khẩu</Typography>
-                <Formik
+                <Formik          
                     initialValues={{
-                        oldPassword: '',
-                        newPassword: '',
-                        confirmPassword: '',
-                        error: {oldPassword: '', newPassword: '', confirmPassword: ''}
-                    }}
-                    onSubmit={(values, {setErrors}) => changePassword({
-                        oldPassword: values.oldPassword,
-                        newPassword: values.newPassword
-                    }).catch((err: any) => {
-                        setErrors({error: err});
+                        oldPassword: '', 
+                        newPassword: '', 
+                        confirmPassword: '', 
+                        error: {
+                            oldPassword: null, 
+                            newPassword: null, 
+                            confirmPassword: null
+                        }}}
+                    onSubmit={(values, {setErrors}) => changePassword(values).catch((err: any) => {
+                        const error = {
+                            oldPassword: err.oldPassword, 
+                            newPassword: err.newPassword,  
+                            confirmPassword: err.confirmPassword
+                        };
+                        setErrors({error: error});
                     })}
                     validationSchema={validationSchema}
                 >
-                    {({handleSubmit, isSubmitting, errors, handleChange, isValid, dirty}) => (
+                    {({handleSubmit, isSubmitting, errors, isValid, dirty, touched}) => (
                         <Form onSubmit={handleSubmit}>
                             <Field
+                                component={TextField}
+                                fullWidth
                                 name="oldPassword"
                                 label="Mật khẩu cũ"
                                 type="password"
-                                fullWidth
-                                as={TextField}
-                                onChange={handleChange}
                                 sx={{marginBottom: 2}}
-                                error={(dirty && Boolean(errors.oldPassword)) || Boolean(errors.error?.oldPassword)}
-                                helperText={(dirty && errors.oldPassword) || errors.error?.oldPassword}
+                                error={(touched.oldPassword && Boolean(errors.oldPassword)) || Boolean(errors.error?.oldPassword)}
+                                helperText={(touched.oldPassword && errors.oldPassword) || errors.error?.oldPassword}
                             />
                             <Field
+                                component={TextField}
+                                fullWidth
                                 name="newPassword"
                                 type="password"
-                                className="input"
                                 label="Mật khẩu mới"
-                                fullWidth
-                                as={TextField}
-                                onChange={handleChange}
                                 sx={{marginBottom: 2}}
-                                error={(dirty && Boolean(errors.newPassword)) || Boolean(errors.error?.newPassword)}
-                                helperText={(dirty && errors.newPassword) || errors.error?.newPassword}
+                                error={(touched.newPassword && Boolean(errors.newPassword)) || Boolean(errors.error?.newPassword)}
+                                helperText={(touched.newPassword && errors.newPassword) || errors.error?.newPassword}
                             />
                             <Field
-                                type="password"
-                                className="input"
+                                component={TextField}
+                                fullWidth
                                 name="confirmPassword"
                                 label="Nhập lại mật khẩu mới"
-                                fullWidth
-                                as={TextField}
-                                onChange={handleChange}
+                                type="password"
                                 sx={{marginBottom: 2}}
-                                error={(dirty && Boolean(errors.confirmPassword)) || Boolean(errors.error?.confirmPassword)}
-                                helperText={(dirty && errors.confirmPassword) || errors.error?.confirmPassword}
+                                error={(touched.confirmPassword && Boolean(errors.confirmPassword)) || Boolean(errors.error?.confirmPassword)}
+                                helperText={(touched.confirmPassword && errors.confirmPassword) || errors.error?.confirmPassword}
                             />
                             <LoadingButton
-                                color="primary" variant="contained"
+                                color="primary" 
+                                variant="contained"
                                 onClick={closeModal}
                             >
                                 Huỷ
                             </LoadingButton>
-
                             <LoadingButton
-                                color="primary" variant="contained"
+                                color="primary" 
+                                variant="contained"
                                 loading={isSubmitting}
                                 disabled={!isValid || !dirty || isSubmitting}
                                 type="submit"
