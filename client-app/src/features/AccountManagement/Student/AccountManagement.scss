@@ -164,7 +164,11 @@
 
 .account_table_list {
   margin-top: 20px;
-
+  .account_table_list_search{
+    display: flex;
+    justify-content: end;
+    margin-bottom: 10px;
+  }
   .account_list {
     display: flex;
     white-space: nowrap;
@@ -227,7 +231,6 @@
 
   .center_text {
     display: grid;
-    justify-content: center;
   }
 
   .detail_account {
@@ -378,7 +381,7 @@
   .icon_dropzone_ {
     position: absolute;
     top: 45%;
-    left: 55%;
+    left: 46%;
     font-size: 70px;
     color: #bebebe;
   }
@@ -408,7 +411,6 @@
     display: flex;
     justify-content: center;
     margin-bottom: 30px;
-    margin-left: 160px;
     @include tablet {
       margin-left: 100px;
       margin-bottom: 10px;
