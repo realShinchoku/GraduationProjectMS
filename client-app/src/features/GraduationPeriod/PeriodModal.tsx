@@ -11,6 +11,7 @@ import {useEffect, useState} from "react";
 import {TextField} from "formik-mui";
 import {DatePicker} from "formik-mui-x-date-pickers";
 import {observer} from "mobx-react-lite";
+import {ADD} from "mobx/dist/types/observablemap";
 
 interface Props {
     id?: string;
@@ -46,6 +47,11 @@ function PeriodModal({id}: Props) {
                 console.log(period);
             });
     }, [id, setPeriodFormValues, get]);
+    
+    function addDate(date: Date, day: number) {
+        date.setDate(date.getDate() + day);
+        return date;
+    }
 
     return (
         <Box className="Modal">
@@ -88,7 +94,7 @@ function PeriodModal({id}: Props) {
                         .required("Vui lòng điền đủ thông tin"),
                 })}
             >
-                {({touched, dirty, isValid, isSubmitting, errors}) => (
+                {({touched, dirty, isValid, isSubmitting, errors,}) => (
                     <Form className="modalContent">
                         <Grid container spacing={2}>
                             <Grid xs={10} className="contentTop">
@@ -158,7 +164,7 @@ function PeriodModal({id}: Props) {
                                     <Field
                                         component={DatePicker}
                                         name="startDate"
-                                        minDate={new Date()}
+                                        // minDate={new Date()}
                                         slotProps={{
                                             textField: {
                                                 placeholder: "",
@@ -171,6 +177,19 @@ function PeriodModal({id}: Props) {
                                             width: "100%",
                                             border: "none",
                                             "& fieldset": {border: "none"},
+                                        }}
+                                        onChange={(value: Date) => {
+                                            setPeriodFormValues({
+                                                ...periodFormValues,
+                                                startDate: new Date(value),
+                                                contactInstructorTime: new Date(value),
+                                                registerTopicTime: new Date(addDate(value,1)),
+                                                syllabusSubmissionTime: new Date(addDate(value,4)),
+                                                syllabusReviewTime: new Date(addDate(value,15)),
+                                                graduationProjectTime: new Date(addDate(value,22)),
+                                                protectionTime: new Date(addDate(value,119)),
+                                                endDate: new Date(addDate(value,132)),
+                                            });
                                         }}
                                     />
                                 </Grid>
