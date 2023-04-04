@@ -19,6 +19,10 @@ import IsLecturer from "./IsLecturer";
 import IsDepartmentSubject from "./IsDepartmentSubject";
 import IsFaculty from "./IsFaculty";
 import AccountStudent from "../../features/AccountManagement/Student/AccountStudent";
+import Approval from "../../features/Approval/Approval";
+import ApprovalTable from "../../features/Approval/ApprovalTable";
+import Outline from "../../features/Outline/Outline";
+import OutlineTable from "../../features/Outline/OutlineTable";
 
 
 export const route = {
@@ -34,6 +38,10 @@ export const route = {
     accountStudent: '/account/student',
     accountDepartmentSubject: '/account/departmentSubject',
     accountLecturer: '/account/lecturer',
+    project:'/project',
+    projectDetail:(id:string) => {return `/project/${id}`},
+    outline:'/outline',
+    outlineDetail:(id:string) => {return `/outline/${id}`},
 };
 
 export const routes: RouteObject[] = [
@@ -55,6 +63,10 @@ export const routes: RouteObject[] = [
                     {
                         element: <IsDepartmentSubject/>, children: [
                             {path: 'instructor', element: <Instructor/>},
+                            {path: 'project', element: <Approval/>},                         
+                            {path: 'project/:id', element: <ApprovalTable/>},
+                            {path: 'outline', element: <Outline/>},                         
+                            {path: 'outline/:id', element: <OutlineTable/>},
                         ]
                     },
                     {
@@ -63,7 +75,6 @@ export const routes: RouteObject[] = [
                             {path: 'account/student', element: <AccountStudent/>},
                             {path: 'account/departmentSubject', element: <DepartmentSubject/>},
                             {path: 'account/lecturer', element: <AccountLecturer/>},
-
                         ]
                     },
                     {path: '', element: <HomePage/>},
