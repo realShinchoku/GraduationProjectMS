@@ -25,3 +25,16 @@ export interface Topic {
     description: string,
     status: number,
 }
+
+export interface TopicDto {
+    id: string;
+    studentId: string;
+    studentName: string;
+    class: string;
+    faculty: string;
+    type: string;
+    name: string;
+    lecturer: string;
+    lecturerApproval: boolean;
+    departmentSubjectApproval: boolean;
+}

@@ -12,18 +12,18 @@ import InfiniteScroll from "react-infinite-scroller";
 
 function Period() {
 
-    const {periodStore: {periods, loadLists, periodsList, loading, setPagingParams, pagination}} = useStore();
+    const {periodStore: {periods, loadList, periodsList, loading, setPagingParams, pagination}} = useStore();
     const [loadingNext, setLoadingNext] = useState(false);
     useEffect(() => {
         if (pagination?.itemsPerPage !== 4)
             setPagingParams(new PagingParams(0, 4))
-        if (periods.size <= 1) loadLists();
-    }, [loadLists, periods.size, setPagingParams, pagination?.itemsPerPage]);
+        if (periods.size <= 1) loadList();
+    }, [loadList, periods.size, setPagingParams, pagination?.itemsPerPage]);
 
     function handleGetNext() {
         setLoadingNext(true);
         setPagingParams(new PagingParams(pagination!.currentPage + 1, 2));
-        loadLists().then(() => setLoadingNext(false));
+        loadList().then(() => setLoadingNext(false));
     }
 
     return (

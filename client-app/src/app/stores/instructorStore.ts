@@ -18,12 +18,12 @@ export default class InstructorStore {
             ,
             async () => {
                 this.pagingParams.pageNumber = 0;
-                await this.loadLists();
+                await this.loadList();
             });
 
         reaction(() => this.pagingParams,
             async () => {
-                await this.loadLists();
+                await this.loadList();
             });
     }
 
@@ -40,7 +40,7 @@ export default class InstructorStore {
         return params;
     }
 
-    loadLists = async () => {
+    loadList = async () => {
         this.loading = true;
         try {
             runInAction(() => this.instructors.clear());
@@ -78,7 +78,7 @@ export default class InstructorStore {
 
     setPeriodId = async (id: string) => {
         this.periodId = id;
-        await this.loadLists();
+        await this.loadList();
     }
 
     chose = async (id: string) => {

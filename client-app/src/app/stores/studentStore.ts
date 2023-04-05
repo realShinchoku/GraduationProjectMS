@@ -17,12 +17,12 @@ export default class StudentStore {
             ,
             async () => {
                 this.pagingParams.pageNumber = 0;
-                await this.loadLists();
+                await this.loadList();
             });
 
         reaction(() => this.pagingParams,
             async () => {
-                await this.loadLists();
+                await this.loadList();
             });
     }
 
@@ -38,7 +38,7 @@ export default class StudentStore {
         return params;
     }
 
-    loadLists = async () => {
+    loadList = async () => {
         this.loading = true;
         try {
             runInAction(() => this.students.clear());
@@ -74,11 +74,13 @@ export default class StudentStore {
         this.predicate.clear();
     }
 
-    setPeriodId = async (id: string, isInstructor: boolean) => {
+    setPeriodId = async (id: string, isInstructor: boolean, isTopic: boolean = false) => {
         if (isInstructor)
             this.setPredicate('hasLecturer', false);
+        if(isTopic)
+            this.setPredicate('hasTopic', false);
         this.setPredicate('periodId', id);
-        await this.loadLists();
+        await this.loadList();
     }
 
     create = async (file: any, periodId: string) => {

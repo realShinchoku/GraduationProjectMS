@@ -9,7 +9,7 @@ import {DepartmentSubjectFilterItem} from "../models/filterItem";
 import {Instructor} from "../models/instructor";
 import {Period, PeriodFormValues} from "../models/period";
 import {DepartmentSubject} from "../models/departmentSubject";
-import { Topic } from "../models/topic";
+import {Topic, TopicDto} from "../models/topic";
 
 const sleep = (delay: number) => {
     return new Promise((resolve) => {
@@ -70,7 +70,8 @@ axios.interceptors.response.use(async response => {
             throw data;
         case 500:
             store.commonStore.setServerError(data);
-            await router.navigate('/server-error');
+            // await router.navigate('/server-error');
+            store.snackBarStore.error("Có lỗi xảy ra");
             break;
     }
     return Promise.reject(error);
@@ -156,6 +157,7 @@ const Instructors = {
 }
 
 const Topics = {
+    list: (params: URLSearchParams, periodId: string) => requests.list<TopicDto[]>(`/graduationProject?periodId=${periodId}`,{params}),
     create: (name : string, type: string, description: string) => requests.post<Topic>(`/graduationProject`, {name, type, description}),
     edit: (id : string, name : string, type: string, description: string) => requests.put<Topic>(`/graduationProject`, {id, name, type, description}),
     get: (id: string) => requests.get<Topic>(`/graduationProject/${id}`),

@@ -18,12 +18,17 @@ import IsLecturer from "./IsLecturer";
 import IsDepartmentSubject from "./IsDepartmentSubject";
 import IsFaculty from "./IsFaculty";
 import AccountStudent from "../../features/AccountManagement/Student/AccountStudent";
-import StudentTopic from "../../features/StudentTopic/StudentTopic";
-import AccountDepartmentSubject from "../../features/AccountManagement/DepartmentSubject/AccountDepartmentSubject";
 import TopicAssignment from "../../features/TopicAssignment/TopicAssignment";
 import TopicAssignmentModal from "../../features/TopicAssignment/TopicAssignmentModal";
 import Notification from "../../features/Notification/Notification";
 import Document from "../../features/Document/Document";
+import AccountDepartmentSubject from "../../features/AccountManagement/DepartmentSubject/AccountDepartmentSubject";
+import OutlineTable from "../../features/Outline/OutlineTable";
+import StudentTopic from "../../features/StudentTopic/StudentTopic";
+import Approval from "../../features/Approval/Approval";
+import ApprovalTable from "../../features/Approval/ApprovalTable";
+import Outline from "../../features/Outline/Outline";
+
 
 export const route = {
     home: '/',
@@ -41,6 +46,10 @@ export const route = {
     accountLecturer: '/account/lecturer',
     notification: '/notification',
     document: '/document',
+    project:'/project',
+    projectDetail:(id:string) => {return `/project/${id}`},
+    outline:'/outline',
+    outlineDetail:(id:string) => {return `/outline/${id}`},
 };
 
 export const routes: RouteObject[] = [
@@ -65,6 +74,10 @@ export const routes: RouteObject[] = [
                     {
                         element: <IsDepartmentSubject/>, children: [
                             {path: 'instructor', element: <Instructor/>},
+                            {path: 'project', element: <Approval/>},                         
+                            {path: 'project/:id', element: <ApprovalTable/>},
+                            {path: 'outline', element: <Outline/>},                         
+                            {path: 'outline/:id', element: <OutlineTable/>},
                         ]
                     },
                     {
@@ -73,7 +86,6 @@ export const routes: RouteObject[] = [
                             {path: 'account/student', element: <AccountStudent/>},
                             {path: 'account/departmentSubject', element: <AccountDepartmentSubject/>},
                             {path: 'account/lecturer', element: <AccountLecturer/>},
-
                         ]
                     },
                     {path: '', element: <HomePage/>},
@@ -90,7 +102,7 @@ export const routes: RouteObject[] = [
             {path: 'server-error', element: <ServerError/>},
             {path: 'test', element: <Test/>},
             {path: '*', element: <Navigate replace to={'/not-found'}/>},
-            {path: 'topicassignment', element: <TopicAssignment/>},
+            {path: 'topic/assignment/:id', element: <TopicAssignment/>},
 
         ],
     }

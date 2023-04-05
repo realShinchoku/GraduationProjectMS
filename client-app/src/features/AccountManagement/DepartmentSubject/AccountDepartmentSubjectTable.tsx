@@ -30,10 +30,11 @@ function AccountDepartmentSubjectTable() {
                     <TableHead>
                         <TableRow>
                             <TableCell className='color_background' align="left">STT</TableCell>
+                            <TableCell className='color_background' align="left">Mã Bộ Môn</TableCell>
                             <TableCell className='color_background' align="left">Tên Bộ Môn</TableCell>
-                            <TableCell className='color_background' align="left">Ngày Tạo</TableCell>
                             <TableCell className='color_background' align="left">Email</TableCell>
-                            <TableCell className='color_background' align="right">Mã Bộ Môn</TableCell>
+                            <TableCell className='color_background' align="left">Số điện thoại</TableCell>
+                            <TableCell className='color_background' align="left">Ngày Tạo</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -45,10 +46,11 @@ function AccountDepartmentSubjectTable() {
                                 <TableCell component="th" scope="row">
                                     {pagination!.itemsPerPage * pagination!.currentPage + index + 1}
                                 </TableCell>
+                                <TableCell align="left">{row.username}</TableCell>
                                 <TableCell align="left">{row.displayName}</TableCell>
-                                <TableCell align="left">{format(new Date(row.createdDate), "dd 'Th'M',' yyyy")}</TableCell>
                                 <TableCell align="left">{row.email}</TableCell>
-                                <TableCell align="right">{row.username}</TableCell>
+                                <TableCell align="left">{row.phoneNumber}</TableCell>
+                                <TableCell align="left">{format(new Date(row.createdDate), "dd 'Th'M',' yyyy")}</TableCell>
                             </TableRow>
                         ))}
                     </TableBody>
