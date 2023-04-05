@@ -18,6 +18,9 @@ import Union from "./images/Union.png";
 import LampOn from "./images/LampOn.png";
 import Ellipse from "./images/Ellipse.png";
 import NotFound404 from "./images/404.png";
+import Mission from "./images/Mission.png";
+import FileMoreLine from "./images/FileMoreLine.png";
+import Group from "./images/Group.png";
 
 export {
     Logo,
@@ -38,6 +41,9 @@ export {
     LampOn,
     Ellipse,
     NotFound404,
+    Mission,
+    FileMoreLine,
+    Group,
 };
 
 export const LecturerImages = {
