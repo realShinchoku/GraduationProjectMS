@@ -1,5 +1,4 @@
-import {Box, Button, Typography} from "@mui/material";
-
+import {Box, Button, Link, Typography} from "@mui/material";
 import {NotFound404} from "../../assets";
 import "./Error.scss"
 
@@ -13,7 +12,9 @@ export default function NotFound() {
                     <Box component="span">The page you are looking for doesn’t exist or any other error occurred, go
                         back to home page.</Box>
                     <Box>
-                        <Button>Go Back</Button>
+                        <Link href="/">
+                            <Button>Go Back</Button>
+                        </Link>
                     </Box>
                 </Box>
                 <Box className="thumb">
