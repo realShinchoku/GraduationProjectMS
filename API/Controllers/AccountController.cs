@@ -58,25 +58,23 @@ public class AccountController : BaseApiController
 
     [Authorize(Policy = "IsFacultyOffice")]
     [HttpPost("student")]
-    public async Task<ActionResult<UserDto>> CreateStudent([FromForm] CreateStudent.Command command)
+    public async Task<IActionResult> CreateStudent([FromForm] CreateStudent.Command command)
     {
         return HandleResult(await Mediator.Send(command));
     }
 
     [Authorize(Policy = "IsFacultyOffice")]
     [HttpPost("lecturer")]
-    public async Task<ActionResult<UserDto>> CreateLecture(CreateLectureDto createLectureDto)
+    public async Task<ActionResult> CreateLecture(CreateLectureDto createLectureDto)
     {
         return HandleResult(await Mediator.Send(new CreateLecture.Command { CreateLectureDto = createLectureDto }));
     }
 
     [Authorize(Policy = "IsFacultyOffice")]
     [HttpPost("departmentSubject")]
-    public async Task<ActionResult<UserDto>> CreateDepartmentSubject(
-        CreateDepartmentSubjectDto createDepartmentSubjectDto)
+    public async Task<IActionResult> CreateDepartmentSubject(CreateDepartmentSubjectDto createDepartmentSubjectDto)
     {
-        return HandleResult(await Mediator.Send(new CreateDepartmentSubject.Command
-            { CreateDepartmentSubjectDto = createDepartmentSubjectDto }));
+        return HandleResult(await Mediator.Send(new CreateDepartmentSubject.Command { CreateDepartmentSubjectDto = createDepartmentSubjectDto }));
     }
 
 
@@ -101,7 +99,7 @@ public class AccountController : BaseApiController
         var user = await _userManager.FindByEmailAsync(email);
 
         if (user == null)
-            return Unauthorized("Email not found");
+            return Unauthorized("Email không tồn tại");
 
         var origin = Request.Headers["origin"];
         var token = await _userManager.GeneratePasswordResetTokenAsync(user);
@@ -144,6 +142,7 @@ public class AccountController : BaseApiController
     {
         return new UserDto
         {
+            Id = user.Id,
             DisplayName = user.DisplayName,
             Token = _tokenService.CreateToken(user),
             UserName = user.UserName,

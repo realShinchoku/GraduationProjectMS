@@ -11,6 +11,7 @@ import {useStore} from "../../stores/store";
 import SidebarItem from "./SidebarItem/SidebarItem";
 import "./Sidebar.scss";
 import {useEffect} from "react";
+import TopicTabs from "./TopicTabs/TopicTabs";
 
 function StudentSidebar() {
 
@@ -49,7 +50,7 @@ function StudentSidebar() {
             <Box className="side_bar_inner">
                 <SidebarItem title="Trang chủ" to={route.home} icon={Category}/>
                 <SidebarItem title="Giảng viên" to={route.lecturer} icon={Message}/>
-                <SidebarItem title="Nhiệm vụ" to={route.empty} icon={TaskSquare}/>
+                <SidebarItem title="Đề tài" to={route.topic} icon={TaskSquare}/>
                 <SidebarItem title="Cá nhân" to={route.empty} icon={ProfileUser}/>
                 <SidebarItem title="Quản lý" to={route.empty} icon={Folder}/>
             </Box>
@@ -57,6 +58,12 @@ function StudentSidebar() {
                 <>
                     <Typography className="tlt">GIẢNG VIÊN</Typography>
                     <VerticalTabs/>
+                </>
+            )}
+            {(location.pathname === route.topic) && (
+                <>
+                    <Typography className="tlt">ĐỀ TÀI</Typography>
+                    <TopicTabs/>
                 </>
             )}
             {popupNotification && <Box className="confirm">

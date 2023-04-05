@@ -13,7 +13,7 @@ import {PagingParams} from "../../app/models/pagination";
 function Instructor() {
     const {
         periodStore: {
-            loadLists,
+            loadList,
             periods,
             periodsList,
             setInstructorStatus,
@@ -28,13 +28,13 @@ function Instructor() {
         if (!isInstructor)
             setInstructorStatus();
         if (periods.size <= 0)
-            loadLists();
-    }, [loadLists, periods.size, setInstructorStatus, isInstructor]);
+            loadList();
+    }, [loadList, periods.size, setInstructorStatus, isInstructor]);
 
     function handleGetNext() {
         setLoadingNext(true);
         setPagingParams(new PagingParams(pagination!.currentPage + 1, 2));
-        loadLists().then(() => setLoadingNext(false));
+        loadList().then(() => setLoadingNext(false));
     }
 
     return (

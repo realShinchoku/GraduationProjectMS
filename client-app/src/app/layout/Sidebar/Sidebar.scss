@@ -166,6 +166,10 @@
       .blu {
         color: #76A5EA;
       }
+      .brown{
+        color: #DAA669;
+      }
+      
 
       &.Mui-selected {
         background: rgba(80, 48, 229, 0.0784313725);
@@ -358,5 +362,8 @@
     .tab {
       display: none;
     }
+  }
+  .divider_side_bar{
+    margin-top: 40%;
   }
 }

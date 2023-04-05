@@ -4,6 +4,7 @@ using Application.Instructors.DTOs;
 using Application.Lecturers.DTOs;
 using Application.PopupNotifications.DTOs;
 using Application.Students.DTOs;
+using Application.Topics.DTOs;
 using AutoMapper;
 using Domain;
 
@@ -13,7 +14,7 @@ public class MappingProfiles : Profile
 {
     public MappingProfiles()
     {
-        CreateMap<GraduationProjectPeriod, GraduationProjectPeriod>();
+        CreateMap<GraduationProjectPeriods.DTOs.CreateDto, GraduationProjectPeriod>();
         CreateMap<Lecturer, LecturerDto>()
             .ForMember(d => d.DepartmentSubjects, o => o.MapFrom(x => x.DepartmentSubject.DisplayName))
             .ForMember(d => d.Faculty, o => o.MapFrom(x => x.Faculty.DisplayName))
@@ -43,5 +44,16 @@ public class MappingProfiles : Profile
             .ForMember(d => d.Faculty, o => o.MapFrom(x => x.Faculty.DisplayName));
         CreateMap<PopupNotification, PopupNotificationDto>();
         CreateMap<DepartmentSubject, DepartmentSubjects.DTOs.DepartmentSubjectDto>();
+        CreateMap<Topics.DTOs.CreateDto, GraduationProject>();
+        CreateMap<Student, TopicDto>()
+            .ForMember(x => x.StudentId, o => o.MapFrom(x => x.StudentId))
+            .ForMember(x => x.StudentName, o => o.MapFrom(x => x.DisplayName))
+            .ForMember(x => x.Id, o => o.MapFrom(x => x.GraduationProject.Id))
+            .ForMember(x => x.Faculty, o => o.MapFrom(x => x.Faculty.DisplayName))
+            .ForMember(x => x.Type, o => o.MapFrom(x => x.GraduationProject.Type))
+            .ForMember(x => x.Name, o => o.MapFrom(x => x.GraduationProject.Name))
+            .ForMember(x => x.Lecturer, o => o.MapFrom(x => x.Lecturer.DisplayName))
+            .ForMember(x => x.LecturerApproval, o => o.MapFrom(x => x.GraduationProject.LecturerApproval))
+            .ForMember(x => x.DepartmentSubjectApproval, o => o.MapFrom(x => x.GraduationProject.DepartmentSubjectApproval));
     }
 }

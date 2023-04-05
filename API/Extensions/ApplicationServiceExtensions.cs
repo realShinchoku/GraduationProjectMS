@@ -9,7 +9,10 @@ using Infrastructure.Files;
 using Infrastructure.Photos;
 using Infrastructure.Security;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Net.Http.Headers;
+using Microsoft.OpenApi.Models;
 using Persistence;
+using Swashbuckle.AspNetCore.Filters;
 
 namespace API.Extensions;
 
@@ -20,7 +23,20 @@ public static class ApplicationServiceExtensions
     {
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         services.AddEndpointsApiExplorer();
-        services.AddSwaggerGen();
+        services.AddSwaggerGen(c =>
+        {
+            c.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
+            {
+                Description = "Standard Authorization header using Bearer scheme, e.g. \"Bearer {token}\"",
+                In = ParameterLocation.Header,
+                Name = "Authorization",
+                Type = SecuritySchemeType.ApiKey,
+                Scheme = "Bearer",
+                BearerFormat = "JWT"
+            });
+            c.OperationFilter<SecurityRequirementsOperationFilter>();
+            c.CustomSchemaIds(x => x.FullName);
+        });
 
         services.AddDbContext<DataContext>(options =>
         {

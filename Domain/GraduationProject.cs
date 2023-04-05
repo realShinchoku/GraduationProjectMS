@@ -6,5 +6,6 @@ public class GraduationProject
     public string Name { get; set; }
     public string Type { get; set; }
     public string Description { get; set; }
-    public int Status { get; set; }
+    public bool LecturerApproval { get; set; }
+    public bool DepartmentSubjectApproval { get; set; }
 }

@@ -19,12 +19,12 @@ interface Props {
 }
 
 function AccountStudentTable({studentStore}: Props) {
-    const {loadLists, students, studentsList, pagination, setPagingParams} = studentStore;
+    const {loadList, students, studentsList, pagination, setPagingParams} = studentStore;
 
     useEffect(() => {
         if (students.size <= 0)
-            loadLists();
-    }, [loadLists, students.size]);
+            loadList();
+    }, [loadList, students.size]);
 
     const handleChangePage = (event: unknown, newPage: number) => {
         setPagingParams(new PagingParams(newPage, pagination!.itemsPerPage));
@@ -46,7 +46,7 @@ function AccountStudentTable({studentStore}: Props) {
                             <TableCell className='color_background' align="left">Lớp</TableCell>
                             <TableCell className='color_background' align="left">Khoa</TableCell>
                             <TableCell className='color_background' align="left">Ngày Tạo</TableCell>
-                            <TableCell className='color_background' align="left">Email</TableCell>
+                            <TableCell className='color_background' align="right">Email</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -64,7 +64,7 @@ function AccountStudentTable({studentStore}: Props) {
                                 <TableCell align="left">{row.faculty}</TableCell>
                                 <TableCell
                                     align="left">{format(new Date(row.createdDate), "dd 'Th'M',' yyyy")}</TableCell>
-                                <TableCell align="left">{row.email}</TableCell>
+                                <TableCell align="right">{row.email}</TableCell>
                             </TableRow>
                         ))}
                     </TableBody>

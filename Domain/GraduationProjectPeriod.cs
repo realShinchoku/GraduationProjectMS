@@ -6,6 +6,8 @@ public class GraduationProjectPeriod
     public string Name { get; set; }
     public int Course { get; set; }
     public int Phase { get; set; }
+    public bool LecturerApproval { get; set; }
+    public bool DepartmentSubjectApproval { get; set; }
     public DateTime StartDate { get; set; }
     public DateTime EndDate { get; set; }
     public DateTime ContactInstructorTime { get; set; }

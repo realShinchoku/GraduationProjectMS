@@ -1,4 +1,5 @@
 using Application.GraduationProjectPeriods;
+using Application.GraduationProjectPeriods.DTOs;
 using Domain;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -11,10 +12,9 @@ public class PeriodController : BaseApiController
 {
     [HttpPost] //api/period
     [Authorize(Policy = "IsFacultyOffice")]
-    public async Task<IActionResult> Create(GraduationProjectPeriod graduationProjectPeriod)
+    public async Task<IActionResult> Create(CreateDto graduationProjectPeriod)
     {
-        return HandleResult(
-            await Mediator.Send(new Create.Command { GraduationProjectPeriod = graduationProjectPeriod }));
+        return HandleResult(await Mediator.Send(new Create.Command { GraduationProjectPeriod = graduationProjectPeriod }));
     }
 
     [HttpGet]

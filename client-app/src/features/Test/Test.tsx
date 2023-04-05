@@ -4,12 +4,17 @@ import {useStore} from "../../app/stores/store";
 import {Button} from "@mui/material";
 
 function Test() {
-    const {modalStore} = useStore();
+    const {modalStore, snackBarStore} = useStore();
 
     return (
         <>
             <Button onClick={() => {
-                modalStore.openModal(<div>modal here</div>)
+                snackBarStore.error('test')
+            }}>
+                open modal
+            </Button>
+            <Button onClick={() => {
+                snackBarStore.success('test')
             }}>
                 open modal
             </Button>

@@ -26,10 +26,10 @@ function InstructorTableRow({periodId}: Props) {
         setKeyword('');
         if (newValue === '0') {
             instructorStore.removePredicate(keyword);
-            await instructorStore.loadLists()
+            await instructorStore.loadList()
         } else if (newValue === '1') {
             studentStore.removePredicate(keyword);
-            await studentStore.loadLists();
+            await studentStore.loadList();
         }
     };
 

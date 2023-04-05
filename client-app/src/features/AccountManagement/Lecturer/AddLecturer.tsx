@@ -34,7 +34,7 @@ function AddLecturer() {
             }}
             onSubmit={(values) => lecturerStore.create(values.email, values.displayName, values.education, values.phoneNumber, values.departmentSubject.id)}
             validationSchema={Yup.object().shape({
-                email: Yup.string().required('Hãy điền email'),
+                email: Yup.string().email("Vui lòng nhập email!").required('Hãy điền email'),
                 displayName: Yup.string().required('Hãy điền tên giảng viên'),
                 phoneNumber: Yup.string().required('Hãy điền số điện thoại'),
                 education: Yup.string().required('Hãy chọn học vấn'),
@@ -44,7 +44,7 @@ function AddLecturer() {
                 })
             })}
         >
-            {({initialValues, dirty, errors, isSubmitting, isValid, touched}) =>
+            {({ dirty, errors, isSubmitting, isValid, touched}) =>
                 <Form
                     className="add_lecturer"
                     style={{
@@ -55,13 +55,12 @@ function AddLecturer() {
                         transform: "translate(-50%, -50%)",
                         backgroundColor: "#fff",
                         boxShadow: "24",
-                        padding: 4,
+                        padding: "30px",
                         borderRadius: "10px",
                     }}
                 >
                     <Box sx={{display: "flex", justifyContent: "space-between"}}>
                         <Typography sx={{marginBottom: "25px", fontSize: "2rem"}}>
-                            {" "}
                             Thêm Giảng Viên
                         </Typography>
                         <Button
@@ -131,8 +130,8 @@ function AddLecturer() {
                                         <TF
                                             {...params}
                                             name="education"
-                                            error={!!touched.education && !!errors.education}
-                                            helperText={errors.education}
+                                            error={touched.education && !!errors.education}
+                                            helperText={touched.education && errors.education}
                                             label="Học vị"
                                             variant="outlined"
                                         />
@@ -146,7 +145,7 @@ function AddLecturer() {
                     >
                         <Button
                             variant="contained"
-                            sx={{textTransform: "capitalize"}}
+                            sx={{textTransform: "capitalize", marginRight:'20px', width:'90px'}}
                             onClick={modalStore.closeModal}
                         >
                             Thoát

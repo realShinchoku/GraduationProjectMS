@@ -34,8 +34,10 @@ function AccountLecturerTable() {
                             <TableCell className='color_background' align="left">Tên Giảng Viên</TableCell>
                             <TableCell className='color_background' align="left">Bộ Môn</TableCell>
                             <TableCell className='color_background' align="left">Khoa</TableCell>
+                            <TableCell className='color_background' align="left">Học vị</TableCell>
+                            <TableCell className='color_background' align="left">Số điện thoại</TableCell>
+                            <TableCell className='color_background' align="left">Email</TableCell>
                             <TableCell className='color_background' align="left">Ngày tạo</TableCell>
-                            <TableCell className='color_background' align="right">Email</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -45,15 +47,15 @@ function AccountLecturerTable() {
                                 sx={{'&:last-child td, &:last-child th': {border: 0}}}
                             >
                                 <TableCell component="th" scope="row">
-                                    {index + 1}
+                                    {pagination!.itemsPerPage * pagination!.currentPage + index + 1}
                                 </TableCell>
                                 <TableCell align="left">{row.displayName}</TableCell>
                                 <TableCell align="left">{row.departmentSubjects}</TableCell>
                                 <TableCell align="left">{row.faculty}</TableCell>
-                                <TableCell
-                                    align="left">{format(new Date(row.createdDate), "dd 'Th'M',' yyyy")}</TableCell>
-                                <TableCell align="right">{row.email}</TableCell>
-
+                                <TableCell align="left">{row.education}</TableCell>
+                                <TableCell align="left">{row.phoneNumber}</TableCell>
+                                <TableCell align="left">{row.email}</TableCell>
+                                <TableCell align="left">{format(new Date(row.createdDate), "dd 'Th'M',' yyyy")}</TableCell>
                             </TableRow>
                         ))}
                     </TableBody>

@@ -18,7 +18,6 @@ public class List
 
     public class PeriodParams : PagingParams
     {
-        public string Keyword { get; set; }
         public int? Course { get; set; }
         public int? Phase { get; set; }
     }

@@ -9,8 +9,7 @@ import PasswordResetToken from "../../features/Account/PasswordResetToken";
 import RequireNonAuth from "./RequireNonAuth";
 import Login from "../../features/Account/Login";
 import HomePage from "../../features/Homepage/HomePage";
-import LecturerList from "../../features/Lecturers/List/LecturerList";
-import DepartmentSubject from "../../features/AccountManagement/DepartmentSubject/DepartmentSubject";
+import LecturerList from "../../features/Lecturers/List/LecturerList"
 import AccountLecturer from "../../features/AccountManagement/Lecturer/AccountLecturer";
 import Instructor from "../../features/Instructor/Instructor";
 import Period from "../../features/GraduationPeriod/Period";
@@ -19,10 +18,7 @@ import IsLecturer from "./IsLecturer";
 import IsDepartmentSubject from "./IsDepartmentSubject";
 import IsFaculty from "./IsFaculty";
 import AccountStudent from "../../features/AccountManagement/Student/AccountStudent";
-import Approval from "../../features/Approval/Approval";
-import ApprovalTable from "../../features/Approval/ApprovalTable";
-import Outline from "../../features/Outline/Outline";
-import OutlineTable from "../../features/Outline/OutlineTable";
+
 
 
 export const route = {
@@ -31,6 +27,7 @@ export const route = {
     resetPassword: '/account/password_reset',
     confirmResetPassword: '/account/password_reset/with',
     lecturer: '/lecturer',
+    topic: '/topic',
     empty: 'null',
     instructor: '/instructor',
     period: '/period',
@@ -54,6 +51,7 @@ export const routes: RouteObject[] = [
                     {
                         element: <IsStudent/>, children: [
                             {path: 'lecturer', element: <LecturerList/>},
+                            {path: 'topic', element: <StudentTopic/>},
                         ]
                     },
                     {
@@ -73,7 +71,7 @@ export const routes: RouteObject[] = [
                         element: <IsFaculty/>, children: [
                             {path: 'period', element: <Period/>},
                             {path: 'account/student', element: <AccountStudent/>},
-                            {path: 'account/departmentSubject', element: <DepartmentSubject/>},
+                            {path: 'account/departmentSubject', element: <AccountDepartmentSubject/>},
                             {path: 'account/lecturer', element: <AccountLecturer/>},
                         ]
                     },
@@ -91,6 +89,8 @@ export const routes: RouteObject[] = [
             {path: 'server-error', element: <ServerError/>},
             {path: 'test', element: <Test/>},
             {path: '*', element: <Navigate replace to={'/not-found'}/>},
+            {path: 'topic/assignment/:id', element: <TopicAssignment/>},
+
         ],
     }
 ]

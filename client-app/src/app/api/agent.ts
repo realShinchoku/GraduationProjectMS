@@ -9,6 +9,7 @@ import {DepartmentSubjectFilterItem} from "../models/filterItem";
 import {Instructor} from "../models/instructor";
 import {Period, PeriodFormValues} from "../models/period";
 import {DepartmentSubject} from "../models/departmentSubject";
+import {Topic, TopicDto} from "../models/topic";
 
 const sleep = (delay: number) => {
     return new Promise((resolve) => {
@@ -63,7 +64,7 @@ axios.interceptors.response.use(async response => {
             console.log('Forbidden');
             break;
         case 404:
-            await router.navigate('/not-found');
+            // await router.navigate('/not-found');
             break;
         case 409:
             throw data;
@@ -154,6 +155,13 @@ const Instructors = {
     assign: (studentId: string, lecturerId: string) => requests.post(`/instructor/assign`, {studentId, lecturerId}),
 }
 
+const Topics = {
+    list: (params: URLSearchParams, periodId: string) => requests.list<TopicDto[]>(`/graduationProject?periodId=${periodId}`,{params}),
+    create: (name : string, type: string, description: string) => requests.post<Topic>(`/graduationProject`, {name, type, description}),
+    edit: (id : string, name : string, type: string, description: string) => requests.put<Topic>(`/graduationProject`, {id, name, type, description}),
+    get: (id: string) => requests.get<Topic>(`/graduationProject/${id}`),
+}
+
 const agent = {
     Account,
     Lecturers,
@@ -161,7 +169,8 @@ const agent = {
     Periods,
     DepartmentSubjects,
     Instructors,
-    FilterItems
+    FilterItems,
+    Topics
 }
 
 export default agent;
