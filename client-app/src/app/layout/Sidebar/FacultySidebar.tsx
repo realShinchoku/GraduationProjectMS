@@ -7,11 +7,12 @@ import {Category, Ellipse, LogoSP, ProfileUser, TaskSquare} from "../../../asset
 import {useStore} from "../../stores/store";
 import SidebarItem from "./SidebarItem/SidebarItem";
 import "./Sidebar.scss";
+import {useLocation} from "react-router-dom";
 
 function FacultySidebar() {
 
     const {commonStore: {sideBarState, openSideBar, closeSideBar}} = useStore();
-
+    const location = useLocation();
     const handleClick = () => {
         sideBarState ? closeSideBar() : openSideBar();
     };
@@ -37,12 +38,16 @@ function FacultySidebar() {
                 <SidebarItem title="Đợt đồ án" to={route.period} icon={TaskSquare}/>
                 <SidebarItem title="Tài khoản" to={route.accountStudent} icon={ProfileUser}/>
             </Box>
-            <Divider className="divider_side_bar"/>
-            <Box className="side_bar_inner">
-                <SidebarItem title="Sinh viên" to={route.home} icon={Ellipse}/>
-                <SidebarItem title="Giảng viên" to={route.period} icon={Ellipse}/>
-                <SidebarItem title="Bộ môn" to={route.accountStudent} icon={Ellipse}/>
-            </Box>   
+            {location.pathname.includes('/account')
+                && <>
+                    <Divider className="divider_side_bar"/>
+                    <Box className="side_bar_inner">
+                        <SidebarItem title="Sinh viên" to={route.accountStudent} icon={Ellipse}/>
+                        <SidebarItem title="Giảng viên" to={route.accountLecturer} icon={Ellipse}/>
+                        <SidebarItem title="Bộ môn" to={route.accountDepartmentSubject} icon={Ellipse}/>
+                    </Box>
+                </>
+            }
         </Grid>
     )
 }

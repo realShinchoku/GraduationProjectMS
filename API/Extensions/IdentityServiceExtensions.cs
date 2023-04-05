@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Text;
 using API.Services;
 using Domain;
@@ -6,6 +7,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
+using NuGet.Packaging;
 using Persistence;
 
 namespace API.Extensions;
@@ -64,6 +66,7 @@ public static class IdentityServiceExtensions
             opt.AddPolicy("IsDepartmentSubjects", policy => policy.Requirements.Add(new IsRole(Role.DepartmentSubject)));
             opt.AddPolicy("IsLecturer", policy => policy.Requirements.Add(new IsRole(Role.Lecturer)));
             opt.AddPolicy("IsStudent", policy => policy.Requirements.Add(new IsRole(Role.Student)));
+            opt.AddPolicy("IsLecturerOrDepartmentSubjects", policy => policy.Requirements.AddRange(new List<IAuthorizationRequirement>(){new IsRole(Role.DepartmentSubject), new IsRole(Role.Lecturer)}));
         });
 
         services.AddTransient<IAuthorizationHandler, IsRoleHandler>();
