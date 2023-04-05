@@ -18,6 +18,13 @@ import IsLecturer from "./IsLecturer";
 import IsDepartmentSubject from "./IsDepartmentSubject";
 import IsFaculty from "./IsFaculty";
 import AccountStudent from "../../features/AccountManagement/Student/AccountStudent";
+import TopicAssignment from "../../features/TopicAssignment/TopicAssignment";
+import AccountDepartmentSubject from "../../features/AccountManagement/DepartmentSubject/AccountDepartmentSubject";
+import OutlineTable from "../../features/Outline/OutlineTable";
+import StudentTopic from "../../features/StudentTopic/StudentTopic";
+import Approval from "../../features/Approval/Approval";
+import ApprovalTable from "../../features/Approval/ApprovalTable";
+import Outline from "../../features/Outline/Outline";
 
 
 
