@@ -11,7 +11,12 @@ import * as Yup from "yup";
 import { RadioGroup, TextField } from "formik-mui";
 import "./TopicAssignment.scss";
 
-function TopicAssignmentModal() {
+interface Props {
+    id: string;
+}
+
+
+function TopicAssignmentModal({id}:Props) {
     const { modalStore } = useStore();
     const [value, setValue] = React.useState("female");
 

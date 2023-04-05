@@ -19,12 +19,12 @@ interface Props {
 }
 
 function AccountStudentTable({studentStore}: Props) {
-    const {loadLists, students, studentsList, pagination, setPagingParams} = studentStore;
+    const {loadList, students, studentsList, pagination, setPagingParams} = studentStore;
 
     useEffect(() => {
         if (students.size <= 0)
-            loadLists();
-    }, [loadLists, students.size]);
+            loadList();
+    }, [loadList, students.size]);
 
     const handleChangePage = (event: unknown, newPage: number) => {
         setPagingParams(new PagingParams(newPage, pagination!.itemsPerPage));

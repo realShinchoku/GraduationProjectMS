@@ -20,7 +20,7 @@ public class List
     
     public class TopicParams : PagingParams
     {
-        
+        public Guid PeriodId { get; set; }
     }
 
     public class Handler : IRequestHandler<Query, Result<PageList<TopicDto>>>
@@ -41,9 +41,10 @@ public class List
             var query = _context.Students
                 .Include(x => x.Lecturer)
                 .Include(x => x.GraduationProject)
+                .Include(x => x.GraduationProjectPeriod)
                 .Include(x => x.Faculty)
                 .OrderBy(x => x.StudentId)
-                .Where(x => x.GraduationProject != null)
+                .Where(x => x.GraduationProject != null && x.GraduationProjectPeriod.Id == request.Params.PeriodId)
                 .ProjectTo<TopicDto>(_mapper.ConfigurationProvider).AsQueryable();
             
             if (userRole == Role.DepartmentSubject)

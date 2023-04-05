@@ -22,12 +22,12 @@ interface Props {
 function InstructorAssginTable({periodId}: Props) {
     const {modalStore: {openModal}, periodStore: {studentStores}} = useStore();
     const studentStore = studentStores.get(periodId)!;
-    const {loadLists, students, studentsList, loading, pagination, setPagingParams} = studentStore;
+    const {loadList, students, studentsList, loading, pagination, setPagingParams} = studentStore;
 
     useEffect(() => {
         if (students.size <= 0)
-            loadLists();
-    }, [loadLists, students.size]);
+            loadList();
+    }, [loadList, students.size]);
 
     const handleChangePage = (event: unknown, newPage: number) => {
         setPagingParams(new PagingParams(newPage, pagination!.itemsPerPage));

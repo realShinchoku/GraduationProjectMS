@@ -23,12 +23,12 @@ function InstructorApprovalTable({periodId}: Props) {
 
     const {modalStore, periodStore: {instructorStores}} = useStore();
     const instructorStore = instructorStores.get(periodId);
-    const {loadLists, instructors, instructorsList, loading, pagination, setPagingParams} = instructorStore!;
+    const {loadList, instructors, instructorsList, loading, pagination, setPagingParams} = instructorStore!;
 
     useEffect(() => {
         if (instructors.size <= 0)
-            loadLists();
-    }, [loadLists, instructors.size])
+            loadList();
+    }, [loadList, instructors.size])
 
     const handleChangePage = (event: unknown, newPage: number) => {
         setPagingParams(new PagingParams(newPage, pagination!.itemsPerPage));

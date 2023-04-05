@@ -23,13 +23,13 @@ export default class PeriodStore {
             async () => {
                 this.pagingParams.pageNumber = 0;
                 this.periods.clear()
-                await this.loadLists();
+                await this.loadList();
             });
 
         reaction(() => this.isAccount || this.isInstructor,
             async () => {
                 this.periods.clear()
-                await this.loadLists();
+                await this.loadList();
             });
     }
 
@@ -45,7 +45,7 @@ export default class PeriodStore {
         return params;
     }
 
-    loadLists = async () => {
+    loadList = async () => {
         this.loading = true;
         try {
             const result = await agent.Periods.list(this.axiosParams);
