@@ -18,7 +18,6 @@ public class List
     public class InstructorParams : PagingParams
     {
         public Guid? PeriodId { get; set; }
-        public string Keyword { get; set; }
     }
 
     public class Handler : IRequestHandler<Query, Result<PageList<InstructorDto>>>

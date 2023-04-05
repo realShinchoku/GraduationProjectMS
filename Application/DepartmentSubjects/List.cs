@@ -18,7 +18,6 @@ public class List
 
     public class DepartmentSubjectParams : PagingParams
     {
-        public string Keyword { get; set; }
     }
 
     public class Handler : IRequestHandler<Query, Result<PageList<DepartmentSubjectDto>>>

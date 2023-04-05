@@ -141,17 +141,20 @@ namespace Persistence.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
+                    b.Property<bool>("DepartmentSubjectApproval")
+                        .HasColumnType("boolean");
+
                     b.Property<string>("Description")
                         .HasColumnType("text");
 
                     b.Property<Guid?>("GraduationProjectPeriodId")
                         .HasColumnType("uuid");
 
+                    b.Property<bool>("LecturerApproval")
+                        .HasColumnType("boolean");
+
                     b.Property<string>("Name")
                         .HasColumnType("text");
-
-                    b.Property<int>("Status")
-                        .HasColumnType("integer");
 
                     b.Property<string>("Type")
                         .HasColumnType("text");
@@ -175,6 +178,9 @@ namespace Persistence.Migrations
                     b.Property<int>("Course")
                         .HasColumnType("integer");
 
+                    b.Property<bool>("DepartmentSubjectApproval")
+                        .HasColumnType("boolean");
+
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("timestamp with time zone");
 
@@ -183,6 +189,9 @@ namespace Persistence.Migrations
 
                     b.Property<DateTime>("GraduationProjectTime")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<bool>("LecturerApproval")
+                        .HasColumnType("boolean");
 
                     b.Property<string>("Name")
                         .HasColumnType("text");

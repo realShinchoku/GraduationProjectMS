@@ -142,6 +142,7 @@ public class AccountController : BaseApiController
     {
         return new UserDto
         {
+            Id = user.Id,
             DisplayName = user.DisplayName,
             Token = _tokenService.CreateToken(user),
             UserName = user.UserName,

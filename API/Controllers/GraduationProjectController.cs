@@ -23,10 +23,17 @@ public class GraduationProjectController : BaseApiController
         return HandleResult(await Mediator.Send(new Edit.Command { GraduationProject = graduationProject }));
     }
     
-    [HttpGet]
+    [HttpGet("{id}")]
     [Authorize(Policy = "IsStudent")]
-    public async Task<IActionResult> Get()
+    public async Task<IActionResult> Get(string id)
     {
-        return HandleResult(await Mediator.Send(new Get.Query()));
+        return HandleResult(await Mediator.Send(new Get.Query{Id = id}));
+    }
+
+    [HttpGet]
+    [Authorize]
+    public async Task<IActionResult> List([FromQuery] List.TopicParams @params)
+    {
+        return HandlePageResult(await Mediator.Send(new List.Query { Params = @params }));
     }
 }

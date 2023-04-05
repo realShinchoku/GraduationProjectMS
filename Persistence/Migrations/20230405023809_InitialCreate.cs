@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Persistence.Migrations
 {
     /// <inheritdoc />
-    public partial class Init : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -164,6 +164,8 @@ namespace Persistence.Migrations
                     Name = table.Column<string>(type: "text", nullable: true),
                     Course = table.Column<int>(type: "integer", nullable: false),
                     Phase = table.Column<int>(type: "integer", nullable: false),
+                    LecturerApproval = table.Column<bool>(type: "boolean", nullable: false),
+                    DepartmentSubjectApproval = table.Column<bool>(type: "boolean", nullable: false),
                     StartDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     EndDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     ContactInstructorTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
@@ -224,7 +226,8 @@ namespace Persistence.Migrations
                     Name = table.Column<string>(type: "text", nullable: true),
                     Type = table.Column<string>(type: "text", nullable: true),
                     Description = table.Column<string>(type: "text", nullable: true),
-                    Status = table.Column<int>(type: "integer", nullable: false),
+                    LecturerApproval = table.Column<bool>(type: "boolean", nullable: false),
+                    DepartmentSubjectApproval = table.Column<bool>(type: "boolean", nullable: false),
                     GraduationProjectPeriodId = table.Column<Guid>(type: "uuid", nullable: true)
                 },
                 constraints: table =>

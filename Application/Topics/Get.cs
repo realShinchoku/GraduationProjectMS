@@ -11,6 +11,7 @@ public class Get
 {
     public class Query : IRequest<Result<GraduationProject>>
     {
+        public string Id { get; set; }
     }
     
     public class Handler : IRequestHandler<Query, Result<GraduationProject>>
@@ -25,10 +26,14 @@ public class Get
         }
         public async Task<Result<GraduationProject>> Handle(Query request, CancellationToken cancellationToken)
         {
-            var student = await _context.Students
-                .Include(x => x.GraduationProject)
-                .FirstOrDefaultAsync(x => x.UserName == _userAccessor.GetUserName(), cancellationToken);
-            if (student == null)
+            var query = _context.Students
+                .Include(x => x.GraduationProject).AsQueryable();
+            if (request.Id != "")
+                query = query.Where(x => x.Id == request.Id);
+            else
+                query = query.Where(x => x.UserName == _userAccessor.GetUserName());
+            var student = await query.FirstOrDefaultAsync(cancellationToken);
+            if (student?.GraduationProject == null)
                 return null;
             return Result<GraduationProject>.Success(student.GraduationProject);
         }

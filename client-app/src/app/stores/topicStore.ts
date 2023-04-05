@@ -23,16 +23,18 @@ export default class TopicStore {
         }
         finally{this.loading = false};
     }
-    get = async () => {
+    get = async (id: string = '') => {
         this.loading = true;
         try {
-            const topic = await agent.Topics.get();
+            if(id === '')
+                id = store.userStore.user!.id;
+            const topic = await agent.Topics.get(id);
             runInAction(()=>this.topic = topic);
         } catch (error) {
             runInAction(()=>this.topic = null);
             console.log(error);
         }
-        finally{this.loading = false};
+        finally{this.loading = false}
     }
     edit = async (id: string, name : string, type: string, description: string) => {
         this.loading = true;

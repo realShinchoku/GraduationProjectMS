@@ -158,7 +158,7 @@ const Instructors = {
 const Topics = {
     create: (name : string, type: string, description: string) => requests.post<Topic>(`/graduationProject`, {name, type, description}),
     edit: (id : string, name : string, type: string, description: string) => requests.put<Topic>(`/graduationProject`, {id, name, type, description}),
-    get: () => requests.get<Topic>(`/graduationProject`),
+    get: (id: string) => requests.get<Topic>(`/graduationProject/${id}`),
 }
 
 const agent = {

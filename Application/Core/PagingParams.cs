@@ -5,6 +5,7 @@ public class PagingParams
     private const int MaxPageSize = 50;
     private int _pageSize = 10;
     public int PageNumber { get; set; } = 0;
+    public string Keyword { get; set; } = String.Empty;
 
     public int PageSize
     {
