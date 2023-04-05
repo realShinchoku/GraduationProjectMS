@@ -70,7 +70,8 @@ axios.interceptors.response.use(async response => {
             throw data;
         case 500:
             store.commonStore.setServerError(data);
-            await router.navigate('/server-error');
+            // await router.navigate('/server-error');
+            store.snackBarStore.error("Có lỗi xảy ra");
             break;
     }
     return Promise.reject(error);
