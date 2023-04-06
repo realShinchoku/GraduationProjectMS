@@ -18,7 +18,7 @@ interface Props {
 
 function TopicAssignmentModal({id}: Props) {
     const {modalStore, topicStore} = useStore();
-    
+
     return (
         <Formik
             initialValues={{
@@ -88,29 +88,30 @@ function TopicAssignmentModal({id}: Props) {
                     </Box>
                     <Typography className="label_topic_bottom">Kiểu đồ án</Typography>
 
-                    <FormControl sx={{ display:"unset"}} variant="standard" error={touched.type && Boolean(errors.type)}>
+                    <FormControl sx={{display: "unset"}} variant="standard"
+                                 error={touched.type && Boolean(errors.type)}>
                         <Field component={RadioGroup} name="type" className="radio_group">
                             <FormControlLabel
                                 value="Web"
-                                control={<Radio disabled={isSubmitting} />}
+                                control={<Radio disabled={isSubmitting}/>}
                                 label="Web"
                                 disabled={isSubmitting}
                             />
                             <FormControlLabel
                                 value="Android"
-                                control={<Radio disabled={isSubmitting} />}
+                                control={<Radio disabled={isSubmitting}/>}
                                 label="Android"
                                 disabled={isSubmitting}
                             />
                             <FormControlLabel
                                 value="AI"
-                                control={<Radio disabled={isSubmitting} />}
+                                control={<Radio disabled={isSubmitting}/>}
                                 label="AI"
                                 disabled={isSubmitting}
                             />
                             <FormControlLabel
                                 value="Nghiên cứu"
-                                control={<Radio disabled={isSubmitting} />}
+                                control={<Radio disabled={isSubmitting}/>}
                                 label="Nghiên cứu"
                                 disabled={isSubmitting}
                             />

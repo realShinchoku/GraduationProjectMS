@@ -54,10 +54,10 @@ function Header() {
                     <Box className="user">
                         <Box className="icon" sx={{color: 'action.active'}}>
                             <Box component="img" src={MessageQuestion} alt=""/>
-                            <Box component="img" src={Notification} alt="" 
-                                onClick={() => {
-                                    modalStore.openModal(<ModalNotification/>)
-                                }}
+                            <Box component="img" src={Notification} alt=""
+                                 onClick={() => {
+                                     modalStore.openModal(<ModalNotification/>)
+                                 }}
                             />
                         </Box>
                         <Box className="tlt">

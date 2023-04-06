@@ -7,7 +7,7 @@ import TxtNotification from "./TxtNotification";
 
 function ModalNotification() {
 
-    const { modalStore: {closeModal}} = useStore();
+    const {modalStore: {closeModal}} = useStore();
 
     return (
         <Box className="modal_notification">
@@ -30,7 +30,7 @@ function ModalNotification() {
                     <TxtNotification tlt="Bộ môn:" txt=" Trí tuệ nhân tạo"/>
                 </Box>
                 <LoadingButton
-                    color="primary" 
+                    color="primary"
                     variant="contained"
                     onClick={closeModal}
                 >

@@ -88,6 +88,7 @@ function LecturerTableRowDetail({value, lecturer}: Props) {
                                     <Typography variant="body1">Liên hệ hướng dẫn</Typography>
                                 </Button>
                                 <Button className="choose_lecturer"
+                                        disabled={lecturer.studentCount >= lecturer.maxStudentsNumber}
                                         onClick={() => chose(lecturer.id).then(() => setIsActive(current => !current))}>Chọn
                                     giảng viên</Button>
                             </ButtonGroup>

@@ -26,6 +26,7 @@ function RegisterTopic({topic}: Props) {
 
     const {topicStore: {create, edit}, modalStore: {closeModal}} = useStore();
     const topicFormValue = new TopicFormValue(topic);
+
     function handleSubmit(values: any, setErrors: any) {
         if (values.id) {
             edit(values.id, values.name, values.type, values.description).catch((err: any) => {

@@ -124,13 +124,9 @@ export default class TopicStore {
 
     setPeriod = (periodId: string) => this.periodId = periodId;
 
-    private setItem = (item: TopicDto) => {
-        this.topics.set(item.id, item);
-    }
-    
-    assign = async (id: string,name: string, type: string, description: string) => {
+    assign = async (id: string, name: string, type: string, description: string) => {
         try {
-            await agent.Topics.assign(id,name, type, description);
+            await agent.Topics.assign(id, name, type, description);
             store.studentStore.removeItem(id)
             store.modalStore.closeModal();
             store.snackBarStore.success('Bạn đã tạo thành công');
@@ -138,5 +134,9 @@ export default class TopicStore {
             store.snackBarStore.error('Có lỗi xảy ra');
             throw error;
         }
+    }
+
+    private setItem = (item: TopicDto) => {
+        this.topics.set(item.id, item);
     }
 }

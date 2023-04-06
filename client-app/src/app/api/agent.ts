@@ -170,7 +170,7 @@ const Topics = {
         description
     }),
     get: (id: string) => requests.get<Topic>(`/graduationProject/${id}`),
-    assign: (id: string,name: string, type: string, description: string) =>requests.post<Topic>(`/graduationProject/${id}`, {
+    assign: (id: string, name: string, type: string, description: string) => requests.post<Topic>(`/graduationProject/${id}`, {
         name,
         type,
         description

@@ -5,15 +5,7 @@ import {Avatar, Box, Typography} from "@mui/material";
 import Button from '@mui/material/Button';
 
 import {route} from "../../router/Routers";
-import {
-    Category,  
-    LogoSP, 
-    Message,
-    ProfileUser, 
-    Notification, 
-    TaskSquare,
-    Mission
-} from "../../../assets";
+import {Category, LogoSP, Message, Mission, Notification, ProfileUser, TaskSquare} from "../../../assets";
 import VerticalTabs from "./Tab";
 import {useStore} from "../../stores/store";
 import SidebarItem from "./SidebarItem/SidebarItem";

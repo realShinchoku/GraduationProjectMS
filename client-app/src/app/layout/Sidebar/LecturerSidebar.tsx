@@ -3,15 +3,7 @@ import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import {Avatar, Box, Typography} from "@mui/material";
 
 import {route} from "../../router/Routers";
-import {
-    Category,  
-    LogoSP, 
-    Message,
-    ProfileUser, 
-    Notification, 
-    TaskSquare,
-    Folder,
-} from "../../../assets";
+import {Category, Folder, LogoSP, Message, Notification, TaskSquare,} from "../../../assets";
 import {useStore} from "../../stores/store";
 import SidebarItem from "./SidebarItem/SidebarItem";
 import "./Sidebar.scss";

@@ -1,7 +1,7 @@
-import { Typography } from '@mui/material';
+import {Typography} from '@mui/material';
 import Box from '@mui/material/Box';
 import "./Document.scss"
-import { Group } from '../../assets';
+import {Group} from '../../assets';
 
 export default function Document() {
 
