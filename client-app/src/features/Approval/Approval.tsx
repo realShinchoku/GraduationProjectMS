@@ -17,7 +17,7 @@ function Approval() {
         if (pagination?.itemsPerPage !== 4)
             setPagingParams(new PagingParams(0, 4))
         if (periods.size <= 1) loadList();
-    }, [, periods.size, setPagingParams, pagination?.itemsPerPage]);
+    }, [loadList, periods.size, setPagingParams, pagination?.itemsPerPage]);
 
     function handleGetNext() {
         setLoadingNext(true);
@@ -30,7 +30,7 @@ function Approval() {
             <Box className="inner">
                 <Box className="nav">
                     <Typography variant="h3">Quản Lý Đề Tài</Typography>
-                    <ApprovalFilter />
+                    <ApprovalFilter/>
                     <InfiniteScroll pageStart={0} loadMore={handleGetNext}
                                     hasMore={!loadingNext && !!pagination && pagination.currentPage + 1 < pagination.totalPages}
                                     initialLoad={false}>

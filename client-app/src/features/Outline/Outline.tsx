@@ -31,7 +31,7 @@ function Outline() {
             <Box className="inner">
                 <Box className="nav">
                     <Typography variant="h3">Quản Lý Đề Cương</Typography>
-                    <OutlineFilter />
+                    <OutlineFilter/>
                     <InfiniteScroll pageStart={0} loadMore={handleGetNext}
                                     hasMore={!loadingNext && !!pagination && pagination.currentPage + 1 < pagination.totalPages}
                                     initialLoad={false}>

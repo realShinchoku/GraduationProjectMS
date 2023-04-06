@@ -15,7 +15,7 @@ public class Approval
         public string Note { get; set; }
         public Guid Id { get; set; }
     }
-    
+
     public class Handler : IRequestHandler<Command, Result<Unit>>
     {
         private readonly DataContext _context;
@@ -26,10 +26,12 @@ public class Approval
             _context = context;
             _userAccessor = userAccessor;
         }
+
         public async Task<Result<Unit>> Handle(Command request, CancellationToken cancellationToken)
         {
             var userRole = _userAccessor.GetUserRole();
-            var topic = await _context.GraduationProjects.FirstOrDefaultAsync(x => x.Id == request.Id, cancellationToken);
+            var topic = await _context.GraduationProjects.FirstOrDefaultAsync(x => x.Id == request.Id,
+                cancellationToken);
             if (topic == null)
                 return null;
             if (userRole == Role.DepartmentSubject)

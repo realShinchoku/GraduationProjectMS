@@ -6,7 +6,6 @@ using AutoMapper.QueryableExtensions;
 using Domain;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Internal;
 using Persistence;
 
 namespace Application.Topics;
@@ -17,7 +16,7 @@ public class List
     {
         public TopicParams Params { get; set; }
     }
-    
+
     public class TopicParams : PagingParams
     {
         public Guid PeriodId { get; set; }
@@ -26,8 +25,8 @@ public class List
     public class Handler : IRequestHandler<Query, Result<PageList<TopicDto>>>
     {
         private readonly DataContext _context;
-        private readonly IUserAccessor _userAccessor;
         private readonly IMapper _mapper;
+        private readonly IUserAccessor _userAccessor;
 
         public Handler(DataContext context, IUserAccessor userAccessor, IMapper mapper)
         {
@@ -35,6 +34,7 @@ public class List
             _userAccessor = userAccessor;
             _mapper = mapper;
         }
+
         public async Task<Result<PageList<TopicDto>>> Handle(Query request, CancellationToken cancellationToken)
         {
             var userRole = _userAccessor.GetUserRole();
@@ -46,7 +46,7 @@ public class List
                 .OrderBy(x => x.StudentId)
                 .Where(x => x.GraduationProject != null && x.GraduationProjectPeriod.Id == request.Params.PeriodId)
                 .ProjectTo<TopicDto>(_mapper.ConfigurationProvider).AsQueryable();
-            
+
             if (userRole == Role.DepartmentSubject)
                 query = query.Where(x => x.LecturerApproval);
 

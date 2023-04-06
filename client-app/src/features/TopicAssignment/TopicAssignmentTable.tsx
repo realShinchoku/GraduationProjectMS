@@ -7,16 +7,16 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
-import { Button } from '@mui/material';
-import { useStore } from '../../app/stores/store';
+import {Button} from '@mui/material';
+import {useStore} from '../../app/stores/store';
 import TopicAssignmentModal from './TopicAssignmentModal';
 import {PagingParams} from "../../app/models/pagination";
 import {observer} from "mobx-react-lite";
 import LoadingCircular from "../../app/layout/LoadingCircular";
 
 function TopicAssignmentTable() {
-    const {studentStore:{studentsList,setPagingParams, pagination, loading},modalStore} = useStore();
-    
+    const {studentStore: {studentsList, setPagingParams, pagination, loading}, modalStore} = useStore();
+
     const handleChangePage = (event: unknown, newPage: number) => {
         setPagingParams(new PagingParams(newPage, pagination!.itemsPerPage));
     };
@@ -36,7 +36,8 @@ function TopicAssignmentTable() {
                             <TableCell className='color_text' align="left">Tên sinh viên</TableCell>
                             <TableCell className='color_text' align="left">Lớp</TableCell>
                             <TableCell className='color_text' align="left">Khoa</TableCell>
-                            <TableCell sx={{paddingRight:'40px'}} className='color_text label' align="right">Trạng thái</TableCell>
+                            <TableCell sx={{paddingRight: '40px'}} className='color_text label' align="right">Trạng
+                                thái</TableCell>
                         </TableRow>
                     </TableHead>
                     {!loading && <TableBody>
@@ -60,7 +61,7 @@ function TopicAssignmentTable() {
                     </TableBody>}
                 </Table>
             </TableContainer>
-            {loading && <LoadingCircular />}
+            {loading && <LoadingCircular/>}
             <TablePagination
                 rowsPerPageOptions={[5, 10, 25]}
                 component="div"

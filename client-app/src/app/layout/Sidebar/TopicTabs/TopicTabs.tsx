@@ -2,7 +2,7 @@ import Box from '@mui/material/Box';
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 
 import LinkSidebar from '../LinkSidebar';
-import { route } from '../../../router/Routers';
+import {route} from '../../../router/Routers';
 import "../Sidebar.scss"
 
 export default function TopicTabs() {

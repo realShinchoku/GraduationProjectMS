@@ -159,25 +159,26 @@
   }
 }
 
-.topic_assignment_table{
-    .color_text{
-        color: #b9b9b9;
-        font-weight: 200;
-    }
-    .button_table{
-        text-transform:none;
-        font-family: 'Inter';
-        font-style: normal;
-        font-weight: 400;
-        font-size: 14px;
-        text-align: center;
-        border-radius: 10px;
-        background-color:#3690E3;
-    }
+.topic_assignment_table {
+  .color_text {
+    color: #b9b9b9;
+    font-weight: 200;
+  }
+
+  .button_table {
+    text-transform: none;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    text-align: center;
+    border-radius: 10px;
+    background-color: #3690E3;
+  }
 }
 
-.topic_assignment_modal{
-  .info_topic{
+.topic_assignment_modal {
+  .info_topic {
     font-family: 'Inter';
     font-style: normal;
     font-weight: 700;
@@ -185,7 +186,8 @@
     line-height: 39px;
     margin-bottom: 40px;
   }
-  .label_topic{
+
+  .label_topic {
     font-family: 'Inter';
     font-style: normal;
     font-weight: 700;
@@ -194,7 +196,8 @@
     margin-left: 22px;
     margin-top: 10px;
   }
-  .label_topic_{
+
+  .label_topic_ {
     margin-top: 30px;
     font-family: 'Inter';
     font-style: normal;
@@ -203,16 +206,18 @@
     line-height: 29px;
     margin-left: 22px;
   }
-  .label_topic_bottom{
+
+  .label_topic_bottom {
     margin-top: 30px;
     font-family: 'Inter';
     font-style: normal;
     font-weight: 700;
-    font-size: 24px;  
+    font-size: 24px;
     line-height: 29px;
     margin-bottom: 24px;
   }
-  .field_{
+
+  .field_ {
     border-radius: 10px;
     border: 1px solid #000000;
   }

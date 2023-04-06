@@ -14,7 +14,8 @@ public class PeriodController : BaseApiController
     [Authorize(Policy = "IsFacultyOffice")]
     public async Task<IActionResult> Create(CreateDto graduationProjectPeriod)
     {
-        return HandleResult(await Mediator.Send(new Create.Command { GraduationProjectPeriod = graduationProjectPeriod }));
+        return HandleResult(
+            await Mediator.Send(new Create.Command { GraduationProjectPeriod = graduationProjectPeriod }));
     }
 
     [HttpGet]

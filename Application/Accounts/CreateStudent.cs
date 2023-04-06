@@ -1,6 +1,4 @@
 using System.Globalization;
-using System.Text;
-using System.Text.RegularExpressions;
 using Application.Accounts.DTOs;
 using Application.Core;
 using Application.Interfaces;
@@ -44,8 +42,9 @@ public class CreateStudent
             Map(p => p.StudentId).Index(0);
             Map(p => p.Email).Index(1);
             Map(p => p.DisplayName).Index(2);
-            Map(p => p.Birthday).Index(3);
-            Map(p => p.Sex).Index(4);
+            Map(p => p.Class).Index(3);
+            Map(p => p.Birthday).Index(4);
+            Map(p => p.Sex).Index(5);
         }
     }
 
@@ -124,6 +123,5 @@ public class CreateStudent
 
             return Result<Unit>.Success(Unit.Value);
         }
-        
     }
 }

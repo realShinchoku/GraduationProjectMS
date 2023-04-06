@@ -44,7 +44,7 @@ function AddLecturer() {
                 })
             })}
         >
-            {({ dirty, errors, isSubmitting, isValid, touched}) =>
+            {({dirty, errors, isSubmitting, isValid, touched}) =>
                 <Form
                     className="add_lecturer"
                     style={{
@@ -145,7 +145,7 @@ function AddLecturer() {
                     >
                         <Button
                             variant="contained"
-                            sx={{textTransform: "capitalize", marginRight:'20px', width:'90px'}}
+                            sx={{textTransform: "capitalize", marginRight: '20px', width: '90px'}}
                             onClick={modalStore.closeModal}
                         >
                             Thoát

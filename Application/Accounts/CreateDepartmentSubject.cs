@@ -1,6 +1,4 @@
-﻿using System.Text;
-using System.Text.RegularExpressions;
-using Application.Accounts.DTOs;
+﻿using Application.Accounts.DTOs;
 using Application.Core;
 using Application.Interfaces;
 using Domain;
@@ -76,7 +74,7 @@ public class CreateDepartmentSubject
                     Email = request.CreateDepartmentSubjectDto.Email,
                     PhoneNumber = request.CreateDepartmentSubjectDto.PhoneNumber,
                     DisplayName = request.CreateDepartmentSubjectDto.DisplayName,
-                    Faculty = faculty,
+                    Faculty = faculty
                 };
 
                 var result = await _userManager.CreateAsync(user, password);

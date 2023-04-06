@@ -11,7 +11,6 @@ import {useEffect, useState} from "react";
 import {TextField} from "formik-mui";
 import {DatePicker} from "formik-mui-x-date-pickers";
 import {observer} from "mobx-react-lite";
-import {ADD} from "mobx/dist/types/observablemap";
 
 interface Props {
     id?: string;
@@ -47,7 +46,7 @@ function PeriodModal({id}: Props) {
                 console.log(period);
             });
     }, [id, setPeriodFormValues, get]);
-    
+
     function addDate(date: Date, day: number) {
         date.setDate(date.getDate() + day);
         return date;
@@ -183,12 +182,12 @@ function PeriodModal({id}: Props) {
                                                 ...periodFormValues,
                                                 startDate: new Date(value),
                                                 contactInstructorTime: new Date(value),
-                                                registerTopicTime: new Date(addDate(value,1)),
-                                                syllabusSubmissionTime: new Date(addDate(value,4)),
-                                                syllabusReviewTime: new Date(addDate(value,15)),
-                                                graduationProjectTime: new Date(addDate(value,22)),
-                                                protectionTime: new Date(addDate(value,119)),
-                                                endDate: new Date(addDate(value,132)),
+                                                registerTopicTime: new Date(addDate(value, 1)),
+                                                syllabusSubmissionTime: new Date(addDate(value, 4)),
+                                                syllabusReviewTime: new Date(addDate(value, 15)),
+                                                graduationProjectTime: new Date(addDate(value, 22)),
+                                                protectionTime: new Date(addDate(value, 119)),
+                                                endDate: new Date(addDate(value, 132)),
                                             });
                                         }}
                                     />

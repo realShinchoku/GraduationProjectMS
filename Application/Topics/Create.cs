@@ -15,8 +15,9 @@ public class Create
     public class Command : IRequest<Result<GraduationProject>>
     {
         public CreateDto GraduationProject { get; set; }
+        public string Id { get; set; }
     }
-    
+
     public class CommandValidator : AbstractValidator<Command>
     {
         public CommandValidator()
@@ -38,9 +39,9 @@ public class Create
 
     public class Handler : IRequestHandler<Command, Result<GraduationProject>>
     {
-        private readonly IUserAccessor _userAccessor;
         private readonly DataContext _context;
         private readonly IMapper _mapper;
+        private readonly IUserAccessor _userAccessor;
 
         public Handler(IUserAccessor userAccessor, DataContext context, IMapper mapper)
         {
@@ -48,11 +49,20 @@ public class Create
             _context = context;
             _mapper = mapper;
         }
+
         public async Task<Result<GraduationProject>> Handle(Command request, CancellationToken cancellationToken)
         {
-            var student = await _context.Students
-                .Include(x => x.GraduationProject)
-                .FirstOrDefaultAsync(x => x.UserName == _userAccessor.GetUserName(), cancellationToken);
+            Student student;
+            if (!string.IsNullOrEmpty(request.Id))
+                student = await _context.Students
+                    .Include(x => x.GraduationProject)
+                    .FirstOrDefaultAsync(x => x.Id == request.Id, cancellationToken);
+
+            else
+                student = await _context.Students
+                    .Include(x => x.GraduationProject)
+                    .FirstOrDefaultAsync(x => x.UserName == _userAccessor.GetUserName(), cancellationToken);
+
             if (student == null)
                 return null;
             if (student.GraduationProject != null)

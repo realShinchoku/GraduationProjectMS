@@ -45,7 +45,8 @@ public class List
             if (_userAccessor.GetUserRole() == Role.Lecturer)
                 query = query.Where(x => x.Lecturer.UserName == _userAccessor.GetUserName());
             if (request.Params.HasTopic != null)
-                query = query.Where(x => request.Params.HasTopic == false ? x.GraduationProject == null : x.GraduationProject != null);
+                query = query.Where(x =>
+                    request.Params.HasTopic == false ? x.GraduationProject == null : x.GraduationProject != null);
             return Result<PageList<StudentDto>>.Success(
                 await PageList<StudentDto>.CreateAsync(query.ProjectTo<StudentDto>(_mapper.ConfigurationProvider),
                     request.Params, cancellationToken)

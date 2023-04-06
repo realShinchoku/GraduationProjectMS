@@ -27,7 +27,6 @@ import ApprovalTable from "../../features/Approval/ApprovalTable";
 import Outline from "../../features/Outline/Outline";
 
 
-
 export const route = {
     home: '/',
     login: '/login',
@@ -42,10 +41,14 @@ export const route = {
     accountStudent: '/account/student',
     accountDepartmentSubject: '/account/departmentSubject',
     accountLecturer: '/account/lecturer',
-    project:'/project',
-    projectDetail:(id:string) => {return `/project/${id}`},
-    outline:'/outline',
-    outlineDetail:(id:string) => {return `/outline/${id}`},
+    project: '/project',
+    projectDetail: (id: string) => {
+        return `/project/${id}`
+    },
+    outline: '/outline',
+    outlineDetail: (id: string) => {
+        return `/outline/${id}`
+    },
 };
 
 export const routes: RouteObject[] = [
@@ -68,9 +71,9 @@ export const routes: RouteObject[] = [
                     {
                         element: <IsDepartmentSubject/>, children: [
                             {path: 'instructor', element: <Instructor/>},
-                            {path: 'project', element: <Approval/>},                         
+                            {path: 'project', element: <Approval/>},
                             {path: 'project/:id', element: <ApprovalTable/>},
-                            {path: 'outline', element: <Outline/>},                         
+                            {path: 'outline', element: <Outline/>},
                             {path: 'outline/:id', element: <OutlineTable/>},
                         ]
                     },

@@ -1,5 +1,3 @@
-using System.Text;
-using System.Text.RegularExpressions;
 using Application.Accounts.DTOs;
 using Application.Core;
 using Application.Interfaces;
@@ -95,7 +93,6 @@ public class CreateLecture
 
                 return Result<Unit>.Success(Unit.Value);
             }
-            
         }
     }
 }

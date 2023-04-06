@@ -2,13 +2,13 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import { FormControl, FormControlLabel, FormHelperText, Grid, Radio } from "@mui/material";
-import { useStore } from "../../app/stores/store";
-import { LoadingButton } from "@mui/lab";
-import { observer } from "mobx-react-lite";
-import { Field, Form, Formik } from "formik";
+import {FormControl, FormControlLabel, FormHelperText, Grid, Radio} from "@mui/material";
+import {useStore} from "../../app/stores/store";
+import {LoadingButton} from "@mui/lab";
+import {observer} from "mobx-react-lite";
+import {Field, Form, Formik} from "formik";
 import * as Yup from "yup";
-import { RadioGroup, TextField } from "formik-mui";
+import {RadioGroup, TextField} from "formik-mui";
 import "./TopicAssignment.scss";
 
 interface Props {
@@ -16,27 +16,26 @@ interface Props {
 }
 
 
-function TopicAssignmentModal({id}:Props) {
-    const { modalStore } = useStore();
-    const [value, setValue] = React.useState("female");
-
+function TopicAssignmentModal({id}: Props) {
+    const {modalStore, topicStore, snackBarStore} = useStore();
+    
     return (
         <Formik
             initialValues={{
-                displayName: "",
+                name: "",
                 describe: "",
                 type: "",
                 error: null,
             }}
-            onSubmit={(values) => console.log(values)}
+            onSubmit={(values) => topicStore.assign(id, values.name, values.type, values.describe)}
             validationSchema={Yup.object().shape({
-                displayName: Yup.string().required("Hãy điền tên giảng viên"),
+                name: Yup.string().required("Hãy điền tên đề tài"),
                 describe: Yup.string().required("Hãy điền mô tả"),
                 type: Yup.string().required("Vui lòng chọn kiểu đồ án"),
 
             })}
         >
-            {({ dirty, errors, isSubmitting, isValid, touched }) => (
+            {({dirty, errors, isSubmitting, isValid, touched}) => (
                 <Form
                     className="topic_assignment_modal"
                     style={{
@@ -52,24 +51,24 @@ function TopicAssignmentModal({id}:Props) {
                         padding: "62px",
                     }}
                 >
-                    <Box sx={{ display: "flex", justifyContent: "center" }}>
+                    <Box sx={{display: "flex", justifyContent: "center"}}>
                         <Typography className="info_topic">THÔNG TIN ĐỀ TÀI</Typography>
                     </Box>
-                    <Box sx={{ width: "100%" }}>
+                    <Box sx={{width: "100%"}}>
                         <Grid
                             container
                             rowSpacing={3}
-                            columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+                            columnSpacing={{xs: 1, sm: 2, md: 3}}
                         >
                             <Typography className="label_topic">Tên đề tài</Typography>
                             <Grid item xs={12}>
                                 <Field
                                     className="field_"
                                     component={TextField}
-                                    name="displayName"
+                                    name="name"
                                     fullWidth
-                                    error={touched.displayName && Boolean(errors.displayName)}
-                                    helperText={touched.displayName && errors.displayName}
+                                    error={touched.name && Boolean(errors.name)}
+                                    helperText={touched.name && errors.name}
                                 />
                             </Grid>
                             <Typography className="label_topic_">Mô tả</Typography>
@@ -88,7 +87,7 @@ function TopicAssignmentModal({id}:Props) {
                         </Grid>
                     </Box>
                     <Typography className="label_topic_bottom">Kiểu đồ án</Typography>
-                    <FormControl sx={{width:'inherit'}} error={touched.type && Boolean(errors.type)}>
+                    <FormControl sx={{width: 'inherit'}} error={touched.type && Boolean(errors.type)}>
                         <Field component={RadioGroup} name="type">
                             <Grid
                                 container
@@ -100,10 +99,10 @@ function TopicAssignmentModal({id}:Props) {
                                 xs={12}
                                 margin={'auto'}
                             >
-                                <Grid item xs={5} container justifyContent="center" >
+                                <Grid item xs={5} container justifyContent="center">
                                     <FormControlLabel
                                         value="web"
-                                        control={<Radio disabled={isSubmitting} />}
+                                        control={<Radio disabled={isSubmitting}/>}
                                         label="Web"
                                         disabled={isSubmitting}
                                     />
@@ -111,7 +110,7 @@ function TopicAssignmentModal({id}:Props) {
                                 <Grid item xs={5} container justifyContent="center">
                                     <FormControlLabel
                                         value="android"
-                                        control={<Radio disabled={isSubmitting} />}
+                                        control={<Radio disabled={isSubmitting}/>}
                                         label="Android"
                                         disabled={isSubmitting}
                                     />
@@ -119,7 +118,7 @@ function TopicAssignmentModal({id}:Props) {
                                 <Grid item xs={5} container justifyContent="center">
                                     <FormControlLabel
                                         value="AI"
-                                        control={<Radio disabled={isSubmitting} />}
+                                        control={<Radio disabled={isSubmitting}/>}
                                         label="AI"
                                         disabled={isSubmitting}
                                     />
@@ -127,7 +126,7 @@ function TopicAssignmentModal({id}:Props) {
                                 <Grid item xs={5} container justifyContent="center">
                                     <FormControlLabel
                                         value="math"
-                                        control={<Radio disabled={isSubmitting} />}
+                                        control={<Radio disabled={isSubmitting}/>}
                                         label="Math"
                                         disabled={isSubmitting}
                                     />
@@ -139,13 +138,14 @@ function TopicAssignmentModal({id}:Props) {
                         </FormHelperText>
                     </FormControl>
                     <Box
-                        sx={{ display: "flex", justifyContent: "right", marginTop: "30px" }}
+                        sx={{display: "flex", justifyContent: "right", marginTop: "30px"}}
                     >
-                        <Button sx={{marginRight: "20px",borderRadius:'10px',width:'149px'}} variant="contained" onClick={modalStore.closeModal}>
+                        <Button sx={{marginRight: "20px", borderRadius: '10px', width: '149px'}} variant="contained"
+                                onClick={modalStore.closeModal}>
                             Thoát
                         </Button>
                         <LoadingButton
-                            sx={{width: "149px",borderRadius:'10px' }}
+                            sx={{width: "149px", borderRadius: '10px'}}
                             variant="contained"
                             type={"submit"}
                             loading={isSubmitting}

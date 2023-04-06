@@ -3,7 +3,7 @@ import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import {Avatar, Box, Divider, Typography} from "@mui/material";
 
 import {route} from "../../router/Routers";
-import {Category, Ellipse, LogoSP, ProfileUser, TaskSquare} from "../../../assets";
+import {Category, LogoSP, ProfileUser, TaskSquare} from "../../../assets";
 import {useStore} from "../../stores/store";
 import SidebarItem from "./SidebarItem/SidebarItem";
 import "./Sidebar.scss";
@@ -44,9 +44,12 @@ function FacultySidebar() {
                 && <>
                     <Divider className="divider_side_bar"/>
                     <Box className="side_bar_inner tab">
-                        <LinkSidebar title="Sinh viên" to={route.accountStudent} icon={<FiberManualRecordIcon className='blu'/>}/>
-                        <LinkSidebar title="Giảng viên" to={route.accountLecturer} icon={<FiberManualRecordIcon className='red'/>}/>
-                        <LinkSidebar title="Bộ môn" to={route.accountDepartmentSubject} icon={<FiberManualRecordIcon className='brown'/>}/>
+                        <LinkSidebar title="Sinh viên" to={route.accountStudent}
+                                     icon={<FiberManualRecordIcon className='blu'/>}/>
+                        <LinkSidebar title="Giảng viên" to={route.accountLecturer}
+                                     icon={<FiberManualRecordIcon className='red'/>}/>
+                        <LinkSidebar title="Bộ môn" to={route.accountDepartmentSubject}
+                                     icon={<FiberManualRecordIcon className='brown'/>}/>
                     </Box>
                 </>
             }
