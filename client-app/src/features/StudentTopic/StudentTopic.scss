@@ -2,177 +2,190 @@
 @import "../../assets/css/mixin/function";
 
 .student_topic {
-    text-align: center;
-    padding: 56px 135px 0 117px;
+  text-align: center;
+  padding: 56px 135px 0 117px;
+  @include sp {
+    padding: get_sp(20);
+  }
+
+  h2 {
+    font-family: 'Inter';
+    font-style: normal;
+    font-size: 46px;
+    font-weight: 600;
+    line-height: 56px;
+    color: #0D062D;
+    margin-bottom: 70px;
     @include sp {
+      font-size: get_sp(30);
+      line-height: get_sp(40);
+      margin-bottom: get_sp(30);
+    }
+  }
+
+  .inner {
+    h4 {
+      font-family: 'Inter';
+      font-style: normal;
+      font-weight: 600;
+      font-size: 46px;
+      line-height: 56px;
+      color: #7E7E7E;
+      padding-top: 167px;
+      margin-bottom: 205px;
+      @include sp {
+        padding-top: get_sp(50);
+        font-size: get_sp(30);
+        line-height: get_sp(40);
+        margin-bottom: get_sp(50);
+      }
+    }
+
+    button {
+      font-family: 'Inter';
+      font-style: normal;
+      color: #FFFFFF;
+      padding: 20px;
+      line-height: 29px;
+      font-size: 24px;
+      font-weight: 600;
+      background-color: #004CDF;
+      border: 1px solid #787486;
+      border-radius: 10px;
+      @include sp {
+        font-size: get_sp(20);
+        line-height: get_sp(18);
         padding: get_sp(20);
+      }
     }
-    h2 {
-        font-family: 'Inter';
-        font-style: normal;
-        font-size: 46px;
-        font-weight: 600;
-        line-height: 56px;
-        color: #0D062D;
-        margin-bottom: 70px;
+
+    .tlt {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 17px;
+      padding-top: 20px;
+      @include sp {
+        display: block;
+      }
+
+      h4 {
+        padding-top: 0;
+        font-size: 32px;
+        font-weight: 700;
+        line-height: 52px;
+        margin-bottom: 0;
+        color: rgba(0, 0, 0, 1);
         @include sp {
-            font-size: get_sp(30);
-            line-height: get_sp(40);
-            margin-bottom: get_sp(30);
+          margin-bottom: get_sp(20);
         }
-    }
-    .inner {
-        h4 {
-            font-family: 'Inter';
-            font-style: normal;
-            font-weight: 600;
-            font-size: 46px;
-            line-height: 56px;
-            color: #7E7E7E;
-            padding-top: 167px;
-            margin-bottom: 205px;
-            @include sp {
-                padding-top: get_sp(50);
-                font-size: get_sp(30);
-                line-height: get_sp(40);
-                margin-bottom: get_sp(50);
-            }
-        }
+      }
+
+      .button {
         button {
-            font-family: 'Inter';
-            font-style: normal;
-            color: #FFFFFF;
-            padding: 20px;
-            line-height: 29px;
-            font-size: 24px;
-            font-weight: 600;
-            background-color: #004CDF;
-            border: 1px solid #787486;
-            border-radius: 10px;
-            @include sp {
-                font-size: get_sp(20);
-                line-height: get_sp(18);
-                padding: get_sp(20);
-            }
+          background-color: #FFFFFF;
+          color: #787486;
+          border: 1px solid #787486;
+          text-transform: none;
+          font-size: 20px;
+          line-height: 24px;
+          font-weight: 500;
+          padding: 20px;
         }
-        .tlt {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 17px;
-            padding-top: 20px;
-            @include sp {
-                display: block;
-            }
-            h4 {
-                padding-top: 0;
-                font-size: 32px;
-                font-weight: 700;
-                line-height: 52px;
-                margin-bottom: 0;
-                color: rgba(0, 0, 0, 1);
-                @include sp {
-                    margin-bottom: get_sp(20);
-                }
-            }
-            .button {
-                button {
-                    background-color: #FFFFFF;
-                    color: #787486;
-                    border: 1px solid #787486;
-                    text-transform: none;
-                    font-size: 20px;
-                    line-height: 24px;
-                    font-weight: 500;
-                    padding: 20px;
-                }
-            }
-        }
-        form {
-            padding: 56px 33px 40px 33px;
-            @include sp {
-                padding: get_sp(20);
-            }
-            .input {
-                margin-bottom: 40px;
-            }
-        }
+      }
     }
+
+    form {
+      padding: 56px 33px 40px 33px;
+      @include sp {
+        padding: get_sp(20);
+      }
+
+      .input {
+        margin-bottom: 40px;
+      }
+    }
+  }
 }
+
 .register_topic {
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    border-radius: 5px;
-    width: 880px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  border-radius: 5px;
+  width: 880px;
+  position: relative;
+  transition: all 5s ease-in-out;
+  height: 100%;
+  justify-content: center;
+  @include sp {
+    width: 90%;
+    padding: 0 get_sp(20);
+  }
+
+  .inner {
+    background-color: #fff;
+    border-radius: 4px;
+    padding: 40px;
     position: relative;
-    transition: all 5s ease-in-out;
-    height: 100%;
-    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
     @include sp {
-        width: 90%;
-        padding: 0 get_sp(20);
+      padding: get_sp(20);
     }
-    .inner {
-        background-color: #fff;
-        border-radius: 4px;
-        padding: 40px;
-        position: relative;
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-        @include sp {
-            padding: get_sp(20);
-        }
-        .close {
-            position: absolute;
-            top: 10px;
-            right: 14px;
-            transition: all 200ms;
-            font-size: 30px;
-            font-weight: bold;
-            text-decoration: none;
-            color: #333;
-            line-height: unset;
-            cursor: pointer;
-        }
-    
-        h2 {
-            font-size: 40px;
-            color: #0D062D;
-            font-weight: 500;
-            line-height: 56px;
-            margin-bottom: 10px;
-            @include sp {
-                font-size: get_sp(28);
-                line-height: get_sp(30);
-                margin-bottom: get_sp(10);
-            }
-        }
-    
-        p {
-            margin-bottom: 10px;
-        }
-        .radio_group {
-            display: block;
-            border: 1px solid rgba(0, 0, 0, 1);
-            padding: 20px 55px 26px;
-            margin-bottom: 16px;
-            @include sp {
-                padding: get_sp(10);
-            }
-            label {
-                width: 50%;
-                margin-right: 0;
-            }
-        }
-    
-        button {
-            float: right;
-            padding: 10px 30px;
-        }
-    
-        button + button {
-            margin-right: 20px;
-        }
+
+    .close {
+      position: absolute;
+      top: 10px;
+      right: 14px;
+      transition: all 200ms;
+      font-size: 30px;
+      font-weight: bold;
+      text-decoration: none;
+      color: #333;
+      line-height: unset;
+      cursor: pointer;
     }
+
+    h2 {
+      font-size: 40px;
+      color: #0D062D;
+      font-weight: 500;
+      line-height: 56px;
+      margin-bottom: 10px;
+      @include sp {
+        font-size: get_sp(28);
+        line-height: get_sp(30);
+        margin-bottom: get_sp(10);
+      }
+    }
+
+    p {
+      margin-bottom: 10px;
+    }
+
+    .radio_group {
+      display: block;
+      border: 1px solid rgba(0, 0, 0, 1);
+      padding: 20px 55px 26px;
+      margin-bottom: 16px;
+      @include sp {
+        padding: get_sp(10);
+      }
+
+      label {
+        width: 50%;
+        margin-right: 0;
+      }
+    }
+
+    button {
+      float: right;
+      padding: 10px 30px;
+    }
+
+    button + button {
+      margin-right: 20px;
+    }
+  }
 }

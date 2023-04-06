@@ -74,7 +74,8 @@ public class AccountController : BaseApiController
     [HttpPost("departmentSubject")]
     public async Task<IActionResult> CreateDepartmentSubject(CreateDepartmentSubjectDto createDepartmentSubjectDto)
     {
-        return HandleResult(await Mediator.Send(new CreateDepartmentSubject.Command { CreateDepartmentSubjectDto = createDepartmentSubjectDto }));
+        return HandleResult(await Mediator.Send(new CreateDepartmentSubject.Command
+            { CreateDepartmentSubjectDto = createDepartmentSubjectDto }));
     }
 
 

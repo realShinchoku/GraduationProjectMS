@@ -7,7 +7,7 @@ import { useStore } from "../../app/stores/store";
 import { Role } from "../../app/models/user";
 
 interface Props {
-  period: Period;
+    period: Period;
 }
 
 function PeriodListItem({ period }: Props) {

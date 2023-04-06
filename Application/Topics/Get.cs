@@ -13,7 +13,7 @@ public class Get
     {
         public string Id { get; set; }
     }
-    
+
     public class Handler : IRequestHandler<Query, Result<GraduationProject>>
     {
         private readonly DataContext _context;
@@ -24,6 +24,7 @@ public class Get
             _context = context;
             _userAccessor = userAccessor;
         }
+
         public async Task<Result<GraduationProject>> Handle(Query request, CancellationToken cancellationToken)
         {
             var query = _context.Students

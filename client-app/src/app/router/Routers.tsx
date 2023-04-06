@@ -81,9 +81,9 @@ export const routes: RouteObject[] = [
                     {
                         element: <IsDepartmentSubject/>, children: [
                             {path: 'instructor', element: <Instructor/>},
-                            {path: 'project', element: <Approval/>},                         
+                            {path: 'project', element: <Approval/>},
                             {path: 'project/:id', element: <ApprovalTable/>},
-                            {path: 'outline', element: <Outline/>},                         
+                            {path: 'outline', element: <Outline/>},
                             {path: 'outline/:id', element: <OutlineTable/>},
                         ]
                     },

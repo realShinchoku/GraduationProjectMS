@@ -35,7 +35,7 @@ function ApprovalModal() {
             initialValues={{picker: -1, note: ''}}
             // onSubmit={(values) => approval( values.picker, values.note).then(() => modalStore.openModal(
             //     <SuccessModal/>))}
-            onSubmit={()=>modalStore.openModal(<SuccessModal/>)}
+            onSubmit={() => modalStore.openModal(<SuccessModal/>)}
             validationSchema={Yup.object().shape({
                 picker: Yup.boolean().required('Vui lòng chọn trạng thái duyệt'),
                 note: Yup.string().required('Vui lòng viết ghi chú'),

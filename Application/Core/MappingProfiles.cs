@@ -7,6 +7,7 @@ using Application.Students.DTOs;
 using Application.Topics.DTOs;
 using AutoMapper;
 using Domain;
+using CreateDto = Application.GraduationProjectPeriods.DTOs.CreateDto;
 
 namespace Application.Core;
 
@@ -14,7 +15,7 @@ public class MappingProfiles : Profile
 {
     public MappingProfiles()
     {
-        CreateMap<GraduationProjectPeriods.DTOs.CreateDto, GraduationProjectPeriod>();
+        CreateMap<CreateDto, GraduationProjectPeriod>();
         CreateMap<Lecturer, LecturerDto>()
             .ForMember(d => d.DepartmentSubjects, o => o.MapFrom(x => x.DepartmentSubject.DisplayName))
             .ForMember(d => d.Faculty, o => o.MapFrom(x => x.Faculty.DisplayName))
@@ -54,6 +55,7 @@ public class MappingProfiles : Profile
             .ForMember(x => x.Name, o => o.MapFrom(x => x.GraduationProject.Name))
             .ForMember(x => x.Lecturer, o => o.MapFrom(x => x.Lecturer.DisplayName))
             .ForMember(x => x.LecturerApproval, o => o.MapFrom(x => x.GraduationProject.LecturerApproval))
-            .ForMember(x => x.DepartmentSubjectApproval, o => o.MapFrom(x => x.GraduationProject.DepartmentSubjectApproval));
+            .ForMember(x => x.DepartmentSubjectApproval,
+                o => o.MapFrom(x => x.GraduationProject.DepartmentSubjectApproval));
     }
 }

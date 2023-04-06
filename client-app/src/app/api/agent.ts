@@ -72,7 +72,7 @@ axios.interceptors.response.use(async response => {
             store.commonStore.setServerError(data);
             // await router.navigate('/server-error');
             store.snackBarStore.error("Có lỗi xảy ra");
-            break;
+            throw data;
     }
     return Promise.reject(error);
 });
@@ -157,10 +157,24 @@ const Instructors = {
 }
 
 const Topics = {
-    list: (params: URLSearchParams, periodId: string) => requests.list<TopicDto[]>(`/graduationProject?periodId=${periodId}`,{params}),
-    create: (name : string, type: string, description: string) => requests.post<Topic>(`/graduationProject`, {name, type, description}),
-    edit: (id : string, name : string, type: string, description: string) => requests.put<Topic>(`/graduationProject`, {id, name, type, description}),
+    list: (params: URLSearchParams, periodId: string) => requests.list<TopicDto[]>(`/graduationProject?periodId=${periodId}`, {params}),
+    create: (name: string, type: string, description: string) => requests.post<Topic>(`/graduationProject`, {
+        name,
+        type,
+        description
+    }),
+    edit: (id: string, name: string, type: string, description: string) => requests.put<Topic>(`/graduationProject`, {
+        id,
+        name,
+        type,
+        description
+    }),
     get: (id: string) => requests.get<Topic>(`/graduationProject/${id}`),
+    assign: (id: string,name: string, type: string, description: string) =>requests.post<Topic>(`/graduationProject/${id}`, {
+        name,
+        type,
+        description
+    }),
 }
 
 const agent = {

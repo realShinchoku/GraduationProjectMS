@@ -7,6 +7,7 @@ public static class PasswordGenerator
 {
     private const string Chars = "0123456789ABCDEFGHIJKLMNOPQSTUVWXYZabcdefghijklmnpqrstuvwxyz";
     private static readonly Regex PasswordRegex = new("^(?=.*[0-9]+.*)(?=.*[a-z]+.*)(?=.*[A-Z]+.*)[!-z]{6,20}");
+
     public static string GeneratePassword()
     {
         while (true)

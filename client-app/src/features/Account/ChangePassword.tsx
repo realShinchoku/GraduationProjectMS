@@ -38,20 +38,21 @@ function ChangePassword() {
                 <Box className="close" onClick={closeModal}>×</Box>
                 <Typography variant="h2">Đổi mật khẩu</Typography>
                 <Typography variant="body1">Vì lý do bảo mật, bạn vui lòng nhập lại mật khẩu</Typography>
-                <Formik          
+                <Formik
                     initialValues={{
-                        oldPassword: '', 
-                        newPassword: '', 
-                        confirmPassword: '', 
+                        oldPassword: '',
+                        newPassword: '',
+                        confirmPassword: '',
                         error: {
-                            oldPassword: null, 
-                            newPassword: null, 
+                            oldPassword: null,
+                            newPassword: null,
                             confirmPassword: null
-                        }}}
+                        }
+                    }}
                     onSubmit={(values, {setErrors}) => changePassword(values).catch((err: any) => {
                         const error = {
-                            oldPassword: err.oldPassword, 
-                            newPassword: err.newPassword,  
+                            oldPassword: err.oldPassword,
+                            newPassword: err.newPassword,
                             confirmPassword: err.confirmPassword
                         };
                         setErrors({error: error});
@@ -91,14 +92,14 @@ function ChangePassword() {
                                 helperText={(touched.confirmPassword && errors.confirmPassword) || errors.error?.confirmPassword}
                             />
                             <LoadingButton
-                                color="primary" 
+                                color="primary"
                                 variant="contained"
                                 onClick={closeModal}
                             >
                                 Huỷ
                             </LoadingButton>
                             <LoadingButton
-                                color="primary" 
+                                color="primary"
                                 variant="contained"
                                 loading={isSubmitting}
                                 disabled={!isValid || !dirty || isSubmitting}

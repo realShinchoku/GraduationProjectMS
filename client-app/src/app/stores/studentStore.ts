@@ -77,7 +77,7 @@ export default class StudentStore {
     setPeriodId = async (id: string, isInstructor: boolean, isTopic: boolean = false) => {
         if (isInstructor)
             this.setPredicate('hasLecturer', false);
-        if(isTopic)
+        if (isTopic)
             this.setPredicate('hasTopic', false);
         this.setPredicate('periodId', id);
         await this.loadList();
