@@ -19,6 +19,9 @@ import IsDepartmentSubject from "./IsDepartmentSubject";
 import IsFaculty from "./IsFaculty";
 import AccountStudent from "../../features/AccountManagement/Student/AccountStudent";
 import TopicAssignment from "../../features/TopicAssignment/TopicAssignment";
+import TopicAssignmentModal from "../../features/TopicAssignment/TopicAssignmentModal";
+import Notification from "../../features/Notification/Notification";
+import Document from "../../features/Document/Document";
 import AccountDepartmentSubject from "../../features/AccountManagement/DepartmentSubject/AccountDepartmentSubject";
 import OutlineTable from "../../features/Outline/OutlineTable";
 import StudentTopic from "../../features/StudentTopic/StudentTopic";
@@ -41,14 +44,12 @@ export const route = {
     accountStudent: '/account/student',
     accountDepartmentSubject: '/account/departmentSubject',
     accountLecturer: '/account/lecturer',
-    project: '/project',
-    projectDetail: (id: string) => {
-        return `/project/${id}`
-    },
-    outline: '/outline',
-    outlineDetail: (id: string) => {
-        return `/outline/${id}`
-    },
+    notification: '/notification',
+    document: '/document',
+    project:'/project',
+    projectDetail:(id:string) => {return `/project/${id}`},
+    outline:'/outline',
+    outlineDetail:(id:string) => {return `/outline/${id}`},
 };
 
 export const routes: RouteObject[] = [
@@ -62,6 +63,8 @@ export const routes: RouteObject[] = [
                         element: <IsStudent/>, children: [
                             {path: 'lecturer', element: <LecturerList/>},
                             {path: 'topic', element: <StudentTopic/>},
+                            {path: 'notification', element: <Notification/>},
+                            {path: 'document', element: <Document/>},
                         ]
                     },
                     {

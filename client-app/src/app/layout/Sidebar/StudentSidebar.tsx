@@ -5,7 +5,15 @@ import {Avatar, Box, Typography} from "@mui/material";
 import Button from '@mui/material/Button';
 
 import {route} from "../../router/Routers";
-import {Category, Folder, LogoSP, Message, ProfileUser, TaskSquare} from "../../../assets";
+import {
+    Category,  
+    LogoSP, 
+    Message,
+    ProfileUser, 
+    Notification, 
+    TaskSquare,
+    Mission
+} from "../../../assets";
 import VerticalTabs from "./Tab";
 import {useStore} from "../../stores/store";
 import SidebarItem from "./SidebarItem/SidebarItem";
@@ -51,8 +59,9 @@ function StudentSidebar() {
                 <SidebarItem title="Trang chủ" to={route.home} icon={Category}/>
                 <SidebarItem title="Giảng viên" to={route.lecturer} icon={Message}/>
                 <SidebarItem title="Đề tài" to={route.topic} icon={TaskSquare}/>
-                <SidebarItem title="Cá nhân" to={route.empty} icon={ProfileUser}/>
-                <SidebarItem title="Quản lý" to={route.empty} icon={Folder}/>
+                <SidebarItem title="Tài liệu" to={route.document} icon={ProfileUser}/>
+                <SidebarItem title="Thông báo" to={route.notification} icon={Notification}/>
+                <SidebarItem title="Nhiệm vụ" to={route.empty} icon={Mission}/>
             </Box>
             {(location.pathname === route.lecturer) && (
                 <>

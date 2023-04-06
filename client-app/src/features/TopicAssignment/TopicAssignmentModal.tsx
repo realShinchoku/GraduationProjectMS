@@ -63,22 +63,22 @@ function TopicAssignmentModal({id}: Props) {
                             <Typography className="label_topic">Tên đề tài</Typography>
                             <Grid item xs={12}>
                                 <Field
-                                    className="field_"
                                     component={TextField}
                                     name="name"
                                     fullWidth
                                     error={touched.name && Boolean(errors.name)}
                                     helperText={touched.name && errors.name}
+                                    sx={{marginBottom: 2}}
                                 />
                             </Grid>
                             <Typography className="label_topic_">Mô tả</Typography>
                             <Grid item xs={12}>
                                 <Field
-                                    className="field_"
                                     component={TextField}
-                                    name="describe"
                                     fullWidth
-                                    error={touched.describe && Boolean(errors.describe)}
+                                    name="describe"
+                                    sx={{marginBottom: 2}}
+                                    error={touched.describe && !!errors.describe}
                                     helperText={touched.describe && errors.describe}
                                     multiline
                                     rows="9"
@@ -87,52 +87,35 @@ function TopicAssignmentModal({id}: Props) {
                         </Grid>
                     </Box>
                     <Typography className="label_topic_bottom">Kiểu đồ án</Typography>
-                    <FormControl sx={{width: 'inherit'}} error={touched.type && Boolean(errors.type)}>
-                        <Field component={RadioGroup} name="type">
-                            <Grid
-                                container
-                                rowSpacing={1}
-                                justifyContent="center"
-                                alignItems="center"
-                                border={'1px solid #000000'}
-                                borderRadius={'10px'}
-                                xs={12}
-                                margin={'auto'}
-                            >
-                                <Grid item xs={5} container justifyContent="center">
-                                    <FormControlLabel
-                                        value="web"
-                                        control={<Radio disabled={isSubmitting}/>}
-                                        label="Web"
-                                        disabled={isSubmitting}
-                                    />
-                                </Grid>
-                                <Grid item xs={5} container justifyContent="center">
-                                    <FormControlLabel
-                                        value="android"
-                                        control={<Radio disabled={isSubmitting}/>}
-                                        label="Android"
-                                        disabled={isSubmitting}
-                                    />
-                                </Grid>
-                                <Grid item xs={5} container justifyContent="center">
-                                    <FormControlLabel
-                                        value="AI"
-                                        control={<Radio disabled={isSubmitting}/>}
-                                        label="AI"
-                                        disabled={isSubmitting}
-                                    />
-                                </Grid>
-                                <Grid item xs={5} container justifyContent="center">
-                                    <FormControlLabel
-                                        value="math"
-                                        control={<Radio disabled={isSubmitting}/>}
-                                        label="Math"
-                                        disabled={isSubmitting}
-                                    />
-                                </Grid>
-                            </Grid>
+
+                    <FormControl sx={{ display:"unset"}} variant="standard" error={touched.type && Boolean(errors.type)}>
+                        <Field component={RadioGroup} name="type" className="radio_group">
+                            <FormControlLabel
+                                value="Web"
+                                control={<Radio disabled={isSubmitting} />}
+                                label="Web"
+                                disabled={isSubmitting}
+                            />
+                            <FormControlLabel
+                                value="Android"
+                                control={<Radio disabled={isSubmitting} />}
+                                label="Android"
+                                disabled={isSubmitting}
+                            />
+                            <FormControlLabel
+                                value="AI"
+                                control={<Radio disabled={isSubmitting} />}
+                                label="AI"
+                                disabled={isSubmitting}
+                            />
+                            <FormControlLabel
+                                value="Nghiên cứu"
+                                control={<Radio disabled={isSubmitting} />}
+                                label="Nghiên cứu"
+                                disabled={isSubmitting}
+                            />
                         </Field>
+                        <FormHelperText>{errors.type}</FormHelperText>
                         <FormHelperText>
                             {touched.type && errors.type}
                         </FormHelperText>
