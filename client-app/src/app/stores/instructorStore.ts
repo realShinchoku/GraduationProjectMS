@@ -86,6 +86,7 @@ export default class InstructorStore {
             await agent.Instructors.chose(id);
         } catch (e) {
             console.log(e);
+            throw e;
         }
     }
 
@@ -100,6 +101,7 @@ export default class InstructorStore {
             });
         } catch (e) {
             console.log(e);
+            throw e;
         }
     }
 
@@ -111,6 +113,7 @@ export default class InstructorStore {
             });
         } catch (e) {
             console.log(e);
+            throw e;
         }
     }
 

@@ -100,6 +100,7 @@ export default class PeriodStore {
             await this.setItem(newPeriod);
         } catch (e) {
             console.log(e);
+            throw e;
         }
     }
     edit = async (period: PeriodFormValues) => {
@@ -109,6 +110,7 @@ export default class PeriodStore {
             await this.setItem(editPeriod);
         } catch (e) {
             console.log(e);
+            throw e;
         }
     }
 

@@ -11,7 +11,7 @@ public class Approval
 {
     public class Command : IRequest<Result<Unit>>
     {
-        public bool Status { get; set; }
+        public int Status { get; set; }
         public string Note { get; set; }
         public Guid Id { get; set; }
     }
@@ -35,9 +35,9 @@ public class Approval
             if (topic == null)
                 return null;
             if (userRole == Role.DepartmentSubject)
-                topic.DepartmentSubjectApproval = request.Status;
+                topic.DepartmentSubjectApproval = request.Status != 0;
             else if (userRole == Role.Lecturer)
-                topic.LecturerApproval = request.Status;
+                topic.LecturerApproval = request.Status != 0;
 
             var result = await _context.SaveChangesAsync(cancellationToken) > 0;
 

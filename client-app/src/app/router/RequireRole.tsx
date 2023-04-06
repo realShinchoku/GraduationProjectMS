@@ -8,7 +8,7 @@ interface Props {
     roles: Role[];
 }
 
-function RequireRole({roles}:Props) {
+function RequireRole({roles}: Props) {
     const {userStore: {getRole}} = useStore();
 
     if (!roles.includes(getRole))

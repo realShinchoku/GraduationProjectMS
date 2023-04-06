@@ -1,7 +1,6 @@
 import {observer} from "mobx-react-lite";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import {Avatar, Box, Typography} from "@mui/material";
-
 import {route} from "../../router/Routers";
 import {Category, Folder, LogoSP, Message, Notification, TaskSquare,} from "../../../assets";
 import {useStore} from "../../stores/store";

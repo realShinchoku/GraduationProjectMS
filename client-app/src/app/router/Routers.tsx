@@ -44,8 +44,8 @@ export const route = {
     notification: '/notification',
     document: '/document',
     project: '/project',
-    projectDetail: (id: string) => {
-        return `/project/${id}`
+    projectDetail: (id: string, name: string) => {
+        return `/project/${id}?name=${name}`
     },
     outline: '/outline',
     outlineDetail: (id: string) => {
@@ -78,12 +78,14 @@ export const routes: RouteObject[] = [
                     }
                     ,
                     {
-                        element: <RequireRole roles={[Role.DepartmentSubject]} key={Role.DepartmentSubject}/>, children: [
+                        element: <RequireRole roles={[Role.DepartmentSubject]} key={Role.DepartmentSubject}/>,
+                        children: [
                             {path: 'instructor', element: <Instructor/>},
                         ]
                     },
                     {
-                        element: <RequireRole roles={[Role.DepartmentSubject, Role.Lecturer]} key={Role.DepartmentSubject + Role.Lecturer}/>, children: [
+                        element: <RequireRole roles={[Role.DepartmentSubject, Role.Lecturer]}
+                                              key={Role.DepartmentSubject + Role.Lecturer}/>, children: [
                             {path: 'project', element: <Approval/>},
                             {path: 'project/:id', element: <ApprovalTable/>},
                             {path: 'outline', element: <Outline/>},

@@ -136,6 +136,18 @@ export default class TopicStore {
         }
     }
 
+    approval = async (status: number, note: string, id: string) => {
+        try {
+            await agent.Topics.approval(status, note, id);
+            await this.loadList();
+            store.modalStore.closeModal();
+            store.snackBarStore.success("Duyệt thành công");
+        } catch (e) {
+            store.snackBarStore.error('Có lỗi xảy ra');
+            throw e;
+        }
+    }
+
     private setItem = (item: TopicDto) => {
         this.topics.set(item.id, item);
     }

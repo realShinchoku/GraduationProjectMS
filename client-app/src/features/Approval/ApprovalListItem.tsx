@@ -35,7 +35,7 @@ function PeriodListItem({period}: Props) {
                             color="inherit"
                             variant="outlined"
                             className="button_"
-                            href={route.projectDetail(period.id)}
+                            href={route.projectDetail(period.id, period.name)}
                         >
                             Duyệt đề tài
                         </Button>

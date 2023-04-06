@@ -175,6 +175,11 @@ const Topics = {
         type,
         description
     }),
+    approval: (status: number, note: string, id: string) => requests.post<void>('/graduationProject/approval', {
+        status,
+        note,
+        id
+    })
 }
 
 const agent = {

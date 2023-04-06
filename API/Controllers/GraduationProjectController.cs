@@ -38,7 +38,7 @@ public class GraduationProjectController : BaseApiController
     }
 
     [HttpPost("approval")]
-    [Authorize(Policy = "IsLecturerOrDepartmentSubjects")]
+    [Authorize]
     public async Task<IActionResult> Approval(Approval.Command command)
     {
         return HandleResult(await Mediator.Send(command));

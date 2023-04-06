@@ -1,9 +1,8 @@
 import {observer} from "mobx-react-lite";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import {Avatar, Box, Typography} from "@mui/material";
-
 import {route} from "../../router/Routers";
-import {Category, Folder, LogoSP, ProfileUser, TaskSquare} from "../../../assets";
+import {Category, Folder, LogoSP, Notification, ProfileUser, TaskSquare} from "../../../assets";
 import {useStore} from "../../stores/store";
 import SidebarItem from "./SidebarItem/SidebarItem";
 import "./Sidebar.scss";
@@ -46,7 +45,7 @@ function DepartmentSubjectSidebar() {
                 <SidebarItem title="Giảng viên hướng dẫn" to={route.instructor} icon={ProfileUser}/>
                 <SidebarItem title="Đề Tài" to={route.project} icon={TaskSquare}/>
                 <SidebarItem title="Thông Báo" to={route.notification} icon={Notification}/>
-                <SidebarItem title="Báo Cáo" to={route.outline} icon={Folder}/>
+                <SidebarItem title="Đề Cương" to={route.outline} icon={Folder}/>
             </Box>
         </Grid>
     )
