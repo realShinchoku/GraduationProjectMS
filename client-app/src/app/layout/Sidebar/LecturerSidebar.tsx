@@ -3,14 +3,21 @@ import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import {Avatar, Box, Typography} from "@mui/material";
 
 import {route} from "../../router/Routers";
-import {Category, Folder, LogoSP, ProfileUser, TaskSquare} from "../../../assets";
+import {
+    Category,  
+    LogoSP, 
+    Message,
+    ProfileUser, 
+    Notification, 
+    TaskSquare,
+    Folder,
+} from "../../../assets";
 import {useStore} from "../../stores/store";
 import SidebarItem from "./SidebarItem/SidebarItem";
 import "./Sidebar.scss";
 import {useEffect} from "react";
 
-function DepartmentSubjectSidebar() {
-
+function LecturerSidebar() {
     const {
         commonStore: {sideBarState, openSideBar, closeSideBar},
         popupNotificationStore: {createHubConnection, isConnected}
@@ -42,8 +49,8 @@ function DepartmentSubjectSidebar() {
                 </Box>
             </Box>
             <Box className="side_bar_inner">
-                <SidebarItem title="Trang chủ" to={route.home} icon={Category}/>
-                <SidebarItem title="Giảng viên hướng dẫn" to={route.instructor} icon={ProfileUser}/>
+                <SidebarItem title="Trang Chủ" to={route.home} icon={Category}/>
+                <SidebarItem title="Sinh Viên" to={route.lecturer} icon={Message}/>
                 <SidebarItem title="Đề Tài" to={route.project} icon={TaskSquare}/>
                 <SidebarItem title="Thông Báo" to={route.notification} icon={Notification}/>
                 <SidebarItem title="Báo Cáo" to={route.outline} icon={Folder}/>
@@ -52,4 +59,4 @@ function DepartmentSubjectSidebar() {
     )
 }
 
-export default observer(DepartmentSubjectSidebar);
+export default observer(LecturerSidebar);

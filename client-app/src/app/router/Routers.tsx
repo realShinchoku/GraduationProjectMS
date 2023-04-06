@@ -68,7 +68,14 @@ export const routes: RouteObject[] = [
                         ]
                     },
                     {
-                        element: <IsLecturer/>, children: []
+                        element: <IsLecturer/>, children: [
+                            {path: 'project', element: <Approval/>},                         
+                            {path: 'project/:id', element: <ApprovalTable/>},
+                            {path: 'notification', element: <Notification/>},
+                            {path: 'outline', element: <Outline/>},                         
+                            {path: 'outline/:id', element: <OutlineTable/>},
+                            {path: 'topic/assignment/:id', element: <TopicAssignment/>},
+                        ]
                     }
                     ,
                     {
@@ -102,7 +109,6 @@ export const routes: RouteObject[] = [
             {path: 'server-error', element: <ServerError/>},
             {path: 'test', element: <Test/>},
             {path: '*', element: <Navigate replace to={'/not-found'}/>},
-            {path: 'topic/assignment/:id', element: <TopicAssignment/>},
 
         ],
     }
