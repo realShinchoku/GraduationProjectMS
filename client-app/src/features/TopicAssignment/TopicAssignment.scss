@@ -177,56 +177,69 @@
   }
 }
 
-.topic_assignment_modal {
-  .info_topic {
-    font-family: 'Inter', sans-serif;
-    font-style: normal;
-    font-weight: 700;
-    font-size: 32px;
-    line-height: 39px;
-    margin-bottom: 40px;
+
+.register_topic {
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  border-radius: 5px;
+  width: 880px;
+  position: relative;
+  transition: all 5s ease-in-out;
+  height: 100%;
+  justify-content: center;
+  @include sp {
+    width: 90%;
+    padding: 0 get_sp(20);
   }
 
-  .label_topic {
-    font-family: 'Inter', sans-serif;
-    font-style: normal;
-    font-weight: 700;
-    font-size: 24px;
-    line-height: 29px;
-    margin-left: 22px;
-    margin-top: 10px;
-  }
+  .inner {
+    background-color: #fff;
+    border-radius: 4px;
+    padding: 40px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    @include sp {
+      padding: get_sp(20);
+    }
 
-  .label_topic_ {
-    margin-top: 30px;
-    font-family: 'Inter', sans-serif;
-    font-style: normal;
-    font-weight: 700;
-    font-size: 24px;
-    line-height: 29px;
-    margin-left: 22px;
-  }
+    .close {
+      position: absolute;
+      top: 10px;
+      right: 14px;
+      transition: all 200ms;
+      font-size: 30px;
+      font-weight: bold;
+      text-decoration: none;
+      color: #333;
+      line-height: unset;
+      cursor: pointer;
+    }
 
-  .label_topic_bottom {
-    margin-top: 30px;
-    font-family: 'Inter', sans-serif;
-    font-style: normal;
-    font-weight: 700;
-    font-size: 24px;
-    line-height: 29px;
-    margin-bottom: 24px;
-  }
+    h2 {
+      font-size: 40px;
+      color: #0D062D;
+      font-weight: 500;
+      line-height: 56px;
+      margin-bottom: 10px;
+      @include sp {
+        font-size: get_sp(28);
+        line-height: get_sp(30);
+        margin-bottom: get_sp(10);
+      }
+    }
 
-  .field_ {
-    border-radius: 10px;
-    border: 1px solid #000000;
+    p {
+      margin-bottom: 10px;
+    }
 
     .radio_group {
       display: block;
-      border: 1px solid rgb(189, 189, 189);
+      border: 1px solid rgba(0, 0, 0, 1);
       padding: 20px 55px 26px;
       margin-bottom: 16px;
-
       @include sp {
         padding: get_sp(10);
       }
@@ -236,10 +249,15 @@
         margin-right: 0;
       }
     }
+
+    button {
+      float: right;
+      padding: 10px 30px;
+    }
+
+    button + button {
+      margin-right: 20px;
+    }
   }
 }
-
-
-
-
 

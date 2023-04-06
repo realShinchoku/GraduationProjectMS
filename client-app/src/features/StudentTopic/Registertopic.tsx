@@ -71,7 +71,7 @@ function RegisterTopic({topic}: Props) {
                                 multiline
                                 rows={4}
                             />
-                            <FormControl sx={{display: "unset"}} error={!!errors.type} variant="standard">
+                            <FormControl sx={{display: "unset"}} error={touched.type &&  !!errors.type} variant="standard">
                                 <Field component={RadioGroup} name="type" className="radio_group">
                                     <FormControlLabel
                                         value="Web"
@@ -98,7 +98,7 @@ function RegisterTopic({topic}: Props) {
                                         disabled={isSubmitting}
                                     />
                                 </Field>
-                                <FormHelperText>{errors.type}</FormHelperText>
+                                <FormHelperText>{touched.type &&  errors.type}</FormHelperText>
                             </FormControl>
 
                             <LoadingButton

@@ -68,6 +68,11 @@ public class Create
             if (student.GraduationProject != null)
                 return Result<GraduationProject>.Failure("Đã có đồ án");
             var topic = _mapper.Map<GraduationProject>(request.GraduationProject);
+            if (!string.IsNullOrEmpty(request.Id))
+            {
+                topic.DepartmentSubjectApproval = true;
+                topic.LecturerApproval = true;
+            }
             student.GraduationProject = topic;
             _context.Update(student);
             var result = await _context.SaveChangesAsync(cancellationToken) > 0;

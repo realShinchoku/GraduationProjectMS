@@ -73,7 +73,6 @@ export const routes: RouteObject[] = [
                     },
                     {
                         element: <RequireRole roles={[Role.Lecturer]} key={Role.Lecturer}/>, children: [
-                            {path: 'project/assignment/:id', element: <TopicAssignment/>},
                         ]
                     }
                     ,
@@ -81,6 +80,7 @@ export const routes: RouteObject[] = [
                         element: <RequireRole roles={[Role.DepartmentSubject]} key={Role.DepartmentSubject}/>,
                         children: [
                             {path: 'instructor', element: <Instructor/>},
+                            {path: 'project/assignment/:id', element: <TopicAssignment/>},
                         ]
                     },
                     {

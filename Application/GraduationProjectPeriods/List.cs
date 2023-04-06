@@ -43,6 +43,7 @@ public class List
                 return null;
             var query = _context.GraduationProjectPeriods
                 .Include(s => s.Students)
+                .Include(x => x.Projects)
                 .Include(s => s.Syllabi)
                 .Include(f => f.Faculty.Lecturers)
                 .Where(x => x.Faculty == faculty)

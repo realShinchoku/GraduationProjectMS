@@ -6,6 +6,9 @@ import TopicAssignmentTable from "./TopicAssignmentTable";
 import {useEffect} from "react";
 import {useStore} from "../../app/stores/store";
 import {useParams} from "react-router-dom";
+import {route} from "../../app/router/Routers";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import {IconButton} from "@mui/material";
 
 function TopicAssignment() {
     const {studentStore: {setPeriodId}} = useStore();
@@ -18,6 +21,9 @@ function TopicAssignment() {
         <Box className={`topic_assigment`}>
             <Box className="inner">
                 <Box className="nav">
+                    <IconButton href={route.project}>
+                        <ArrowBackIcon/>
+                    </IconButton>
                     <Typography variant="h3">Giao đề tài</Typography>
                     <TopicAssignmentTable/>
                 </Box>
