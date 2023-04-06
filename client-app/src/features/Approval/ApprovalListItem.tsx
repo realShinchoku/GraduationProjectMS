@@ -40,7 +40,7 @@ function PeriodListItem({period}: Props) {
                             Duyệt đề tài
                         </Button>
 
-                        {userStore.getRole === Role.Lecturer && (
+                        {userStore.getRole === Role.DepartmentSubject && (
                             <Button
                                 color="inherit"
                                 variant="outlined"
