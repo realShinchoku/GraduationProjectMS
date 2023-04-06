@@ -17,7 +17,7 @@ interface Props {
 
 
 function TopicAssignmentModal({id}: Props) {
-    const {modalStore, topicStore, snackBarStore} = useStore();
+    const {modalStore, topicStore} = useStore();
     
     return (
         <Formik

@@ -220,18 +220,21 @@
   .field_ {
     border-radius: 10px;
     border: 1px solid #000000;
-  .radio_group {
-    display: block;
-    border: 1px solid rgb(189, 189, 189);
-    padding: 20px 55px 26px;
-    margin-bottom: 16px;
-    
-    @include sp {
-      padding: get_sp(10);
-    }
-    label {
-      width: 50%;
-      margin-right: 0;
+
+    .radio_group {
+      display: block;
+      border: 1px solid rgb(189, 189, 189);
+      padding: 20px 55px 26px;
+      margin-bottom: 16px;
+
+      @include sp {
+        padding: get_sp(10);
+      }
+
+      label {
+        width: 50%;
+        margin-right: 0;
+      }
     }
   }
 }
