@@ -78,6 +78,37 @@ public class Create
             var result = await _context.SaveChangesAsync(cancellationToken) > 0;
             if (!result)
                 return Result<GraduationProject>.Failure("Có lỗi khi tạo đồ án");
+            if (!string.IsNullOrEmpty(request.Id))
+            {
+                var notification = new Notification
+                {
+                    Student = student,
+                    Name = "Xác nhận hoàn thành đăng ký đề tài",
+                    InfoTitle = "Thông tin đề tài",
+                    Infos = new List<Info>()
+                    {
+                        new ()
+                        {
+                            Key = "Tên đề tài",
+                            Value = topic.Name,
+                        },
+                        new ()
+                        {
+                            Key = "Mô tả",
+                            Value = topic.Description,
+                        },
+                        new ()
+                        {
+                            Key = "Kiểu đồ án",
+                            Value = topic.Type,
+                        }
+                    }
+                };
+                
+                _context.Notifications.Add(notification);
+
+            }
+
             return Result<GraduationProject>.Success(topic);
         }
     }

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using Domain;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
@@ -363,6 +365,28 @@ namespace Persistence.Migrations
                         principalColumn: "Id");
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Notifications",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    Name = table.Column<string>(type: "text", nullable: true),
+                    CreatedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    StudentId = table.Column<string>(type: "text", nullable: true),
+                    InfoTitle = table.Column<string>(type: "text", nullable: true),
+                    Infos = table.Column<List<Info>>(type: "jsonb", nullable: true),
+                    IsRead = table.Column<bool>(type: "boolean", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Notifications", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Notifications_Students_StudentId",
+                        column: x => x.StudentId,
+                        principalTable: "Students",
+                        principalColumn: "Id");
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_DepartmentSubjects_FacultyId",
                 table: "DepartmentSubjects",
@@ -417,6 +441,11 @@ namespace Persistence.Migrations
                 name: "IX_Lecturers_FacultyId",
                 table: "Lecturers",
                 column: "FacultyId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Notifications_StudentId",
+                table: "Notifications",
+                column: "StudentId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_PopupNotifications_TargetUserId",
@@ -491,6 +520,9 @@ namespace Persistence.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Instructors");
+
+            migrationBuilder.DropTable(
+                name: "Notifications");
 
             migrationBuilder.DropTable(
                 name: "PopupNotifications");

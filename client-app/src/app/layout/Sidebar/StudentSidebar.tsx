@@ -17,19 +17,11 @@ function StudentSidebar() {
 
     const location = useLocation();
 
-    const {
-        commonStore: {sideBarState, openSideBar, closeSideBar},
-        popupNotificationStore: {createHubConnection, maskAsRead, popupNotification, isConnected}
-    } = useStore();
+    const {commonStore: {sideBarState, openSideBar, closeSideBar},} = useStore();
 
     const handleClick = () => {
         sideBarState ? closeSideBar() : openSideBar();
     };
-
-    useEffect(() => {
-        if (!isConnected)
-            createHubConnection();
-    }, [createHubConnection, isConnected])
 
     return (
         <Grid sx={{background: '#FFFFFF'}} className={`side_bar ${sideBarState}`}>
@@ -67,37 +59,6 @@ function StudentSidebar() {
                     <TopicTabs/>
                 </>
             )}
-            {popupNotification && <Box className="confirm">
-                <Box className="inner">
-                    <Box className="thumb"/>
-                    <Box className="thumb_"/>
-                    <Box className="txt">
-                        <Typography variant="h3">Thông báo xác nhận</Typography>
-                        <Typography variant="body1">{popupNotification.message}</Typography>
-                        <Button
-                            style={{
-                                backgroundColor: "#fff",
-                                color: "#000000",
-                                boxShadow: "unset"
-                            }}
-                            variant="contained"
-                            onClick={maskAsRead}
-                        >
-                            OK
-                        </Button>
-                        <Button
-                            style={{
-                                backgroundColor: "#fff",
-                                color: "#000000",
-                                boxShadow: "unset"
-                            }}
-                            variant="contained"
-                        >
-                            Đóng
-                        </Button>
-                    </Box>
-                </Box>
-            </Box>}
         </Grid>
     )
 }

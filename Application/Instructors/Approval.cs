@@ -59,15 +59,37 @@ public class Approval
             if (!result)
                 return Result<Unit>.Failure("Có lỗi khi chấp nhận giảng viên hướng dẫn");
 
-            var popupNotification = new PopupNotification
+            var notification = new Notification
             {
-                Message = request.Status != 0
-                    ? $"Yêu cầu giảng viên {instructor.Lecturer.DisplayName} đã được chấp thuận."
-                    : $"Yêu cầu giảng viên {instructor.Lecturer.DisplayName} không được chấp thuận.",
-                TargetUser = instructor.Student
+                Student = instructor.Student,
+                Name = "Xác nhận hoàn thành đăng ký giáo viên",
+                InfoTitle = "Thông tin giáo viên hướng dẫn",
+                Infos = new List<Info>()
+                {
+                    new ()
+                    {
+                        Key = "Tên giáo viên hướng dẫn",
+                        Value = instructor.Lecturer.DisplayName,
+                    },
+                    new ()
+                    {
+                        Key = "Email",
+                        Value = instructor.Lecturer.Email,
+                    },
+                    new ()
+                    {
+                        Key = "Học vị",
+                        Value = instructor.Lecturer.Education,
+                    },
+                    new ()
+                    {
+                        Key = "Bộ môn",
+                        Value = departmentSubject.DisplayName,
+                    },
+                }
             };
 
-            _context.PopupNotifications.Add(popupNotification);
+            _context.Notifications.Add(notification);
 
             await _context.SaveChangesAsync(cancellationToken);
 
