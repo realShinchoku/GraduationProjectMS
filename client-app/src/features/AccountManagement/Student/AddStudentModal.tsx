@@ -52,7 +52,6 @@ function AddStudentModal({periodId}: Props) {
                                         .then(async () => {
                                             store.modalStore.closeModal();
                                             store.snackBarStore.success("Tạo tài khoản thành công");
-                                            await periodStore.get(periodId)
                                         })
                                 }}
                             >Tải lên</LoadingButton>

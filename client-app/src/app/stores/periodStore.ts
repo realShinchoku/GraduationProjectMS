@@ -122,17 +122,12 @@ export default class PeriodStore {
     }
 
     get = async (id: string) => {
-        let item = this.getItem(id);
-        if (item)
+        try {
+            const item = await agent.Periods.single(id);
+            await this.setItem(item);
             return item;
-        else {
-            try {
-                item = await agent.Periods.single(id);
-                await this.setItem(item);
-                return item;
-            } catch (e) {
-                console.log(e);
-            }
+        } catch (e) {
+            console.log(e);
         }
     }
 

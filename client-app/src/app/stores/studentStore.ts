@@ -2,6 +2,7 @@ import {makeAutoObservable, reaction, runInAction} from "mobx";
 import {Student} from "../models/student";
 import {Pagination, PagingParams} from "../models/pagination";
 import agent from "../api/agent";
+import {store} from "./store";
 
 export default class StudentStore {
     students = new Map<string, Student>();
@@ -87,6 +88,7 @@ export default class StudentStore {
         this.loadingUpload = true;
         try {
             await agent.Account.createStudent(file, periodId);
+            await store.periodStore.get(periodId);
         } catch (e) {
             console.log(e);
             throw e;
