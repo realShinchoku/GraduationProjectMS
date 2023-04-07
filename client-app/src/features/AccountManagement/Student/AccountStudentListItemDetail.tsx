@@ -18,28 +18,28 @@ function AccountStudentListItemDetail({periodId}: Props) {
     return (
         <Box className="account_table_list">
             <Box className="account_table_list_search">
-            <TextField
-                className="search_account"
-                fullWidth
-                size="small"
-                id="standard-bare"
-                variant="outlined"
-                placeholder="Tìm kiếm..."
-                InputProps={{
-                    startAdornment: (
-                        <IconButton onClick={() => studentStore.setPredicate('Keyword', keyword)}>
-                            <SearchOutlined/>
-                        </IconButton>
-                    ),
-                }}
-                value={keyword}
-                onChange={(e) => setKeyword(e.target.value)}
-                onKeyDown={(e) => {
-                    if (e.key === 'Enter')
-                        studentStore.setPredicate('Keyword', keyword);
-                }}
-                disabled={studentStore.loading}
-            />
+                <TextField
+                    className="search_account"
+                    fullWidth
+                    size="small"
+                    id="standard-bare"
+                    variant="outlined"
+                    placeholder="Tìm kiếm..."
+                    InputProps={{
+                        startAdornment: (
+                            <IconButton onClick={() => studentStore.setPredicate('Keyword', keyword)}>
+                                <SearchOutlined/>
+                            </IconButton>
+                        ),
+                    }}
+                    value={keyword}
+                    onChange={(e) => setKeyword(e.target.value)}
+                    onKeyDown={(e) => {
+                        if (e.key === 'Enter')
+                            studentStore.setPredicate('Keyword', keyword);
+                    }}
+                    disabled={studentStore.loading}
+                />
             </Box>
             <AccountStudentTable studentStore={studentStore}/>
         </Box>

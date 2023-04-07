@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Text;
 using API.Services;
 using Domain;
@@ -63,10 +62,13 @@ public static class IdentityServiceExtensions
         services.AddAuthorization(opt =>
         {
             opt.AddPolicy("IsFacultyOffice", policy => policy.Requirements.Add(new IsRole(Role.FacultyOffice)));
-            opt.AddPolicy("IsDepartmentSubjects", policy => policy.Requirements.Add(new IsRole(Role.DepartmentSubject)));
+            opt.AddPolicy("IsDepartmentSubjects",
+                policy => policy.Requirements.Add(new IsRole(Role.DepartmentSubject)));
             opt.AddPolicy("IsLecturer", policy => policy.Requirements.Add(new IsRole(Role.Lecturer)));
             opt.AddPolicy("IsStudent", policy => policy.Requirements.Add(new IsRole(Role.Student)));
-            opt.AddPolicy("IsLecturerOrDepartmentSubjects", policy => policy.Requirements.AddRange(new List<IAuthorizationRequirement>(){new IsRole(Role.DepartmentSubject), new IsRole(Role.Lecturer)}));
+            opt.AddPolicy("IsLecturerOrDepartmentSubjects",
+                policy => policy.Requirements.AddRange(new List<IAuthorizationRequirement>
+                    { new IsRole(Role.DepartmentSubject), new IsRole(Role.Lecturer) }));
         });
 
         services.AddTransient<IAuthorizationHandler, IsRoleHandler>();

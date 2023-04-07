@@ -19,7 +19,7 @@ export default function OutlineSkeleton() {
                             <Skeleton animation="wave" width="80%" height={28}/>
                             <Skeleton animation="wave" width="80%" height={28}/>
                         </Box>
-                       
+
                     </Box>
                     <Skeleton animation="wave" width={100} height={40}/>
                 </Box>
@@ -38,7 +38,7 @@ export default function OutlineSkeleton() {
                             <Skeleton animation="wave" width="80%" height={28}/>
                             <Skeleton animation="wave" width="80%" height={28}/>
                         </Box>
-                       
+
                     </Box>
                     <Skeleton animation="wave" width={100} height={40}/>
                 </Box>

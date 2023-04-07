@@ -11,8 +11,6 @@ import {Form, Formik} from "formik";
 import {LoadingButton} from "@mui/lab";
 import * as Yup from 'yup';
 import {observer} from "mobx-react-lite";
-import SuccessModal from "./SuccessModal";
-
 
 const style = {
     position: 'absolute' as 'absolute',
@@ -27,15 +25,17 @@ const style = {
     padding: '35px 44px',
 };
 
-function ApprovalModal() {
-    const {modalStore} = useStore();
+interface Props {
+    id: string;
+}
+
+function ApprovalModal({id}: Props) {
+    const {modalStore, topicStore: {approval}} = useStore();
 
     return (
         <Formik
             initialValues={{picker: -1, note: ''}}
-            // onSubmit={(values) => approval( values.picker, values.note).then(() => modalStore.openModal(
-            //     <SuccessModal/>))}
-            onSubmit={()=>modalStore.openModal(<SuccessModal/>)}
+            onSubmit={(values) => approval(values.picker, values.note, id)}
             validationSchema={Yup.object().shape({
                 picker: Yup.boolean().required('Vui lòng chọn trạng thái duyệt'),
                 note: Yup.string().required('Vui lòng viết ghi chú'),

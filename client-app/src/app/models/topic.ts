@@ -1,5 +1,10 @@
 export class TopicFormValue {
-    constructor(topic?:Topic) {
+    id: string = "";
+    type: string = "";
+    name: string = "";
+    description: string = "";
+
+    constructor(topic?: Topic) {
         if (topic) {
             this.id = topic.id;
             this.type = topic.type;
@@ -8,16 +13,14 @@ export class TopicFormValue {
         }
 
     }
-    id: string = "";
-    type: string = "";
-    name: string = "";
-    description: string = "";
 }
+
 export class Topic implements Topic {
-    constructor(init?:TopicFormValue) {
+    constructor(init?: TopicFormValue) {
         Object.assign(this, init)
     }
 }
+
 export interface Topic {
     id: string,
     name: string,

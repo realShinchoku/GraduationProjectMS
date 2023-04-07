@@ -15,8 +15,9 @@ public class Create
     public class Command : IRequest<Result<GraduationProject>>
     {
         public CreateDto GraduationProject { get; set; }
+        public string Id { get; set; }
     }
-    
+
     public class CommandValidator : AbstractValidator<Command>
     {
         public CommandValidator()
@@ -38,9 +39,9 @@ public class Create
 
     public class Handler : IRequestHandler<Command, Result<GraduationProject>>
     {
-        private readonly IUserAccessor _userAccessor;
         private readonly DataContext _context;
         private readonly IMapper _mapper;
+        private readonly IUserAccessor _userAccessor;
 
         public Handler(IUserAccessor userAccessor, DataContext context, IMapper mapper)
         {
@@ -48,21 +49,66 @@ public class Create
             _context = context;
             _mapper = mapper;
         }
+
         public async Task<Result<GraduationProject>> Handle(Command request, CancellationToken cancellationToken)
         {
-            var student = await _context.Students
-                .Include(x => x.GraduationProject)
-                .FirstOrDefaultAsync(x => x.UserName == _userAccessor.GetUserName(), cancellationToken);
+            Student student;
+            if (!string.IsNullOrEmpty(request.Id))
+                student = await _context.Students
+                    .Include(x => x.GraduationProject)
+                    .FirstOrDefaultAsync(x => x.Id == request.Id, cancellationToken);
+
+            else
+                student = await _context.Students
+                    .Include(x => x.GraduationProject)
+                    .FirstOrDefaultAsync(x => x.UserName == _userAccessor.GetUserName(), cancellationToken);
+
             if (student == null)
                 return null;
             if (student.GraduationProject != null)
                 return Result<GraduationProject>.Failure("Đã có đồ án");
             var topic = _mapper.Map<GraduationProject>(request.GraduationProject);
+            if (!string.IsNullOrEmpty(request.Id))
+            {
+                topic.DepartmentSubjectApproval = true;
+                topic.LecturerApproval = true;
+            }
             student.GraduationProject = topic;
             _context.Update(student);
             var result = await _context.SaveChangesAsync(cancellationToken) > 0;
             if (!result)
                 return Result<GraduationProject>.Failure("Có lỗi khi tạo đồ án");
+            if (!string.IsNullOrEmpty(request.Id))
+            {
+                var notification = new Notification
+                {
+                    Student = student,
+                    Name = "Xác nhận hoàn thành đăng ký đề tài",
+                    InfoTitle = "Thông tin đề tài",
+                    Infos = new List<Info>()
+                    {
+                        new ()
+                        {
+                            Key = "Tên đề tài",
+                            Value = topic.Name,
+                        },
+                        new ()
+                        {
+                            Key = "Mô tả",
+                            Value = topic.Description,
+                        },
+                        new ()
+                        {
+                            Key = "Kiểu đồ án",
+                            Value = topic.Type,
+                        }
+                    }
+                };
+                
+                _context.Notifications.Add(notification);
+
+            }
+
             return Result<GraduationProject>.Success(topic);
         }
     }

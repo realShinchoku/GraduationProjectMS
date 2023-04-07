@@ -48,7 +48,7 @@ export default class DepartmentSubjectStore {
                 this.setItem(departmentSubject);
             });
         } catch (err) {
-            console.log(err)
+            console.log(err);
         } finally {
             runInAction(() => this.loading = false);
         }
@@ -80,6 +80,7 @@ export default class DepartmentSubjectStore {
             store.snackBarStore.success("Tạo thành công");
         } catch (e) {
             console.log(e);
+            throw e;
         }
     }
 

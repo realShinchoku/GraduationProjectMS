@@ -44,8 +44,8 @@ public class Create
     public class Handler : IRequestHandler<Command, Result<Unit>>
     {
         private readonly DataContext _context;
-        private readonly IUserAccessor _userAccessor;
         private readonly IMapper _mapper;
+        private readonly IUserAccessor _userAccessor;
 
         public Handler(DataContext context, IUserAccessor userAccessor, IMapper mapper)
         {
@@ -66,10 +66,11 @@ public class Create
 
             if (period != null)
                 return Result<Unit>.Failure($"Đã tồn tại {period.Name}");
-            
+
             period = _mapper.Map<GraduationProjectPeriod>(request.GraduationProjectPeriod);
             period.Faculty = faculty;
-            period.Name = $"Đồ án Khóa K{request.GraduationProjectPeriod.Course} Đợt {request.GraduationProjectPeriod.Phase}";
+            period.Name =
+                $"Đồ án Khóa K{request.GraduationProjectPeriod.Course} Đợt {request.GraduationProjectPeriod.Phase}";
             _context.GraduationProjectPeriods.Add(period);
             var result = await _context.SaveChangesAsync(cancellationToken) > 0;
 

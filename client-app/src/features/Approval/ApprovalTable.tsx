@@ -7,220 +7,146 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
-import { Box, Button, IconButton, Typography } from "@mui/material";
-import { observer } from "mobx-react-lite";
-import { useState } from "react";
+import {Box, Button, IconButton, Typography} from "@mui/material";
+import {observer} from "mobx-react-lite";
+import {useEffect} from "react";
 import "./Approval.scss"
-import { useStore } from "../../app/stores/store";
+import {useStore} from "../../app/stores/store";
 import ApprovalModal from "./ApprovalModal";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import { route } from "../../app/router/Routers";
-
-function createData(
-  msv: number,
-  tensv: string,
-  lop: string,
-  khoa: string,
-  tendetai: string,
-  loaidetai: string,
-  tenGV: string,
-  trangthai: boolean,
-  tacvu: any
-) {
-  return {
-    msv,
-    tensv,
-    lop,
-    khoa,
-    tendetai,
-    loaidetai,
-    tenGV,
-    trangthai,
-    tacvu,
-  };
-}
-
-const rows = [
-  createData(
-    1951060949,
-    "Phạm Tuyết Anh",
-    "61THNB",
-    "Công nghệ thông tin",
-    "Trang web bán khô gà",
-    "Sản Phẩm",
-    "Nguyễn Thị Phương Thảo",
-    true,
-    "Duyệt"
-  ),
-  createData(
-    1951060949,
-    "Phạm Tuyết Anh",
-    "61THNB",
-    "Công nghệ thông tin",
-    "Trang web bán khô gà",
-    "Sản Phẩm",
-    "Nguyễn Thị Phương Thảo",
-    false,
-    "Duyệt"
-  ),
-  createData(
-    1951060949,
-    "Phạm Tuyết Anh",
-    "61THNB",
-    "Công nghệ thông tin",
-    "Trang web bán khô gà",
-    "Sản Phẩm",
-    "Nguyễn Thị Phương Thảo",
-    false,
-    "Duyệt"
-  ),
-  createData(
-    1951060949,
-    "Phạm Tuyết Anh",
-    "61THNB",
-    "Công nghệ thông tin",
-    "Trang web bán khô gà",
-    "Sản Phẩm",
-    "Nguyễn Thị Phương Thảo",
-    true,
-    "Duyệt"
-  ),
-  createData(
-    1951060949,
-    "Phạm Tuyết Anh",
-    "61THNB",
-    "Công nghệ thông tin",
-    "Trang web bán khô gà",
-    "Sản Phẩm",
-    "Nguyễn Thị Phương Thảo",
-    true,
-    "Duyệt"
-  ),
-  createData(
-    1951060949,
-    "Phạm Tuyết Anh",
-    "61THNB",
-    "Công nghệ thông tin",
-    "Trang web bán khô gà",
-    "Sản Phẩm",
-    "Nguyễn Thị Phương Thảo",
-    true,
-    "Duyệt"
-  ),
-];
+import {route} from "../../app/router/Routers";
+import {PagingParams} from "../../app/models/pagination";
+import useQuery from "../../app/util/hooks";
+import {useParams} from "react-router-dom";
+import LoadingCircular from "../../app/layout/LoadingCircular";
+import {Role} from "../../app/models/user";
 
 function ConfirmProjectTable() {
-  const {modalStore, periodStore: {instructorStores}} = useStore();
-  const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(5);
+    const {id} = useParams();
+    const name = useQuery().get("name") as string;
+    const {
+        modalStore,
+        userStore,
+        topicStore: {setPagingParams, pagination, setPeriod, loading, loadList, topicsList}
+    } = useStore();
+    const handleChangePage = (event: unknown, newPage: number) => {
+        setPagingParams(new PagingParams(newPage, pagination!.itemsPerPage));
+    };
 
-  const handleChangePage = (event: unknown, newPage: number) => {
-    setPage(newPage);
-  };
+    const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setPagingParams(new PagingParams(0, parseInt(event.target.value, 10)));
+    };
 
-  const handleChangeRowsPerPage = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    setRowsPerPage(+event.target.value);
-    setPage(0);
-  };
+    useEffect(() => {
+        if (id) {
+            setPeriod(id);
+            loadList();
+        }
+    }, [id, loadList, setPeriod]);
 
-  return (
-    <Box className={'approval'}>
-      <Box className="inner">
-        <IconButton href={route.project}>
-          <ArrowBackIcon/>
-        </IconButton>
-        <Box className="nav">
-          <Typography variant="h3">Duyệt Đề Tài</Typography>
-          <Typography variant="h6">Đồ án khóa k60 đợt 1</Typography>
+    return (
+        <Box className={'approval'}>
+            <Box className="inner">
+                <IconButton href={route.project}>
+                    <ArrowBackIcon/>
+                </IconButton>
+                <Box className="nav">
+                    <Typography variant="h3">Duyệt Đề Tài</Typography>
+                    <Typography variant="h6">{name}</Typography>
+                </Box>
+            </Box>
+            <Paper sx={{width: "100%", overflow: "hidden", boxShadow: "none"}}>
+                <TableContainer>
+                    <Table stickyHeader aria-label="sticky table">
+                        <TableHead>
+                            <TableRow>
+                                <TableCell className="color_background" align="center">
+                                    Mã sinh viên
+                                </TableCell>
+                                <TableCell className="color_background" align="center">
+                                    Tên sinh viên
+                                </TableCell>
+                                <TableCell className="color_background" align="center">
+                                    Lớp
+                                </TableCell>
+                                <TableCell className="color_background" align="center">
+                                    Khoa
+                                </TableCell>
+                                <TableCell className="color_background" align="center">
+                                    Tên đề tài
+                                </TableCell>
+                                <TableCell className="color_background" align="center">
+                                    Loại đề tài
+                                </TableCell>
+                                <TableCell className="color_background" align="center">
+                                    Tên giáo viên
+                                </TableCell>
+                                <TableCell className="color_background" align="center">
+                                    Trạng thái
+                                </TableCell>
+                                <TableCell className="color_background" align="center">
+                                    Tác vụ
+                                </TableCell>
+                            </TableRow>
+                        </TableHead>
+                        {!loading && <TableBody>
+                            {topicsList.map((row) => (
+                                <TableRow
+                                    key={row.id}
+                                    sx={{"&:last-child td, &:last-child th": {border: 0}}}
+                                >
+                                    <TableCell align="center">{row.studentId}</TableCell>
+                                    <TableCell align="center">{row.studentName}</TableCell>
+                                    <TableCell align="left">{row.class}</TableCell>
+                                    <TableCell align="left">{row.faculty}</TableCell>
+                                    <TableCell align="center">{row.name}</TableCell>
+                                    <TableCell align="center">{row.type}</TableCell>
+                                    <TableCell align="center">{row.lecturer}</TableCell>
+                                    {userStore.getRole === Role.Lecturer ?
+                                        <TableCell align="center">
+                                            {row.lecturerApproval ? "Đã duyệt" : "Chưa duyệt"}
+                                        </TableCell>
+                                        :
+                                        <TableCell align="center">
+                                            {row.departmentSubjectApproval ? "Đã duyệt" : "Chưa duyệt"}
+                                        </TableCell>
+                                    }
+                                    <TableCell align="center">
+                                        <Button
+                                            sx={{
+                                                background: "#3690E3",
+                                                color: "#ffffff",
+                                                border: "1px solid #ffffff",
+                                                borderRadius: "8px",
+                                                boxShadow: "none",
+                                                width: "95px",
+                                                textTransform: "capitalize",
+                                            }}
+                                            variant="contained"
+                                            disabled={(userStore.getRole === Role.Lecturer && row.lecturerApproval) || (userStore.getRole === Role.DepartmentSubject && row.departmentSubjectApproval)}
+                                            onClick={() => modalStore.openModal(<ApprovalModal id={row.id}/>)}
+                                        >
+                                            Duyệt
+                                        </Button>
+                                    </TableCell>
+                                </TableRow>
+                            ))}
+                        </TableBody>}
+                    </Table>
+                </TableContainer>
+                {loading && <LoadingCircular/>}
+                <TablePagination
+                    rowsPerPageOptions={[5, 10, 25]}
+                    component="div"
+                    count={pagination?.totalItems || 0}
+                    rowsPerPage={pagination?.itemsPerPage || 10}
+                    page={pagination?.currentPage || 0}
+                    onPageChange={handleChangePage}
+                    onRowsPerPageChange={handleChangeRowsPerPage}
+                />
+            </Paper>
         </Box>
-      </Box>
-      <Paper sx={{ width: "100%", overflow: "hidden", boxShadow: "none" }}>
-        <TableContainer>
-          <Table stickyHeader aria-label="sticky table">
-            <TableHead>
-              <TableRow>
-                <TableCell className="color_background" align="center">
-                  Mã sinh viên
-                </TableCell>
-                <TableCell className="color_background" align="center">
-                  Tên sinh viên
-                </TableCell>
-                <TableCell className="color_background" align="center">
-                  Lớp
-                </TableCell>
-                <TableCell className="color_background" align="center">
-                  Khoa
-                </TableCell>
-                <TableCell className="color_background" align="center">
-                  Tên đề tài
-                </TableCell>
-                <TableCell className="color_background" align="center">
-                  Loại đề tài
-                </TableCell>
-                <TableCell className="color_background" align="center">
-                  Tên giáo viên
-                </TableCell>
-                <TableCell className="color_background" align="center">
-                  Trạng thái
-                </TableCell>
-                <TableCell className="color_background" align="center">
-                  Tác vụ
-                </TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {rows.map((row, index) => (
-                <TableRow
-                  key={index}
-                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                >
-                  <TableCell align="center">{row.msv}</TableCell>
-                  <TableCell align="center">{row.tensv}</TableCell>
-                  <TableCell align="left">{row.lop}</TableCell>
-                  <TableCell align="left">{row.khoa}</TableCell>
-                  <TableCell align="center">{row.tendetai}</TableCell>
-                  <TableCell align="center">{row.loaidetai}</TableCell>
-                  <TableCell align="center">{row.tenGV}</TableCell>
-                  <TableCell align="center">
-                    {row.trangthai ? "Đã duyệt" : "Chưa duyệt"}
-                  </TableCell>
-                  <TableCell align="center">
-                    <Button
-                      sx={{
-                        background: "#3690E3",
-                        color: "#ffffff",
-                        border: "1px solid #ffffff",
-                        borderRadius: "8px",
-                        boxShadow: "none",
-                        width: "95px",
-                        textTransform: "capitalize",
-                      }}
-                      variant="contained"
-                      disabled={row.trangthai}
-                      onClick={() => modalStore.openModal(<ApprovalModal/>)}
-                    >
-                      Duyệt
-                    </Button>
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-        <TablePagination
-          rowsPerPageOptions={[10, 25, 100]}
-          component="div"
-          count={12}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onPageChange={handleChangePage}
-          onRowsPerPageChange={handleChangeRowsPerPage}
-        />
-      </Paper>
-    </Box>
-  );
+    );
 }
 
 export default observer(ConfirmProjectTable);

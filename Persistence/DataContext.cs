@@ -22,6 +22,8 @@ public class DataContext : IdentityDbContext<AppUser, AppRole, string>
     public DbSet<Instructor> Instructors { get; set; }
     public DbSet<PopupNotification> PopupNotifications { get; set; }
 
+    public DbSet<Notification> Notifications { get; set; }
+
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
@@ -44,5 +46,8 @@ public class DataContext : IdentityDbContext<AppUser, AppRole, string>
             .HasIndex(x => x.Course);
         builder.Entity<GraduationProjectPeriod>()
             .HasIndex(x => x.Phase);
+
+        builder.Entity<Notification>().Property(b => b.Infos)
+            .HasColumnType("jsonb");
     }
 }

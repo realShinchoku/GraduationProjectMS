@@ -1,4 +1,4 @@
-import { Typography } from '@mui/material';
+import {Typography} from '@mui/material';
 import Box from '@mui/material/Box';
 import "./Notification.scss";
 
@@ -8,10 +8,10 @@ interface Props {
 }
 
 export default function TxtNotification({tlt, txt}: Props) {
-    
+
     return (
         <Typography variant='body1'>
-            {tlt}
+            {tlt + ": "}
             <Box component="span">{txt}</Box>
         </Typography>
     );

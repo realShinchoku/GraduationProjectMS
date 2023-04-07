@@ -7,6 +7,7 @@ using Application.Students.DTOs;
 using Application.Topics.DTOs;
 using AutoMapper;
 using Domain;
+using CreateDto = Application.GraduationProjectPeriods.DTOs.CreateDto;
 
 namespace Application.Core;
 
@@ -14,7 +15,7 @@ public class MappingProfiles : Profile
 {
     public MappingProfiles()
     {
-        CreateMap<GraduationProjectPeriods.DTOs.CreateDto, GraduationProjectPeriod>();
+        CreateMap<CreateDto, GraduationProjectPeriod>();
         CreateMap<Lecturer, LecturerDto>()
             .ForMember(d => d.DepartmentSubjects, o => o.MapFrom(x => x.DepartmentSubject.DisplayName))
             .ForMember(d => d.Faculty, o => o.MapFrom(x => x.Faculty.DisplayName))
@@ -37,9 +38,9 @@ public class MappingProfiles : Profile
             .ForMember(d => d.Lecturer, o => o.MapFrom(x => x.Lecturer.DisplayName));
         CreateMap<GraduationProjectPeriod, GraduationProjectPeriodDto>()
             .ForMember(d => d.StudentsCount, o => o.MapFrom(x => x.Students.Count))
-            .ForMember(d => d.SyllabiCount, o => o.MapFrom(x => x.Syllabi.Count))
+            .ForMember(d => d.SyllabiCount, o => o.MapFrom(x => x.Students.Count(s => s.Syllabus != null)))
             .ForMember(d => d.ClassesCount, o => o.MapFrom(x => x.Students.GroupBy(s => s.Class).Count()))
-            .ForMember(d => d.ProjectsCount, o => o.MapFrom(x => x.Projects.Count))
+            .ForMember(d => d.ProjectsCount, o => o.MapFrom(x => x.Students.Count(s => s.GraduationProject != null)))
             .ForMember(d => d.LecturersCount, o => o.MapFrom(x => x.Faculty.Lecturers.Count))
             .ForMember(d => d.Faculty, o => o.MapFrom(x => x.Faculty.DisplayName));
         CreateMap<PopupNotification, PopupNotificationDto>();
@@ -54,6 +55,7 @@ public class MappingProfiles : Profile
             .ForMember(x => x.Name, o => o.MapFrom(x => x.GraduationProject.Name))
             .ForMember(x => x.Lecturer, o => o.MapFrom(x => x.Lecturer.DisplayName))
             .ForMember(x => x.LecturerApproval, o => o.MapFrom(x => x.GraduationProject.LecturerApproval))
-            .ForMember(x => x.DepartmentSubjectApproval, o => o.MapFrom(x => x.GraduationProject.DepartmentSubjectApproval));
+            .ForMember(x => x.DepartmentSubjectApproval,
+                o => o.MapFrom(x => x.GraduationProject.DepartmentSubjectApproval));
     }
 }

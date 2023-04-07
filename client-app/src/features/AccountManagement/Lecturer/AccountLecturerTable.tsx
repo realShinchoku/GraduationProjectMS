@@ -55,7 +55,8 @@ function AccountLecturerTable() {
                                 <TableCell align="left">{row.education}</TableCell>
                                 <TableCell align="left">{row.phoneNumber}</TableCell>
                                 <TableCell align="left">{row.email}</TableCell>
-                                <TableCell align="left">{format(new Date(row.createdDate), "dd 'Th'M',' yyyy")}</TableCell>
+                                <TableCell
+                                    align="left">{format(new Date(row.createdDate), "dd 'Th'M',' yyyy")}</TableCell>
                             </TableRow>
                         ))}
                     </TableBody>

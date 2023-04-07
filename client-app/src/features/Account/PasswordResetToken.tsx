@@ -7,12 +7,12 @@ import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import {useStore} from "../../app/stores/store";
 import useQuery from "../../app/util/hooks";
 import VpnKeyIcon from '@mui/icons-material/VpnKey';
+import * as React from "react";
 import {useState} from "react";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import {route} from "../../app/router/Routers";
 import './Account.scss';
-import * as React from "react";
 import {TextField} from "formik-mui";
 
 const validationSchema = Yup.object().shape({
@@ -87,6 +87,7 @@ function PasswordResetToken() {
                                             helperText={(touched.password && errors.password) || errors.error}
                                         />
                                         <Field
+                                            component={TextField}
                                             className="input"
                                             fullWidth
                                             id="confirmPassword"

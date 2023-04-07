@@ -13,13 +13,8 @@ import LecturerList from "../../features/Lecturers/List/LecturerList"
 import AccountLecturer from "../../features/AccountManagement/Lecturer/AccountLecturer";
 import Instructor from "../../features/Instructor/Instructor";
 import Period from "../../features/GraduationPeriod/Period";
-import IsStudent from "./IsStudent";
-import IsLecturer from "./IsLecturer";
-import IsDepartmentSubject from "./IsDepartmentSubject";
-import IsFaculty from "./IsFaculty";
 import AccountStudent from "../../features/AccountManagement/Student/AccountStudent";
 import TopicAssignment from "../../features/TopicAssignment/TopicAssignment";
-import TopicAssignmentModal from "../../features/TopicAssignment/TopicAssignmentModal";
 import Notification from "../../features/Notification/Notification";
 import Document from "../../features/Document/Document";
 import AccountDepartmentSubject from "../../features/AccountManagement/DepartmentSubject/AccountDepartmentSubject";
@@ -30,6 +25,8 @@ import ApprovalTable from "../../features/Approval/ApprovalTable";
 import Outline from "../../features/Outline/Outline";
 import DocumentOutline from "../../features/Document/DocumentOutline";
 import DocumentReport from "../../features/Document/DocumentReport";
+import RequireRole from "./RequireRole";
+import {Role} from "../models/user";
 
 
 export const route = {
@@ -48,10 +45,17 @@ export const route = {
     accountLecturer: '/account/lecturer',
     notification: '/notification',
     document: '/document',
-    project:'/project',
-    projectDetail:(id:string) => {return `/project/${id}`},
-    outline:'/outline',
-    outlineDetail:(id:string) => {return `/outline/${id}`},
+    project: '/project',
+    projectDetail: (id: string, name: string) => {
+        return `/project/${id}?name=${name}`
+    },
+    outline: '/outline',
+    outlineDetail: (id: string) => {
+        return `/outline/${id}`
+    },
+    projectAssignment: (id: string) => {
+        return `/project/assignment/${id}`
+    },
 };
 
 export const routes: RouteObject[] = [
@@ -62,7 +66,7 @@ export const routes: RouteObject[] = [
             {
                 element: <RequireAuth/>, children: [
                     {
-                        element: <IsStudent/>, children: [
+                        element: <RequireRole roles={[Role.Student]} key={Role.Student}/>, children: [
                             {path: 'lecturer', element: <LecturerList/>},
                             {path: 'topic', element: <StudentTopic/>},
                             {path: 'notification', element: <Notification/>},
@@ -72,20 +76,28 @@ export const routes: RouteObject[] = [
                         ]
                     },
                     {
-                        element: <IsLecturer/>, children: []
+                        element: <RequireRole roles={[Role.Lecturer]} key={Role.Lecturer}/>, children: [
+                        ]
                     }
                     ,
                     {
-                        element: <IsDepartmentSubject/>, children: [
+                        element: <RequireRole roles={[Role.DepartmentSubject]} key={Role.DepartmentSubject}/>,
+                        children: [
                             {path: 'instructor', element: <Instructor/>},
-                            {path: 'project', element: <Approval/>},                         
+                            {path: 'project/assignment/:id', element: <TopicAssignment/>},
+                        ]
+                    },
+                    {
+                        element: <RequireRole roles={[Role.DepartmentSubject, Role.Lecturer]}
+                                              key={Role.DepartmentSubject + Role.Lecturer}/>, children: [
+                            {path: 'project', element: <Approval/>},
                             {path: 'project/:id', element: <ApprovalTable/>},
-                            {path: 'outline', element: <Outline/>},                         
+                            {path: 'outline', element: <Outline/>},
                             {path: 'outline/:id', element: <OutlineTable/>},
                         ]
                     },
                     {
-                        element: <IsFaculty/>, children: [
+                        element: <RequireRole roles={[Role.FacultyOffice]} key={Role.FacultyOffice}/>, children: [
                             {path: 'period', element: <Period/>},
                             {path: 'account/student', element: <AccountStudent/>},
                             {path: 'account/departmentSubject', element: <AccountDepartmentSubject/>},
@@ -106,7 +118,6 @@ export const routes: RouteObject[] = [
             {path: 'server-error', element: <ServerError/>},
             {path: 'test', element: <Test/>},
             {path: '*', element: <Navigate replace to={'/not-found'}/>},
-            {path: 'topic/assignment/:id', element: <TopicAssignment/>},
 
         ],
     }

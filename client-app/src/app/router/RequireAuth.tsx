@@ -9,6 +9,8 @@ import {Role} from "../models/user";
 import StudentSidebar from "../layout/Sidebar/StudentSidebar";
 import DepartmentSubjectSidebar from "../layout/Sidebar/DepartmentSubjectSidebar";
 import FacultySidebar from "../layout/Sidebar/FacultySidebar";
+import LecturerSidebar from "../layout/Sidebar/LecturerSidebar";
+
 
 function RequireAuth() {
     const {commonStore: {sideBarState}, userStore} = useStore();
@@ -19,7 +21,7 @@ function RequireAuth() {
             case Role.Student:
                 return <StudentSidebar/>;
             case Role.Lecturer:
-                return <></>;
+                return <LecturerSidebar/>;
             case Role.DepartmentSubject:
                 return <DepartmentSubjectSidebar/>;
             case Role.FacultyOffice:
