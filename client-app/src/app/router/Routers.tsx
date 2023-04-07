@@ -23,6 +23,8 @@ import StudentTopic from "../../features/StudentTopic/StudentTopic";
 import Approval from "../../features/Approval/Approval";
 import ApprovalTable from "../../features/Approval/ApprovalTable";
 import Outline from "../../features/Outline/Outline";
+import DocumentOutline from "../../features/Document/DocumentOutline";
+import DocumentReport from "../../features/Document/DocumentReport";
 import RequireRole from "./RequireRole";
 import {Role} from "../models/user";
 
@@ -69,6 +71,8 @@ export const routes: RouteObject[] = [
                             {path: 'topic', element: <StudentTopic/>},
                             {path: 'notification', element: <Notification/>},
                             {path: 'document', element: <Document/>},
+                            {path: '/document/outline', element: <DocumentOutline/>},
+                            {path: '/document/report', element: <DocumentReport/>},
                         ]
                     },
                     {
