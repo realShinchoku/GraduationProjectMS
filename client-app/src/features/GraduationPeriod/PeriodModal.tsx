@@ -91,7 +91,7 @@ function PeriodModal({id}: Props) {
                         .required("Vui lòng điền đủ thông tin"),
                 })}
             >
-                {({touched, dirty, isValid, isSubmitting, errors,}) => (
+                {({touched, dirty, isValid, isSubmitting, errors}) => (
                     <Form className="modalContent">
                         <Grid container spacing={2}>
                             <Grid xs={10} className="contentTop">
@@ -139,7 +139,7 @@ function PeriodModal({id}: Props) {
                                     color="inherit"
                                     variant="outlined"
                                     className="button"
-                                    disabled={!dirty || !isValid || isSubmitting}
+                                    disabled={(touched.phase && touched.course && touched.startDate) || !isValid || isSubmitting}
                                     loading={isSubmitting}
                                 >
                                     {id ? "Cập nhật" : "Tạo"}
