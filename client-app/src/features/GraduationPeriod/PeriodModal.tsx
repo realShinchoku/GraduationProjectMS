@@ -26,14 +26,12 @@ function PeriodModal({id}: Props) {
         periodFormValues: PeriodFormValues,
         setErrors: any
     ) {
-        if (!periodFormValues.id) {
+        if (!id) {
             create({...periodFormValues, id: uuid()}).then(() => {
-                modalStore.closeModal();
                 snackBarStore.success('Tạo thành công');
             });
         } else {
             edit(periodFormValues).then(() => {
-                modalStore.closeModal();
                 snackBarStore.success('Cập nhật thành công');
             });
         }
@@ -186,8 +184,8 @@ function PeriodModal({id}: Props) {
                                                 syllabusSubmissionTime: new Date(addDate(value, 4)),
                                                 syllabusReviewTime: new Date(addDate(value, 15)),
                                                 graduationProjectTime: new Date(addDate(value, 22)),
-                                                protectionTime: new Date(addDate(value, 119)),
-                                                endDate: new Date(addDate(value, 132)),
+                                                protectionTime: new Date(addDate(value, 30)),
+                                                endDate: new Date(addDate(value, 37)),
                                             });
                                         }}
                                     />

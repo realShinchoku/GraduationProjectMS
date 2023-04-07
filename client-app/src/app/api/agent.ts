@@ -131,7 +131,7 @@ const Students = {
 
 const Periods = {
     create: (period: PeriodFormValues) => requests.post<void>('/period', period),
-    edit: (period: PeriodFormValues) => requests.put<void>('/period', period),
+    edit: (period: PeriodFormValues) => requests.put<void>(`/period/${period.id}`, period),
     list: (params: URLSearchParams) => requests.list<Period[]>('/period', {params}),
     single: (id: string) => requests.get<Period>(`/period/${id}`),
 }
