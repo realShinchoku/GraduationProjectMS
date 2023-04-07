@@ -19,7 +19,7 @@ function TopicAssignmentModal({id}: Props) {
     const {modalStore, topicStore} = useStore();
 
     return (
-        <Box className="register_topic">
+        <Box className="register_topic_">
             <Box className="inner">
                 <Box className="close" onClick={modalStore.closeModal}>×</Box>
                 <Typography sx={{textAlign:'center'}} variant="h2">THÔNG TIN ĐỀ TÀI</Typography>
@@ -39,7 +39,7 @@ function TopicAssignmentModal({id}: Props) {
                     })}
                 >
                     {({isSubmitting, errors, isValid, dirty, touched}) => (
-                        <Form>
+                        <Form className="form">
                             <Typography variant='h5' sx={{marginBottom:'10px',fontWeight:'500'}}>Tên đề tài</Typography>
                             <Field
                                 component={TextField}

@@ -107,7 +107,7 @@
   }
 }
 
-.register_topic {
+.register_topic_ {
   margin: 0 auto;
   display: flex;
   align-items: center;
@@ -157,6 +157,14 @@
         font-size: get_sp(28);
         line-height: get_sp(30);
         margin-bottom: get_sp(10);
+      }
+    }
+
+    .form {
+      height: 600px;
+      overflow: scroll;
+      @include pc {
+        height: get_pc(600);
       }
     }
 
