@@ -66,7 +66,7 @@ public static class ApplicationServiceExtensions
                 var pgHost = pgHostPort.Split(":")[0];
                 var pgPort = pgHostPort.Split(":")[1];
 
-                connStr = $"Server={pgHost};Port={pgPort};User Id={pgUser};Password={pgPass};Database={pgDb};";
+                connStr = $"Server={pgHost};Port={pgPort};User Id={pgUser};Password={pgPass};Database={pgDb};SSL=false;SslMode=Disable;";
             }
 
             // Whether the connection string came from the local development configuration file
