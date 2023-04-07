@@ -23,9 +23,10 @@ function AddStudentModal({periodId}: Props) {
         onDrop: (files) => {
             setFile(files[0]);
         },
+        onDropRejected: () => snackBarStore.error("File không được chấp thuận")
     });
 
-    const {modalStore, studentStore} = useStore();
+    const {modalStore, studentStore, snackBarStore, periodStore} = useStore();
     return (
         <Grid className='add_account'>
             <Grid className="modal_body">
@@ -48,9 +49,10 @@ function AddStudentModal({periodId}: Props) {
                                 onClick={() => {
                                     studentStore
                                         .create(file, periodId)
-                                        .then(() => {
+                                        .then(async () => {
                                             store.modalStore.closeModal();
                                             store.snackBarStore.success("Tạo tài khoản thành công");
+                                            await periodStore.get(periodId)
                                         })
                                 }}
                             >Tải lên</LoadingButton>
