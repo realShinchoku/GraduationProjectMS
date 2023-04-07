@@ -18,27 +18,27 @@ interface Props {
 
 function PeriodModal({id}: Props) {
     const {modalStore, periodStore: {create, edit, get}, snackBarStore} = useStore();
-    const [periodFormValues, setPeriodFormValues] = useState<PeriodFormValues>(
-        new PeriodFormValues()
-    );
+    const [periodFormValues, setPeriodFormValues] = useState<PeriodFormValues>(new PeriodFormValues());
 
     function handleFormSubmit(
         periodFormValues: PeriodFormValues,
         setErrors: any
     ) {
-        if (!id) {
+        if (!periodFormValues.id) {
             create({...periodFormValues, id: uuid()}).then(() => {
+                modalStore.closeModal();
                 snackBarStore.success('Tạo thành công');
             });
         } else {
             edit(periodFormValues).then(() => {
+                modalStore.closeModal();
                 snackBarStore.success('Cập nhật thành công');
             });
         }
     }
 
     useEffect(() => {
-        if (id)
+        if (id !== undefined)
             get(id).then((period) => {
                 setPeriodFormValues(new PeriodFormValues(period));
                 console.log(period);
@@ -59,10 +59,10 @@ function PeriodModal({id}: Props) {
                     handleFormSubmit(values, setErrors)
                 }
                 validationSchema={Yup.object().shape({
-                    phase: Yup.number()
+                    phase: Yup.string()
                         .typeError("Nhập khóa đồ án")
                         .required("Vui lòng điền đủ thông tin"),
-                    course: Yup.number()
+                    course: Yup.string()
                         .typeError("Nhập đợt đồ án")
                         .required("Vui lòng điền đủ thông tin"),
                     startDate: Yup.date()
@@ -91,7 +91,7 @@ function PeriodModal({id}: Props) {
                         .required("Vui lòng điền đủ thông tin"),
                 })}
             >
-                {({touched, dirty, isValid, isSubmitting, errors}) => (
+                {({touched, dirty, isValid, isSubmitting, errors,values}) => (
                     <Form className="modalContent">
                         <Grid container spacing={2}>
                             <Grid xs={10} className="contentTop">
@@ -139,7 +139,7 @@ function PeriodModal({id}: Props) {
                                     color="inherit"
                                     variant="outlined"
                                     className="button"
-                                    disabled={(touched.phase && touched.course && touched.startDate) || !isValid || isSubmitting}
+                                    disabled={!dirty || !isValid || isSubmitting}
                                     loading={isSubmitting}
                                 >
                                     {id ? "Cập nhật" : "Tạo"}
@@ -161,7 +161,7 @@ function PeriodModal({id}: Props) {
                                     <Field
                                         component={DatePicker}
                                         name="startDate"
-                                        // minDate={new Date()}
+                                        minDate={new Date()}
                                         slotProps={{
                                             textField: {
                                                 placeholder: "",
@@ -178,14 +178,16 @@ function PeriodModal({id}: Props) {
                                         onChange={(value: Date) => {
                                             setPeriodFormValues({
                                                 ...periodFormValues,
+                                                phase: values.phase,
+                                                course: values.course,
                                                 startDate: new Date(value),
                                                 contactInstructorTime: new Date(value),
                                                 registerTopicTime: new Date(addDate(value, 1)),
                                                 syllabusSubmissionTime: new Date(addDate(value, 4)),
                                                 syllabusReviewTime: new Date(addDate(value, 15)),
                                                 graduationProjectTime: new Date(addDate(value, 22)),
-                                                protectionTime: new Date(addDate(value, 30)),
-                                                endDate: new Date(addDate(value, 37)),
+                                                protectionTime: new Date(addDate(value, 119)),
+                                                endDate: new Date(addDate(value, 132)),
                                             });
                                         }}
                                     />

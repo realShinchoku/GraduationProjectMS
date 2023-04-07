@@ -103,6 +103,8 @@ export default class PeriodStore {
             
         } catch (e) {
             console.log(e);
+            store.modalStore.closeModal();
+            
             store.snackBarStore.error("Có lỗi xảy ra");
             throw e;
         }
@@ -116,6 +118,8 @@ export default class PeriodStore {
             
         } catch (e) {
             console.log(e);
+            store.modalStore.closeModal();
+            
             store.snackBarStore.error("Có lỗi xảy ra");
             throw e;
         }
