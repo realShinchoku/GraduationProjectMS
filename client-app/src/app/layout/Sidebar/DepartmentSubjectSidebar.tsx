@@ -44,7 +44,6 @@ function DepartmentSubjectSidebar() {
                 <SidebarItem title="Trang chủ" to={route.home} icon={Category}/>
                 <SidebarItem title="Giảng viên hướng dẫn" to={route.instructor} icon={ProfileUser}/>
                 <SidebarItem title="Đề Tài" to={route.project} icon={TaskSquare}/>
-                <SidebarItem title="Thông Báo" to={route.notification} icon={Notification}/>
                 <SidebarItem title="Đề Cương" to={route.outline} icon={Folder}/>
             </Box>
         </Grid>

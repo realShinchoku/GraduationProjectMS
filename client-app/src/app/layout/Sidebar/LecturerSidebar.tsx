@@ -43,7 +43,6 @@ function LecturerSidebar() {
                 <SidebarItem title="Trang Chủ" to={route.home} icon={Category}/>
                 <SidebarItem title="Sinh Viên" to={route.lecturer} icon={Message}/>
                 <SidebarItem title="Đề Tài" to={route.project} icon={TaskSquare}/>
-                <SidebarItem title="Thông Báo" to={route.notification} icon={Notification}/>
                 <SidebarItem title="Báo Cáo" to={route.outline} icon={Folder}/>
             </Box>
         </Grid>
