@@ -2,15 +2,12 @@ import {observer} from "mobx-react-lite";
 import {useLocation} from "react-router-dom";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import {Avatar, Box, Typography} from "@mui/material";
-import Button from '@mui/material/Button';
-
 import {route} from "../../router/Routers";
 import {Category, LogoSP, Message, Mission, Notification, ProfileUser, TaskSquare} from "../../../assets";
 import VerticalTabs from "./Tab";
 import {useStore} from "../../stores/store";
 import SidebarItem from "./SidebarItem/SidebarItem";
 import "./Sidebar.scss";
-import {useEffect} from "react";
 import TopicTabs from "./TopicTabs/TopicTabs";
 
 function StudentSidebar() {

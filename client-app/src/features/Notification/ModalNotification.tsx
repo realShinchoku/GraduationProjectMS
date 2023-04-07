@@ -10,9 +10,9 @@ interface Props {
     notification: Notification;
 }
 
-function ModalNotification({notification}:Props) {
+function ModalNotification({notification}: Props) {
 
-    const {modalStore: {closeModal}, notificationStore:{markAsRead}} = useStore();
+    const {modalStore: {closeModal}, notificationStore: {markAsRead}} = useStore();
 
     return (
         <Box className="modal_notification">

@@ -1,6 +1,6 @@
-import { Link, Typography } from '@mui/material';
+import {Link, Typography} from '@mui/material';
 import Box from '@mui/material/Box';
-import { Group } from '../../assets';
+import {Group} from '../../assets';
 import "./Document.scss"
 
 export default function Document() {

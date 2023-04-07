@@ -73,6 +73,7 @@ public class Create
                 topic.DepartmentSubjectApproval = true;
                 topic.LecturerApproval = true;
             }
+
             student.GraduationProject = topic;
             _context.Update(student);
             var result = await _context.SaveChangesAsync(cancellationToken) > 0;
@@ -85,28 +86,27 @@ public class Create
                     Student = student,
                     Name = "Xác nhận hoàn thành đăng ký đề tài",
                     InfoTitle = "Thông tin đề tài",
-                    Infos = new List<Info>()
+                    Infos = new List<Info>
                     {
-                        new ()
+                        new()
                         {
                             Key = "Tên đề tài",
-                            Value = topic.Name,
+                            Value = topic.Name
                         },
-                        new ()
+                        new()
                         {
                             Key = "Mô tả",
-                            Value = topic.Description,
+                            Value = topic.Description
                         },
-                        new ()
+                        new()
                         {
                             Key = "Kiểu đồ án",
-                            Value = topic.Type,
+                            Value = topic.Type
                         }
                     }
                 };
-                
-                _context.Notifications.Add(notification);
 
+                _context.Notifications.Add(notification);
             }
 
             return Result<GraduationProject>.Success(topic);

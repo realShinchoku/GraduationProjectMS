@@ -12,9 +12,10 @@ public class NotificationController : BaseApiController
     {
         return HandleResult(await Mediator.Send(new List.Query()));
     }
+
     [HttpPost("{id}")]
     public async Task<IActionResult> MarkAsRead(Guid id)
     {
-        return HandleResult(await Mediator.Send(new MarkAsRead.Command{Id = id}));
+        return HandleResult(await Mediator.Send(new MarkAsRead.Command { Id = id }));
     }
 }

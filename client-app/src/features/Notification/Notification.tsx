@@ -14,7 +14,7 @@ function Notification() {
     const {modalStore, notificationStore: {loading, loadList, listNotifications, notifications}} = useStore();
 
     useEffect(() => {
-        if(notifications.size <= 0)
+        if (notifications.size <= 0)
             loadList()
     }, [loadList, notifications.size]);
 

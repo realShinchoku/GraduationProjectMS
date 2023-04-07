@@ -23,7 +23,8 @@ public class MarkAsRead
 
         public async Task<Result<Unit>> Handle(Command request, CancellationToken cancellationToken)
         {
-            var notification = await _context.Notifications.FirstOrDefaultAsync(x => x.Id == request.Id, cancellationToken);
+            var notification =
+                await _context.Notifications.FirstOrDefaultAsync(x => x.Id == request.Id, cancellationToken);
             if (notification == null)
                 return null;
             notification.IsRead = true;

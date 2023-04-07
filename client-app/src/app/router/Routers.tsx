@@ -76,8 +76,7 @@ export const routes: RouteObject[] = [
                         ]
                     },
                     {
-                        element: <RequireRole roles={[Role.Lecturer]} key={Role.Lecturer}/>, children: [
-                        ]
+                        element: <RequireRole roles={[Role.Lecturer]} key={Role.Lecturer}/>, children: []
                     }
                     ,
                     {

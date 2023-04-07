@@ -15,8 +15,8 @@ import {ListItemIcon, MenuItem} from "@mui/material";
 import {AccountCircle, Logout, Settings} from "@mui/icons-material";
 import "./Header.scss";
 import ChangePassword from "../../../features/Account/ChangePassword";
-import {MessageQuestion, Notification} from "../../../assets";
-import ModalNotification from "../../../features/Notification/ModalNotification";
+import {MessageQuestion} from "../../../assets";
+
 
 function Header() {
 

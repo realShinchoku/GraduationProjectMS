@@ -1,8 +1,7 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import {FormControl, FormControlLabel, FormHelperText, Grid, Radio} from "@mui/material";
+import {FormControl, FormControlLabel, FormHelperText, Radio} from "@mui/material";
 import {useStore} from "../../app/stores/store";
 import {LoadingButton} from "@mui/lab";
 import {observer} from "mobx-react-lite";
@@ -61,7 +60,8 @@ function TopicAssignmentModal({id}: Props) {
                                 multiline
                                 rows={4}
                             />
-                            <FormControl sx={{display: "unset"}} error={touched.type && !!errors.type} variant="standard">
+                            <FormControl sx={{display: "unset"}} error={touched.type && !!errors.type}
+                                         variant="standard">
                                 <Field component={RadioGroup} name="type" className="radio_group">
                                     <FormControlLabel
                                         value="Web"

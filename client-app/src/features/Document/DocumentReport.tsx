@@ -1,6 +1,6 @@
-import { Link, Typography } from '@mui/material';
+import {Link, Typography} from '@mui/material';
 import Box from '@mui/material/Box';
-import { ArrowLeft } from '../../assets';
+import {ArrowLeft} from '../../assets';
 import "./Document.scss"
 import UploadFile from './UploadFile';
 

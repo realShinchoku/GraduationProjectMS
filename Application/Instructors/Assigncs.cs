@@ -86,28 +86,28 @@ public class Assign
                 Student = student,
                 Name = "Xác nhận hoàn thành đăng ký giáo viên",
                 InfoTitle = "Thông tin giáo viên hướng dẫn",
-                Infos = new List<Info>()
+                Infos = new List<Info>
                 {
-                    new ()
+                    new()
                     {
                         Key = "Tên giáo viên hướng dẫn",
-                        Value = lecturer.DisplayName,
+                        Value = lecturer.DisplayName
                     },
-                    new ()
+                    new()
                     {
                         Key = "Email",
-                        Value = lecturer.Email,
+                        Value = lecturer.Email
                     },
-                    new ()
+                    new()
                     {
                         Key = "Học vị",
-                        Value = lecturer.Education,
+                        Value = lecturer.Education
                     },
-                    new ()
+                    new()
                     {
                         Key = "Bộ môn",
-                        Value = departmentSubject.DisplayName,
-                    },
+                        Value = departmentSubject.DisplayName
+                    }
                 }
             };
 

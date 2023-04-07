@@ -1,8 +1,8 @@
-import { Link, Typography } from '@mui/material';
+import {Link, Typography} from '@mui/material';
 import Box from '@mui/material/Box';
 import "./Document.scss"
 import UploadFile from './UploadFile';
-import { ArrowLeft } from '../../assets';
+import {ArrowLeft} from '../../assets';
 
 export default function DocumentOutline() {
     return (
