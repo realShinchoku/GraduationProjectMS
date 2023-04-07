@@ -81,6 +81,7 @@ export default class LecturerStore {
             store.snackBarStore.success("Tạo thành công");
         } catch (e) {
             console.log(e);
+            throw e;
         }
     }
 

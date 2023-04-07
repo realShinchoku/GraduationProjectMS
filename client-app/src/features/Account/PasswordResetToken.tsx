@@ -87,6 +87,7 @@ function PasswordResetToken() {
                                             helperText={(touched.password && errors.password) || errors.error}
                                         />
                                         <Field
+                                            component={TextField}
                                             className="input"
                                             fullWidth
                                             id="confirmPassword"

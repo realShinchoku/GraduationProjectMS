@@ -89,6 +89,7 @@ export default class StudentStore {
             await agent.Account.createStudent(file, periodId);
         } catch (e) {
             console.log(e);
+            throw e;
         } finally {
             this.loadingUpload = false;
         }

@@ -10,6 +10,7 @@ import {Instructor} from "../models/instructor";
 import {Period, PeriodFormValues} from "../models/period";
 import {DepartmentSubject} from "../models/departmentSubject";
 import {Topic, TopicDto} from "../models/topic";
+import {Notification} from "../models/notification";
 
 const sleep = (delay: number) => {
     return new Promise((resolve) => {
@@ -170,11 +171,21 @@ const Topics = {
         description
     }),
     get: (id: string) => requests.get<Topic>(`/graduationProject/${id}`),
-    assign: (id: string,name: string, type: string, description: string) =>requests.post<Topic>(`/graduationProject/${id}`, {
+    assign: (id: string, name: string, type: string, description: string) => requests.post<Topic>(`/graduationProject/${id}`, {
         name,
         type,
         description
     }),
+    approval: (status: number, note: string, id: string) => requests.post<void>('/graduationProject/approval', {
+        status,
+        note,
+        id
+    })
+}
+
+const Notifications = {
+    list: () => requests.get<Notification[]>('/notification'),
+    markAsRead: (id: string) => requests.post<void>(`/notification/${id}`, {})
 }
 
 const agent = {
@@ -185,7 +196,8 @@ const agent = {
     DepartmentSubjects,
     Instructors,
     FilterItems,
-    Topics
+    Topics,
+    Notifications
 }
 
 export default agent;

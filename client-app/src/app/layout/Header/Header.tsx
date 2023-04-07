@@ -15,8 +15,8 @@ import {ListItemIcon, MenuItem} from "@mui/material";
 import {AccountCircle, Logout, Settings} from "@mui/icons-material";
 import "./Header.scss";
 import ChangePassword from "../../../features/Account/ChangePassword";
-import {MessageQuestion, Notification} from "../../../assets";
-import ModalNotification from "../../../features/Notification/ModalNotification";
+import {MessageQuestion} from "../../../assets";
+
 
 function Header() {
 
@@ -54,11 +54,6 @@ function Header() {
                     <Box className="user">
                         <Box className="icon" sx={{color: 'action.active'}}>
                             <Box component="img" src={MessageQuestion} alt=""/>
-                            <Box component="img" src={Notification} alt="" 
-                                onClick={() => {
-                                    modalStore.openModal(<ModalNotification/>)
-                                }}
-                            />
                         </Box>
                         <Box className="tlt">
                             <Typography variant="h5">{user?.displayName}</Typography>

@@ -213,6 +213,7 @@ function PeriodModal({id}: Props) {
                                             border: "none",
                                             "& fieldset": {border: "none"},
                                         }}
+                                        disabled
                                     />
                                 </Grid>
                             </Grid>
@@ -241,6 +242,7 @@ function PeriodModal({id}: Props) {
                                             border: "none",
                                             "& fieldset": {border: "none"},
                                         }}
+                                        disabled
                                     />
                                 </Box>
                             </Grid>
@@ -266,6 +268,7 @@ function PeriodModal({id}: Props) {
                                             border: "none",
                                             "& fieldset": {border: "none"},
                                         }}
+                                        disabled
                                     />
                                 </Box>
                             </Grid>
@@ -291,6 +294,7 @@ function PeriodModal({id}: Props) {
                                             border: "none",
                                             "& fieldset": {border: "none"},
                                         }}
+                                        disabled
                                     />
                                 </Box>
                             </Grid>
@@ -316,6 +320,7 @@ function PeriodModal({id}: Props) {
                                             border: "none",
                                             "& fieldset": {border: "none"},
                                         }}
+                                        disabled
                                     />
                                 </Box>
                             </Grid>
@@ -341,6 +346,7 @@ function PeriodModal({id}: Props) {
                                             border: "none",
                                             "& fieldset": {border: "none"},
                                         }}
+                                        disabled
                                     />
                                 </Box>
                             </Grid>
@@ -368,6 +374,7 @@ function PeriodModal({id}: Props) {
                                             border: "none",
                                             "& fieldset": {border: "none"},
                                         }}
+                                        disabled
                                     />
                                 </Box>
                             </Grid>

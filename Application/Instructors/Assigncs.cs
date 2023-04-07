@@ -81,13 +81,37 @@ public class Assign
 
             if (!result) return Result<Unit>.Failure("Có lỗi khi chọn giảng viên hướng dẫn");
 
-            var popupNotification = new PopupNotification
+            var notification = new Notification
             {
-                Message = $"Bạn đã được phân giảng viên {instructor.Lecturer.DisplayName} làm giảng viên hướng dẫn",
-                TargetUser = student
+                Student = student,
+                Name = "Xác nhận hoàn thành đăng ký giáo viên",
+                InfoTitle = "Thông tin giáo viên hướng dẫn",
+                Infos = new List<Info>
+                {
+                    new()
+                    {
+                        Key = "Tên giáo viên hướng dẫn",
+                        Value = lecturer.DisplayName
+                    },
+                    new()
+                    {
+                        Key = "Email",
+                        Value = lecturer.Email
+                    },
+                    new()
+                    {
+                        Key = "Học vị",
+                        Value = lecturer.Education
+                    },
+                    new()
+                    {
+                        Key = "Bộ môn",
+                        Value = departmentSubject.DisplayName
+                    }
+                }
             };
 
-            _context.PopupNotifications.Add(popupNotification);
+            _context.Notifications.Add(notification);
 
             await _context.SaveChangesAsync(cancellationToken);
 

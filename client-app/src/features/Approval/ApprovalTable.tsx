@@ -9,121 +9,40 @@ import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import {Box, Button, IconButton, Typography} from "@mui/material";
 import {observer} from "mobx-react-lite";
-import {useState} from "react";
+import {useEffect} from "react";
 import "./Approval.scss"
 import {useStore} from "../../app/stores/store";
 import ApprovalModal from "./ApprovalModal";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import {route} from "../../app/router/Routers";
-
-function createData(
-    msv: number,
-    tensv: string,
-    lop: string,
-    khoa: string,
-    tendetai: string,
-    loaidetai: string,
-    tenGV: string,
-    trangthai: boolean,
-    tacvu: any
-) {
-    return {
-        msv,
-        tensv,
-        lop,
-        khoa,
-        tendetai,
-        loaidetai,
-        tenGV,
-        trangthai,
-        tacvu,
-    };
-}
-
-const rows = [
-    createData(
-        1951060949,
-        "Phạm Tuyết Anh",
-        "61THNB",
-        "Công nghệ thông tin",
-        "Trang web bán khô gà",
-        "Sản Phẩm",
-        "Nguyễn Thị Phương Thảo",
-        true,
-        "Duyệt"
-    ),
-    createData(
-        1951060949,
-        "Phạm Tuyết Anh",
-        "61THNB",
-        "Công nghệ thông tin",
-        "Trang web bán khô gà",
-        "Sản Phẩm",
-        "Nguyễn Thị Phương Thảo",
-        false,
-        "Duyệt"
-    ),
-    createData(
-        1951060949,
-        "Phạm Tuyết Anh",
-        "61THNB",
-        "Công nghệ thông tin",
-        "Trang web bán khô gà",
-        "Sản Phẩm",
-        "Nguyễn Thị Phương Thảo",
-        false,
-        "Duyệt"
-    ),
-    createData(
-        1951060949,
-        "Phạm Tuyết Anh",
-        "61THNB",
-        "Công nghệ thông tin",
-        "Trang web bán khô gà",
-        "Sản Phẩm",
-        "Nguyễn Thị Phương Thảo",
-        true,
-        "Duyệt"
-    ),
-    createData(
-        1951060949,
-        "Phạm Tuyết Anh",
-        "61THNB",
-        "Công nghệ thông tin",
-        "Trang web bán khô gà",
-        "Sản Phẩm",
-        "Nguyễn Thị Phương Thảo",
-        true,
-        "Duyệt"
-    ),
-    createData(
-        1951060949,
-        "Phạm Tuyết Anh",
-        "61THNB",
-        "Công nghệ thông tin",
-        "Trang web bán khô gà",
-        "Sản Phẩm",
-        "Nguyễn Thị Phương Thảo",
-        true,
-        "Duyệt"
-    ),
-];
+import {PagingParams} from "../../app/models/pagination";
+import useQuery from "../../app/util/hooks";
+import {useParams} from "react-router-dom";
+import LoadingCircular from "../../app/layout/LoadingCircular";
+import {Role} from "../../app/models/user";
 
 function ConfirmProjectTable() {
-    const {modalStore} = useStore();
-    const [page, setPage] = useState(0);
-    const [rowsPerPage, setRowsPerPage] = useState(5);
-
+    const {id} = useParams();
+    const name = useQuery().get("name") as string;
+    const {
+        modalStore,
+        userStore,
+        topicStore: {setPagingParams, pagination, setPeriod, loading, loadList, topicsList}
+    } = useStore();
     const handleChangePage = (event: unknown, newPage: number) => {
-        setPage(newPage);
+        setPagingParams(new PagingParams(newPage, pagination!.itemsPerPage));
     };
 
-    const handleChangeRowsPerPage = (
-        event: React.ChangeEvent<HTMLInputElement>
-    ) => {
-        setRowsPerPage(+event.target.value);
-        setPage(0);
+    const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setPagingParams(new PagingParams(0, parseInt(event.target.value, 10)));
     };
+
+    useEffect(() => {
+        if (id) {
+            setPeriod(id);
+            loadList();
+        }
+    }, [id, loadList, setPeriod]);
 
     return (
         <Box className={'approval'}>
@@ -133,7 +52,7 @@ function ConfirmProjectTable() {
                 </IconButton>
                 <Box className="nav">
                     <Typography variant="h3">Duyệt Đề Tài</Typography>
-                    <Typography variant="h6">Đồ án khóa k60 đợt 1</Typography>
+                    <Typography variant="h6">{name}</Typography>
                 </Box>
             </Box>
             <Paper sx={{width: "100%", overflow: "hidden", boxShadow: "none"}}>
@@ -170,22 +89,28 @@ function ConfirmProjectTable() {
                                 </TableCell>
                             </TableRow>
                         </TableHead>
-                        <TableBody>
-                            {rows.map((row, index) => (
+                        {!loading && <TableBody>
+                            {topicsList.map((row) => (
                                 <TableRow
-                                    key={index}
+                                    key={row.id}
                                     sx={{"&:last-child td, &:last-child th": {border: 0}}}
                                 >
-                                    <TableCell align="center">{row.msv}</TableCell>
-                                    <TableCell align="center">{row.tensv}</TableCell>
-                                    <TableCell align="left">{row.lop}</TableCell>
-                                    <TableCell align="left">{row.khoa}</TableCell>
-                                    <TableCell align="center">{row.tendetai}</TableCell>
-                                    <TableCell align="center">{row.loaidetai}</TableCell>
-                                    <TableCell align="center">{row.tenGV}</TableCell>
-                                    <TableCell align="center">
-                                        {row.trangthai ? "Đã duyệt" : "Chưa duyệt"}
-                                    </TableCell>
+                                    <TableCell align="center">{row.studentId}</TableCell>
+                                    <TableCell align="center">{row.studentName}</TableCell>
+                                    <TableCell align="left">{row.class}</TableCell>
+                                    <TableCell align="left">{row.faculty}</TableCell>
+                                    <TableCell align="center">{row.name}</TableCell>
+                                    <TableCell align="center">{row.type}</TableCell>
+                                    <TableCell align="center">{row.lecturer}</TableCell>
+                                    {userStore.getRole === Role.Lecturer ?
+                                        <TableCell align="center">
+                                            {row.lecturerApproval ? "Đã duyệt" : "Chưa duyệt"}
+                                        </TableCell>
+                                        :
+                                        <TableCell align="center">
+                                            {row.departmentSubjectApproval ? "Đã duyệt" : "Chưa duyệt"}
+                                        </TableCell>
+                                    }
                                     <TableCell align="center">
                                         <Button
                                             sx={{
@@ -198,23 +123,24 @@ function ConfirmProjectTable() {
                                                 textTransform: "capitalize",
                                             }}
                                             variant="contained"
-                                            disabled={row.trangthai}
-                                            onClick={() => modalStore.openModal(<ApprovalModal/>)}
+                                            disabled={(userStore.getRole === Role.Lecturer && row.lecturerApproval) || (userStore.getRole === Role.DepartmentSubject && row.departmentSubjectApproval)}
+                                            onClick={() => modalStore.openModal(<ApprovalModal id={row.id}/>)}
                                         >
                                             Duyệt
                                         </Button>
                                     </TableCell>
                                 </TableRow>
                             ))}
-                        </TableBody>
+                        </TableBody>}
                     </Table>
                 </TableContainer>
+                {loading && <LoadingCircular/>}
                 <TablePagination
-                    rowsPerPageOptions={[10, 25, 100]}
+                    rowsPerPageOptions={[5, 10, 25]}
                     component="div"
-                    count={12}
-                    rowsPerPage={rowsPerPage}
-                    page={page}
+                    count={pagination?.totalItems || 0}
+                    rowsPerPage={pagination?.itemsPerPage || 10}
+                    page={pagination?.currentPage || 0}
                     onPageChange={handleChangePage}
                     onRowsPerPageChange={handleChangeRowsPerPage}
                 />

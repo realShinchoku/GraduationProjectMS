@@ -38,16 +38,16 @@ public class GraduationProjectController : BaseApiController
     }
 
     [HttpPost("approval")]
-    [Authorize(Policy = "IsLecturerOrDepartmentSubjects")]
+    [Authorize]
     public async Task<IActionResult> Approval(Approval.Command command)
     {
         return HandleResult(await Mediator.Send(command));
     }
-    
+
     [HttpPost("{id}")]
-    [Authorize(Policy = "IsLecturer")]
+    [Authorize(Policy = "IsDepartmentSubjects")]
     public async Task<IActionResult> Assign(CreateDto graduationProject, string id)
     {
-        return HandleResult(await Mediator.Send(new Create.Command { GraduationProject = graduationProject, Id = id}));
+        return HandleResult(await Mediator.Send(new Create.Command { GraduationProject = graduationProject, Id = id }));
     }
 }
