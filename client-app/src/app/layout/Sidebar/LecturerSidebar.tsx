@@ -7,7 +7,6 @@ import {
     Category,  
     LogoSP, 
     Message,
-    ProfileUser, 
     Notification, 
     TaskSquare,
     Folder,

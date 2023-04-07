@@ -109,7 +109,8 @@ export const routes: RouteObject[] = [
             {path: 'server-error', element: <ServerError/>},
             {path: 'test', element: <Test/>},
             {path: '*', element: <Navigate replace to={'/not-found'}/>},
-
+            {path: 'de-cuong-bo-mon', element: <Outline/>},
+            {path: 'de-tai-bo-mon', element: <Approval/>},
         ],
     }
 ]
