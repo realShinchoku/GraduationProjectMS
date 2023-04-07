@@ -5,8 +5,15 @@ import ListItemLink from "./ListItemLink";
 import {Bag, Book, Cap, File} from "../../assets";
 import "./HomePage.scss"
 import {route} from "../../app/router/Routers";
+import {useStore} from "../../app/stores/store";
+import {Role} from "../../app/models/user";
 
 function HomePage() {
+    const {userStore:{getRole}}= useStore();
+    
+    if(getRole !== Role.Student)
+        return <></>;
+    
     return (
         <Box className={'homepage'}>
             <Box className="inner">
