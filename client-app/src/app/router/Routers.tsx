@@ -23,6 +23,8 @@ import StudentTopic from "../../features/StudentTopic/StudentTopic";
 import Approval from "../../features/Approval/Approval";
 import ApprovalTable from "../../features/Approval/ApprovalTable";
 import Outline from "../../features/Outline/Outline";
+import DocumentOutline from "../../features/Document/DocumentOutline";
+import DocumentReport from "../../features/Document/DocumentReport";
 import RequireRole from "./RequireRole";
 import {Role} from "../models/user";
 
@@ -69,11 +71,12 @@ export const routes: RouteObject[] = [
                             {path: 'topic', element: <StudentTopic/>},
                             {path: 'notification', element: <Notification/>},
                             {path: 'document', element: <Document/>},
+                            {path: 'document/outline', element: <DocumentOutline/>},
+                            {path: 'document/report', element: <DocumentReport/>},
                         ]
                     },
                     {
-                        element: <RequireRole roles={[Role.Lecturer]} key={Role.Lecturer}/>, children: [
-                        ]
+                        element: <RequireRole roles={[Role.Lecturer]} key={Role.Lecturer}/>, children: []
                     }
                     ,
                     {
@@ -114,7 +117,8 @@ export const routes: RouteObject[] = [
             {path: 'server-error', element: <ServerError/>},
             {path: 'test', element: <Test/>},
             {path: '*', element: <Navigate replace to={'/not-found'}/>},
-
+            {path: 'de-cuong-bo-mon', element: <Outline/>},
+            {path: 'de-tai-bo-mon', element: <Approval/>},
         ],
     }
 ]

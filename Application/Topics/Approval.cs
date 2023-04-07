@@ -43,6 +43,40 @@ public class Approval
 
             if (!result)
                 return Result<Unit>.Failure("Có lỗi khi duyệt đề tài");
+
+            var student = await _context.Students
+                .Include(x => x.GraduationProject)
+                .Include(x => x.DepartmentSubject)
+                .Include(x => x.Lecturer)
+                .FirstOrDefaultAsync(x => x.GraduationProject.Id == request.Id, cancellationToken);
+
+            var notification = new Notification
+            {
+                Student = student,
+                Name = "Xác nhận hoàn thành đăng ký đề tài",
+                InfoTitle = "Thông tin đề tài",
+                Infos = new List<Info>
+                {
+                    new()
+                    {
+                        Key = "Tên đề tài",
+                        Value = topic.Name
+                    },
+                    new()
+                    {
+                        Key = "Mô tả",
+                        Value = topic.Description
+                    },
+                    new()
+                    {
+                        Key = "Kiểu đồ án",
+                        Value = topic.Type
+                    }
+                }
+            };
+
+            _context.Notifications.Add(notification);
+
             return Result<Unit>.Success(Unit.Value);
         }
     }

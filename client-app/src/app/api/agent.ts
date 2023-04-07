@@ -10,6 +10,7 @@ import {Instructor} from "../models/instructor";
 import {Period, PeriodFormValues} from "../models/period";
 import {DepartmentSubject} from "../models/departmentSubject";
 import {Topic, TopicDto} from "../models/topic";
+import {Notification} from "../models/notification";
 
 const sleep = (delay: number) => {
     return new Promise((resolve) => {
@@ -130,7 +131,7 @@ const Students = {
 
 const Periods = {
     create: (period: PeriodFormValues) => requests.post<void>('/period', period),
-    edit: (period: PeriodFormValues) => requests.put<void>('/period', period),
+    edit: (period: PeriodFormValues) => requests.put<void>(`/period/${period.id}`, period),
     list: (params: URLSearchParams) => requests.list<Period[]>('/period', {params}),
     single: (id: string) => requests.get<Period>(`/period/${id}`),
 }
@@ -182,6 +183,11 @@ const Topics = {
     })
 }
 
+const Notifications = {
+    list: () => requests.get<Notification[]>('/notification'),
+    markAsRead: (id: string) => requests.post<void>(`/notification/${id}`, {})
+}
+
 const agent = {
     Account,
     Lecturers,
@@ -190,7 +196,8 @@ const agent = {
     DepartmentSubjects,
     Instructors,
     FilterItems,
-    Topics
+    Topics,
+    Notifications
 }
 
 export default agent;

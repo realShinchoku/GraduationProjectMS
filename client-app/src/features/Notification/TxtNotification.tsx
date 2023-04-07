@@ -11,7 +11,7 @@ export default function TxtNotification({tlt, txt}: Props) {
 
     return (
         <Typography variant='body1'>
-            {tlt}
+            {tlt + ": "}
             <Box component="span">{txt}</Box>
         </Typography>
     );

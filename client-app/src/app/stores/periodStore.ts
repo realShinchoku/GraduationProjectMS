@@ -4,6 +4,7 @@ import agent from "../api/agent";
 import {Period, PeriodFormValues} from "../models/period";
 import InstructorStore from "./instructorStore";
 import StudentStore from "./studentStore";
+import {store} from "./store";
 
 export default class PeriodStore {
     periods = new Map<string, Period>();
@@ -98,8 +99,11 @@ export default class PeriodStore {
             await agent.Periods.create(period)
             const newPeriod = new Period(period);
             await this.setItem(newPeriod);
+            store.modalStore.closeModal();
+            
         } catch (e) {
             console.log(e);
+            store.snackBarStore.error("Có lỗi xảy ra");
             throw e;
         }
     }
@@ -108,8 +112,11 @@ export default class PeriodStore {
             await agent.Periods.edit(period)
             const editPeriod = new Period(period);
             await this.setItem(editPeriod);
+            store.modalStore.closeModal();
+            
         } catch (e) {
             console.log(e);
+            store.snackBarStore.error("Có lỗi xảy ra");
             throw e;
         }
     }

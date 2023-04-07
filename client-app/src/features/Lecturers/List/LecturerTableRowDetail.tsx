@@ -21,7 +21,7 @@ type Props = {
 
 function LecturerTableRowDetail({value, lecturer}: Props) {
 
-    const {instructorStore: {chose}} = useStore();
+    const {instructorStore: {chose}, snackBarStore} = useStore();
 
     const [isActive, setIsActive] = useState(false);
 
@@ -89,7 +89,7 @@ function LecturerTableRowDetail({value, lecturer}: Props) {
                                 </Button>
                                 <Button className="choose_lecturer"
                                         disabled={lecturer.studentCount >= lecturer.maxStudentsNumber}
-                                        onClick={() => chose(lecturer.id).then(() => setIsActive(current => !current))}>Chọn
+                                        onClick={() => chose(lecturer.id).then(() => setIsActive(current => !current)).catch(err => snackBarStore.error("Bạn đã chọn giản viên hướng dẫn"))}>Chọn
                                     giảng viên</Button>
                             </ButtonGroup>
                         </Grid>

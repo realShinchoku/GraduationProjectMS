@@ -4,7 +4,7 @@ import {useStore} from "../../app/stores/store";
 import {Button} from "@mui/material";
 
 function Test() {
-    const {modalStore, snackBarStore} = useStore();
+    const {snackBarStore} = useStore();
 
     return (
         <>
