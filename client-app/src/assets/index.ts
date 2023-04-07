@@ -21,6 +21,9 @@ import NotFound404 from "./images/404.png";
 import Mission from "./images/Mission.png";
 import FileMoreLine from "./images/FileMoreLine.png";
 import Group from "./images/Group.png";
+import Document from "./images/Document.png";
+import Document_ from "./images/Document_.png";
+import ArrowLeft from "./images/ArrowLeft.png";
 
 export {
     Logo,
@@ -44,6 +47,9 @@ export {
     Mission,
     FileMoreLine,
     Group,
+    Document,
+    Document_,
+    ArrowLeft,
 };
 
 export const LecturerImages = {
