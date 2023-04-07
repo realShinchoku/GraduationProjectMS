@@ -71,8 +71,8 @@ export const routes: RouteObject[] = [
                             {path: 'topic', element: <StudentTopic/>},
                             {path: 'notification', element: <Notification/>},
                             {path: 'document', element: <Document/>},
-                            {path: '/document/outline', element: <DocumentOutline/>},
-                            {path: '/document/report', element: <DocumentReport/>},
+                            {path: 'document/outline', element: <DocumentOutline/>},
+                            {path: 'document/report', element: <DocumentReport/>},
                         ]
                     },
                     {
