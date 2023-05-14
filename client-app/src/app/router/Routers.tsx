@@ -29,6 +29,7 @@ import RequireRole from "./RequireRole";
 import {Role} from "../models/user";
 import Mission from "../../features/Mission/Mission";
 import Result from "../../features/Result/Result";
+import Student from "../../features/Lecturers/Student/Student";
 
 
 export const route = {
@@ -50,6 +51,7 @@ export const route = {
     project: '/project',
     mission: '/mission',
     result:  '/result',
+    student: '/student',
     projectDetail: (id: string, name: string) => {
         return `/project/${id}?name=${name}`
     },
@@ -81,7 +83,9 @@ export const routes: RouteObject[] = [
                         ]
                     },
                     {
-                        element: <RequireRole roles={[Role.Lecturer]} key={Role.Lecturer}/>, children: []
+                        element: <RequireRole roles={[Role.Lecturer]} key={Role.Lecturer}/>, children: [
+                            {path: 'student', element: <Student/>},
+                        ]
                     }
                     ,
                     {

@@ -41,7 +41,7 @@ function LecturerSidebar() {
             </Box>
             <Box className="side_bar_inner">
                 <SidebarItem title="Trang Chủ" to={route.home} icon={Category}/>
-                <SidebarItem title="Sinh Viên" to={route.lecturer} icon={Message}/>
+                <SidebarItem title="Sinh Viên" to={route.student} icon={Message}/>
                 <SidebarItem title="Đề Tài" to={route.project} icon={TaskSquare}/>
                 <SidebarItem title="Báo Cáo" to={route.outline} icon={Folder}/>
             </Box>
