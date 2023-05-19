@@ -27,6 +27,9 @@ import DocumentOutline from "../../features/Document/DocumentOutline";
 import DocumentReport from "../../features/Document/DocumentReport";
 import RequireRole from "./RequireRole";
 import {Role} from "../models/user";
+import Mission from "../../features/Mission/Mission";
+import Result from "../../features/Result/Result";
+import Student from "../../features/Lecturers/Student/Student";
 
 
 export const route = {
@@ -46,6 +49,9 @@ export const route = {
     notification: '/notification',
     document: '/document',
     project: '/project',
+    mission: '/mission',
+    result:  '/result',
+    student: '/student',
     projectDetail: (id: string, name: string) => {
         return `/project/${id}?name=${name}`
     },
@@ -68,6 +74,7 @@ export const routes: RouteObject[] = [
                     {
                         element: <RequireRole roles={[Role.Student]} key={Role.Student}/>, children: [
                             {path: 'lecturer', element: <LecturerList/>},
+                            {path: 'mission', element: <Mission/>},
                             {path: 'topic', element: <StudentTopic/>},
                             {path: 'notification', element: <Notification/>},
                             {path: 'document', element: <Document/>},
@@ -76,7 +83,9 @@ export const routes: RouteObject[] = [
                         ]
                     },
                     {
-                        element: <RequireRole roles={[Role.Lecturer]} key={Role.Lecturer}/>, children: []
+                        element: <RequireRole roles={[Role.Lecturer]} key={Role.Lecturer}/>, children: [
+                            {path: 'student', element: <Student/>},
+                        ]
                     }
                     ,
                     {
@@ -101,6 +110,7 @@ export const routes: RouteObject[] = [
                             {path: 'account/student', element: <AccountStudent/>},
                             {path: 'account/departmentSubject', element: <AccountDepartmentSubject/>},
                             {path: 'account/lecturer', element: <AccountLecturer/>},
+                            {path: 'result', element: <Result/>},
                         ]
                     },
                     {path: '', element: <HomePage/>},

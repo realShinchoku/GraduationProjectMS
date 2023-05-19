@@ -42,7 +42,7 @@ function StudentSidebar() {
                 <SidebarItem title="Đề tài" to={route.topic} icon={TaskSquare}/>
                 <SidebarItem title="Tài liệu" to={route.document} icon={ProfileUser}/>
                 <SidebarItem title="Thông báo" to={route.notification} icon={Notification}/>
-                <SidebarItem title="Nhiệm vụ" to={route.empty} icon={Mission}/>
+                <SidebarItem title="Nhiệm vụ" to={route.mission} icon={Mission}/>
             </Box>
             {(location.pathname === route.lecturer) && (
                 <>

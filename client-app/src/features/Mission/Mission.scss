@@ -1,0 +1,37 @@
+.mission {
+    h2 {
+        font-size: 50px;
+        font-weight: bold;
+        margin-left: 50px;
+    }
+    ul {
+        display: flex;
+        flex-wrap: wrap;
+        padding: 20px;
+        li {
+            width: 23%;
+            margin-bottom: 20px;
+            display: unset;
+            padding: 30px;
+            text-align: center;
+            background-color: #000000;
+            color: #fff;
+            margin-right: 20px;
+            border-radius: 20px;
+            .inner {
+                display: flex;
+                align-items: center;
+                margin-bottom: 30px;
+                justify-content: center;
+                h4 {
+                    font-size: 26px;
+                    font-weight: bold;
+                }
+            }
+            p {
+                font-size: 10px;
+                font-weight: 400;
+            }
+        }
+    }
+}
