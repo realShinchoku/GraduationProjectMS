@@ -17,18 +17,16 @@ namespace API.Controllers;
 public class AccountController : BaseApiController
 {
     private readonly IEmailSender _emailSender;
-    private readonly RoleManager<AppRole> _roleManager;
     private readonly SignInManager<AppUser> _signInManager;
     private readonly TokenService _tokenService;
     private readonly UserManager<AppUser> _userManager;
 
     public AccountController(UserManager<AppUser> userManager, TokenService tokenService,
-        SignInManager<AppUser> signInManager, IEmailSender emailSender, RoleManager<AppRole> roleManager)
+        SignInManager<AppUser> signInManager, IEmailSender emailSender)
     {
         _tokenService = tokenService;
         _signInManager = signInManager;
         _emailSender = emailSender;
-        _roleManager = roleManager;
         _userManager = userManager;
     }
 
@@ -150,6 +148,5 @@ public class AccountController : BaseApiController
             Role = user.Role,
             Email = user.Email
         };
-        ;
     }
 }

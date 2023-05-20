@@ -22,7 +22,7 @@ function TopicAssignmentModal({id}: Props) {
         <Box className="register_topic_">
             <Box className="inner">
                 <Box className="close" onClick={modalStore.closeModal}>×</Box>
-                <Typography sx={{textAlign:'center'}} variant="h2">THÔNG TIN ĐỀ TÀI</Typography>
+                <Typography sx={{textAlign: 'center'}} variant="h2">THÔNG TIN ĐỀ TÀI</Typography>
                 <Formik
                     initialValues={{
                         name: "",
@@ -40,7 +40,8 @@ function TopicAssignmentModal({id}: Props) {
                 >
                     {({isSubmitting, errors, isValid, dirty, touched}) => (
                         <Form className="form">
-                            <Typography variant='h5' sx={{marginBottom:'10px',fontWeight:'500'}}>Tên đề tài</Typography>
+                            <Typography variant='h5' sx={{marginBottom: '10px', fontWeight: '500'}}>Tên đề
+                                tài</Typography>
                             <Field
                                 component={TextField}
                                 fullWidth
@@ -49,7 +50,8 @@ function TopicAssignmentModal({id}: Props) {
                                 error={touched.name && !!errors.name}
                                 helperText={touched.name && errors.name}
                             />
-                            <Typography variant='h5' sx={{marginBottom:'10px', marginTop:'30px',fontWeight:'500'}}>Mô tả</Typography>
+                            <Typography variant='h5' sx={{marginBottom: '10px', marginTop: '30px', fontWeight: '500'}}>Mô
+                                tả</Typography>
                             <Field
                                 component={TextField}
                                 fullWidth
@@ -60,8 +62,10 @@ function TopicAssignmentModal({id}: Props) {
                                 multiline
                                 rows={10}
                             />
-                            <Typography variant='h5' sx={{marginBottom:'10px', marginTop:'30px',fontWeight:'500'}}>Kiểu đồ án</Typography>
-                            <FormControl sx={{display: "unset"}} error={touched.type && !!errors.type} variant="standard">
+                            <Typography variant='h5' sx={{marginBottom: '10px', marginTop: '30px', fontWeight: '500'}}>Kiểu
+                                đồ án</Typography>
+                            <FormControl sx={{display: "unset"}} error={touched.type && !!errors.type}
+                                         variant="standard">
                                 <Field component={RadioGroup} name="type" className="radio_group">
                                     <FormControlLabel
                                         value="Web"
@@ -99,7 +103,7 @@ function TopicAssignmentModal({id}: Props) {
                             >
                                 Xác nhận
                             </LoadingButton>
-                            
+
                             <LoadingButton
                                 color="primary"
                                 variant="contained"

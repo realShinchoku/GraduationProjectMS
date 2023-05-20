@@ -6,7 +6,7 @@ import {store} from "./store";
 export default class NotificationStore {
     notifications = new Map<string, Notification>();
     loading = false;
-    
+
     constructor() {
         makeAutoObservable(this);
     }

@@ -29,7 +29,7 @@ public class List
         {
             var notifications = await _context.Notifications
                 .Include(x => x.Student)
-                .Where(x => x.Student.UserName == UserAccessor.GetUserName() && x.IsRead == false)
+                .Where(x => x.Student.UserName == UserAccessor.GetUserName() && !x.IsRead)
                 .ToListAsync(cancellationToken);
 
             return Result<List<Notification>>.Success(notifications);

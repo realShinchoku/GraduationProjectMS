@@ -100,11 +100,11 @@ export default class PeriodStore {
             const newPeriod = new Period(period);
             await this.setItem(newPeriod);
             store.modalStore.closeModal();
-            
+
         } catch (e) {
             console.log(e);
             store.modalStore.closeModal();
-            
+
             store.snackBarStore.error("Có lỗi xảy ra");
             throw e;
         }
@@ -115,11 +115,11 @@ export default class PeriodStore {
             const editPeriod = new Period(period);
             await this.setItem(editPeriod);
             store.modalStore.closeModal();
-            
+
         } catch (e) {
             console.log(e);
             store.modalStore.closeModal();
-            
+
             store.snackBarStore.error("Có lỗi xảy ra");
             throw e;
         }

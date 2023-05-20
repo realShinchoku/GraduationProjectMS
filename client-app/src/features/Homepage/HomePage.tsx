@@ -9,11 +9,11 @@ import {useStore} from "../../app/stores/store";
 import {Role} from "../../app/models/user";
 
 function HomePage() {
-    const {userStore:{getRole}}= useStore();
-    
-    if(getRole !== Role.Student)
+    const {userStore: {getRole}} = useStore();
+
+    if (getRole !== Role.Student)
         return <></>;
-    
+
     return (
         <Box className={'homepage'}>
             <Box className="inner">

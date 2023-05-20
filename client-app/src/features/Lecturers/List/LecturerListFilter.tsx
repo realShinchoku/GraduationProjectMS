@@ -38,7 +38,7 @@ function LecturerListFilter() {
                     renderInput={(params) => <TextField {...params} label={"Trạng thái"}/>}
                     onChange={(event, value) => {
                         if (value)
-                            setPredicate('status', value!.id);
+                            setPredicate('status', value.id);
                         else
                             removePredicate('status');
                     }}
@@ -55,7 +55,7 @@ function LecturerListFilter() {
                     renderInput={(params) => <TextField {...params} label={"Bộ môn"}/>}
                     onChange={(event, value) => {
                         if (value)
-                            setPredicate('departmentSubjectId', value!.id);
+                            setPredicate('departmentSubjectId', value.id);
                         else
                             removePredicate('departmentSubjectId');
                     }}

@@ -5,8 +5,7 @@ namespace Persistence;
 
 public class Seed
 {
-    public static async Task SeedData(DataContext context,
-        UserManager<AppUser> userManager, RoleManager<AppRole> roleManager)
+    public static async Task SeedData(UserManager<AppUser> userManager, RoleManager<AppRole> roleManager)
     {
         if (!roleManager.Roles.Any())
         {

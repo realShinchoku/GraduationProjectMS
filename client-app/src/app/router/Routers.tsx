@@ -50,7 +50,7 @@ export const route = {
     document: '/document',
     project: '/project',
     mission: '/mission',
-    result:  '/result',
+    result: '/result',
     student: '/student',
     projectDetail: (id: string, name: string) => {
         return `/project/${id}?name=${name}`

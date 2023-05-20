@@ -17,7 +17,7 @@ const validationSchema = Yup.object().shape({
         .required("Vui lòng nhập email"),
     password: Yup.string()
         .matches(
-            /^(?=.*[0-9]+.*)(?=.*[a-z]+.*)(?=.*[A-Z]+.*)[!-z]{6,20}.*$/,
+            /^(?=.*\d+.*)(?=.*[a-z]+.*)(?=.*[A-Z]+.*)[!-z]{6,20}.*$/,
             "Mật khẩu gồm ít nhất 8 kí tự trong đó bao gồm 1 kí tự hoa, 1 kí tự thường và 1 số"
         ).required("Vui lòng nhập mật khẩu"),
 });

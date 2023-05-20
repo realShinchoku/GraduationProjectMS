@@ -9,7 +9,7 @@ export default function Document() {
         <Box className="document">
             <Typography variant='h2'>Quản lý tài liệu</Typography>
             <Box className="inner">
-                <Link href="/document/outline">
+                <Link href={"/document/outline"}>
                     <Box className="group">
                         <Box className="thumb">
                             <Box component="img" src={Group} alt=""/>
@@ -17,7 +17,7 @@ export default function Document() {
                         <Typography variant='body1'>Nộp đề cương</Typography>
                     </Box>
                 </Link>
-                <Link href="/document/report">
+                <Link href={"/document/report"}>
                     <Box className="group">
                         <Box className="thumb">
                             <Box component="img" src={Group} alt=""/>

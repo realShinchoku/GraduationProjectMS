@@ -26,7 +26,7 @@ function AddStudentModal({periodId}: Props) {
         onDropRejected: () => snackBarStore.error("File không được chấp thuận")
     });
 
-    const {modalStore, studentStore, snackBarStore, periodStore} = useStore();
+    const {modalStore, studentStore, snackBarStore} = useStore();
     return (
         <Grid className='add_account'>
             <Grid className="modal_body">

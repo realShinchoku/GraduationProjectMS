@@ -96,7 +96,7 @@ function InstructorApprovalTable({periodId}: Props) {
                                 <TableCell align="left">{row.student}</TableCell>
                                 <TableCell align="left">{row.class}</TableCell>
                                 <TableCell align="left">{row.faculty}</TableCell>
-                                <TableCell align="left">{format(new Date(row.createdDate!), 'dd/MM/yyyy')}</TableCell>
+                                <TableCell align="left">{format(new Date(row.createdDate), 'dd/MM/yyyy')}</TableCell>
                                 <TableCell align="left">{row.lecturer}</TableCell>
                                 <TableCell align="left">{row.lecturer}</TableCell>
                                 <TableCell align="left">{row.approvalStatus}</TableCell>

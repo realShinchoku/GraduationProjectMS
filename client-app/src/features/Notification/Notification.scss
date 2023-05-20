@@ -8,8 +8,7 @@
   }
 
   h2 {
-    font-family: 'Inter';
-    font-size: normal;
+    font-family: 'Inter', sans-serif;
     font-weight: 700;
     font-size: 40px;
     line-height: 48px;
@@ -39,7 +38,7 @@
       }
 
       h4 {
-        font-family: 'Inter';
+        font-family: 'Inter', sans-serif;
         font-style: normal;
         font-weight: 600;
         font-size: 24px;
@@ -54,7 +53,7 @@
       }
 
       p {
-        font-family: 'Inter';
+        font-family: 'Inter', sans-serif;
         font-style: normal;
         font-weight: 200;
         font-size: 16px;
@@ -130,7 +129,7 @@
 
     .tlt {
       h2 {
-        font-family: 'Inter';
+        font-family: 'Inter', sans-serif;
         font-style: normal;
         font-weight: 600;
         font-size: 24px;
@@ -139,7 +138,7 @@
       }
 
       p {
-        font-family: 'Inter';
+        font-family: 'Inter', sans-serif;
         font-style: normal;
         font-weight: 600;
         font-size: 16px;
@@ -166,7 +165,7 @@
       }
 
       p {
-        font-family: 'Inter';
+        font-family: 'Inter', sans-serif;
         font-style: normal;
         font-weight: 500;
         font-size: 18px;
@@ -181,11 +180,12 @@
           font-weight: 200;
         }
       }
+
       button {
         margin-left: auto;
         width: 139px;
         padding: 14px 0;
-      }     
+      }
     }
   }
 }

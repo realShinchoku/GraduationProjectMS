@@ -20,7 +20,7 @@ function UploadFile() {
         },
     });
 
-    const { studentStore} = useStore();
+    const {studentStore} = useStore();
     return (
         <Box className='upload'>
             <Box className='upload_file'>

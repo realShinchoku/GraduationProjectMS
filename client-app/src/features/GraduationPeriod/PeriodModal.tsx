@@ -91,7 +91,7 @@ function PeriodModal({id}: Props) {
                         .required("Vui lòng điền đủ thông tin"),
                 })}
             >
-                {({touched, dirty, isValid, isSubmitting, errors,values}) => (
+                {({touched, dirty, isValid, isSubmitting, errors, values}) => (
                     <Form className="modalContent">
                         <Grid container spacing={2}>
                             <Grid xs={10} className="contentTop">

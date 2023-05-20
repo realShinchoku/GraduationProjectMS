@@ -38,7 +38,7 @@ public class List
                 .OrderBy(x => x.UserName.Length)
                 .ThenBy(x => x.UserName).AsQueryable();
 
-            if (request.Params.PeriodId != default)
+            if (request.Params.PeriodId != Guid.NewGuid())
                 query = query.Where(x => x.GraduationProjectPeriod.Id == request.Params.PeriodId);
             if (request.Params.HasLecturer != null)
                 query = query.Where(x => request.Params.HasLecturer == false ? x.Lecturer == null : x.Lecturer != null);

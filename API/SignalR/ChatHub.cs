@@ -9,7 +9,6 @@ namespace API.SignalR;
 
 public class ChatHub : Hub
 {
-    private readonly DataContext _context;
     private readonly IMediator _mediator;
     private readonly IUserAccessor _userAccessor;
 
@@ -17,7 +16,6 @@ public class ChatHub : Hub
     {
         _mediator = mediator;
         _userAccessor = userAccessor;
-        _context = context;
     }
 
     public async Task MaskAsRead(MarkAsRead.Command command)

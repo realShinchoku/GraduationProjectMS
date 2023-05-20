@@ -8,7 +8,6 @@
 
   h2 {
     font-family: 'Inter', sans-serif;
-    font-size: normal;
     font-weight: 600;
     font-size: 46px;
     line-height: 56px;
@@ -47,7 +46,7 @@
       }
 
       p {
-        font-family: 'Inter';
+        font-family: 'Inter', sans-serif;
         font-style: normal;
         font-weight: 700;
         font-size: 32px;
@@ -58,7 +57,7 @@
   }
 
   p {
-    font-family: 'Inter';
+    font-family: 'Inter', sans-serif;
     font-style: normal;
     font-weight: 700;
     font-size: 32px;
@@ -85,8 +84,7 @@
 
   .inner {
     h2 {
-      font-family: 'Inter';
-      font-size: normal;
+      font-family: 'Inter', sans-serif;
       font-weight: 600;
       font-size: 46px;
       line-height: 56px;
@@ -128,7 +126,7 @@
       }
 
       p {
-        font-family: 'Roboto';
+        font-family: 'Roboto', sans-serif;
         font-style: normal;
         font-weight: 400;
         font-size: 11px;
@@ -168,8 +166,7 @@
       button {
         width: 209px;
         height: 78px;
-        font-family: 'Inter';
-        font-size: normal;
+        font-family: 'Inter', sans-serif;
         font-weight: 500;
         font-size: 24px;
         text-align: center;
